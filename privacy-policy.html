@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>iPathi By Vilsa</title>
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" >
+<!--theme-style-->
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" >
+<!--//theme-style-->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--fonts-->
+<link href='http://fonts.googleapis.com/css?family=Exo:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700' rel='stylesheet' type='text/css'>
+<!--//fonts-->
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/move-top.js"></script>
+<script type="text/javascript" src="js/easing.js"></script>
+</head>
+<body>
+	<!--header-->
+	<div class="header">
+		<div class="container">
+			<div class="logo">
+			</div>
+			<div class="top-nav">
+				<span class="menu"> </span>
+				<ul>
+					<li><a href="#what" class="scroll"> </a><span></span></li>
+					<li><a class="active scroll" href="#portfolio">iPathi By Vilsa</a><span></span></li>
+					<li><a href="#team" class="scroll"> </a> <span></span></li>
+					<li><a href="#contact" class="scroll"> </a></li>
+				</ul>
+				<!-- script-nav -->
+			<script>
+			$("span.menu").click(function(){
+				$(".top-nav ul").slideToggle(500, function(){
+				});
+			});
+			</script>
+			<script type="text/javascript">
+					jQuery(document).ready(function($) {
+						$(".scroll").click(function(event){		
+							event.preventDefault();
+							$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+						});
+					});
+					</script>
+				<!-- //script-nav -->
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+	<!--//header-->
+	<!--banner-->
+	<div class="banner">
+		<div class="banner-matter">
+			<h2>Privacy Policy</h2>
+			<p style="font-size:10"> 1. We never share the user data with other users or any third party.
+<br>2. We ensure you that your all the data and collected will kept confidential.
+<br>3.We never share any contact details of our users with any third party.	<br>	
+4. We uses camera only if user want to capture photo and upload.		</p>
+			
+		</div>
+	</div>
+	
+	<!--footer-->
+	<div class="footer">
+		<div class="container">
+			 <p class="footer-class">&copy; 2020 iPathi by <a href="https://vilsatechnologies.com/" target="_blank">Vilsa Technologies</a> </p>
+			
+			 <div class="clearfix"> </div>
+		</div>
+		<script type="text/javascript">
+						$(document).ready(function() {
+							/*
+							var defaults = {
+					  			containerID: 'toTop', // fading element id
+								containerHoverID: 'toTopHover', // fading element hover id
+								scrollSpeed: 1200,
+								easingType: 'linear' 
+					 		};
+							*/
+							
+							$().UItoTop({ easingType: 'easeOutQuart' });
+							
+						});
+					</script>
+				<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+	</div>
+</body>
+</html>

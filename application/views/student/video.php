@@ -54,10 +54,6 @@
 			<input class="q3" type="radio" name="Question3" value="No">No<br>
 			<input class="q3" type="radio" name="Question3" value="Can't say">can't say<br>
 		</div>
-		<div class="lightbox warning">
-		<h4>Wrong Answer,Try again</h4>
-		<button class="ok" name="okay" color="blue">Okay</button>
-		</div>
 
 	</div>
 	</form>
@@ -69,29 +65,33 @@ var video1;
 var question1Asked = false;
 var question2Asked = false;
 var question3Asked = false;
+var score = 0;
+var EndTime;
+var startTime;
 
 $(document).ready(function(){
-
 	$.featherlight.defaults.afterClose = playPauseVideo;
-
 	video1 = $('#video1');
-   
-
-	
-     
 	$(video1).on('timeupdate', function(){
 		var currentTime = Math.round(this.currentTime);
         var choicePart = 10;
 	    var choicePart1 = 20;
         var choicePart3 = 30;
-
+        
+		if(currentTime == 0){
+			 startTime = new Date();
+		}
+         
         if(currentTime == choicePart && question1Asked == false){
 			question1Asked = true;
 			video1[0].pause();
 			$.featherlight($('.popUpQuestion1'))
 			$('.q1').click(function(){
 	          let answer1 = $("input[type='radio'][name='Question1']:checked").val();
-			  $.featherlight.current().close();  
+			  $.featherlight.current().close();
+			  if (answer1 == "Good"){
+				  score = score+30 
+			  }   
 			  })
 		}
         if(currentTime == choicePart1 && question2Asked == false){
@@ -100,7 +100,10 @@ $(document).ready(function(){
 			$.featherlight($('.popUpQuestion2'))
 			$('.q2').click(function(){
 				let answer2 = $("input[type='radio'][name='Question2']:checked").val();
-				$.featherlight.current().close();  
+				$.featherlight.current().close();
+				if (answer2 == "5Star"){
+				  score = score+30 
+			  }  
 			  })
 		}
         if(currentTime == choicePart3 && question3Asked == false){
@@ -109,13 +112,42 @@ $(document).ready(function(){
 			$.featherlight($('.popUpQuestion3'))
 			$('.q3').click(function(){
 				let answer3 = $("input[type='radio'][name='Question3']:checked").val();
-				$.featherlight.current().close();			
+				$.featherlight.current().close();
+				if (answer3 == "Yes"){
+				  score = score+30 
+			  }			
 			  })
 		};
 	});
+});
 
+
+$('#video1').bind('ended',function(){
+
+var EndTime = new Date();
+console.log("Your score is: " + score)
+console.log("Video Start Time: " + startTime)
+console.log("Video End Time: " + EndTime)
+date1 = startTime
+date2 =EndTime
+         var res = Math.abs(date1 - date2) / 1000;
+         
+         // get total days between two dates
+         var days = Math.floor(res / 86400);                      
+         
+         // get hours        
+         var hours = Math.floor(res / 3600) % 24;         
+         
+         // get minutes
+         var minutes = Math.floor(res / 60) % 60;  
+     
+         // get seconds
+         var seconds = res % 60;
+        
+		console.log("Time Spent on video: " + hours +  " hours" + ":" + minutes + " minutes" + ":" + seconds + " seconds" )
 
 });
+
 
 
 
@@ -136,13 +168,5 @@ function playPauseVideo(popUp){
 	}
 }
 
-// function setCookie(name,value,days) {
-//     var expires = "";
-//     if (days) {
-//         var date = new Date();
-//         date.setTime(date.getTime() + (days*24*60*60*1000));
-//         expires = "; expires=" + date.toUTCString();
-//     }
-//     document.cookie = name + "=" + (value || "")  + expires + "; path=/";
-// }
 </script>
+

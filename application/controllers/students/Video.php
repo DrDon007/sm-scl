@@ -8,14 +8,22 @@ if(!defined('BASEPATH'))
        { 
             $this->load->view('student/video');  
        }
-       public function form_data(){
-          $this->load->model('video_model');
-          $data = array(
-              "q1" => $this->input->get('Question1'),
-              "q2" => $this->input->get('Question2'),
-              "q3" => $this->input->get('Question3'),
-          );
-          $this->Video_model->insert_data($data);
+
+       public function data()
+       {
+        // echo "p";
+          $this->load->model('Video_model');          
+        //   $q1=$_COOKIE['answer1'];
+          $q1 = $this->input->post('Question1');
+        //   var_dump($q1);
+        //   $res= 
+          $this->Video_model->insert_data($q1);
+        //   echo $res;
+       }
+
+       public function check()
+       {
+           echo "p";
        }
      
    }

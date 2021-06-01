@@ -172,6 +172,9 @@ if (!empty($staff_list)) {
 
                                     </div>
                                 </div>
+
+                              
+
                                  <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="pwd"><?php echo $this->lang->line('attachment'); ?></label>

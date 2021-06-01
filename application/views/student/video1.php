@@ -38,7 +38,6 @@
 				Your browser does not support the video tag.
 			</video>
 		</div>
-		<form action="<?php echo site_url('students/video/data')?>" id="videoFrm" name="videoFrm" method="post">
             <div class="lightbox popUpQuestion1"> 
                 <h4>Question 1</h4>
                 <p>How the video feels</p>
@@ -46,9 +45,8 @@
 				<input class="q1" type="radio" name="Question1" value="Good">Good<br>
                 <input class="q1" type="radio" name="Question1" value="Bad">Bad<br>
                 <input class="q1" type="radio" name="Question1" value="Poor">Poor<br>				
-				<button type="button" class="btn" onclick="save()">submit</button>
+				<!-- <button type="button" class="btn" onclick="save()">submit</button> -->
             </div>
-        </form>
             <div class="lightbox popUpQuestion2">
                 <h4>Question 2</h4>
                 <p>Rate The Video</p>
@@ -66,36 +64,27 @@
                 <input class="q3" type="radio" name="Question3" value="No">No<br>
                 <input class="q3" type="radio" name="Question3" value="Can't say">can't say<br>
             </div>
-             <div class="lightbox warning">
-            <h4>Wrong Answer,Try again</h4>
-            <button class="ok" name="okay" color="blue">Okay</button>
-            </div>
+             <div class="lightbox popUpQuestion01"> 
+			<h4></h4>
+			<p style="margin-bottom:20px;">course completed ?</p>
+			
+			<input class="submitResponse" type="button" name="startBtn" value="Submit">
+		</div>
         </form>
 	</div>
 </body>
 </html>
 
 <script type="text/javascript">
-	function save()
-	{
-		// var answer1 = $("input[type='radio'][name='Question1']:checked").val();
-		$.ajax({
-			type: 'POST',
-			url: '<?=base_url('Students/video/data')?>',
-			data: {'ans1': answer1},
-			success: function(response) 
-			{
-				// $('#result').html(response);
-			}
-		});
-	}
-
+	
 	var video1;
 	var statrVar=false;
 	var question1Asked = false;
 	var question2Asked = false;
 	var question3Asked = false;
-
+    var answer1=null;
+			var answer2=null;
+			var answer3=null;
 	$(document).ready(function()
 	{
 		$.featherlight.defaults.afterClose = playPauseVideo;
@@ -103,75 +92,76 @@
 		$(video1).on('timeupdate', function()
 		{
 			var currentTime = Math.round(this.currentTime);
-			var choicePart01 = 0;
+			var choicePart01 = 10;
 			var choicePart = 2;
 			var choicePart1 = 5;
 			var choicePart3 = 8;
-			var answer1=null;
-			var answer2=null;
-			var answer3=null;
-			// if(currentTime == choicePart01 && statrVar == false)
-			// {
-			// 	statrVar = true;
-			// 	video1[0].pause();
-			// 	$.featherlight($('.popUpQuestion01'))
-			// 	$('.startVideo').click(function()
-			// 	{
-			// 		// sessionCreate();	
-			// 		$.featherlight.current().close();  
-			// 	})
-			// }
+			
+			if(currentTime == choicePart && question1Asked == false)
+            {
+                question1Asked = true;
+                video1[0].pause();
+                $.featherlight($('.popUpQuestion1'))
+                $('.q1').click(function()
+                {
+                answer1 = $("input[type='radio'][name='Question1']:checked").val();
+                setCookie("answer1",answer1,1)
+                $.featherlight.current().close();
 
-			if(currentTime == choicePart && question1Asked == false){
-			question1Asked = true;
-			video1[0].pause();
-			$.featherlight($('.popUpQuestion1'))
-			$('.q1').click(function()
+                })
+		    }
+
+            if(currentTime == choicePart1 && question2Asked == false)
+            {
+                question2Asked = true;
+                video1[0].pause();
+                $.featherlight($('.popUpQuestion2'))
+                $('.q2').click(function(){
+                    answer2 = $("input[type='radio'][name='Question2']:checked").val();
+                    // setCookie("answer2",answer2,1)
+                    $.featherlight.current().close();  
+                })
+		    }
+            if(currentTime == choicePart3 && question3Asked == false)
+            {
+                question3Asked = true;
+                video1[0].pause();
+                $.featherlight($('.popUpQuestion3'))
+                $('.q3').click(function()
+                {
+                    answer3 = $("input[type='radio'][name='Question3']:checked").val();
+                    // setCookie("answer3",answer3,1)
+                    $.featherlight.current().close();
+    
+                })
+            }
+
+            if(currentTime == choicePart01 && statrVar == false)
 			{
-	          answer1 = $("input[type='radio'][name='Question1']:checked").val();
-			  setCookie("answer1",answer1,1)
-			  $.featherlight.current().close();
-
-			})
-		}
-
-        if(currentTime == choicePart1 && question2Asked == false){
-			question2Asked = true;
-			video1[0].pause();
-			$.featherlight($('.popUpQuestion2'))
-			$('.q2').click(function(){
-				answer2 = $("input[type='radio'][name='Question2']:checked").val();
-				// setCookie("answer2",answer2,1)
-				$.featherlight.current().close();  
-			  })
-		}
-        if(currentTime == choicePart3 && question3Asked == false)
-		{
-			question3Asked = true;
-			video1[0].pause();
-			$.featherlight($('.popUpQuestion3'))
-			$('.q3').click(function()
-			{
-				answer3 = $("input[type='radio'][name='Question3']:checked").val();
-				// setCookie("answer3",answer3,1)
-				$.featherlight.current().close();
-  
-			})
-		}
+				statrVar = true;
+				video1[0].pause();
+				$.featherlight($('.popUpQuestion01'))
+				$('.submitResponse').click(function()
+				{
+					// sessionCreate();	
+                    save(answer1,answer2,answer3);
+					$.featherlight.current().close();  
+				})
+			}
 		
-		save(answer1,answer2,answer3);
+		
 		});
 	});
 
 	function save(answer1,answer2,answer3)
 		{
-			var ans1=null;
-			var ans2=null;
-			var ans3=null;
+			var ans1=answer1;
+			var ans2=answer2;
+			var ans3=answer3;
 			// var answer1 = $("input[type='radio'][name='Question1']:checked").val();
 			$.ajax({
 				type: 'POST',
-				url: '<?=base_url('Students/video/data')?>',
+				url: '<?=base_url('Students/video/data1')?>',
 				data: {'ans1': ans1,'ans2': ans2,'ans3': ans3},
 				success: function(response) 
 				{

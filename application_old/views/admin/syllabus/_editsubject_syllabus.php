@@ -86,6 +86,12 @@
                                         <textarea type="text" id="editcomprehensive_questions" name="comprehensive_questions" class="form-control " ></textarea>
                                     </div> 
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="form-group ">
+                                        <label for="pwd"><?php echo $this->lang->line('demo'); ?></label>
+                                        <input type="text" id="rt" name="rtt" class="form-control">
+                                    </div>
+                                </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1"><?php echo ('presentation --r'); ?></label><small class="req"> *</small>

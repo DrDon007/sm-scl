@@ -242,7 +242,7 @@ if($this->studentmodule_lib->hasActive('multi_class')){
                     <ul class="sessionul fixedmenu">    
 
                         <li class="removehover accurrent">
-      <a data-toggle="modal" data-target="#user_sessionModal"><span><?php echo $this->lang->line('current_session') . ": " . $this->setting_model->getCurrentSessionName(); ?></span><i class="fa fa-pencil pull-right"></i></a>
+                            <a data-toggle="modal" data-target="#user_sessionModal"><span><?php echo $this->lang->line('current_session') . ": " . $this->setting_model->getCurrentSessionName(); ?></span><i class="fa fa-pencil pull-right"></i></a>
 
                          
                         </li>   
@@ -261,8 +261,8 @@ if($this->studentmodule_lib->hasActive('multi_class')){
                          if($this->module_lib->hasModule('zoom_live_classes')){
                        if ($this->studentmodule_lib->hasActive('live_classes')) {
                             ?>
- <li class="<?php echo set_topmenu('Conference'); ?>"><a href="<?php echo base_url('user/conference'); ?>"><i class="fa fa-video-camera ftlayer"></i> <?php echo $this->lang->line('live_class'); ?></a></li>
-<?php } } ?>
+                                <li class="<?php echo set_topmenu('Conference'); ?>"><a href="<?php echo base_url('user/conference'); ?>"><i class="fa fa-video-camera ftlayer"></i> <?php echo $this->lang->line('live_class'); ?></a></li>
+                                <?php } } ?>
                         <?php
 
                         if ($this->studentmodule_lib->hasActive('class_timetable')) {
@@ -289,7 +289,7 @@ if($this->studentmodule_lib->hasActive('multi_class')){
                         }  if ($this->studentmodule_lib->hasActive('online_examination')) {
                             ?>
                         <li class="treeview <?php echo set_Topmenu('Onlineexam'); ?>"><a href="<?php echo site_url('user/onlineexam'); ?>"><i class="fa fa-rss ftlayer"></i> <span><?php echo $this->lang->line('online')." ".$this->lang->line('exam');?></span></a></li>
-
+                       
                              
                         <?php }
 						 if ($this->studentmodule_lib->hasActive('apply_leave')) {
@@ -353,13 +353,15 @@ if($this->studentmodule_lib->hasActive('multi_class')){
                             <?php
                         }
 
-                        if ($this->studentmodule_lib->hasActive('teachers_rating')) {
+                        if ($this->studentmodule_lib->hasActive('teachers_rating')) 
+                        {
                             ?>                       
                             <li class="<?php echo set_Topmenu('Teachers'); ?>"><a href="<?php echo base_url(); ?>user/teacher"><i class="fa fa-user-secret ftlayer"></i> <span><?php echo $this->lang->line('teachers')." ".$this->lang->line('reviews'); ?></span></a></li>
                             <?php
                         }
 
-                        if ($this->studentmodule_lib->hasActive('library')) {
+                        if ($this->studentmodule_lib->hasActive('library')) 
+                        {
                             ?>
                             <li class="treeview <?php echo set_Topmenu('Library'); ?>">
                                 <a href="#">
@@ -378,12 +380,14 @@ if($this->studentmodule_lib->hasActive('multi_class')){
                             </li>
                             <?php
                         }
-                        if ($this->studentmodule_lib->hasActive('transport_routes')) {
+                        if ($this->studentmodule_lib->hasActive('transport_routes')) 
+                        {
                             ?>
                             <li class="<?php echo set_Submenu('route/index'); ?>"><a href="<?php echo base_url(); ?>user/route"><i class="fa fa-bus ftlayer"></i> <span><?php echo $this->lang->line('transport_routes'); ?></span></a></li>
                             <?php
                         }
-                        if ($this->studentmodule_lib->hasActive('hostel_rooms')) {
+                        if ($this->studentmodule_lib->hasActive('hostel_rooms')) 
+                        {
                             ?>
                             <li class="<?php echo set_Submenu('hostelroom/index'); ?>"><a href="<?php echo base_url(); ?>user/hostelroom"><i class="fa fa-building-o ftlayer"></i> <span><?php echo $this->lang->line('hostel_rooms'); ?></span></a></li>
 

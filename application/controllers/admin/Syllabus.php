@@ -31,23 +31,34 @@ class Syllabus extends Admin_Controller {
 		$data['this_week_start']=date($this->customlib->getSchoolDateFormat(), $this->customlib->dateyyyymmddTodateformat($this_week_start));
 		$data['this_week_end']=date($this->customlib->getSchoolDateFormat(), $this->customlib->dateyyyymmddTodateformat($this_week_end));
         $data['staff_id']=$this->staff_id;
+
+        //modified question popup
+        $questionList         = $this->question_model->getByClassSection($class_id,$section_id,$subject_id_filter);
+        $data['questionList'] = $questionList;
+        $class                = $this->class_model->get();
+        $data['classlistNEW'] = $class;    
+        $subject_result       = $this->subject_model->get();
+        $data['subjectlist']  = $subject_result;
+
         $this->load->view('layout/header', $data);
         $this->load->view('admin/syllabus/index', $data);
         $this->load->view('layout/footer', $data);
     }
 
 
-    public function get_weekdates(){     
- 
+    public function get_weekdates()
+    {      
         $this_week_start=$_POST['date'];  
-        $date = date_create($this_week_start);
-        
-        if($_POST['status']=='pre_week'){
+        $date = date_create($this_week_start);        
+        if($_POST['status']=='pre_week')
+        {
            date_add($date, date_interval_create_from_date_string('-6 days'));
            $this_week_end= date_format($date, $this->customlib->getSchoolDateFormat());
            $data['this_week_start']=$this_week_end;
            $data['this_week_end']=$this_week_start;
-        }else{            
+        }
+        else
+        {            
             date_add($date, date_interval_create_from_date_string('+6 days'));
             $this_week_end= date_format($date, $this->customlib->getSchoolDateFormat());
             $data['this_week_start']=$this_week_start;

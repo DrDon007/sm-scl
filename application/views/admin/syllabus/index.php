@@ -19,9 +19,9 @@
 
                     <div class="box-body">
                         <?php
-if ($role_id == 7) {
+                            if ($role_id == 7) {
 
-    ?>
+                                ?>
 
                         <form action="<?php echo site_url('admin/syllabus/getteachertimetable'); ?>" id="getTimetable" class="row">
                          <div class="col-lg-4 col-md-4 col-sm-4">
@@ -30,14 +30,14 @@ if ($role_id == 7) {
                                 <select class="form-control" name="teacher" id="teacher">
                                     <option value=""><?php echo $this->lang->line('select') ?></option>
                                     <?php
-if (!empty($staff_list)) {
-        foreach ($staff_list as $staff_key => $staff_value) {
-            ?>
+                                        if (!empty($staff_list)) {
+                                                foreach ($staff_list as $staff_key => $staff_value) {
+                                                    ?>
                                             <option value="<?php echo $staff_value['id']; ?>"><?php echo $staff_value["name"] . " " . $staff_value["surname"] . " (" . $staff_value['employee_id'] . ")"; ?></option>
                                             <?php
-}
-    }
-    ?>
+                                    }
+                                        }
+                                        ?>
                                 </select>
 
                             </div>
@@ -203,17 +203,69 @@ if (!empty($staff_list)) {
                                         <textarea type="text" id="comprehensive_questions" name="comprehensive_questions" class="form-control " ></textarea>
                                     </div>
                                 </div>
+                                <div class="row">
+                        <input type="hidden" name="ci_csrf_token" value="">
+                            <?php echo $this->customlib->getCSRF(); ?>
+                            <div class="col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <label><?php echo $this->lang->line('class'); ?></label><small class="req"> *</small>
+                                    <select autofocus="" id="class_id_filter" name="class_id_filter" class="form-control">
+                                        <option value=""><?php echo $this->lang->line('select'); ?></option>
+                                        <?php
+                                        foreach ($classlistNEW as $class) 
+                                        {
+                                            ?>
+                                            <option value="<?php echo $class['id'] ?>" <?php if (set_value('class_id') == $class['id']) echo "selected=selected" ?> ><?php echo $class['class'] ?></option>                                        
+                                            <?php
+                                            $count++;
+                                        }
+                                        ?>
+                                    </select>
+                                    <span class="text-danger"><?php echo form_error('class_id'); ?></span>
+                                </div>
+                            </div> 
+                            <div class="col-sm-4 col-md-4">
+                                <div class="form-group">  
+                                    <label><?php echo $this->lang->line('section'); ?></label><small class="req"> *</small>
+                                    <select id="section_id_filter" name="section_id_filter" class="form-control">
+                                        <option value=""><?php echo $this->lang->line('select'); ?></option>
+                                    </select>
+                                    <span class="text-danger"><?php echo form_error('section_id'); ?></span>
+                                </div>  
+                            </div>
+                            <div class="col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <label for="subject_id"><?php echo $this->lang->line('subject') ?></label><small class="req"> *</small>
+                                    <select class="form-control" id="subject_id_filter" name="subject_id_filter">
+                                        <option value=""><?php echo $this->lang->line('select'); ?></option>
+                                        <?php
+                                        foreach ($subjectlist as $subject_key => $subject_value) {
+                                            ?>
+                                            <option value="<?php echo $subject_value['id']; ?>"><?php echo $subject_value['name']; ?></option>
+                                             <?php
+                                        }
+                                        ?>
+                                    </select>
+                                    <span class="text text-danger subject_id_error"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">  
+                                    <label><?php echo $this->lang->line('question'); ?></label><small class="req"> *</small>
+                                    <select id="question_id_filter" name="question_id_filter" class="form-control">
 
-                                <div class="col-md-12">
+                                    </select>
+                                </div>  
+                            </div> 
+
+                            <div class="col-md-12">
                                     <div class="form-group" id="get_ckeditor">
                                         <label for="exampleInputEmail1"><?php echo $this->lang->line('presentation'); ?></label>
                                        <button class="btn btn-primary pull-right btn-xs" type="button" id="question" data-toggle="modal" data-location="question" data-target="#myimgModal"><i class="fa fa-plus"></i> <?php echo $this->lang->line('add') . " " . $this->lang->line('image') ?></button>
                                         <textarea name="presentation" id="question_textbox"  class="form-control ckeditor" >
                                         </textarea>
                                     </div>
-                                </div>
-
-
+                            </div>
 
                             </div><!--./row-->
                         </div><!--./col-md-12-->
@@ -471,11 +523,12 @@ if (!empty($staff_list)) {
     });
 
 
-      $("#syllabus_form").on('submit', (function (e) {
+      $("#syllabus_form").on('submit', (function (e) 
+      {
         e.preventDefault();
-    for (instance in CKEDITOR.instances) {
-        CKEDITOR.instances[instance].updateElement();
-    }
+        for (instance in CKEDITOR.instances) {
+            CKEDITOR.instances[instance].updateElement();
+        }
         var $this = $(this).find("button[type=submit]:focus");
 
         $.ajax({
@@ -486,9 +539,9 @@ if (!empty($staff_list)) {
             contentType: false,
             cache: false,
             processData: false,
-            beforeSend: function () {
+            beforeSend: function () 
+            {
                 $this.button('loading');
-
             },
             success: function (res)
             {
@@ -713,12 +766,10 @@ $('#created_for').val(staff_id);
 </script>
 
 <script> 
-
-  document.getElementById("printModal").style.display = "block";
-  document.getElementById("btnExportModal").style.display = "block";
-
-        function printDivModal() { 
-		
+        // document.getElementById("printModal").style.display = "block";
+        // document.getElementById("btnExportModal").style.display = "block";
+        function printDivModal() 
+        { 		
             // document.getElementById("noprint").style.display = "none";
 			$("#visibleModal").removeClass("hide");
 			$(".pull-right").addClass("hide");
@@ -736,37 +787,181 @@ $('#created_for').val(staff_id);
             location.reload(true);
         }
     
- function fnExcelReportModal()
-{
-    var tab_text="<table border='2px'><tr >";
-    var textRange; var j=0;
-    tab = document.getElementById('headerTableModal'); // id of table
-	
-    for(j = 0 ; j < tab.rows.length ; j++) 
-    {     
-        tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
-        //tab_text=tab_text+"</tr>";
-    }
-	 $("#visibleModal").removeClass("hide");
-    tab_text=tab_text+"</table>";
-    tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
-    tab_text= tab_text.replace(/<img[^>]*>/gi,""); // remove if u want images in your table
-    tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+        function fnExcelReportModal()
+        {
+            var tab_text="<table border='2px'><tr >";
+            var textRange; var j=0;
+            tab = document.getElementById('headerTableModal'); // id of table
+            
+            for(j = 0 ; j < tab.rows.length ; j++) 
+            {     
+                tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
+                //tab_text=tab_text+"</tr>";
+            }
+            $("#visibleModal").removeClass("hide");
+            tab_text=tab_text+"</table>";
+            tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+            tab_text= tab_text.replace(/<img[^>]*>/gi,""); // remove if u want images in your table
+            tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
 
-    var ua = window.navigator.userAgent;
-    var msie = ua.indexOf("MSIE "); 
-	$("#visibleModal").addClass("hide");
-    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+            var ua = window.navigator.userAgent;
+            var msie = ua.indexOf("MSIE "); 
+            $("#visibleModal").addClass("hide");
+            if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+            {
+                txtArea1.document.open("txt/html","replace");
+                txtArea1.document.write(tab_text);
+                txtArea1.document.close();
+                txtArea1.focus(); 
+                sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
+            }  
+            else                 //other browser not tested on IE 11
+                    sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));  
+
+            return (sa);
+        }  
+
+
+    //--custom
+
+    function getSectionByClass(class_id, section_id) 
     {
-        txtArea1.document.open("txt/html","replace");
-        txtArea1.document.write(tab_text);
-        txtArea1.document.close();
-        txtArea1.focus(); 
-        sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
-    }  
-    else                 //other browser not tested on IE 11
-        sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));  
+        if(class_id != "" && section_id != "") 
+        {
+            $('#section_id').html("");
+            var base_url = '<?php echo base_url() ?>';
+            var div_data = '<option value=""><?php echo $this->lang->line('select'); ?></option>';
+            $.ajax({
+                type: "GET",
+                url: base_url + "sections/getByClass",
+                data: {'class_id': class_id},
+                dataType: "json",
+                success: function (data) {
+                    $.each(data, function (i, obj)
+                    {
+                        var sel = "";
+                        if (section_id == obj.section_id) {
+                            sel = "selected";
+                        }
+                        div_data += "<option value=" + obj.section_id + " " + sel + ">" + obj.section + "</option>";
+                    });
+                    $('#section_id').append(div_data);
+                }
+            });
+        }
+    }
 
-    return (sa);
-}  
-    </script>
+    $(document).ready(function() 
+    {
+        var class_id = $('#class_id_filter').val();
+        var section_id = '<?php echo set_value('section_id_filter') ?>';
+        getSectionByClass(class_id, section_id);
+        $(document).on('change', '#class_id_filter', function (e) 
+        {
+            $('#section_id_filter').html("");
+            var class_id = $(this).val();
+            var base_url = '<?php echo base_url() ?>';
+            var div_data = '<option value=""><?php echo $this->lang->line('select'); ?></option>';
+            $.ajax({
+                type: "GET",
+                url: base_url + "sections/getByClass",
+                data: {'class_id': class_id},
+                dataType: "json",
+                success: function (data) {
+                    $.each(data, function (i, obj)
+                    {
+                        div_data += "<option value=" + obj.section_id + ">" + obj.section + "</option>";
+                    });
+                    $('#section_id_filter').append(div_data);
+                }
+            });
+        });
+    });
+
+   
+    $(document).ready(function () 
+    {
+        var div_data = '<option value=""><?php echo $this->lang->line('select'); ?></option>';
+        $(document).on('change', '#subject_id_filter', function (e) 
+        {
+            var class_id_filter = $('#class_id_filter').val();
+            var section_id_filter = $('#section_id_filter').val();
+            var subject_id_filter = $('#subject_id_filter').val();        
+            // var status=$(this).attr('state');
+            $.ajax({
+                url:'<?=base_url('admin/Question/getQuestionByFilter'); ?>',
+                method: 'POST',                
+                data:{class_id:class_id_filter,section_id:section_id_filter,subject_id:subject_id_filter},
+                dataType:'json',
+                success: function(data)
+                {
+                    // $.each(data, function (i, obj)
+                    // {
+                    //     div_data += "<option value=" + obj.id + ">" + obj.question + "</option>";
+                    // });
+                    // $('#question_id_filter').html(div_data);
+                               var html = '';
+                               var i;
+                               for(i=0; i<data.length; i++)
+                               {
+                                   html +="<option value=" + data[i].id + ">" + data[i].question + "</option>";
+                               }
+                               $('#question_id_filter').html(html);
+                           },
+                           error:function(){
+                               alert('could not get data from database');
+                           }
+        });
+            // getQuestions();
+        });
+    });
+    
+    function getQuestions() 
+    {
+       
+    }
+
+    // $('#question_filter').on('click','.que-filter',function()
+    // {
+    //     getQuestions();
+    // });
+    
+    // filter questions
+    $('#question_filter').on('click','.que-filter',function()
+    {
+        var class_id_filter = $('#class_id_filter').val();
+        var section_id_filter = $('#section_id_filter').val();
+        var subject_id_filter = $('#subject_id_filter').val();
+        // var status=$(this).attr('state');
+            $.ajax({
+                url:'<?=base_url('admin/Question/getQuestionByFilter'); ?>',
+                method: 'POST',                
+                data:{class_id:class_id_filter,section_id:section_id_filter,subject_id:subject_id_filter},
+                dataType:'json',
+                success: function(data){
+                               var html = '';
+                               var i;
+                               for(i=0; i<data.length; i++)
+                               {
+                                html +='<tr>'+
+                                   '<td data-label="username">'+data[i].class+'</td>'+
+                                       '<td>'+data[i].section+'</td>'+
+                                       '<td>'+data[i].name+'</td>'+
+                                       '<td>'+data[i].question+'</td>'+
+                                       '<td>'+data[i].correct+'</td>'+
+                                       '<td><button type="button" data-placement="left" class="btn btn-default btn-xs question-btn-edit" data-toggle="tooltip" id="load" data-recordid='+data[i].id+' title="<?php echo $this->lang->line('edit'); ?>" ><i class="fa fa-pencil"></i></button></td>'+
+                                       '<td><a data-placement="left" href="<?=base_url();?>admin/question/delete/'+data[i].id+'" class="btn btn-default btn-xs"  data-toggle="tooltip" title="<?php echo $this->lang->line('delete'); ?>" onclick="return confirm(<?php echo $this->lang->line("delete_confirm") ?>);"><i class="fa fa-remove"></i></a></td>'+
+                                       '</tr>';
+                               }
+                               $('#question_f').html(html);
+                           },
+                           error:function(){
+                               alert('could not get data from database');
+                           }
+        });
+    });
+
+    //--custom
+
+          
+</script>

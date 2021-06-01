@@ -27,6 +27,7 @@
 		<div class="row videoArea">
 			<video id="video1" controls autoplay="true">
 				<source src="<?=base_url()?>video/video1.mp4" type="video/mp4">
+				
 				Your browser does not support the video tag.
 			</video>
 		</div>

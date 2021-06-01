@@ -203,6 +203,53 @@ if (!empty($staff_list)) {
                                         <textarea type="text" id="comprehensive_questions" name="comprehensive_questions" class="form-control " ></textarea>
                                     </div>
                                 </div>
+                                <div class="row">
+                        <input type="hidden" name="ci_csrf_token" value="">
+                            <?php echo $this->customlib->getCSRF(); ?>
+                            <div class="col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <label><?php echo $this->lang->line('class'); ?></label><small class="req"> *</small>
+                                    <select autofocus="" id="class_id_filter" name="class_id_filter" class="form-control" >
+                                        <option value=""><?php echo $this->lang->line('select'); ?></option>
+                                        <?php
+                                        foreach ($classlistNEW as $class) 
+                                        {
+                                            ?>
+                                            <option value="<?php echo $class['id'] ?>" <?php if (set_value('class_id') == $class['id']) echo "selected=selected" ?> ><?php echo $class['class'] ?></option>
+                                            
+                                            <?php
+                                            $count++;
+                                        }
+                                        ?>
+                                    </select>
+                                    <span class="text-danger"><?php echo form_error('class_id'); ?></span>
+                                </div>
+                            </div> 
+                            <div class="col-sm-4 col-md-4">
+                                <div class="form-group">  
+                                    <label><?php echo $this->lang->line('section'); ?></label><small class="req"> *</small>
+                                    <select id="section_id_filter" name="section_id_filter" class="form-control">
+                                        <option value=""><?php echo $this->lang->line('select'); ?></option>
+                                    </select>
+                                    <span class="text-danger"><?php echo form_error('section_id'); ?></span>
+                                </div>  
+                            </div>
+                            <div class="col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <label for="subject_id"><?php echo $this->lang->line('subject') ?></label><small class="req"> *</small>
+                                    <select class="form-control" id="subject_id_filter" name="subject_id_filter">
+                                        <option value=""><?php echo $this->lang->line('select'); ?></option>
+                                        <?php
+                                        foreach ($subjectlist as $subject_key => $subject_value) {
+                                            ?>
+                                            <option value="<?php echo $subject_value['id']; ?>"><?php echo $subject_value['name']; ?></option>
+                                             <?php
+                                        }
+                                        ?>
+                                    </select>
+                                    <span class="text text-danger subject_id_error"></span>
+                                </div>
+                            </div>
 
                                 <div class="col-md-12">
                                     <div class="form-group" id="get_ckeditor">
@@ -769,4 +816,126 @@ $('#created_for').val(staff_id);
 
     return (sa);
 }  
+
+
+//modified question popup 
+function getSectionByClass(class_id, section_id) 
+    {
+        if (class_id != "" && section_id != "") {
+            $('#section_id').html("");
+            var base_url = '<?php echo base_url() ?>';
+            var div_data = '<option value=""><?php echo $this->lang->line('select'); ?></option>';
+            $.ajax({
+                type: "GET",
+                url: base_url + "sections/getByClass",
+                data: {'class_id': class_id},
+                dataType: "json",
+                success: function (data) {
+                    $.each(data, function (i, obj)
+                    {
+                        var sel = "";
+                        if (section_id == obj.section_id) {
+                            sel = "selected";
+                        }
+                        div_data += "<option value=" + obj.section_id + " " + sel + ">" + obj.section + "</option>";
+                    });
+                    $('#section_id').append(div_data);
+                }
+            });
+        }
+    }
+
+    $(document).ready(function () 
+    {
+        var class_id = $('#class_id_filter').val();
+        var section_id = '<?php echo set_value('section_id_filter') ?>';
+        getSectionByClass(class_id, section_id);
+        $(document).on('change', '#class_id_filter', function (e) 
+        {
+            $('#section_id_filter').html("");
+            var class_id = $(this).val();
+            var base_url = '<?php echo base_url() ?>';
+            var div_data = '<option value=""><?php echo $this->lang->line('select'); ?></option>';
+            $.ajax({
+                type: "GET",
+                url: base_url + "sections/getByClass",
+                data: {'class_id': class_id},
+                dataType: "json",
+                success: function (data) {
+                    $.each(data, function (i, obj)
+                    {
+                        div_data += "<option value=" + obj.section_id + ">" + obj.section + "</option>";
+                    });
+                    $('#section_id_filter').append(div_data);
+                }
+            });
+        });
+    });
+
+    $(document).ready(function () 
+    {
+        var class_id = $('#class_id').val();
+        var section_id = '<?php echo set_value('section_id') ?>';
+        getSectionByClass(class_id, section_id);
+        $(document).on('change', '#class_id', function (e) 
+        {
+            $('#section_id').html("");
+            var class_id = $(this).val();
+            var base_url = '<?php echo base_url() ?>';
+            var div_data = '<option value=""><?php echo $this->lang->line('select'); ?></option>';
+            $.ajax({
+                type: "GET",
+                url: base_url + "sections/getByClass",
+                data: {'class_id': class_id},
+                dataType: "json",
+                success: function (data) {
+                    $.each(data, function (i, obj)
+                    {
+                        div_data += "<option value=" + obj.section_id + ">" + obj.section + "</option>";
+                    });
+                    $('#section_id').append(div_data);
+                }
+            });
+        });
+    });
+
+    $(document).ready(function () 
+    {
+        getQuestions();
+    });
+    function getQuestions() 
+    {
+        var class_id_filter = $('#class_id_filter').val();
+        var section_id_filter = $('#section_id_filter').val();
+        var subject_id_filter = $('#subject_id_filter').val();
+        // var status=$(this).attr('state');
+            $.ajax({
+                url:'<?=base_url('admin/Question/getQuestionByFilter'); ?>',
+                method: 'POST',                
+                data:{class_id:class_id_filter,section_id:section_id_filter,subject_id:subject_id_filter},
+                dataType:'json',
+                success: function(data){
+                               var html = '';
+                               var i;
+                               for(i=0; i<data.length; i++)
+                               {
+                                   html +='<tr>'+
+                                   '<td data-label="username">'+data[i].class+'</td>'+
+                                       '<td>'+data[i].section+'</td>'+
+                                       '<td>'+data[i].name+'</td>'+
+                                       '<td>'+data[i].question+'</td>'+
+                                       '<td>'+data[i].correct+'</td>'+
+                                       '<td><button type="button" data-placement="left" class="btn btn-default btn-xs question-btn-edit" data-toggle="tooltip" id="load" data-recordid='+data[i].id+' title="<?php echo $this->lang->line('edit'); ?>" ><i class="fa fa-pencil"></i></button></td>'+
+                                       '<td><a data-placement="left" href="<?=base_url();?>admin/question/delete/'+data[i].id+'" class="btn btn-default btn-xs"  data-toggle="tooltip" title="<?php echo $this->lang->line('delete'); ?>" onclick="return confirm(<?php echo $this->lang->line("delete_confirm") ?>);"><i class="fa fa-remove"></i></a></td>'+
+                                       '</tr>';
+                               }
+                               $('#question_f').html(html);
+                           },
+                           error:function(){
+                               alert('could not get data from database');
+                           }
+        });
+    }
+    
+
     </script>

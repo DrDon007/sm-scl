@@ -31,6 +31,15 @@ class Syllabus extends Admin_Controller {
 		$data['this_week_start']=date($this->customlib->getSchoolDateFormat(), $this->customlib->dateyyyymmddTodateformat($this_week_start));
 		$data['this_week_end']=date($this->customlib->getSchoolDateFormat(), $this->customlib->dateyyyymmddTodateformat($this_week_end));
         $data['staff_id']=$this->staff_id;
+       
+        //modified question popup
+
+        $subject_result       = $this->subject_model->get();
+        $data['subjectlist']  = $subject_result;
+        $class                   = $this->class_model->get();
+        $data['classlistNEW']    = $class;    
+
+
         $this->load->view('layout/header', $data);
         $this->load->view('admin/syllabus/index', $data);
         $this->load->view('layout/footer', $data);

@@ -169,6 +169,7 @@ date2 =EndTime
 				
 			
 			$.featherlight.current().close();
+        
 
 	    
     });

@@ -250,6 +250,13 @@ if (!empty($staff_list)) {
                                     <span class="text text-danger subject_id_error"></span>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                    <div class="form-group">  
+                                        <label><?php echo $this->lang->line('question'); ?></label><small class="req"> *</small>
+                                        <select id="question_id_filter" name="question_id_filter" class="form-control">
+                                        </select>
+                                    </div>  
+                                </div> 
 
                                 <div class="col-md-12">
                                     <div class="form-group" id="get_ckeditor">
@@ -761,8 +768,8 @@ $('#created_for').val(staff_id);
 
 <script> 
 
-  document.getElementById("printModal").style.display = "block";
-  document.getElementById("btnExportModal").style.display = "block";
+//   document.getElementById("printModal").style.display = "block";
+//   document.getElementById("btnExportModal").style.display = "block";
 
         function printDivModal() { 
 		
@@ -819,9 +826,12 @@ $('#created_for').val(staff_id);
 
 
 //modified question popup 
-function getSectionByClass(class_id, section_id) 
+      //--custom
+
+      function getSectionByClass(class_id, section_id) 
     {
-        if (class_id != "" && section_id != "") {
+        if(class_id != "" && section_id != "") 
+        {
             $('#section_id').html("");
             var base_url = '<?php echo base_url() ?>';
             var div_data = '<option value=""><?php echo $this->lang->line('select'); ?></option>';
@@ -845,7 +855,7 @@ function getSectionByClass(class_id, section_id)
         }
     }
 
-    $(document).ready(function () 
+    $(document).ready(function() 
     {
         var class_id = $('#class_id_filter').val();
         var section_id = '<?php echo set_value('section_id_filter') ?>';
@@ -872,70 +882,38 @@ function getSectionByClass(class_id, section_id)
         });
     });
 
+   
     $(document).ready(function () 
     {
-        var class_id = $('#class_id').val();
-        var section_id = '<?php echo set_value('section_id') ?>';
-        getSectionByClass(class_id, section_id);
-        $(document).on('change', '#class_id', function (e) 
+        var div_data = '<option value=""><?php echo $this->lang->line('select'); ?></option>';
+        $(document).on('change', '#subject_id_filter', function (e) 
         {
-            $('#section_id').html("");
-            var class_id = $(this).val();
-            var base_url = '<?php echo base_url() ?>';
-            var div_data = '<option value=""><?php echo $this->lang->line('select'); ?></option>';
-            $.ajax({
-                type: "GET",
-                url: base_url + "sections/getByClass",
-                data: {'class_id': class_id},
-                dataType: "json",
-                success: function (data) {
-                    $.each(data, function (i, obj)
-                    {
-                        div_data += "<option value=" + obj.section_id + ">" + obj.section + "</option>";
-                    });
-                    $('#section_id').append(div_data);
-                }
-            });
-        });
-    });
-
-    $(document).ready(function () 
-    {
-        getQuestions();
-    });
-    function getQuestions() 
-    {
-        var class_id_filter = $('#class_id_filter').val();
-        var section_id_filter = $('#section_id_filter').val();
-        var subject_id_filter = $('#subject_id_filter').val();
-        // var status=$(this).attr('state');
+            var class_id_filter = $('#class_id_filter').val();
+            var section_id_filter = $('#section_id_filter').val();
+            var subject_id_filter = $('#subject_id_filter').val();        
+            // var status=$(this).attr('state');
             $.ajax({
                 url:'<?=base_url('admin/Question/getQuestionByFilter'); ?>',
                 method: 'POST',                
                 data:{class_id:class_id_filter,section_id:section_id_filter,subject_id:subject_id_filter},
                 dataType:'json',
-                success: function(data){
+                success: function(data)
+                {                   
                                var html = '';
                                var i;
                                for(i=0; i<data.length; i++)
                                {
-                                   html +='<tr>'+
-                                   '<td data-label="username">'+data[i].class+'</td>'+
-                                       '<td>'+data[i].section+'</td>'+
-                                       '<td>'+data[i].name+'</td>'+
-                                       '<td>'+data[i].question+'</td>'+
-                                       '<td>'+data[i].correct+'</td>'+
-                                       '<td><button type="button" data-placement="left" class="btn btn-default btn-xs question-btn-edit" data-toggle="tooltip" id="load" data-recordid='+data[i].id+' title="<?php echo $this->lang->line('edit'); ?>" ><i class="fa fa-pencil"></i></button></td>'+
-                                       '<td><a data-placement="left" href="<?=base_url();?>admin/question/delete/'+data[i].id+'" class="btn btn-default btn-xs"  data-toggle="tooltip" title="<?php echo $this->lang->line('delete'); ?>" onclick="return confirm(<?php echo $this->lang->line("delete_confirm") ?>);"><i class="fa fa-remove"></i></a></td>'+
-                                       '</tr>';
+                                   html +="<option value="+data[i].id+" data-id='"+ i +"' ques='"+data[i].question+"'>"+data[i].question+"</option>";
                                }
-                               $('#question_f').html(html);
+                               $('#question_id_filter').html(html);
                            },
                            error:function(){
                                alert('could not get data from database');
                            }
         });
-    }
-    
+            // getQuestions();
+        });
+    });
 
-    </script>
+    //--custom
+</script>

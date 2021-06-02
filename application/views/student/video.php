@@ -23,22 +23,40 @@
     <title>BALA BHARATHI VIDYALAYAM</title>
 </head>
 <body>
+	<?php
+
+		foreach ($res as $r => $rv) 
+		{
+	
+			$video=$rv['lacture_video'];
+			// $question_id=$rv['question_id'];
+			$question=$rv['question'];
+			$opt_a=$rv['opt_a'];
+			$opt_b=$rv['opt_b'];
+			$opt_c=$rv['opt_c'];
+			$opt_d=$rv['opt_d'];
+			$video_timing=$rv['video_timing'];
+			$correct=$rv['correct'];
+			
+			// echo $video;
+		}
+		
+	?>
     <div id="container">
 		<div class="row videoArea">
 			<video id="video1" controls autoplay="true">
-				<source src="<?=base_url()?>video/video1.mp4" type="video/mp4">
-				
+				<source src="<?=base_url()?>admin/syllabus/lacture_video_download/<?=$video?>" type="video/mp4">				
 				Your browser does not support the video tag.
 			</video>
 		</div>
             <div class="lightbox popUpQuestion1"> 
                 <h4>Question 1</h4>
-                <p>How the video feels</p>
+                <p><?=$question?></p>
                 <br>
-			<input class="q1" type="radio" name="Question2" value="Good">Good<br>
-			<input class="q1" type="radio" name="Question2" value="Bad">Bad<br>
-			<input class="q1" type="radio" name="Question2" value="Poor">Poor<br>
-	
+			<input class="q1" type="radio" name="Question2" value="<?=$opt_a?>"><?=$opt_a?>
+			<input class="q1" type="radio" name="Question2" value="<?=$opt_b?>"><?=$opt_b?>
+			<input class="q1" type="radio" name="Question2" value="<?=$opt_c?>"><?=$opt_c?>
+			<input class="q1" type="radio" name="Question2" value="<?=$opt_d?>"><?=$opt_d?>	
 		<div class="lightbox popUpQuestion2">
 			<h4>Question 2</h4>
 			<p>Rate The Video</p>

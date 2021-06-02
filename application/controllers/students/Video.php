@@ -6,26 +6,30 @@ if(!defined('BASEPATH'))
    {
        public function index()
        { 
-            $this->load->view('student/video');  
-       }
-       public function form_data(){
-          $this->load->model('Video_model');
-              $score = $this->input->POST('score');
-              $TimeSpent = $this->input->POST('TimeSpent');
-              $StartTime = $this->input->POST('StartTime');
-              $EndTime = $this->input->POST('EndTime');
-              $User =$this->session->userdata['student']['username'];
-          $this->Video_model->insert_summary($score,$TimeSpent,$StartTime,$EndTime,$User);
-          redirect('user/user/dashboard');
+            $this->load->model('Video_model');
+            $data['res']=$this->Video_model->getdata();
+            $this->load->view('student/video',$data);  
        }
 
-       public function check(){
+       public function form_data()
+       {
+            $this->load->model('Video_model');
+            $score = $this->input->POST('score');
+            $TimeSpent = $this->input->POST('TimeSpent');
+            $StartTime = $this->input->POST('StartTime');
+            $EndTime = $this->input->POST('EndTime');
+            $User =$this->session->userdata['student']['username'];
+            $this->Video_model->insert_summary($score,$TimeSpent,$StartTime,$EndTime,$User);
+            redirect('user/user/dashboard');
+       }
 
-        // $User =  $this->session->userdata(‘student_id’);
+       public function check()
+       {
+            // $User =  $this->session->userdata(‘student_id’);
              $User =$this->session->userdata['student']['username'];
-        echo $User;
-
+            echo $User;
        }
+
    }
 
 

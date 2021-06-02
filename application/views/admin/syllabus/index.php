@@ -258,6 +258,14 @@ if (!empty($staff_list)) {
                                     </div>  
                                 </div> 
 
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="pwd">Timing in seconds</label>
+                                        <input type="text" id="time" name="time" class="form-control">
+                                    </div>
+                                </div>
+
+
                                 <div class="col-md-12">
                                     <div class="form-group" id="get_ckeditor">
                                         <label for="exampleInputEmail1"><?php echo $this->lang->line('presentation'); ?></label>
@@ -348,8 +356,9 @@ if (!empty($staff_list)) {
     }
 </script>	
 <script>	
-	function get_subject_syllabus(id){
-  $('#assignsyllabus').modal('show');
+	function get_subject_syllabus(id)
+    {
+        $('#assignsyllabus').modal('show');
         $('#syllabus_result').html('');
         $.ajax({
             type: "POST",

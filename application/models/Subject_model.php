@@ -9,7 +9,8 @@ class Subject_model extends MY_Model {
         parent::__construct();
     }
 
-    public function get($id = null) {
+    public function get($id = null) 
+    {
 
         $subject_condition=0;
         $userdata = $this->customlib->getUserData();
@@ -29,8 +30,7 @@ class Subject_model extends MY_Model {
                     $subject_condition=0;
               }else{
                 $subject_condition=1;
-               $my_subjects=$this->teacher_model->get_examsubjects($userdata['id']);
-               
+               $my_subjects=$this->teacher_model->get_examsubjects($userdata['id']);          
                
 
 

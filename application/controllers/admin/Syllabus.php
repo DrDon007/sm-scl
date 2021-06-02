@@ -191,8 +191,8 @@ class Syllabus extends Admin_Controller {
                 //'subject_group_subject_id' =>  $_POST['subject_group_subject_id'],             
                 'created_by'        =>  $this->staff_id,
                 'created_for'=>$_POST['created_for'],
-                'id'=>$_POST['subject_syllabusid'],
-
+                'question_id'=>$_POST['question_id_filter'],
+                'video_timing'=>$_POST['time'],
             );
 
            

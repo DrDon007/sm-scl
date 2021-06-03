@@ -370,7 +370,8 @@ if (!empty($staff_list)) {
         });
     }
 
-    function subject_syllabusedit(id){
+    function subject_syllabusedit(id)
+    {
         $('#title').html('<?php echo $this->lang->line('edit')." ".$this->lang->line('lesson_plan')?>');
          $.ajax({
             url: "<?php echo site_url("admin/syllabus/getsubject_syllabus/") ?>"+id,
@@ -400,7 +401,7 @@ if (!empty($staff_list)) {
                     get_lesson(res.subject_group_subject_id,res.lesson_id,res.subject_group_class_sections_id);
                     get_topic(res.lesson_id,res.topic_id);
                 
-   CKEDITOR.instances['question_textbox'].setData(res.presentation);
+                    CKEDITOR.instances['question_textbox'].setData(res.presentation);
                 $('#add_assignsyllabus').modal('show');
                  
 

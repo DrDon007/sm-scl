@@ -36,7 +36,9 @@
 			$opt_c=$rv['opt_c'];
 			$opt_d=$rv['opt_d'];
 			$video_timing=$rv['video_timing'];
+			
 			$correct=$rv['correct'];
+
 			
 			// echo $video;
 		}
@@ -53,10 +55,10 @@
                 <h4>Question 1</h4>
                 <p><?=$question?></p>
                 <br>
-			<input class="q1" type="radio" name="Question2" value="<?=$opt_a?>"><?=$opt_a?>
-			<input class="q1" type="radio" name="Question2" value="<?=$opt_b?>"><?=$opt_b?>
-			<input class="q1" type="radio" name="Question2" value="<?=$opt_c?>"><?=$opt_c?>
-			<input class="q1" type="radio" name="Question2" value="<?=$opt_d?>"><?=$opt_d?>	
+			<input class="q1" type="radio" name="Question1" value="opt_a"><?=$opt_a?>
+			<input class="q1" type="radio" name="Question1" value="opt_b"><?=$opt_b?>
+			<input class="q1" type="radio" name="Question1" value="opt_c"><?=$opt_c?>
+			<input class="q1" type="radio" name="Question1" value="opt_d"><?=$opt_d?>	
 		<div class="lightbox popUpQuestion2">
 			<h4>Question 2</h4>
 			<p>Rate The Video</p>
@@ -102,9 +104,9 @@ $(document).ready(function(){
 	video1 = $('#video1');
 	$(video1).on('timeupdate', function(){
 		var currentTime = Math.round(this.currentTime);
-        var choicePart = 10;
-	    var choicePart1 = 20;
-        var choicePart3 = 30;
+        var choicePart = 3;
+	    var choicePart1 = 8;
+        var choicePart3 = 10;
         
 		if(currentTime == 0){
 			 startTime = new Date();
@@ -116,9 +118,9 @@ $(document).ready(function(){
 			$.featherlight($('.popUpQuestion1'))
 			$('.q1').click(function(){
 				let answer1 = $("input[type='radio'][name='Question1']:checked").val();
-				setCookie("answer1",answer1,1)
+				// setCookie("answer1",answer1,1)
 			  $.featherlight.current().close();
-			  if (answer1 == "Good"){
+			  if (answer1 == "<?=$correct;?>"){
 				  score = score+30 
 			  }   
 			  })

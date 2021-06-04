@@ -346,7 +346,7 @@ if (!empty($staff_list)) {
     </div>
 </div>
 
-<script>
+
 
 <script>
    var  i = 1;

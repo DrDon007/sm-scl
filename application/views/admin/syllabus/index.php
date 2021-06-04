@@ -361,8 +361,8 @@ if (!empty($staff_list)) {
    else{
     $('#add_question_button').off("click");
    }
-});
-
+}
+);
     function run_video(lacture_youtube_url){		
 		$('#lacture_youtube_modal').modal('show');  
 		var str = lacture_youtube_url;

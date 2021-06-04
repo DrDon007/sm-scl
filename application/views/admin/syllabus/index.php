@@ -348,6 +348,22 @@ if (!empty($staff_list)) {
 
 <script>
 
+<script>
+   var  i = 1;
+   
+    $('#add_question_button').click(function (){
+        if(i < 5) { 
+        var $add_div = $(' <div class="col-md-6"> <div class="form-group">  <label><?php echo $this->lang->line('question'); ?></label><small class="req"> *</small> <select id="question_id_filter'+i+'" name="question_id_filter" class="form-control"> </select> </div> </div> <div class="col-md-4"> <div class="form-group"> <label for="pwd">Timing in seconds</label> <input type="text" id="time'+i+'" name="time"class="form-control"> </div> </div> </div>');
+        $('#add_question').append($add_div);
+        $('#question_id_filter option').clone().appendTo('#question_id_filter'+i+'')
+        i++;      
+         }
+   else{
+    $('#add_question_button').off("click");
+   }
+}
+);
+
     function run_video(lacture_youtube_url){		
 		$('#lacture_youtube_modal').modal('show');  
 		var str = lacture_youtube_url;

@@ -251,6 +251,37 @@ class Lessonplan_model extends MY_model {
 			}
         }
 
+		public function add_question1($data)
+		{
+			if(isset($questionData['id']) && $questionData['id']>0) 
+			{
+				$this->db->where('id', $questionData['id']);
+				$this->db->update('intractive_video_question', $questionData);
+				$insert_id    =  $questionData['id'];
+				$message      =  UPDATE_RECORD_CONSTANT." On intractive_video_question id ".$insert_id;
+				$action       =  "Update";
+				$record_id    =  $insert_id;
+				return $record_id;
+			} 
+			else 
+			{
+				$this->db->insert('intractive_video_question', $questionData);
+				$insert_id 	  =  $this->db->insert_id();
+				$message      =  INSERT_RECORD_CONSTANT." On intractive_video_question id ".$insert_id;
+				$action       =  "Insert";
+				$record_id    =  $insert_id;
+				return $this->db->insert_id();
+			}
+		}
+
+		function add_products($questionData)
+		{
+			// $sql="INSERT INTO `intractive_video_question`(`question_id`, `video_timing`, `subject_syllabus_id`) VALUES (:question_id,:video_timing,:subject_syllabus_id)";
+			// $rs=$this->db->query($sql);
+			// return $rs;    
+			$this->db->insert('intractive_video_question', $questionData);
+			
+		}
 
 		public function update_syllabus($data) 
 		{

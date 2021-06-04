@@ -209,12 +209,40 @@ class Syllabus extends Admin_Controller
             $insert_id = $this->lessonplan_model->add_syllabus($data);
 
             ///--------------------------custom------------------
-            $questionData=array(
-                'question_id'=>$_POST['question_id_filter'],
-                'video_timing'=>$_POST['time'],
-                'subject_syllabus_id'=>$insert_id,
-            ); 
-            $que_insert_id = $this->lessonplan_model->add_question($questionData);
+           
+            $que_count=$_POST['question_count'];
+            $ques=implode(",",$_POST['question_id_filter']);
+            $video_timing=implode(",",$_POST['time']);
+             $questionData=array(
+                    ':question_id'=>$ques,
+                    ':video_timing'=>$video_timing,
+                    ':subject_syllabus_id'=>$insert_id,
+                ); 
+                $this->lessonplan_model->add_products($questionData);
+            //  -------
+                        // $data1['subject_syllabus_id']=$insert_id;
+                        // $question_id_filter = $this->input->post('question_id_filter');
+                        // var_dump($question_id_filter);
+                        // $time = $this->input->post('time');
+                        // if(!empty($question_id_filter) && ! empty($time) ) 
+                        // {
+                        //     foreach ($question_id_filter as $key => $value ) 
+                        //     {
+                        //         $data1['question_id_filter'] = $value;
+                        //         $data1['time'] = $time[$key];
+                        //         $this->lessonplan_model->add_products($data1);
+                        //     }
+                    
+                        // } 
+                     
+            //  -------
+
+            // $questionData=array(
+            //     'question_id'=>$_POST['question_id_filter'],
+            //     'video_timing'=>$_POST['time'],
+            //     'subject_syllabus_id'=>$insert_id,
+            // ); 
+            // $que_insert_id = $this->lessonplan_model->add_question($questionData);
             ///--------------------------custom------------------
 
             if(isset($_FILES["file"]) && !empty($_FILES['file']['name'])) 

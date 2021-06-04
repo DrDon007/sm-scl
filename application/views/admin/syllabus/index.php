@@ -250,6 +250,7 @@ if (!empty($staff_list)) {
                                     <span class="text text-danger subject_id_error"></span>
                                 </div>
                             </div>
+                            <div id="add_question">
                             <div class="col-md-6">
                                     <div class="form-group">  
                                         <label><?php echo $this->lang->line('question'); ?></label><small class="req"> *</small>
@@ -264,7 +265,9 @@ if (!empty($staff_list)) {
                                         <input type="text" id="time" name="time" class="form-control">
                                     </div>
                                 </div>
-
+                                </div>
+                                <button id="add_question_button" type="button" style="background-color:Green; position:absolute; bottom: 427px; left: 720px;" name="Add Question">Add Question</button>
+                               <input type="number" id="question_count" name="question_count" value="" hidden>
 
                                 <div class="col-md-12">
                                     <div class="form-group" id="get_ckeditor">
@@ -345,9 +348,29 @@ if (!empty($staff_list)) {
         </div>
     </div>
 </div>
-
 <script>
+   var  i = 1;
+   
+    $('#add_question_button').click(function (){
+        $('#subject_id_filter').prop("disabled",true)
+        $('#section_id_filter').prop("disabled",true)
+        $('#class_id_filter').prop("disabled",true)
+        
+        if(i < 5) { 
+            document.getElementById("question_count").value = i+1;
+            var $add_div = $(' <div class="col-md-6"> <div class="form-group">  <label><?php echo $this->lang->line('question'); ?></label><small class="req"> *</small> <select id="question_id_filter'+i+'" name="question_id_filter[]" class="form-control"> </select> </div> </div> <div class="col-md-4"> <div class="form-group"> <label for="pwd">Timing in seconds</label> <input type="text" id="time'+i+'" name="time[]" class="form-control"> </div> </div> </div>');
+        // var $add_div = $(' <div class="col-md-6"> <div class="form-group">  <label><?php echo $this->lang->line('question'); ?></label><small class="req"> *</small> <select id="question_id_filter'+i+'" name="question_id_filter" class="form-control"> </select> </div> </div> <div class="col-md-4"> <div class="form-group"> <label for="pwd">Timing in seconds</label> <input type="text" id="time'+i+'" name="time"class="form-control"> </div> </div> </div>');
+        $('#add_question').append($add_div);
+        $('#question_id_filter option').clone().appendTo('#question_id_filter'+i+'')
+        // $('#question_id_filter option').clone().appendTo('#question_id_filter')
+        i++;
 
+         }
+   else{
+    $('#add_question_button').off("click");
+   }
+}
+);
     function run_video(lacture_youtube_url){		
 		$('#lacture_youtube_modal').modal('show');  
 		var str = lacture_youtube_url;
@@ -370,8 +393,7 @@ if (!empty($staff_list)) {
         });
     }
 
-    function subject_syllabusedit(id)
-    {
+    function subject_syllabusedit(id){
         $('#title').html('<?php echo $this->lang->line('edit')." ".$this->lang->line('lesson_plan')?>');
          $.ajax({
             url: "<?php echo site_url("admin/syllabus/getsubject_syllabus/") ?>"+id,
@@ -401,7 +423,7 @@ if (!empty($staff_list)) {
                     get_lesson(res.subject_group_subject_id,res.lesson_id,res.subject_group_class_sections_id);
                     get_topic(res.lesson_id,res.topic_id);
                 
-                    CKEDITOR.instances['question_textbox'].setData(res.presentation);
+   CKEDITOR.instances['question_textbox'].setData(res.presentation);
                 $('#add_assignsyllabus').modal('show');
                  
 
@@ -537,9 +559,9 @@ if (!empty($staff_list)) {
 
       $("#syllabus_form").on('submit', (function (e) {
         e.preventDefault();
-    for (instance in CKEDITOR.instances) {
-        CKEDITOR.instances[instance].updateElement();
-    }
+        for (instance in CKEDITOR.instances) {
+            CKEDITOR.instances[instance].updateElement();
+        }
         var $this = $(this).find("button[type=submit]:focus");
 
         $.ajax({
@@ -837,7 +859,6 @@ $('#created_for').val(staff_id);
 
 //modified question popup 
       //--custom
-
       function getSectionByClass(class_id, section_id) 
     {
         if(class_id != "" && section_id != "") 

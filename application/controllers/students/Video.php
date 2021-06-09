@@ -29,6 +29,15 @@ if(!defined('BASEPATH'))
              $User =$this->session->userdata['student']['username'];
             echo $User;
        }
+       public function lacture_video_download($doc)
+       {
+           $this->load->helper('download');
+           $filepath = "./uploads/syllabus_attachment/lacture_video/" . $this->uri->segment(4);
+         
+           $data     = file_get_contents($filepath);
+           $name     = $this->uri->segment(4);
+           force_download($name, $data);
+       }
 
    }
 

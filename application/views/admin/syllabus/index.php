@@ -254,7 +254,7 @@ if (!empty($staff_list)) {
                             <div class="col-md-6">
                                     <div class="form-group">  
                                         <label><?php echo $this->lang->line('question'); ?></label><small class="req"> *</small>
-                                        <select id="question_id_filter" name="question_id_filter" class="form-control">
+                                        <select id="question_id_filter" name="question_id_filter[]" class="form-control">
                                         </select>
                                     </div>  
                                 </div> 
@@ -262,7 +262,7 @@ if (!empty($staff_list)) {
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="pwd">Timing in seconds</label>
-                                        <input type="text" id="time" name="time" class="form-control">
+                                        <input type="text" id="time" name="time[]" class="form-control">
                                     </div>
                                 </div>
                                 </div>
@@ -349,17 +349,17 @@ if (!empty($staff_list)) {
     </div>
 </div>
 <script>
-   var  i = 1;
+   var  i = 2;
    
     $('#add_question_button').click(function (){
         $('#subject_id_filter').prop("disabled",true)
         $('#section_id_filter').prop("disabled",true)
         $('#class_id_filter').prop("disabled",true)
         
-        if(i < 5) { 
-            document.getElementById("question_count").value = i+1;
-            var $add_div = $(' <div class="col-md-6"> <div class="form-group">  <label><?php echo $this->lang->line('question'); ?></label><small class="req"> *</small> <select id="question_id_filter'+i+'" name="question_id_filter[]" class="form-control"> </select> </div> </div> <div class="col-md-4"> <div class="form-group"> <label for="pwd">Timing in seconds</label> <input type="text" id="time'+i+'" name="time[]" class="form-control"> </div> </div> </div>');
-        // var $add_div = $(' <div class="col-md-6"> <div class="form-group">  <label><?php echo $this->lang->line('question'); ?></label><small class="req"> *</small> <select id="question_id_filter'+i+'" name="question_id_filter" class="form-control"> </select> </div> </div> <div class="col-md-4"> <div class="form-group"> <label for="pwd">Timing in seconds</label> <input type="text" id="time'+i+'" name="time"class="form-control"> </div> </div> </div>');
+        if(i < 6) { 
+            document.getElementById("question_count").value = i;
+            var $add_div = $(' <div class="col-md-6"> <div class="form-group">  <label><?php echo $this->lang->line('question'); ?></label><small class="req"> *</small> <select id="question_id_filter'+i+'" name="question_id_filter'+i+'" class="form-control"> </select> </div> </div> <div class="col-md-4"> <div class="form-group"> <label for="pwd">Timing in seconds</label> <input type="text" id="time'+i+'" name="time'+i+'" class="form-control"> </div> </div> </div>');
+        // var $add_div = $(' <div class="col-md-6"> <div class="form-group">  <label><?php echo $this->lang->line('question'); ?></label><small class="req"> *</small> <select id="question_id_filter'+i+'" name="question_id_filter'+i+'" class="form-control"> </select> </div> </div> <div class="col-md-4"> <div class="form-group"> <label for="pwd">Timing in seconds</label> <input type="text" id="time'+i+'" name="time'+i+'"class="form-control"> </div> </div> </div>');
         $('#add_question').append($add_div);
         $('#question_id_filter option').clone().appendTo('#question_id_filter'+i+'')
         // $('#question_id_filter option').clone().appendTo('#question_id_filter')

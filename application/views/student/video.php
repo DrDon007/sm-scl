@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,18 +45,13 @@
 	?>
     <div id="container">
 		<div class="row videoArea">
-		<!-- <iframe  width="560" height="315" src="https://www.youtube.com/embed/1pOstnFhges" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-
+		<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/1pOstnFhges" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 			<video id="video1" controls autoplay="true">
 			<source src="<?=base_url()?>students/video/lacture_video_download/<?=$video?>" type="video/mp4">	
 
 				<!-- <iframe id=”player” type=”text/html” width=”640″ height=”390″ src=”http://www.youtube.com/embed/M7lc1UVf-VE?enablejsapi=1&origin=http://example.com” frameborder=”0″></iframe> -->
 				Your browser does not support the video tag.
 			</video>
-
-	 
-		
-
 		</div>
             <div class="lightbox popUpQuestion1"> 
                 <h4>Question 1</h4>
@@ -106,7 +103,7 @@ var startTime;
 
 $(document).ready(function(){
 	$.featherlight.defaults.afterClose = playPauseVideo;
-	video1 = $('iframe');
+	video1 = $('#video1');
 	$(video1).on('timeupdate', function(){
 		var currentTime = Math.round(this.currentTime);
         var choicePart = <?=$video_timing ?>;
@@ -232,11 +229,4 @@ function setCookie(name,value,days) {
     document.cookie = name + "=" + (value || "")  + expires + "; path=/";
 }
 
-// $(function(){
-
-// 	$('iframe').attr('id','video1');
-// });
-
-
 </script>
-

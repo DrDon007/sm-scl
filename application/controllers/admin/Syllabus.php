@@ -210,39 +210,57 @@ class Syllabus extends Admin_Controller
 
             ///--------------------------custom------------------
            
-            // $que_count=$_POST['question_count'];
-            // $ques=implode(",",$_POST['question_id_filter']);
-            // $video_timing=implode(",",$_POST['time']);
-            //  $questionData=array(
-            //         ':question_id'=>$ques,
-            //         ':video_timing'=>$video_timing,
-            //         ':subject_syllabus_id'=>$insert_id,
-            //     ); 
-            //     $this->lessonplan_model->add_products($questionData);
-            //  -------
-                        // $data1['subject_syllabus_id']=$insert_id;
-                        // $question_id_filter = $this->input->post('question_id_filter');
-                        // var_dump($question_id_filter);
-                        // $time = $this->input->post('time');
-                        // if(!empty($question_id_filter) && ! empty($time) ) 
-                        // {
-                        //     foreach ($question_id_filter as $key => $value ) 
-                        //     {
-                        //         $data1['question_id_filter'] = $value;
-                        //         $data1['time'] = $time[$key];
-                        //         $this->lessonplan_model->add_products($data1);
-                        //     }
-                    
-                        // } 
-                     
-            //  -------
+            
+            if($_POST['question_id_filter'] && $_POST['time']){
+                $questionData=array(
+                    'question_id'=>$_POST['question_id_filter'],
+                    'video_timing'=>$_POST['time'],
+                    'subject_syllabus_id'=>$insert_id,
+                ); 
+                $this->lessonplan_model->add_question($questionData);
+            }
+            
 
-            $questionData=array(
-                'question_id'=>$_POST['question_id_filter'],
-                'video_timing'=>$_POST['time'],
-                'subject_syllabus_id'=>$insert_id,
-            ); 
-            $que_insert_id = $this->lessonplan_model->add_question($questionData);
+            if($_POST['question_id_filter2'] && $_POST['time2']){
+
+                $questionData=array(
+                    'question_id'=>$_POST['question_id_filter2'],
+                    'video_timing'=>$_POST['time2'],
+                    'subject_syllabus_id'=>$insert_id,
+                ); 
+    
+                $this->lessonplan_model->add_question($questionData);
+            }
+            
+            if($_POST['question_id_filter3'] && $_POST['time3']){
+                $questionData=array(
+                    'question_id'=>$_POST['question_id_filter3'],
+                    'video_timing'=>$_POST['time3'],
+                    'subject_syllabus_id'=>$insert_id,
+                ); 
+                $this->lessonplan_model->add_question($questionData);
+            }
+            if($_POST['question_id_filter4'] && $_POST['time4']){
+                $questionData=array(
+                    'question_id'=>$_POST['question_id_filter4'],
+                    'video_timing'=>$_POST['time4'],
+                    'subject_syllabus_id'=>$insert_id,
+                ); 
+                $this->lessonplan_model->add_question($questionData);
+            }
+
+            if($_POST['question_id_filter5'] && $_POST['time5']){
+                $questionData=array(
+                    'question_id'=>$_POST['question_id_filter5'],
+                    'video_timing'=>$_POST['time5'],
+                    'subject_syllabus_id'=>$insert_id,
+                ); 
+                $this->lessonplan_model->add_question($questionData);
+            }
+            
+            
+            
+            //$que_insert_id = $this->lessonplan_model->add_question($questionData);
             ///--------------------------custom------------------
 
             if(isset($_FILES["file"]) && !empty($_FILES['file']['name'])) 

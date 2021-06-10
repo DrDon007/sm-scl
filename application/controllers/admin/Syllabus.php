@@ -220,73 +220,29 @@ class Syllabus extends Admin_Controller
             //     ); 
             //     $this->lessonplan_model->add_products($questionData);
             //  -------
-                    //  $que_count=$_POST['question_count'];
-                    //  $questionData = [];
-                    //  for( $i=1; $i = $que_count; $i++){
-                    //    $questionData.$i=array(
-                    //    'question_id'=>$_POST['question_id_filter'.$i],
-                    //    'video_timing'=>$_POST['time'.$i],
-                    //    'subject_syllabus_id'=>$insert_id,
-                    //    ); 
-                    // }
-                    // $this->lessonplan_model->add_products($questionData);
+                        // $data1['subject_syllabus_id']=$insert_id;
+                        // $question_id_filter = $this->input->post('question_id_filter');
+                        // var_dump($question_id_filter);
+                        // $time = $this->input->post('time');
+                        // if(!empty($question_id_filter) && ! empty($time) ) 
+                        // {
+                        //     foreach ($question_id_filter as $key => $value ) 
+                        //     {
+                        //         $data1['question_id_filter'] = $value;
+                        //         $data1['time'] = $time[$key];
                         //         $this->lessonplan_model->add_products($data1);
                         //     }
                     
                         // } 
                      
-                      
-                        //    if(isset  (null !== 'question_id_filter')){
-                        //        $questionarray = array(
-                        //     'question_id' => $_POST['question_id_filter'],
-                        //     'video_timing' => $_POST['time'],
-                        //     'subject_syllabus_id'=> $insert_id,
-                        //        );
-                        //        $this->lessonplan_model->add_products($questionarray);
-                        //    }
+            //  -------
 
-           
-            // $question_id = $this->input->post( 'question_id_filter' );
-            // $video_timing = $this->input->post( 'time' );
-            //     if ( ! empty($question_id) && ! empty($video_timing) ) 
-            //     {
-            //         foreach ($question_id as $key => $value ) 
-            //         {
-            //             $data['question_id_filter'] = $value;
-            //             $data['time'] = $video_timing[$key];
-            //             $insert_id =  'subject_syllabus_id'; 
-            //             $this->lessonplan_model->add_products($data);
-                        
-            //         }
-                      
-                   
-            //     } 
-        
-
-
-
-            // $question_id=$_POST['question_id_filter'];
-            //     $video_timing =$_POST['time'];
-            //     $que_count=$_POST['question_count'];
-            //     if ( ! empty($question_id) && ! empty($video_timing) ) {
-            //         for($i = 0; $i<$que_count; $i++){
-            //             $questionData = array(
-            //                 'question_id' => $question_id_filter[$i],
-            //                 'video_timing' => $video_timing[$i],
-            //                 'subject_syllabus_id'=>$insert_id,
-            //             );
-            //             $this->lessonplan_model->add_question($questionData);
-            //         }
-            //     }
-
-                    
-
-            // $questionData=array(
-            //     'question_id'=>$_POST['question_id_filter'],
-            //     'video_timing'=>$_POST['time'],
-            //     'subject_syllabus_id'=>$insert_id,
-            // ); 
-            // $que_insert_id = $this->lessonplan_model->add_question($questionData);
+            $questionData=array(
+                'question_id'=>$_POST['question_id_filter'],
+                'video_timing'=>$_POST['time'],
+                'subject_syllabus_id'=>$insert_id,
+            ); 
+            $que_insert_id = $this->lessonplan_model->add_question($questionData);
             ///--------------------------custom------------------
 
             if(isset($_FILES["file"]) && !empty($_FILES['file']['name'])) 
@@ -468,3 +424,18 @@ class Syllabus extends Admin_Controller
      
 }
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

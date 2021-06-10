@@ -254,7 +254,7 @@ if (!empty($staff_list)) {
                             <div class="col-md-6">
                                     <div class="form-group">  
                                         <label><?php echo $this->lang->line('question'); ?></label><small class="req"> *</small>
-                                        <select id="question_id_filter" name="question_id_filter[]" class="form-control">
+                                        <select id="question_id_filter" name="question_id_filter" class="form-control">
                                         </select>
                                     </div>  
                                 </div> 
@@ -262,7 +262,7 @@ if (!empty($staff_list)) {
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="pwd">Timing in seconds</label>
-                                        <input type="text" id="time" name="time[]" class="form-control">
+                                        <input type="text" id="time" name="time" class="form-control">
                                     </div>
                                 </div>
                                 </div>

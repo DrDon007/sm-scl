@@ -210,7 +210,7 @@ class Syllabus extends Admin_Controller
 
             ///--------------------------custom------------------
            
-            $question_count = 2;//$_POST['question_count'];
+            $question_count = $_POST['question_count'];
             if($_POST['question_id_filter'] ){
                     $questionData = array(
                         'question_id'=>$_POST['question_id_filter'],
@@ -221,7 +221,7 @@ class Syllabus extends Admin_Controller
                 
             }
             if($_POST['question_id_filter2']){
-                for($i=1; $i<=2; $i++){
+                for($i=1; $i<=$question_count; $i++){
                     $questionData = array(
                         'question_id'=>$_POST['question_id_filter'.$i.''],
                         'video_timing'=>$_POST['time'.$i.''],

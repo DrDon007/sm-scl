@@ -26,22 +26,103 @@
 </head>
 <body>
 	<?php
-
 		foreach ($res as $r => $rv) 
 		{
-	
 			$video=$rv['lacture_video'];
 			// $question_id=$rv['question_id'];
-			$question=$rv['question'];
-			$opt_a=$rv['opt_a'];
-			$opt_b=$rv['opt_b'];
-			$opt_c=$rv['opt_c'];
-			$opt_d=$rv['opt_d'];
-			$video_timing=$rv['video_timing'];
-			
-			$correct=$rv['correct'];
+			$question[]=$rv['question'];
+			$opt_a[]=$rv['opt_a'];
+			$opt_b[]=$rv['opt_b'];
+			$opt_c[]=$rv['opt_c'];
+			$opt_d[]=$rv['opt_d'];
+			$video_timing[]=$rv['video_timing'];
+			// $correct=$rv['correct'];
 		}
+
+		$vt1=$video_timing[0];
+		$vt2=$video_timing[1];
+		$vt3=$video_timing[2];
+		$vt4=$video_timing[3];
+		$vt5=$video_timing[4];
+
+		$question1=$question[0];
+		$question2=$question[1];
+		$question3=$question[2];
+		$question4=$question[3];
+		$question5=$question[4];
+
+		// if(is_numeric($video_timing[0])){
+		// 	$vt1=$video_timing[0];
+			
+		// }else{
+		// 	$vt1=abc;
+		// }
+
+
+		// if(is_numeric($video_timing[1])){
+		// 	$vt2=$video_timing[1];
+			
+		// }else{
+		// 	$vt2=abc;
+		// }
+
+
+		// if(is_numeric($video_timing[2])){
+		// 	$vt3=$video_timing[2];
+			
+		// }else{
+		// 	$vt3=abc;
+		// }
+
+
+		// if(is_numeric($video_timing[3])){
+		// 	$vt4=$video_timing[3];
+			
+		// }else{
+		// 	$vt4=abc;
+		// }
+
+
+        // if(is_numeric($video_timing[4])){
+		// 	$vt5=$video_timing[4];
+			
+		// }else{
+		// 	$vt5=abc;
+		// }
+
+
+		$opt1_a=$opt_a[0];
+		$opt2_a=$opt_a[1];
+		$opt3_a=$opt_a[2];
+		$opt4_a=$opt_a[3];
+		$opt5_a=$opt_a[4];
+
+		$opt1_b=$opt_b[0];
+		$opt2_b=$opt_b[1];
+		$opt3_b=$opt_b[2];
+		$opt4_b=$opt_b[3];
+		$opt5_b=$opt_b[4];
+
+		$opt1_c=$opt_c[0];
+		$opt2_c=$opt_c[1];
+		$opt3_c=$opt_c[2];
+		$opt4_c=$opt_c[3];
+		$opt5_c=$opt_c[4];
+
+		$opt1_d=$opt_d[0];
+		$opt2_d=$opt_d[1];
+		$opt3_d=$opt_d[2];
+		$opt4_d=$opt_d[3];
+		$opt5_d=$opt_d[4];
+
+
+
+
+
 		
+        
+
+
 	?>
     <div id="container">
 		<div class="row videoArea">
@@ -55,28 +136,50 @@
 		</div>
             <div class="lightbox popUpQuestion1"> 
                 <h4>Question 1</h4>
-                <p><?=$question?></p>
+                <p><?=$question1?></p>
                 <br>
-			<input class="q1" type="radio" name="Question1" value="opt_a"><?=$opt_a?>
-			<input class="q1" type="radio" name="Question1" value="opt_b"><?=$opt_b?>
-			<input class="q1" type="radio" name="Question1" value="opt_c"><?=$opt_c?>
-			<input class="q1" type="radio" name="Question1" value="opt_d"><?=$opt_d?>	
+			<input class="q1" type="radio" name="Question1" value="opt_a"><?=$opt1_a?><br>
+			<input class="q1" type="radio" name="Question1" value="opt_b"><?=$opt1_b?><br>
+			<input class="q1" type="radio" name="Question1" value="opt_c"><?=$opt1_c?><br>
+			<input class="q1" type="radio" name="Question1" value="opt_d"><?=$opt1_d?><br>
+			</div>	
 		<div class="lightbox popUpQuestion2">
 			<h4>Question 2</h4>
-			<p>Rate The Video</p>
+			<p><?=$question2?></p>
 			<br>
-			<input class="q2" type="radio" name="Question2" value="5Star">5Star<br>
-			<input class="q2" type="radio" name="Question2" value="4Star">4Star<br>
-			<input class="q2" type="radio" name="Question2" value="3Star">3Star<br>
+			<input class="q2" type="radio" name="Question2" value="opt_a"><?=$opt2_a?><br>
+			<input class="q2" type="radio" name="Question2" value="opt_b"><?=$opt2_b?><br>
+			<input class="q2" type="radio" name="Question2" value="opt_c"><?=$opt2_c?><br>
+			<input class="q2" type="radio" name="Question2" value="opt_d"><?=$opt2_d?><br>
 		</div>
 		<div class="lightbox popUpQuestion3">
 			<h4>Question 3</h4>
-			<p>Have you got something  from the video?</p>
+			<p><?=$question3?></p>
 			<br>
-			<input class="q3" type="radio" name="Question3" value="Yes">Yes<br>
-			<input class="q3" type="radio" name="Question3" value="No">No<br>
-			<input class="q3" type="radio" name="Question3" value="Can't say">can't say<br>
+			<input class="q3" type="radio" name="Question3" value="opt_a"><?=$opt3_a?><br>
+			<input class="q3" type="radio" name="Question3" value="opt_b"><?=$opt3_b?><br>
+			<input class="q3" type="radio" name="Question3" value="opt_c"><?=$opt3_c?><br>
+			<input class="q3" type="radio" name="Question3" value="opt_d"><?=$opt3_d?><br>
 		</div>
+		<div class="lightbox popUpQuestion4"> 
+                <h4>Question 4</h4>
+                <p><?=$question4?></p>
+                <br>
+			<input class="q4" type="radio" name="Question4" value="opt_a"><?=$opt4_a?>
+			<input class="q4" type="radio" name="Question4" value="opt_b"><?=$opt4_b?>
+			<input class="q4" type="radio" name="Question4" value="opt_c"><?=$opt4_c?>
+			<input class="q4" type="radio" name="Question4" value="opt_d"><?=$opt4_d?>
+			</div>
+			<div class="lightbox popUpQuestion5"> 
+                <h4>Question 5</h4>
+                <p><?=$question5?></p>
+                <br>
+			<input class="q5" type="radio" name="Question5" value="opt_a"><?=$opt5_a?>
+			<input class="q5" type="radio" name="Question5" value="opt_b"><?=$opt5_b?>
+			<input class="q5" type="radio" name="Question5" value="opt_c"><?=$opt5_c?>
+			<input class="q5" type="radio" name="Question5" value="opt_d"><?=$opt5_d?>
+			</div>
+		
 		<div class="lightbox final">
 		<h4> Thanks For Watching Video</h4>
 		<form action="<?php echo site_url('students/video/form_data')?>" id="videoFrm" name="videoFrm" method="POST"> 
@@ -97,6 +200,8 @@ var video1;
 var question1Asked = false;
 var question2Asked = false;
 var question3Asked = false;
+var question4Asked = false;
+var question5Asked = false;
 var score = 0;
 var EndTime;
 var startTime;
@@ -106,49 +211,72 @@ $(document).ready(function(){
 	video1 = $('#video1');
 	$(video1).on('timeupdate', function(){
 		var currentTime = Math.round(this.currentTime);
-        var choicePart = <?=$video_timing ?>;
-	    var choicePart1 = 20;
-        var choicePart3 = 30;
+        var choicePart1 = <?=$vt1?>;
+	    var choicePart2 = <?=$vt2?>;
+        var choicePart3 = <?=$vt3?>;
+		var choicePart4 = <?=$vt4?>;
+		var choicePart5 = <?=$vt5?>;
         
 		if(currentTime == 0){
 			 startTime = new Date();
 		}
          
-        if(currentTime == choicePart && question1Asked == false){
+        if(currentTime == choicePart1 && question1Asked == false){
 			question1Asked = true;
 			video1[0].pause();
 			$.featherlight($('.popUpQuestion1'))
 			$('.q1').click(function(){
 				let answer1 = $("input[type='radio'][name='Question1']:checked").val();
-				// setCookie("answer1",answer1,1)
-			  $.featherlight.current().close();
-			  if (answer1 == "<?=$correct;?>"){
+			    $.featherlight.current().close();
+			    if (answer1 == "Good"){
 				  score = score+30 
 			  }   
 			  })
 		}
-        if(currentTime == choicePart1 && question2Asked == false){
+        if(currentTime == choicePart2 && question2Asked == false){
 			question2Asked = true;
 			video1[0].pause();
 			$.featherlight($('.popUpQuestion2'))
 			$('.q2').click(function(){
 				let answer2 = $("input[type='radio'][name='Question2']:checked").val();
-				setCookie("answer2",answer2,1)
 				$.featherlight.current().close();
 				if (answer2 == "5Star"){
 				  score = score+30 
 			  }  
 			  })
 		}
-        if(currentTime == choicePart3 && question3Asked == false){
+		if(currentTime == choicePart3 && question3Asked == false){
 			question3Asked = true;
 			video1[0].pause();
 			$.featherlight($('.popUpQuestion3'))
 			$('.q3').click(function(){
 				let answer3 = $("input[type='radio'][name='Question3']:checked").val();
-				setCookie("answer3",answer3,1)
 				$.featherlight.current().close();
-				if (answer3 == "Yes"){
+				if (answer3 == "5Star"){
+				  score = score+30 
+			  }  
+			  })
+		}
+		if(currentTime == choicePart4 && question4Asked == false){
+			question4Asked = true;
+			video1[0].pause();
+			$.featherlight($('.popUpQuestion4'))
+			$('.q4').click(function(){
+				let answer4 = $("input[type='radio'][name='Question4']:checked").val();
+				$.featherlight.current().close();
+				if (answer2 == "5Star"){
+				  score = score+30 
+			  }  
+			  })
+		}
+        if(currentTime == choicePart5 && question5Asked == false){
+			question5Asked = true;
+			video1[0].pause();
+			$.featherlight($('.popUpQuestion5'))
+			$('.q5').click(function(){
+				let answer5 = $("input[type='radio'][name='Question5']:checked").val();
+				$.featherlight.current().close();
+				if (answer5 == "Yes"){
 				  score = score+30 
 			  }			
 			  })

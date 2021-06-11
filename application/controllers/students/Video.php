@@ -7,8 +7,8 @@ if(!defined('BASEPATH'))
        public function index()
        { 
             $this->load->model('Video_model');
-            $data['res']=$this->Video_model->getdata();
-            $this->load->view('student/video',$data);  
+            $data['res']=$this->Video_model->getLatest();
+            $this->load->view('student/video',$data); 
        }
 
        public function form_data()
@@ -26,8 +26,19 @@ if(!defined('BASEPATH'))
        public function check()
        {
             // $User =  $this->session->userdata(‘student_id’);
-             $User =$this->session->userdata['student']['username'];
-            echo $User;
+          //    $User =$this->session->userdata['student']['username'];
+          //   echo $User;
+          // $query = $this->db->get('subject_syllabus');
+
+          // $query = $this->db->select('id')->limit(1)->get('subject_syllabus');
+          // $this->load->model('Video_model');
+          // $data=$this->Video_model->getLatest();
+          // //   $this->load->view('student/video',$data);  
+          //   echo $data;
+       
+           
+
+         
        }
        public function lacture_video_download($doc)
        {

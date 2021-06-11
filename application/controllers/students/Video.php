@@ -6,9 +6,10 @@ if(!defined('BASEPATH'))
    {
        public function index()
        { 
-            $this->load->model('Video_model');
-            $data['res']=$this->Video_model->getdata();
-            $this->load->view('student/video',$data);  
+          $this->load->model('Video_model');
+          //   $data['res']=$this->Video_model->getdata();
+          $data['res'] = $this->Video_model->getAllQuestions();
+          $this->load->view('student/video',$data);  
        }
 
        public function form_data()
@@ -26,8 +27,12 @@ if(!defined('BASEPATH'))
        public function check()
        {
             // $User =  $this->session->userdata(‘student_id’);
-             $User =$this->session->userdata['student']['username'];
-            echo $User;
+          //    $User =$this->session->userdata['student']['username'];
+          //   echo $User;
+          
+          // $this->load->model('Video_model');
+          // $id=$this->Video_model->getAllQuestions();
+          // echo $id;
        }
        public function lacture_video_download($doc)
        {

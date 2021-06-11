@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,57 +24,61 @@
 </head>
 <body>
 	<?php
-
-		foreach ($res as $r => $rv) 
+		$count=0;
+		$video='';
+		foreach($res as $r => $rv) 
 		{
-	
 			$video=$rv['lacture_video'];
-			// $question_id=$rv['question_id'];
-			$question=$rv['question'];
-			$opt_a=$rv['opt_a'];
-			$opt_b=$rv['opt_b'];
-			$opt_c=$rv['opt_c'];
-			$opt_d=$rv['opt_d'];
-			$video_timing=$rv['video_timing'];
-			
-			$correct=$rv['correct'];
+			$count++;
 		}
+		echo $count;
+		$video_timing=array();		
+		$opt_a=array();
+		$opt_b=array();
+		$opt_c=array();
+		$opt_d=array();
+		$correct=array();
+		$question_id=array();
+
+		for($i=0;$i<$count;$i++)
+		{
+			// $question_id[$i]=$rv['question_id'];
+			$question[$i]=$res[$i]['question'];
+			$opt_a[$i]=$res[$i]['opt_a'];
+			$opt_b[$i]=$res[$i]['opt_b'];
+			$opt_c[$i]=$res[$i]['opt_c'];
+			$opt_d[$i]=$res[$i]['opt_d'];
+			$video_timing[$i]=$res[$i]['video_timing'];			
+			$correct[$i]=$res[$i]['correct'];
+		}
+		// echo $res[1]['question'];
 		
 	?>
     <div id="container">
 		<div class="row videoArea">
-		<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/1pOstnFhges" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 			<video id="video1" controls autoplay="true">
 			<source src="<?=base_url()?>students/video/lacture_video_download/<?=$video?>" type="video/mp4">	
-
-				<!-- <iframe id=”player” type=”text/html” width=”640″ height=”390″ src=”http://www.youtube.com/embed/M7lc1UVf-VE?enablejsapi=1&origin=http://example.com” frameborder=”0″></iframe> -->
 				Your browser does not support the video tag.
 			</video>
 		</div>
-            <div class="lightbox popUpQuestion1"> 
-                <h4>Question 1</h4>
-                <p><?=$question?></p>
-                <br>
-			<input class="q1" type="radio" name="Question1" value="opt_a"><?=$opt_a?>
-			<input class="q1" type="radio" name="Question1" value="opt_b"><?=$opt_b?>
-			<input class="q1" type="radio" name="Question1" value="opt_c"><?=$opt_c?>
-			<input class="q1" type="radio" name="Question1" value="opt_d"><?=$opt_d?>	
-		<div class="lightbox popUpQuestion2">
-			<h4>Question 2</h4>
-			<p>Rate The Video</p>
-			<br>
-			<input class="q2" type="radio" name="Question2" value="5Star">5Star<br>
-			<input class="q2" type="radio" name="Question2" value="4Star">4Star<br>
-			<input class="q2" type="radio" name="Question2" value="3Star">3Star<br>
-		</div>
-		<div class="lightbox popUpQuestion3">
-			<h4>Question 3</h4>
-			<p>Have you got something  from the video?</p>
-			<br>
-			<input class="q3" type="radio" name="Question3" value="Yes">Yes<br>
-			<input class="q3" type="radio" name="Question3" value="No">No<br>
-			<input class="q3" type="radio" name="Question3" value="Can't say">can't say<br>
-		</div>
+		<?php
+		{
+			for($i=0;$i<$count;$i++)
+			{
+			?>
+				 <div class="lightbox popUpQuestion<?=$i+1?>"> 
+					<h4>Question <?=$i+1?></h4>
+					<p><?=$question[$i]?></p>
+					<br>
+					<input class="q<?=$i+1?>" type="radio" name="Question<?=$i+1?>" value="opt_a"><?=$opt_a[$i]?>
+					<input class="q<?=$i+1?>" type="radio" name="Question<?=$i+1?>" value="opt_b"><?=$opt_b[$i]?>
+					<input class="q<?=$i+1?>" type="radio" name="Question<?=$i+1?>" value="opt_c"><?=$opt_c[$i]?>
+					<input class="q<?=$i+1?>" type="radio" name="Question<?=$i+1?>" value="opt_d"><?=$opt_d[$i]?>	
+				</div>
+			<?php
+			}
+		}
+		?>
 		<div class="lightbox final">
 		<h4> Thanks For Watching Video</h4>
 		<form action="<?php echo site_url('students/video/form_data')?>" id="videoFrm" name="videoFrm" method="POST"> 
@@ -93,66 +95,78 @@
 </html>
 
 <script type="text/javascript">
-var video1;
-var question1Asked = false;
-var question2Asked = false;
-var question3Asked = false;
-var score = 0;
-var EndTime;
-var startTime;
+		var video1;
 
-$(document).ready(function(){
+
+		<?php
+		{
+			for($i=0;$i<$count;$i++)
+			{
+			?>
+				var question<?=$i+1?>Asked = false;
+
+			<?php
+			}
+		}
+		?>
+
+		var score = 0;
+		var EndTime;
+		var startTime;
+
+	$(document).ready(function(){
 	$.featherlight.defaults.afterClose = playPauseVideo;
 	video1 = $('#video1');
 	$(video1).on('timeupdate', function(){
 		var currentTime = Math.round(this.currentTime);
-        var choicePart = <?=$video_timing ?>;
-	    var choicePart1 = 20;
-        var choicePart3 = 30;
-        
-		if(currentTime == 0){
+		var choicePart = new Array();
+		var count=<?=$count?>;
+
+		<?php
+		{
+			for($i=0;$i<$count;$i++)
+			{
+			?>
+				choicePart.push("<?=$video_timing[$i]?>");
+			<?php
+			}
+		}
+		?>
+		
+		if(currentTime == 0)
+		{
 			 startTime = new Date();
 		}
          
-        if(currentTime == choicePart && question1Asked == false){
-			question1Asked = true;
-			video1[0].pause();
-			$.featherlight($('.popUpQuestion1'))
-			$('.q1').click(function(){
-				let answer1 = $("input[type='radio'][name='Question1']:checked").val();
-				// setCookie("answer1",answer1,1)
-			  $.featherlight.current().close();
-			  if (answer1 == "<?=$correct;?>"){
-				  score = score+30 
-			  }   
-			  })
+
+		<?php
+		{
+			for($i=0;$i<$count;$i++)
+			{
+			?>
+				if(currentTime == choicePart[<?=$i?>] && question<?=$i+1?>Asked == false)
+				{
+					question<?=$i+1?>Asked = true;
+					video1[0].pause();
+					$.featherlight($('.popUpQuestion<?=$i+1?>'))
+					$('.q<?=$i+1?>').click(function(){
+					$.featherlight.current().close();
+					let answer<?=$i+1?> = $("input[type='radio'][name='Question<?=$i+1?>']:checked").val();
+
+					if(answer<?=$i+1?> == "<?=$correct[$i+1];?>")
+					{
+						score = score+30;
+					}   
+					})
+				}
+
+				
+			<?php
+			}
 		}
-        if(currentTime == choicePart1 && question2Asked == false){
-			question2Asked = true;
-			video1[0].pause();
-			$.featherlight($('.popUpQuestion2'))
-			$('.q2').click(function(){
-				let answer2 = $("input[type='radio'][name='Question2']:checked").val();
-				setCookie("answer2",answer2,1)
-				$.featherlight.current().close();
-				if (answer2 == "5Star"){
-				  score = score+30 
-			  }  
-			  })
-		}
-        if(currentTime == choicePart3 && question3Asked == false){
-			question3Asked = true;
-			video1[0].pause();
-			$.featherlight($('.popUpQuestion3'))
-			$('.q3').click(function(){
-				let answer3 = $("input[type='radio'][name='Question3']:checked").val();
-				setCookie("answer3",answer3,1)
-				$.featherlight.current().close();
-				if (answer3 == "Yes"){
-				  score = score+30 
-			  }			
-			  })
-		};
+		?>
+
+       
 	});
 });
 

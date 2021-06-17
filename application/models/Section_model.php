@@ -23,7 +23,17 @@ class Section_model extends MY_Model {
             return $query->result_array(); 
         }
     }
+    
+    // custom
+    public function getSectionList()
+    {
+        $sql="SELECT * FROM `sections`";
+        $res=$this->db->query($sql);
+        return $res->result_array();
 
+    }
+    //custom
+    
     public function remove($id) {
 		$this->db->trans_start(); # Starting Transaction
         $this->db->trans_strict(false); # See Note 01. If you wish can remove as well

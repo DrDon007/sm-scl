@@ -293,34 +293,55 @@ function findOption($questionOpt, $find)
                                     <label><?php echo $this->lang->line('section'); ?></label><small class="req"> *</small>
                                     <select id="section_id" name="section_id" class="form-control">
                                         <option value=""><?php echo $this->lang->line('select'); ?></option>
+                                        <?php
+                                        foreach ($sectionList as $s) {
+                                            ?>
+                                            <option value="<?php echo $s['id'] ?>" <?php if (set_value('section_id') == $s['id']) echo "selected=selected" ?> ><?php echo $s['section'] ?></option>
+                                            <?php
+                                            // $count++;
+                                        }
+                                        ?>
+                                        
                                     </select>
                                     <span class="text-danger"><?php echo form_error('section_id'); ?></span>
                                 </div>
                     <!-- custom code end -->
-                    <div class="form-group">
-                        <label for="subject_id"><?php echo $this->lang->line('subject') ?></label><small class="req"> *</small>
+                                <div class="form-group">
+                                    <label for="subject_id"><?php echo $this->lang->line('subject') ?></label><small class="req"> *</small>
+                                    <select class="form-control" name="subject_id"  id="subject_id">
+                                        <option value=""><?php echo $this->lang->line('select'); ?></option>
+                                        <?php
+                                        foreach ($subjectlist as $subject_key => $subject_value) {
+                                            ?>
+                                                                        <option value="<?php echo $subject_value['id']; ?>"><?php echo $subject_value['name']; ?></option>
+                                                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                    <span class="text text-danger subject_id_error"></span>
+                                </div>
 
-                        <select class="form-control" name="subject_id">
-                            <option value=""><?php echo $this->lang->line('select'); ?></option>
-                            <?php
-                            foreach ($subjectlist as $subject_key => $subject_value) {
-                                ?>
-                                                            <option value="<?php echo $subject_value['id']; ?>"><?php echo $subject_value['name']; ?></option>
-                                                            <?php
-                            }
-                            ?>
-                        </select>
-                        <span class="text text-danger subject_id_error"></span>
-                    </div>
-                    <div class="form-group">
+                                <!-- ------custom -->
+                                <div class="form-group">
+                                     <label for="isVideoPopup">Want to use this also in interactive video ?</label><small class="req"> *</small>
+                                    <label class="radio-inline">
+                                    <input type="radio" name="isVideoPopup" id="isVideoPopup_chk" value="yes"> Yes
+                                    <label class="radio-inline">
+                                    <input type="radio" name="isVideoPopup" id="isVideoPopup_chk1" value="no"> No
+                                     </label>   
+                                     <span class="text text-danger isVideoPopup"></span>  
+                                </div>  
+                                <!-- ------custom -->
 
-                        <label for="question"><?php echo $this->lang->line('question') ?></label><small class="req"> *</small>
+                                <div class="form-group">
 
-                    <button class="btn btn-primary pull-right btn-xs" type="button" id="question" data-toggle="modal" data-location="question" data-target="#myimgModal"><i class="fa fa-plus"></i><?php echo $this->lang->line('add_image'); ?></button>
+                                    <label for="question"><?php echo $this->lang->line('question') ?></label><small class="req"> *</small>
 
-                        <textarea class="form-control ckeditor" id="question_textbox" name="question"></textarea>
-                        <span class="text text-danger question_error"></span>
-                    </div>
+                                <button class="btn btn-primary pull-right btn-xs" type="button" id="question" data-toggle="modal" data-location="question" data-target="#myimgModal"><i class="fa fa-plus"></i><?php echo $this->lang->line('add_image'); ?></button>
+
+                                    <textarea class="form-control ckeditor" id="question_textbox" name="question"></textarea>
+                                    <span class="text text-danger question_error"></span>
+                                </div>
                     <?php
                     foreach ($questionOpt as $question_opt_key => $question_opt_value) {
                         ?>
@@ -445,7 +466,16 @@ function findOption($questionOpt, $find)
                         $('select[name=section_id]').val(data.result.section);
                         $('select[name=subject_id]').val(data.result.subject_id);
                         $('select[name=correct]').val(data.result.correct);
-                        CKEDITOR.instances['question_textbox'].setData(data.result.question);
+                        if(data.result.isVideoPopup=="yes")
+                        {
+                            document.getElementById("isVideoPopup_chk").checked = true;
+                        }
+                        else
+                        {
+                            document.getElementById("isVideoPopup_chk1").checked = true;
+                        }                        
+                        // alert(data.result.isVideoPopup);
+                        CKEDITOR.instances['question_textbox'].setData(data.result.question);                        
                         CKEDITOR.instances['opt_a_textbox'].setData(data.result.opt_a);
                         CKEDITOR.instances['opt_b_textbox'].setData(data.result.opt_b);
                         CKEDITOR.instances['opt_c_textbox'].setData(data.result.opt_c);
@@ -691,6 +721,7 @@ $('#myimgModal').on('shown.bs.modal', function (event) {
                         div_data += "<option value=" + obj.section_id + ">" + obj.section + "</option>";
                     });
                     $('#section_id_filter').append(div_data);
+                    // $('#section_id').append(div_data);
                 }
             });
         });
@@ -698,9 +729,9 @@ $('#myimgModal').on('shown.bs.modal', function (event) {
 
     $(document).ready(function () 
     {
-        var class_id = $('#class_id').val();
-        var section_id = '<?php echo set_value('section_id') ?>';
-        getSectionByClass(class_id, section_id);
+        var class_id_m = $('#class_id').val();
+        var section_id_m = '<?php echo set_value('section_id') ?>';
+        getSectionByClass(class_id_m, section_id_m);
         $(document).on('change', '#class_id', function (e) 
         {
             $('#section_id').html("");

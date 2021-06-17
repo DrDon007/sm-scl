@@ -924,7 +924,7 @@ $('#created_for').val(staff_id);
             var subject_id_filter = $('#subject_id_filter').val();        
             // var status=$(this).attr('state');
             $.ajax({
-                url:'<?=base_url('admin/Question/getQuestionByFilter'); ?>',
+                url:'<?=base_url('admin/Question/getVideoQuestionByFilter'); ?>',
                 method: 'POST',                
                 data:{class_id:class_id_filter,section_id:section_id_filter,subject_id:subject_id_filter},
                 dataType:'json',

@@ -31,7 +31,7 @@
 			$video=$rv['lacture_video'];
 			$count++;
 		}
-		echo $count;
+		// echo $count;
 		$video_timing=array();		
 		$opt_a=array();
 		$opt_b=array();
@@ -52,10 +52,6 @@
 			$correct[$i]=$res[$i]['correct'];
 		}
 		// echo $res[1]['question'];
-		
-        
-
-
 	?>
     <div id="container">
 		<div class="row videoArea">
@@ -98,90 +94,72 @@
 </html>
 
 <script type="text/javascript">
-		var video1;
-
-
-		<?php
+	var video1;
+	<?php
+	{
+		for($i=0;$i<$count;$i++)
 		{
-			for($i=0;$i<$count;$i++)
+		?>
+			var question<?=$i+1?>Asked = false;
+		<?php
+		}
+	}
+	?>
+	var score = 0;
+	var EndTime;
+	var startTime;
+
+	$(document).ready(function()
+	{
+		$.featherlight.defaults.afterClose = playPauseVideo;
+		video1 = $('#video1');
+		$(video1).on('timeupdate', function()
+		{
+			var currentTime = Math.round(this.currentTime);
+			var choicePart = new Array();
+			var count=<?=$count?>;
+			if(currentTime == 0)
 			{
-			?>
-				var question<?=$i+1?>Asked = false;
+				startTime = new Date();
+			}
 
 			<?php
-			}
-		}
-		?>
-
-		var score = 0;
-		var EndTime;
-		var startTime;
-
-	$(document).ready(function(){
-	$.featherlight.defaults.afterClose = playPauseVideo;
-	video1 = $('#video1');
-	$(video1).on('timeupdate', function(){
-		var currentTime = Math.round(this.currentTime);
-		var choicePart = new Array();
-		var count=<?=$count?>;
-
-		<?php
-		{
-			for($i=0;$i<$count;$i++)
 			{
-			?>
-				choicePart.push("<?=$video_timing[$i]?>");
-			<?php
-			}
-		}
-		?>
-		
-		if(currentTime == 0)
-		{
-			 startTime = new Date();
-		}
-         
-
-		<?php
-		{
-			for($i=0;$i<$count;$i++)
-			{
-			?>
-				if(currentTime == choicePart[<?=$i?>] && question<?=$i+1?>Asked == false)
+				for($i=0;$i<$count;$i++)
 				{
-					question<?=$i+1?>Asked = true;
-					video1[0].pause();
-					$.featherlight($('.popUpQuestion<?=$i+1?>'))
-					$('.q<?=$i+1?>').click(function(){
-					$.featherlight.current().close();
-					let answer<?=$i+1?> = $("input[type='radio'][name='Question<?=$i+1?>']:checked").val();
-
-					if(answer<?=$i+1?> == "<?=$correct[$i+1];?>")
+				?>
+					choicePart.push("<?=$video_timing[$i]?>");
+					if(currentTime == choicePart[<?=$i?>] && question<?=$i+1?>Asked == false)
 					{
-						score = score+30;
-					}   
-					})
+						question<?=$i+1?>Asked = true;
+						video1[0].pause();
+						$.featherlight($('.popUpQuestion<?=$i+1?>'))
+						$('.q<?=$i+1?>').click(function(){
+						$.featherlight.current().close();
+						let answer<?=$i+1?> = $("input[type='radio'][name='Question<?=$i+1?>']:checked").val();
+
+						if(answer<?=$i+1?> == "<?=$correct[$i];?>")
+						{
+							score = score+30;
+						}   
+						})
+					}
+				<?php
 				}
-
-				
-			<?php
 			}
-		}
-		?>
-
-       
+			?>		
+		});
 	});
-});
 
 
-$('#video1').bind('ended',function(){
-
-var EndTime = new Date();
-console.log("Your score is: " + score)
-console.log("Video Start Time: " + startTime)
-console.log("Video End Time: " + EndTime)
-date1 = startTime
-date2 =EndTime
+	$('#video1').bind('ended',function()
+	{
+		var EndTime = new Date();
+		console.log("Your score is: " + score)
+		console.log("Video Start Time: " + startTime)
+		console.log("Video End Time: " + EndTime)
+		date1 = startTime
+		date2 =EndTime
 
          var res = Math.abs(date1 - date2) / 1000;
          
@@ -212,38 +190,41 @@ date2 =EndTime
         
 
 	    
-    });
-        
-});
+		});
+			
+	});
 
 
 
 
-function secondsToHms(d) {
-	d = Number(d);
-	var h = Math.floor(d / 3600);
-	var m = Math.floor(d % 3600 / 60);
-	var s = Math.floor(d % 3600 % 60);
-	return ((h > 0 ? h + ":" + (m < 10 ? "0" : "") : "") + m + ":" + (s < 10 ? "0" : "") + s); 
-}
-
-function playPauseVideo(popUp){
-	if(video1[0].paused){
-		video1[0].play();
-	} else{
-		video1[0].pause();
-		$.featherlight($(popUp));
+	function secondsToHms(d) 
+	{
+		d = Number(d);
+		var h = Math.floor(d / 3600);
+		var m = Math.floor(d % 3600 / 60);
+		var s = Math.floor(d % 3600 % 60);
+		return ((h > 0 ? h + ":" + (m < 10 ? "0" : "") : "") + m + ":" + (s < 10 ? "0" : "") + s); 
 	}
-}
 
-function setCookie(name,value,days) {
-    var expires = "";
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
-        expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
-}
+	function playPauseVideo(popUp)
+	{
+		if(video1[0].paused){
+			video1[0].play();
+		} else{
+			video1[0].pause();
+			$.featherlight($(popUp));
+		}
+	}
+
+	function setCookie(name,value,days) 
+	{
+		var expires = "";
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime() + (days*24*60*60*1000));
+			expires = "; expires=" + date.toUTCString();
+		}
+		document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+	}
 
 </script>

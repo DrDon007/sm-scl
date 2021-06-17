@@ -1,6 +1,3 @@
-
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,6 +13,7 @@
 	<link rel="stylesheet" href="<?=base_url()?>/css/skeleton.css">
 	<link rel="stylesheet" href="<?=base_url()?>css/featherlight.css">
 	<script src="<?=base_url()?>js/featherlight.js"></script>
+	
 
 	<!-- Interaction CSS -->
 	<link rel="stylesheet" href="<?=base_url()?>css/index.css">
@@ -24,161 +22,76 @@
 	<script src="<?=base_url()?>js/TweenMax.min.js"></script>
     <title>BALA BHARATHI VIDYALAYAM</title>
 </head>
+
+<?php
+$count=0;
+$video='';
+foreach($res as $r => $rv) 
+{
+	$video=$rv['lacture_youtube_url'];
+	$count++;
+}
+$video_timing=array();		
+$opt_a=array();
+$opt_b=array();
+$opt_c=array();
+$opt_d=array();
+$correct=array();
+$question_id=array();
+
+for($i=0;$i<$count;$i++)
+{
+	// $question_id[$i]=$rv['question_id'];
+	$question[$i]=$res[$i]['question'];
+	$opt_a[$i]=$res[$i]['opt_a'];
+	$opt_b[$i]=$res[$i]['opt_b'];
+	$opt_c[$i]=$res[$i]['opt_c'];
+	$opt_d[$i]=$res[$i]['opt_d'];
+	$video_timing[$i]=$res[$i]['video_timing'];			
+	$correct[$i]=$res[$i]['correct'];
+}
+
+		function get_youtube_id_from_url($url)
+{
+    if (stristr($url,'youtu.be/'))
+        {preg_match('/(https:|http:|)(\/\/www\.|\/\/|)(.*?)\/(.{11})/i', $url, $final_ID); return $final_ID[4]; }
+    else 
+        {@preg_match('/(https:|http:|):(\/\/www\.|\/\/|)(.?)\/(embed\/|watch.?v=|)([a-z_A-Z0-9\-]{11})/i', $url, $IDD); return $IDD[5]; }
+}
+
+$video_id = get_youtube_id_from_url($video);
+
+?>
+
 <body>
-	<?php
-		foreach ($res as $r => $rv) 
-		{
-			$video=$rv['lacture_video'];
-			// $question_id=$rv['question_id'];
-			$question[]=$rv['question'];
-			$opt_a[]=$rv['opt_a'];
-			$opt_b[]=$rv['opt_b'];
-			$opt_c[]=$rv['opt_c'];
-			$opt_d[]=$rv['opt_d'];
-			$video_timing[]=$rv['video_timing'];
-			// $correct=$rv['correct'];
-		}
 
-		$vt1=$video_timing[0];
-		$vt2=$video_timing[1];
-		$vt3=$video_timing[2];
-		$vt4=$video_timing[3];
-		$vt5=$video_timing[4];
-
-		$question1=$question[0];
-		$question2=$question[1];
-		$question3=$question[2];
-		$question4=$question[3];
-		$question5=$question[4];
-
-		// if(is_numeric($video_timing[0])){
-		// 	$vt1=$video_timing[0];
-			
-		// }else{
-		// 	$vt1=abc;
-		// }
-
-
-		// if(is_numeric($video_timing[1])){
-		// 	$vt2=$video_timing[1];
-			
-		// }else{
-		// 	$vt2=abc;
-		// }
-
-
-		// if(is_numeric($video_timing[2])){
-		// 	$vt3=$video_timing[2];
-			
-		// }else{
-		// 	$vt3=abc;
-		// }
-
-
-		// if(is_numeric($video_timing[3])){
-		// 	$vt4=$video_timing[3];
-			
-		// }else{
-		// 	$vt4=abc;
-		// }
-
-
-        // if(is_numeric($video_timing[4])){
-		// 	$vt5=$video_timing[4];
-			
-		// }else{
-		// 	$vt5=abc;
-		// }
-
-
-		$opt1_a=$opt_a[0];
-		$opt2_a=$opt_a[1];
-		$opt3_a=$opt_a[2];
-		$opt4_a=$opt_a[3];
-		$opt5_a=$opt_a[4];
-
-		$opt1_b=$opt_b[0];
-		$opt2_b=$opt_b[1];
-		$opt3_b=$opt_b[2];
-		$opt4_b=$opt_b[3];
-		$opt5_b=$opt_b[4];
-
-		$opt1_c=$opt_c[0];
-		$opt2_c=$opt_c[1];
-		$opt3_c=$opt_c[2];
-		$opt4_c=$opt_c[3];
-		$opt5_c=$opt_c[4];
-
-		$opt1_d=$opt_d[0];
-		$opt2_d=$opt_d[1];
-		$opt3_d=$opt_d[2];
-		$opt4_d=$opt_d[3];
-		$opt5_d=$opt_d[4];
-
-
-
-
-
-		
-        
-
-
-	?>
     <div id="container">
 		<div class="row videoArea">
 		<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/1pOstnFhges" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-			<video id="video1" controls autoplay="true">
-			<source src="<?=base_url()?>students/video/lacture_video_download/<?=$video?>" type="video/mp4">	
 
-				<!-- <iframe id=”player” type=”text/html” width=”640″ height=”390″ src=”http://www.youtube.com/embed/M7lc1UVf-VE?enablejsapi=1&origin=http://example.com” frameborder=”0″></iframe> -->
-				Your browser does not support the video tag.
-			</video>
+			<iframe id="player" width="560" height="315" class="trackable-video" src="https://www.youtube.com/embed/<?=$video_id?>?autoplay=0&enablejsapi=1"></iframe>
+
+
+			<!-- <iframe width="560" height="315" id="video" class="trackable-video" src="https://www.youtube.com/embed/kOEDG3j1bjs?enablejsapi=1&html5=1&" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 		</div>
-            <div class="lightbox popUpQuestion1"> 
-                <h4>Question 1</h4>
-                <p><?=$question1?></p>
-                <br>
-			<input class="q1" type="radio" name="Question1" value="opt_a"><?=$opt1_a?><br>
-			<input class="q1" type="radio" name="Question1" value="opt_b"><?=$opt1_b?><br>
-			<input class="q1" type="radio" name="Question1" value="opt_c"><?=$opt1_c?><br>
-			<input class="q1" type="radio" name="Question1" value="opt_d"><?=$opt1_d?><br>
-			</div>	
-		<div class="lightbox popUpQuestion2">
-			<h4>Question 2</h4>
-			<p><?=$question2?></p>
-			<br>
-			<input class="q2" type="radio" name="Question2" value="opt_a"><?=$opt2_a?><br>
-			<input class="q2" type="radio" name="Question2" value="opt_b"><?=$opt2_b?><br>
-			<input class="q2" type="radio" name="Question2" value="opt_c"><?=$opt2_c?><br>
-			<input class="q2" type="radio" name="Question2" value="opt_d"><?=$opt2_d?><br>
-		</div>
-		<div class="lightbox popUpQuestion3">
-			<h4>Question 3</h4>
-			<p><?=$question3?></p>
-			<br>
-			<input class="q3" type="radio" name="Question3" value="opt_a"><?=$opt3_a?><br>
-			<input class="q3" type="radio" name="Question3" value="opt_b"><?=$opt3_b?><br>
-			<input class="q3" type="radio" name="Question3" value="opt_c"><?=$opt3_c?><br>
-			<input class="q3" type="radio" name="Question3" value="opt_d"><?=$opt3_d?><br>
-		</div>
-		<div class="lightbox popUpQuestion4"> 
-                <h4>Question 4</h4>
-                <p><?=$question4?></p>
-                <br>
-			<input class="q4" type="radio" name="Question4" value="opt_a"><?=$opt4_a?>
-			<input class="q4" type="radio" name="Question4" value="opt_b"><?=$opt4_b?>
-			<input class="q4" type="radio" name="Question4" value="opt_c"><?=$opt4_c?>
-			<input class="q4" type="radio" name="Question4" value="opt_d"><?=$opt4_d?>
-			</div>
-			<div class="lightbox popUpQuestion5"> 
-                <h4>Question 5</h4>
-                <p><?=$question5?></p>
-                <br>
-			<input class="q5" type="radio" name="Question5" value="opt_a"><?=$opt5_a?>
-			<input class="q5" type="radio" name="Question5" value="opt_b"><?=$opt5_b?>
-			<input class="q5" type="radio" name="Question5" value="opt_c"><?=$opt5_c?>
-			<input class="q5" type="radio" name="Question5" value="opt_d"><?=$opt5_d?>
-			</div>
+		<?php
+		{
+			for($i=0;$i<$count;$i++)
+			{
+			?>
+				 <div class="lightbox popUpQuestion<?=$i+1?>"> 
+					<h4>Question <?=$i+1?></h4>
+					<p><?=$question[$i]?></p>
+					<br>
+					<input class="q<?=$i+1?>" type="radio" name="Question<?=$i+1?>" value="opt_a"><?=$opt_a[$i]?>
+					<input class="q<?=$i+1?>" type="radio" name="Question<?=$i+1?>" value="opt_b"><?=$opt_b[$i]?>
+					<input class="q<?=$i+1?>" type="radio" name="Question<?=$i+1?>" value="opt_c"><?=$opt_c[$i]?>
+					<input class="q<?=$i+1?>" type="radio" name="Question<?=$i+1?>" value="opt_d"><?=$opt_d[$i]?>	
+				</div>
+			<?php
+			}
+		}
+		?>
 		
 		<div class="lightbox final">
 		<h4> Thanks For Watching Video</h4>
@@ -195,166 +108,134 @@
 </body>
 </html>
 
-<script type="text/javascript">
-var video1;
-var question1Asked = false;
-var question2Asked = false;
-var question3Asked = false;
-var question4Asked = false;
-var question5Asked = false;
-var score = 0;
-var EndTime;
-var startTime;
 
-$(document).ready(function(){
-	$.featherlight.defaults.afterClose = playPauseVideo;
-	video1 = $('#video1');
-	$(video1).on('timeupdate', function(){
-		var currentTime = Math.round(this.currentTime);
-        var choicePart1 = <?=$vt1?>;
-	    var choicePart2 = <?=$vt2?>;
-        var choicePart3 = <?=$vt3?>;
-		var choicePart4 = <?=$vt4?>;
-		var choicePart5 = <?=$vt5?>;
-        
-		if(currentTime == 0){
-			 startTime = new Date();
+
+<script>
+
+
+
+   (function() {
+
+	   var time, rate, remainingTime;
+  var stopPlayAt1 = 6; // Stop play at time in seconds
+  var stopPlayAt2 = 10;
+  var stopPlayAt3 = 14;
+  var stopPlayAt4 = 19;
+  let count = <?php echo json_encode($count); ?>;
+    // console.log(count);
+  <?php
+		{
+			for($i=0;$i<$count;$i++)
+			{
+			?>
+				var question<?=$i+1?>Asked = false;
+
+			<?php
+			}
 		}
-         
-        if(currentTime == choicePart1 && question1Asked == false){
-			question1Asked = true;
-			video1[0].pause();
-			$.featherlight($('.popUpQuestion1'))
-			$('.q1').click(function(){
-				let answer1 = $("input[type='radio'][name='Question1']:checked").val();
-			    $.featherlight.current().close();
-			    if (answer1 == "Good"){
-				  score = score+30 
-			  }   
-			  })
-		}
-        if(currentTime == choicePart2 && question2Asked == false){
-			question2Asked = true;
-			video1[0].pause();
-			$.featherlight($('.popUpQuestion2'))
-			$('.q2').click(function(){
-				let answer2 = $("input[type='radio'][name='Question2']:checked").val();
-				$.featherlight.current().close();
-				if (answer2 == "5Star"){
-				  score = score+30 
-			  }  
-			  })
-		}
-		if(currentTime == choicePart3 && question3Asked == false){
-			question3Asked = true;
-			video1[0].pause();
-			$.featherlight($('.popUpQuestion3'))
-			$('.q3').click(function(){
-				let answer3 = $("input[type='radio'][name='Question3']:checked").val();
-				$.featherlight.current().close();
-				if (answer3 == "5Star"){
-				  score = score+30 
-			  }  
-			  })
-		}
-		if(currentTime == choicePart4 && question4Asked == false){
-			question4Asked = true;
-			video1[0].pause();
-			$.featherlight($('.popUpQuestion4'))
-			$('.q4').click(function(){
-				let answer4 = $("input[type='radio'][name='Question4']:checked").val();
-				$.featherlight.current().close();
-				if (answer2 == "5Star"){
-				  score = score+30 
-			  }  
-			  })
-		}
-        if(currentTime == choicePart5 && question5Asked == false){
-			question5Asked = true;
-			video1[0].pause();
-			$.featherlight($('.popUpQuestion5'))
-			$('.q5').click(function(){
-				let answer5 = $("input[type='radio'][name='Question5']:checked").val();
-				$.featherlight.current().close();
-				if (answer5 == "Yes"){
-				  score = score+30 
-			  }			
-			  })
-		};
-	});
-});
+		?>
+  var  stopPlayTimer;   // Reference to settimeout call
 
+ 
+  var tag = document.createElement("script");                             // This code loads the IFrame Player API code asynchronously.
+  tag.src = "//www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName("script")[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-$('#video1').bind('ended',function(){
-
-var EndTime = new Date();
-console.log("Your score is: " + score)
-console.log("Video Start Time: " + startTime)
-console.log("Video End Time: " + EndTime)
-date1 = startTime
-date2 =EndTime
-
-         var res = Math.abs(date1 - date2) / 1000;
-         
-         // get total days between two dates
-         var days = Math.floor(res / 86400);                      
-         
-         // get hours        
-         var hours = Math.floor(res / 3600) % 24;         
-         
-         // get minutes
-         var minutes = Math.floor(res / 60) % 60;  
-     
-         // get seconds
-         var seconds = res % 60;
-        
-		TimeSpent = hours +  " hours" + ":" + minutes + " minutes" + ":" + seconds + " seconds" 
-        console.log(TimeSpent)
-		document.getElementById("st").value = startTime;
-		document.getElementById("et").value = EndTime;
-		document.getElementById("ts").value = TimeSpent;
-		document.getElementById("sc").value = score;
-        
-		$.featherlight($('.final'))
-			$('.submit').click(function(){
-				
-			
-			$.featherlight.current().close();
-        
-
-	    
+  var player;
+  window.onYouTubeIframeAPIReady = function() {
+    player = new YT.Player("player", {
+      "events": {
+        "onReady": onPlayerReady,
+        "onStateChange": onPlayerStateChange
+      }
     });
-        
-});
+  }
+
+  // The API will call this function when the video player is ready.
+  // This automatically starts the video playback when the player is loaded.
+  function onPlayerReady(event) {
+    // event.target.playVideo();
+  }
+
+  // The API calls this function when the player's state changes.
+  function onPlayerStateChange(event) {
+    
+    clearTimeout(stopPlayTimer);
+    if (event.data == YT.PlayerState.PLAYING) {
+      time = player.getCurrentTime();
+      // Add .4 of a second to the time in case it's close to the current time
+      // (The API kept returning ~9.7 when hitting play after stopping at 10s)
 
 
-
-
-function secondsToHms(d) {
-	d = Number(d);
-	var h = Math.floor(d / 3600);
-	var m = Math.floor(d % 3600 / 60);
-	var s = Math.floor(d % 3600 % 60);
-	return ((h > 0 ? h + ":" + (m < 10 ? "0" : "") : "") + m + ":" + (s < 10 ? "0" : "") + s); 
-}
-
-function playPauseVideo(popUp){
-	if(video1[0].paused){
-		video1[0].play();
-	} else{
-		video1[0].pause();
-		$.featherlight($(popUp));
-	}
-}
-
-function setCookie(name,value,days) {
-    var expires = "";
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
-        expires = "; expires=" + date.toUTCString();
+      if (time + .4  < stopPlayAt1) {
+        rate = player.getPlaybackRate();
+        remainingTime = (stopPlayAt1 - time) / rate;
+        stopPlayTimer = setTimeout(pauseVideo, remainingTime * 1000);
+	  }
+	  if (time + .4  < stopPlayAt2) {
+        rate = player.getPlaybackRate();
+        remainingTime = (stopPlayAt2 - time) / rate;
+        stopPlayTimer = setTimeout(pauseVideo, remainingTime * 1000);
+      }
+	  if (time + .4 < stopPlayAt3) {
+        rate = player.getPlaybackRate();
+        remainingTime = (stopPlayAt3 - time) / rate;
+        stopPlayTimer = setTimeout(pauseVideo, remainingTime * 1000);
+      }
+	  if (time + .4 < stopPlayAt4) {
+        rate = player.getPlaybackRate();
+        remainingTime = (stopPlayAt4 - time) / rate;
+        stopPlayTimer = setTimeout(pauseVideo, remainingTime * 1000);
+      }
     }
-    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+  }
+
+  
+  function pauseVideo() {
+	// currentTime = Math.round(player.getCurrentTime());
+	// console.log(time);
+	player.pauseVideo();
+    // time1 = player.getCurrentTime();
+	// console.log(time1)
+	time = Math.round(player.getCurrentTime());
+	// console.log(time);
+	if(time == stopPlayAt1 && question1Asked == false ){
+	$.featherlight($('.popUpQuestion1'))
+	     question1Asked = true; 
+	$('.q1').click(function(){
+		$.featherlight.current().close();
+		player.playVideo();
+	});
 }
+if(question2Asked == false && time == stopPlayAt2){
+		question2Asked = true; 
+	$.featherlight($('.popUpQuestion2'))
+	$('.q2').click(function(){
+		$.featherlight.current().close();
+		player.playVideo();
+	});
+}
+
+if(question3Asked == false && time == stopPlayAt3){
+		question3Asked = true; 
+	$.featherlight($('.popUpQuestion3'))
+	$('.q3').click(function(){
+		$.featherlight.current().close();
+		player.playVideo();
+	});
+}
+
+if(question4Asked == false && time == stopPlayAt4){
+		question4Asked = true; 
+	$.featherlight($('.popUpQuestion4'))
+	$('.q4').click(function(){
+		$.featherlight.current().close();
+		player.playVideo();
+	});
+}
+  }
+})();
 
 </script>
+

@@ -21,7 +21,20 @@
 	<!-- GreenSock -->
 	<script src="<?=base_url()?>js/TweenMax.min.js"></script>
     <title>BALA BHARATHI VIDYALAYAM</title>
+	<style>
+		/* .videoInsert {
+		position: absolute; 
+		right: 0; 
+		bottom: 0;
+		min-width: 100%; 
+		min-height: 100%;
+		width: auto; 
+		height: auto; 
+		background-size: cover;
+		overflow: hidden;} */
+	</style>
 </head>
+
 <body>
 	<?php
 		$count=0;
@@ -57,6 +70,8 @@
 		<div class="row videoArea">
 			<video id="video1" controls autoplay="true">
 			<source src="<?=base_url()?>students/video/lacture_video_download/<?=$video?>" type="video/mp4">	
+			<!-- <source src="https://www.youtube.com/embed/4gxI8Yu6vGU" autoplay="true" type="video/*"> -->
+			<!-- <source width="846" height="480" src="https://www.youtube.com/embed/eG1pjrdmIrs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen type="videp/*"></source> -->
 				Your browser does not support the video tag.
 			</video>
 		</div>
@@ -193,8 +208,6 @@
 		});
 			
 	});
-
-
 
 
 	function secondsToHms(d) 

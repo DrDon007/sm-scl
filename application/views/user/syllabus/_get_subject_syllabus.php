@@ -2,17 +2,14 @@
 	.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
     padding: 5px 0;}
 </style> 
-<div class="col-lg-12" id="transfee">
-	
+
+<div class="col-lg-12" id="transfee">	
 			<?php if(!empty($result)){ ?>
 			<div class="classtopic">
 				<ul class="classlist ">
 					<li><a class="" data-original-title="<?php echo $this->lang->line('print')?>" data-toggle="tooltip" id="print" onclick="printDiv()" ><i class="fa fa-print"></i></a></li>
 					<li> <a data-original-title="<?php echo $this->lang->line('download_excel')?>" data-toggle="tooltip" class="" id="btnExport" onclick="fnExcelReport();"> <i class="fa fa-file-excel-o"></i> </a>
-					</li>
-					
-					
-				
+					</li>			
 				</ul>
 
 				<table class="table table-bordered pt15 mb0" id="headerTable">
@@ -25,41 +22,32 @@
 					<?php if($result['attachment']!=''){
 
 						?>
-<tr>
-
+					<tr>
 						<th><?php echo $this->lang->line('download_attachment')?> : </th>
-
 						<td><a data-original-title="<?php echo $this->lang->line('download_attachment')?>" data-toggle="tooltip" href="<?php echo base_url()?>user/syllabus/download/<?php echo $result['attachment']?>"><i class="fa fa-file-text-o"></i></a></td>
-
 					</tr>
-
 						<?php
-
 					}
-
-					 if($result['lacture_youtube_url']!=''){
-
+					if($result['lacture_youtube_url']!='')
+					{
 						?>
-<tr>
-
+					<tr>
 						<th>Video Link: </th>
-
-						<td><a data-original-title="<?php echo $this->lang->line('youtube_link')?>" data-toggle="tooltip" onclick="run_video('<?php echo $result['lacture_youtube_url']?>')" ><i class="fa fa-play"></i></a></td>
-
+						<td>
+						<a data-original-title="<?php echo $this->lang->line('youtube_link')?>" data-toggle="tooltip" onclick="run_video('<?php echo $result['lacture_youtube_url']?>')" ><i class="fa fa-play"></i></a>
+						</td>
 					</tr>
-
-
-				<?php }
-
-				if($result['lacture_video']!=''){ ?>
-<tr>
-
-						<th><?php echo $this->lang->line('download_video')?> : </th>
-
-						<td><a data-toggle="tooltip" data-original-title="<?php echo $this->lang->line('download_video')?>" href="<?php echo base_url()?>user/syllabus/lacture_video_download/<?php echo $result['lacture_video']?>"><i class="fa fa-file-video-o"></i></a></td>
-
+					<?php 
+					}
+					if($result['lacture_video']!='')
+					{ ?>
+					<tr>
+						<th>Video</th>
+						<td>
+						<!-- <p><a style='margin-left:5px;'data-toggle="tooltip" data-original-title="<?php echo $this->lang->line('download_video')?>" href="<?php echo base_url()?>user/syllabus/lacture_video_download/<?php echo $result['lacture_video']?>"><i class="fa fa-file-video-o">  <?php echo $this->lang->line('download_video')?> </i></a> </p> -->
+						<p><a style="margin-left:5px;" data-original-title="Open video" data-toggle="tooltip" target="#" href="<?=base_url()?>students/video/check/<?=$result['lacture_video']?>" ><i class="fa fa-play"> Play Video</i></a></p>
+						</td>
 					</tr>
-
 					<?php }?>
 
 					<tr>	

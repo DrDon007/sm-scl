@@ -168,39 +168,44 @@ $video_id = get_youtube_id_from_url($video);
       // (The API kept returning ~9.7 when hitting play after stopping at 10s)
 
 
-      if (time + .4  < stopPlayAt1) {
+      if (time   < stopPlayAt1) {
         rate = player.getPlaybackRate();
         remainingTime = (stopPlayAt1 - time) / rate;
-        stopPlayTimer = setTimeout(pauseVideo, remainingTime * 1000);
+        stopPlayTimer = setTimeout(pauseVideo1, remainingTime * 1000);
 	  }
-	  if (time + .4  < stopPlayAt2) {
+	  if (time   < stopPlayAt2) {
         rate = player.getPlaybackRate();
         remainingTime = (stopPlayAt2 - time) / rate;
-        stopPlayTimer = setTimeout(pauseVideo, remainingTime * 1000);
+        stopPlayTimer = setTimeout(pauseVideo2, remainingTime * 1000);
       }
-	  if (time + .4 < stopPlayAt3) {
+	  if (time  < stopPlayAt3) {
         rate = player.getPlaybackRate();
         remainingTime = (stopPlayAt3 - time) / rate;
-        stopPlayTimer = setTimeout(pauseVideo, remainingTime * 1000);
+        stopPlayTimer = setTimeout(pauseVideo3, remainingTime * 1000);
       }
-	  if (time + .4 < stopPlayAt4) {
+	  if (time  < stopPlayAt4) {
         rate = player.getPlaybackRate();
         remainingTime = (stopPlayAt4 - time) / rate;
-        stopPlayTimer = setTimeout(pauseVideo, remainingTime * 1000);
+        stopPlayTimer = setTimeout(pauseVideo4, remainingTime * 1000);
+      }
+	  if (time  < stopPlayAt5) {
+        rate = player.getPlaybackRate();
+        remainingTime = (stopPlayAt5 - time) / rate;
+        stopPlayTimer = setTimeout(pauseVideo5, remainingTime * 1000);
       }
     }
   }
 
   
-  function pauseVideo() {
+  function pauseVideo1() {
 	// currentTime = Math.round(player.getCurrentTime());
 	// console.log(time);
-	player.pauseVideo();
-    // time1 = player.getCurrentTime();
+    time1 = player.getCurrentTime();
 	// console.log(time1)
-	time = Math.round(player.getCurrentTime());
+	// time = Math.round(player.getCurrentTime());
 	// console.log(time);
-	if(time == stopPlayAt1 && question1Asked == false ){
+if( ( time1 > (stopPlayAt1 - 0.5) && time1 < stopPlayAt1 ) &&  question1Asked == false ){
+	player.pauseVideo();
 	$.featherlight($('.popUpQuestion1'))
 	     question1Asked = true; 
 	$('.q1').click(function(){
@@ -208,7 +213,16 @@ $video_id = get_youtube_id_from_url($video);
 		player.playVideo();
 	});
 }
-if(question2Asked == false && time == stopPlayAt2){
+  }
+  function pauseVideo2() {
+	// currentTime = Math.round(player.getCurrentTime());
+	// console.log(time);
+    time1 = player.getCurrentTime();
+	// console.log(time1)
+	time = Math.round(player.getCurrentTime());
+	// console.log(time);
+if(question2Asked == false && ( time1 > (stopPlayAt2 - 0.5) && time1 < stopPlayAt2)){
+	player.pauseVideo();
 		question2Asked = true; 
 	$.featherlight($('.popUpQuestion2'))
 	$('.q2').click(function(){
@@ -216,8 +230,17 @@ if(question2Asked == false && time == stopPlayAt2){
 		player.playVideo();
 	});
 }
+  }
 
-if(question3Asked == false && time == stopPlayAt3){
+  function pauseVideo3() {
+	// currentTime = Math.round(player.getCurrentTime());
+	// console.log(time);
+    time1 = player.getCurrentTime();
+	// console.log(time1)
+	time = Math.round(player.getCurrentTime());
+	// console.log(time);
+if(question3Asked == false && ( time1 > (stopPlayAt3 - 0.5) && time1 < stopPlayAt3)){
+	player.pauseVideo();
 		question3Asked = true; 
 	$.featherlight($('.popUpQuestion3'))
 	$('.q3').click(function(){
@@ -225,11 +248,38 @@ if(question3Asked == false && time == stopPlayAt3){
 		player.playVideo();
 	});
 }
+  }
+  function pauseVideo4() {
+	// currentTime = Math.round(player.getCurrentTime());
+	// console.log(time);
+     time1 = player.getCurrentTime();
+	// console.log(time1)
+	time = Math.round(player.getCurrentTime());
+	// console.log(time);
 
-if(question4Asked == false && time == stopPlayAt4){
+if(question4Asked == false && ( time1 > (stopPlayAt4 - 0.5) && time1 < stopPlayAt4)){
+	player.pauseVideo();
 		question4Asked = true; 
 	$.featherlight($('.popUpQuestion4'))
 	$('.q4').click(function(){
+		$.featherlight.current().close();
+		player.playVideo();
+	});
+}
+  }
+  function pauseVideo5() {
+	// currentTime = Math.round(player.getCurrentTime());
+	// console.log(time);
+     time1 = player.getCurrentTime();
+	// console.log(time1)
+	time = Math.round(player.getCurrentTime());
+	// console.log(time);
+
+if(question5Asked == false && ( time1 > (stopPlayAt5 - 0.5) && time1 < stopPlayAt5)){
+	player.pauseVideo();
+		question5Asked = true; 
+	$.featherlight($('.popUpQuestion5'))
+	$('.q5').click(function(){
 		$.featherlight.current().close();
 		player.playVideo();
 	});

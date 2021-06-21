@@ -41,7 +41,7 @@ $question_id=array();
 
 for($i=0;$i<$count;$i++)
 {
-	// $question_id[$i]=$rv['question_id'];
+
 	$question[$i]=$res[$i]['question'];
 	$opt_a[$i]=$res[$i]['opt_a'];
 	$opt_b[$i]=$res[$i]['opt_b'];
@@ -67,12 +67,10 @@ $video_id = get_youtube_id_from_url($video);
 
     <div id="container">
 		<div class="row videoArea">
-		<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/1pOstnFhges" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 
 			<iframe id="player" width="560" height="315" class="trackable-video" src="https://www.youtube.com/embed/<?=$video_id?>?autoplay=0&enablejsapi=1"></iframe>
 
 
-			<!-- <iframe width="560" height="315" id="video" class="trackable-video" src="https://www.youtube.com/embed/kOEDG3j1bjs?enablejsapi=1&html5=1&" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 		</div>
 		<?php
 		{
@@ -117,12 +115,23 @@ $video_id = get_youtube_id_from_url($video);
    (function() {
 
 	   var time, rate, remainingTime;
-  var stopPlayAt1 = 6; // Stop play at time in seconds
-  var stopPlayAt2 = 10;
-  var stopPlayAt3 = 14;
-  var stopPlayAt4 = 19;
   let count = <?php echo json_encode($count); ?>;
     // console.log(count);
+	<?php
+			{
+				for($i=0;$i<$count;$i++)
+				{
+				?>
+			// stopPlayAt.push("<?=$video_timing[$i]?>");
+              var stopPlayAt<?=$i+1?> = ("<?=$video_timing[$i]?>");
+
+			<?php
+				}
+			}
+			?>
+
+
+
   <?php
 		{
 			for($i=0;$i<$count;$i++)
@@ -198,12 +207,7 @@ $video_id = get_youtube_id_from_url($video);
 
   
   function pauseVideo1() {
-	// currentTime = Math.round(player.getCurrentTime());
-	// console.log(time);
     time1 = player.getCurrentTime();
-	// console.log(time1)
-	// time = Math.round(player.getCurrentTime());
-	// console.log(time);
 if( ( time1 > (stopPlayAt1 - 0.5) && time1 < stopPlayAt1 ) &&  question1Asked == false ){
 	player.pauseVideo();
 	$.featherlight($('.popUpQuestion1'))
@@ -215,12 +219,8 @@ if( ( time1 > (stopPlayAt1 - 0.5) && time1 < stopPlayAt1 ) &&  question1Asked ==
 }
   }
   function pauseVideo2() {
-	// currentTime = Math.round(player.getCurrentTime());
-	// console.log(time);
     time1 = player.getCurrentTime();
-	// console.log(time1)
 	time = Math.round(player.getCurrentTime());
-	// console.log(time);
 if(question2Asked == false && ( time1 > (stopPlayAt2 - 0.5) && time1 < stopPlayAt2)){
 	player.pauseVideo();
 		question2Asked = true; 
@@ -233,12 +233,8 @@ if(question2Asked == false && ( time1 > (stopPlayAt2 - 0.5) && time1 < stopPlayA
   }
 
   function pauseVideo3() {
-	// currentTime = Math.round(player.getCurrentTime());
-	// console.log(time);
     time1 = player.getCurrentTime();
-	// console.log(time1)
 	time = Math.round(player.getCurrentTime());
-	// console.log(time);
 if(question3Asked == false && ( time1 > (stopPlayAt3 - 0.5) && time1 < stopPlayAt3)){
 	player.pauseVideo();
 		question3Asked = true; 
@@ -250,12 +246,8 @@ if(question3Asked == false && ( time1 > (stopPlayAt3 - 0.5) && time1 < stopPlayA
 }
   }
   function pauseVideo4() {
-	// currentTime = Math.round(player.getCurrentTime());
-	// console.log(time);
      time1 = player.getCurrentTime();
-	// console.log(time1)
 	time = Math.round(player.getCurrentTime());
-	// console.log(time);
 
 if(question4Asked == false && ( time1 > (stopPlayAt4 - 0.5) && time1 < stopPlayAt4)){
 	player.pauseVideo();
@@ -268,12 +260,8 @@ if(question4Asked == false && ( time1 > (stopPlayAt4 - 0.5) && time1 < stopPlayA
 }
   }
   function pauseVideo5() {
-	// currentTime = Math.round(player.getCurrentTime());
-	// console.log(time);
      time1 = player.getCurrentTime();
-	// console.log(time1)
 	time = Math.round(player.getCurrentTime());
-	// console.log(time);
 
 if(question5Asked == false && ( time1 > (stopPlayAt5 - 0.5) && time1 < stopPlayAt5)){
 	player.pauseVideo();

@@ -31,7 +31,7 @@
 			$video=$rv['lacture_video'];
 			$count++;
 		}
-		echo $count;
+		
 		$video_timing=array();		
 		$opt_a=array();
 		$opt_b=array();
@@ -83,12 +83,13 @@
 		}
 		?>
 		<div class="lightbox final">
-		<h4> Thanks For Watching Video</h4>
+		<h4> Great you completed the task. </h4>
 		<form action="<?php echo site_url('students/video/form_data')?>" id="videoFrm" name="videoFrm" method="POST"> 
 		<input id="st" type="text" name="StartTime" value="" hidden><br>
 		<input id="et" type="text" name="EndTime" value="" hidden><br>
 		<input id="ts" type="text" name="TimeSpent" value="" hidden><br>
 		<input id="sc" type="text" name="score" value="" hidden><br>
+		<!-- <input id="vi" type="text" name="video_id" value="$<?=$video?>" hidden><br> -->
 		<input type="submit" name="submit" class="submit">
 		</div>
 
@@ -158,7 +159,7 @@
 
 					if(answer<?=$i+1?> == "<?=$correct[$i+1];?>")
 					{
-						score = score+30;
+						score = score+20;
 					}   
 					})
 				}

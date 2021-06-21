@@ -9,7 +9,8 @@ if(!defined('BASEPATH'))
           $this->load->model('Video_model');
           //   $data['res']=$this->Video_model->getdata();
           $data['res'] = $this->Video_model->getAllQuestions();
-          $this->load->view('student/video',$data);  
+          $this->load->view('student/video',$data);
+          echo $data;  
        }
 
        public function form_data()
@@ -20,15 +21,17 @@ if(!defined('BASEPATH'))
             $StartTime = $this->input->POST('StartTime');
             $EndTime = $this->input->POST('EndTime');
             $User =$this->session->userdata['student']['username'];
-            $this->Video_model->insert_summary($score,$TimeSpent,$StartTime,$EndTime,$User);
+            $User_id =$this->session->userdata['student']['id'];
+            // $Video_id = $this->session->POST('video_id');
+            $this->Video_model->insert_summary($score,$TimeSpent,$StartTime,$EndTime,$User,$User_id);
             redirect('user/user/dashboard');
        }
 
        public function check()
        {
             // $User =  $this->session->userdata(‘student_id’);
-          //    $User =$this->session->userdata['student']['username'];
-          //   echo $User;
+            //  $User =$this->session->userdata['student']['id'];
+            // echo $User;
           
           // $this->load->model('Video_model');
           // $id=$this->Video_model->getAllQuestions();

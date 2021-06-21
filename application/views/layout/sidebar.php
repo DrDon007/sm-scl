@@ -450,6 +450,9 @@
                               <?php } if($this->rbac->hasPrivilege('topic','can_view')){?>
                             <li class="<?php echo set_Submenu('admin/lessonplan/topic'); ?>"><a href="<?php echo base_url(); ?>admin/lessonplan/topic"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('topic'); ?></a></li>
                         <?php }?>
+                        <?php if($this->rbac->hasPrivilege('video_report','can_view')){?>
+                            <li class="<?php echo set_Submenu('admin/video_report'); ?>"><a href="<?php echo base_url(); ?>admin/video_report"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('video_report'); ?></a></li>
+                        <?php } ?>
                             
                         </ul>
                     </li>

@@ -2,9 +2,9 @@
 class Video_model extends MY_model
 {
 
-    function insert_summary($score,$TimeSpent,$StartTime,$EndTime,$User)
+    function insert_summary($score,$TimeSpent,$StartTime,$EndTime,$User,$User_id)
     {
-        $sql="INSERT INTO `summary`(`score`,`StartTime`,`EndTime`,`TimeSpent`,`User`) VALUES ($score,'$StartTime','$EndTime','$TimeSpent','$User')";
+        $sql="INSERT INTO `summary`(`score`,`StartTime`,`EndTime`,`TimeSpent`,`User`,`user_id`) VALUES ($score,'$StartTime','$EndTime','$TimeSpent','$User','$User_id')";
         $rs=$this->db->query($sql);
         return $rs;    
     }

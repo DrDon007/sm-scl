@@ -1,3 +1,46 @@
+<?php
+$count=0;
+foreach($res as $r => $rv) 
+{
+	$video=$rv['lacture_youtube_url'];
+	$video1=$rv['lacture_video'];
+	$count++;
+	
+}
+
+
+
+$video_timing=array();		
+$opt_a=array();
+$opt_b=array();
+$opt_c=array();
+$opt_d=array();
+$correct=array();
+$question_id=array();
+
+for($i=0;$i<$count;$i++)
+{
+
+	$question[$i]=$res[$i]['question'];
+	$opt_a[$i]=$res[$i]['opt_a'];
+	$opt_b[$i]=$res[$i]['opt_b'];
+	$opt_c[$i]=$res[$i]['opt_c'];
+	$opt_d[$i]=$res[$i]['opt_d'];
+	$video_timing[$i]=$res[$i]['video_timing'];			
+	$correct[$i]=$res[$i]['correct'];
+
+}
+
+
+
+if(!empty($video)){
+	$lesson = $video;
+}else{
+	$lesson = $video1;
+}
+?>
+
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -22,57 +65,7 @@
 	<script src="<?=base_url()?>js/TweenMax.min.js"></script>
     <title>BALA BHARATHI VIDYALAYAM</title>
 </head>
-
 <?php
-$count=0;
-$video='';
-foreach($res as $r => $rv) 
-{
-	$video=$rv['lacture_youtube_url'];
-	$count++;
-}
-$video_timing=array();		
-$opt_a=array();
-$opt_b=array();
-$opt_c=array();
-$opt_d=array();
-$correct=array();
-$question_id=array();
-
-for($i=0;$i<$count;$i++)
-{
-
-	$question[$i]=$res[$i]['question'];
-	$opt_a[$i]=$res[$i]['opt_a'];
-	$opt_b[$i]=$res[$i]['opt_b'];
-	$opt_c[$i]=$res[$i]['opt_c'];
-	$opt_d[$i]=$res[$i]['opt_d'];
-	$video_timing[$i]=$res[$i]['video_timing'];			
-	$correct[$i]=$res[$i]['correct'];
-}
-
-		function get_youtube_id_from_url($url)
-{
-    if (stristr($url,'youtu.be/'))
-        {preg_match('/(https:|http:|)(\/\/www\.|\/\/|)(.*?)\/(.{11})/i', $url, $final_ID); return $final_ID[4]; }
-    else 
-        {@preg_match('/(https:|http:|):(\/\/www\.|\/\/|)(.?)\/(embed\/|watch.?v=|)([a-z_A-Z0-9\-]{11})/i', $url, $IDD); return $IDD[5]; }
-}
-
-$video_id = get_youtube_id_from_url($video);
-
-?>
-
-<body>
-
-    <div id="container">
-		<div class="row videoArea">
-
-			<iframe id="player" width="560" height="315" class="trackable-video" src="https://www.youtube.com/embed/<?=$video_id?>?autoplay=0&enablejsapi=1"></iframe>
-
-
-		</div>
-		<?php
 		{
 			for($i=0;$i<$count;$i++)
 			{
@@ -103,6 +96,41 @@ $video_id = get_youtube_id_from_url($video);
 
 	</div>
 	</form>
+
+<?php
+
+switch($lesson) {
+	case $video:
+?>
+
+
+
+<?php
+
+		function get_youtube_id_from_url($url)
+{
+    if (stristr($url,'youtu.be/'))
+        {preg_match('/(https:|http:|)(\/\/www\.|\/\/|)(.*?)\/(.{11})/i', $url, $final_ID); return $final_ID[4]; }
+    else 
+        {@preg_match('/(https:|http:|):(\/\/www\.|\/\/|)(.?)\/(embed\/|watch.?v=|)([a-z_A-Z0-9\-]{11})/i', $url, $IDD); return $IDD[5]; }
+}
+
+
+
+$video_id = get_youtube_id_from_url($lesson);
+?>
+
+
+<body>
+
+    <div id="container">
+		<div class="row videoArea">
+
+			<iframe id="player" width="560" height="315" class="trackable-video" src="https://www.youtube.com/embed/<?=$video_id?>?autoplay=0&enablejsapi=1"></iframe>
+
+
+		</div>
+	
 </body>
 </html>
 
@@ -277,3 +305,173 @@ if(question5Asked == false && ( time1 > (stopPlayAt5 - 0.5) && time1 < stopPlayA
 
 </script>
 
+
+<?php
+break;
+?>
+
+<?php
+case $video1:
+	?>
+
+
+
+<body>
+	
+    <div id="container">
+		<div class="row videoArea">
+			<video id="video1" controls>
+			<source src="<?=base_url()?>students/video/lacture_video_download/<?=$lesson?>" type="video/mp4">	
+			<!-- <source src="https://www.youtube.com/embed/4gxI8Yu6vGU" autoplay="true" type="video/*"> -->
+			<!-- <source width="846" height="480" src="https://www.youtube.com/embed/eG1pjrdmIrs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen type="videp/*"></source> -->
+				Your browser does not support the video tag.
+			</video>
+		</div>
+	
+</body>
+</html>
+
+<script type="text/javascript">
+	var video1;
+	<?php
+	{
+		for($i=0;$i<$count;$i++)
+		{
+		?>
+			var question<?=$i+1?>Asked = false;
+		<?php
+		}
+	}
+	?>
+	var score = 0;
+	var EndTime;
+	var startTime;
+
+	$(document).ready(function()
+	{
+		$.featherlight.defaults.afterClose = playPauseVideo;
+		video1 = $('#video1');
+		$(video1).on('timeupdate', function()
+		{
+			var currentTime = Math.round(this.currentTime);
+			var choicePart = new Array();
+			var count=<?=$count?>;
+			if(currentTime == 0)
+			{
+				startTime = new Date();
+			}
+
+			<?php
+			{
+				for($i=0;$i<$count;$i++)
+				{
+				?>
+					choicePart.push("<?=$video_timing[$i]?>");
+					if(currentTime == choicePart[<?=$i?>] && question<?=$i+1?>Asked == false)
+					{
+						question<?=$i+1?>Asked = true;
+						video1[0].pause();
+						$.featherlight($('.popUpQuestion<?=$i+1?>'))
+						$('.q<?=$i+1?>').click(function(){
+						$.featherlight.current().close();
+						let answer<?=$i+1?> = $("input[type='radio'][name='Question<?=$i+1?>']:checked").val();
+
+						if(answer<?=$i+1?> == "<?=$correct[$i];?>")
+						{
+							score = score+30;
+						}   
+						})
+					}
+				<?php
+				}
+			}
+			?>		
+		});
+	});
+
+
+	$('#video1').bind('ended',function()
+	{
+		var EndTime = new Date();
+		console.log("Your score is: " + score)
+		console.log("Video Start Time: " + startTime)
+		console.log("Video End Time: " + EndTime)
+		date1 = startTime
+		date2 =EndTime
+
+         var res = Math.abs(date1 - date2) / 1000;
+         
+         // get total days between two dates
+         var days = Math.floor(res / 86400);                      
+         
+         // get hours        
+         var hours = Math.floor(res / 3600) % 24;         
+         
+         // get minutes
+         var minutes = Math.floor(res / 60) % 60;  
+     
+         // get seconds
+         var seconds = res % 60;
+        
+		TimeSpent = hours +  " hours" + ":" + minutes + " minutes" + ":" + seconds + " seconds" 
+        console.log(TimeSpent)
+		document.getElementById("st").value = startTime;
+		document.getElementById("et").value = EndTime;
+		document.getElementById("ts").value = TimeSpent;
+		document.getElementById("sc").value = score;
+        
+		$.featherlight($('.final'))
+			$('.submit').click(function(){
+				
+			
+			$.featherlight.current().close();
+        
+
+	    
+		});
+			
+	});
+
+
+	function secondsToHms(d) 
+	{
+		d = Number(d);
+		var h = Math.floor(d / 3600);
+		var m = Math.floor(d % 3600 / 60);
+		var s = Math.floor(d % 3600 % 60);
+		return ((h > 0 ? h + ":" + (m < 10 ? "0" : "") : "") + m + ":" + (s < 10 ? "0" : "") + s); 
+	}
+
+	function playPauseVideo(popUp)
+	{
+		if(video1[0].paused){
+			video1[0].play();
+		} else{
+			video1[0].pause();
+			$.featherlight($(popUp));
+		}
+	}
+
+	function setCookie(name,value,days) 
+	{
+		var expires = "";
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime() + (days*24*60*60*1000));
+			expires = "; expires=" + date.toUTCString();
+		}
+		document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+	}
+
+</script>
+
+	<?php
+	break;
+	?>
+
+	<?php
+	default:
+	echo "unable to fetch";
+	break;
+}
+?>

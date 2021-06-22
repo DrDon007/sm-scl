@@ -47,7 +47,8 @@ class Question extends Admin_Controller
           $questionList         = $this->question_model->getByClassSection($class_id,$section_id,$subject_id_filter);
           $data['questionList'] = $questionList;
         $class                   = $this->class_model->get();
-        $data['classlistNEW']    = $class;       
+        $data['classlistNEW']    = $class;      
+        $data['sectionList']    = $this->section_model->getSectionList();
         // custom code end
         $subject_result       = $this->subject_model->get();
         $data['subjectlist']  = $subject_result;
@@ -68,6 +69,16 @@ class Question extends Admin_Controller
         echo json_encode($data);
     }
 
+    public function getVideoQuestionByFilter()
+    {   
+        ///ajax request
+        $class_id=$this->input->post("class_id");
+        $section_id=$this->input->post("section_id");
+        $subject_id_filter=$this->input->post("subject_id");
+        $data=$this->question_model->getVideoQuestionFilter($class_id,$section_id,$subject_id_filter);
+        echo json_encode($data);
+    }
+    
 
     public function getQuestionByID()
     {
@@ -85,6 +96,7 @@ class Question extends Admin_Controller
         //custom code start
         $this->form_validation->set_rules('class_id', $this->lang->line('class'), 'trim|required|xss_clean');
         $this->form_validation->set_rules('section_id', $this->lang->line('section'), 'trim|required|xss_clean');
+        // $this->form_validation->set_rules('isVideoPopup', 'isVideoPopup', 'trim|required|xss_clean');
         // custom code end
         $this->form_validation->set_rules('subject_id', $this->lang->line('subject'), 'trim|required|xss_clean');
         $this->form_validation->set_rules('question', $this->lang->line('question'), 'trim|required|xss_clean');
@@ -100,6 +112,7 @@ class Question extends Admin_Controller
                 // custom code start
                 'class_id'   => form_error('class_id'),
                 'section_id'   => form_error('section_id'),
+                // 'isVideoPopup'   => form_error('isVideoPopup'),
                 // custom code end
                 'subject_id' => form_error('subject_id'),
                 'question'   => form_error('question'),
@@ -117,7 +130,7 @@ class Question extends Admin_Controller
             $insert_data = array(
                 // custom code start
                 'class' => $this->input->post('class_id'),
-                'section'   => $this->input->post('section_id'),
+                'section'   => $this->input->post('section_id'),         
                 // custom code end
                 'subject_id' => $this->input->post('subject_id'),
                 'question'   => $this->input->post('question'),
@@ -127,6 +140,7 @@ class Question extends Admin_Controller
                 'opt_d'      => $this->input->post('opt_d'),
                 'opt_e'      => $this->input->post('opt_e'),
                 'correct'    => $this->input->post('correct'),
+                'isVideoPopup'   => $this->input->post('isVideoPopup'),       
             );
 
             $id = $this->input->post('recordid');

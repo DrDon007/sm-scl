@@ -303,6 +303,82 @@ class Syllabus extends Admin_Controller
          echo json_encode($array);
     }
 
+      //custom
+    public function report()
+    {
+            if (!($this->rbac->hasPrivilege('report', 'can_view') )) 
+            {
+                access_denied();
+            }  
+            $this->session->set_userdata('top_menu', 'lessonplan');
+            $this->session->set_userdata('sub_menu', 'admin/syllabus');
+              $data['title']           = 'Video report';
+            //   $data['adm_auto_insert'] = $this->sch_setting_detail->adm_auto_insert;
+            //   $data['sch_setting']     = $this->sch_setting_detail;
+            //   $data['fields']          = $this->customfield_model->get_custom_fields('students', 1);
+              $class                   = $this->class_model->get();
+              $data['classlist']       = $class;
+      
+              $userdata = $this->customlib->getUserData();
+              $carray   = array();
+              if (!empty($data["classlist"])) 
+              {
+                  foreach ($data["classlist"] as $ckey => $cvalue) {
+      
+                      $carray[] = $cvalue["id"];
+                  }
+              }
+              $button = $this->input->post('search');
+              if ($this->input->server('REQUEST_METHOD') == "GET") 
+              {
+                  $this->load->view('layout/header', $data);
+                  $this->load->view('admin/syllabus/report', $data);
+                  $this->load->view('layout/footer', $data);
+              } 
+              else 
+              {
+                  $class       = $this->input->post('class_id');
+                  $section     = $this->input->post('section_id');
+                  $search      = $this->input->post('search');
+                  $search_text = $this->input->post('search_text');
+                  if (isset($search)) 
+                  {
+                      if($search == 'search_filter') 
+                      {
+                          $this->form_validation->set_rules('class_id', $this->lang->line('class'), 'trim|required|xss_clean');
+                          if ($this->form_validation->run() == false) 
+                          {
+      
+                          } 
+                          else 
+                          {
+                              $data['searchby']    = "filter";
+                              $data['class_id']    = $this->input->post('class_id');
+                              $data['section_id']  = $this->input->post('section_id');
+                              $data['search_text'] = $this->input->post('search_text');
+                              $resultlist          = $this->student_model->videoSearchByClassSection($class, $section);
+                              $data['resultlist']  = $resultlist;
+                              $title               = $this->classsection_model->getDetailbyClassSection($data['class_id'], $data['section_id']);
+                              $data['title']       = 'Score Details for ' . $title['class'] . "(" . $title['section'] . ")";
+                          }
+                      } 
+                      else if ($search == 'search_full') 
+                      {
+                          $data['searchby'] = "text";      
+                          $data['search_text'] = trim($this->input->post('search_text'));
+                          $resultlist          = $this->student_model->VideoSearchFullText($search_text, $carray);
+                          $data['resultlist']  = $resultlist;
+                          $data['title']       = 'Search Details: ' . $data['search_text'];
+                      }
+                  }
+      
+                  $this->load->view('layout/header', $data);
+                  $this->load->view('admin/syllabus/report', $data);
+                  $this->load->view('layout/footer', $data);
+              }
+      }
+    //custom
+    
      public function download($doc)
     {
         $this->load->helper('download');

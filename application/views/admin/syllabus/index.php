@@ -19,9 +19,9 @@
 
                     <div class="box-body">
                         <?php
-if ($role_id == 7) {
-
-    ?>
+                            if ($role_id == 7) 
+                            {
+                                ?>
 
                         <form action="<?php echo site_url('admin/syllabus/getteachertimetable'); ?>" id="getTimetable" class="row">
                          <div class="col-lg-4 col-md-4 col-sm-4">
@@ -108,7 +108,7 @@ if (!empty($staff_list)) {
                                         <input type="hidden" id="subject_id" name="subject_id" class="form-control" >
                                         <input type="hidden" id="subject_group_subject_id" name="subject_group_subject_id" class="form-control" >
                                         <input type="hidden" id="created_for" name="created_for" >
-                                                 <input id="subject_syllabusid" type="hidden" name="subject_syllabusid" >
+                                        <input id="subject_syllabusid" type="hidden" name="subject_syllabusid" >
                                         <span class="section_id_error text-danger"></span>
                                     </div>
                                 </div>
@@ -924,7 +924,7 @@ $('#created_for').val(staff_id);
             var subject_id_filter = $('#subject_id_filter').val();        
             // var status=$(this).attr('state');
             $.ajax({
-                url:'<?=base_url('admin/Question/getQuestionByFilter'); ?>',
+                url:'<?=base_url('admin/Question/getVideoQuestionByFilter'); ?>',
                 method: 'POST',                
                 data:{class_id:class_id_filter,section_id:section_id_filter,subject_id:subject_id_filter},
                 dataType:'json',

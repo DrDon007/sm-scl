@@ -1,8 +1,9 @@
 <?php
 
-class Question_model extends MY_model {
-
-	 public function add($data) {
+class Question_model extends MY_model 
+{
+	public function add($data) 
+    {
 		$this->db->trans_start(); # Starting Transaction
         $this->db->trans_strict(false); # See Note 01. If you wish can remove as well
         //=======================Code Start===========================
@@ -96,9 +97,9 @@ class Question_model extends MY_model {
         }
     }
 
-     // ---------------------
-     public function getQuestionFilter($class_id,$section_id,$subject_id_filter)
-     {
+    // -------------custom--------
+    public function getQuestionFilter($class_id,$section_id,$subject_id_filter)
+    {
         if($class_id!=null && $section_id!=null && $subject_id_filter!=null) 
         {
             $sql="SELECT q.id,c.class,sc.section,s.name,q.`question`,q.`correct` FROM `questions` q INNER JOIN subjects s on s.id=q.`subject_id` INNER JOIN class_sections cs on q.`class`=cs.`class_id` and q.`section`=cs.`section_id` INNER JOIN classes c on c.id=q.class INNER JOIN sections sc on sc.id=q.section  where c.id='$class_id' and sc.id='$section_id' and s.id='$subject_id_filter'";
@@ -129,8 +130,43 @@ class Question_model extends MY_model {
             $rs = $this->db->query($sql);
             return $rs->result();
         }
-     }
- 
+    }
+    
+    public function getVideoQuestionFilter($class_id,$section_id,$subject_id_filter)
+    {
+        if($class_id!=null && $section_id!=null && $subject_id_filter!=null) 
+        {
+            $sql="SELECT q.id,c.class,sc.section,s.name,q.`question`,q.`correct` FROM `questions` q INNER JOIN subjects s on s.id=q.`subject_id` INNER JOIN class_sections cs on q.`class`=cs.`class_id` and q.`section`=cs.`section_id` INNER JOIN classes c on c.id=q.class INNER JOIN sections sc on sc.id=q.section  where c.id='$class_id' and sc.id='$section_id' and s.id='$subject_id_filter' and q.isVideoPopup='yes'";
+            $rs = $this->db->query($sql);
+            return $rs->result();
+        }
+        else if($class_id!=null && $section_id!=null && $subject_id_filter==null)
+        {
+            $sql="SELECT q.id,c.class,sc.section,s.name,q.`question`,q.`correct` FROM `questions` q INNER JOIN subjects s on s.id=q.`subject_id` INNER JOIN class_sections cs on q.`class`=cs.`class_id` and q.`section`=cs.`section_id` INNER JOIN classes c on c.id=q.class INNER JOIN sections sc on sc.id=q.section  where c.id='$class_id' and sc.id='$section_id' and q.isVideoPopup='yes'";
+            $rs = $this->db->query($sql);
+            return $rs->result();
+        }
+        else if($class_id!=null && $section_id==null && $subject_id_filter==null)
+        {
+            $sql="SELECT q.id,c.class,sc.section,s.name,q.`question`,q.`correct` FROM `questions` q INNER JOIN subjects s on s.id=q.`subject_id` INNER JOIN class_sections cs on q.`class`=cs.`class_id` and q.`section`=cs.`section_id` INNER JOIN classes c on c.id=q.class INNER JOIN sections sc on sc.id=q.section  where c.id='$class_id' and q.isVideoPopup='yes'";
+            $rs = $this->db->query($sql);
+            return $rs->result();
+        }
+        else if($class_id==null && $section_id==null && $subject_id_filter!=null)
+        {
+            $sql="SELECT q.id,c.class,sc.section,s.name,q.`question`,q.`correct` FROM `questions` q INNER JOIN subjects s on s.id=q.`subject_id` INNER JOIN class_sections cs on q.`class`=cs.`class_id` and q.`section`=cs.`section_id` INNER JOIN classes c on c.id=q.class INNER JOIN sections sc on sc.id=q.section where s.id='$subject_id_filter' and q.isVideoPopup='yes'";
+            $rs = $this->db->query($sql);
+            return $rs->result();
+        }
+        else 
+        {
+            $sql="SELECT q.id,c.class,sc.section,s.name,q.`question`,q.`correct` FROM `questions` q INNER JOIN subjects s on s.id=q.`subject_id` INNER JOIN class_sections cs on q.`class`=cs.`class_id` and q.`section`=cs.`section_id` INNER JOIN classes c on c.id=q.class INNER JOIN sections sc on sc.id=q.section where q.isVideoPopup='yes'";
+            $rs = $this->db->query($sql);
+            return $rs->result();
+        }
+    }
+    
+    // -------------custom--------
 
     public function remove($id){
 		$this->db->trans_start(); # Starting Transaction
@@ -171,8 +207,9 @@ class Question_model extends MY_model {
         }
     }
 
-    public function add_question_answers($data){
- if (isset($data['id'])) {
+    public function add_question_answers($data)
+    {
+        if (isset($data['id'])) {
             $this->db->where('id', $data['id']);
             $this->db->update('question_answers', $data);
         } else {

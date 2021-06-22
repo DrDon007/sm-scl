@@ -1,3 +1,6 @@
+
+<!DOCTYPE html>
+
 <?php
 $count=0;
 foreach($res as $r => $rv) 
@@ -41,6 +44,7 @@ if(!empty($video)){
 ?>
 
 
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -64,7 +68,53 @@ if(!empty($video)){
 	<!-- GreenSock -->
 	<script src="<?=base_url()?>js/TweenMax.min.js"></script>
     <title>BALA BHARATHI VIDYALAYAM</title>
+	<style>
+		/* .videoInsert {
+		position: absolute; 
+		right: 0; 
+		bottom: 0;
+		min-width: 100%; 
+		min-height: 100%;
+		width: auto; 
+		height: auto; 
+		background-size: cover;
+		overflow: hidden;} */
+	</style>
 </head>
+
+
+<body>
+	<?php
+		$count=0;
+		$video='';
+		foreach($res as $r => $rv) 
+		{
+			$video=$rv['lacture_video'];
+			$vid=$rv['id'];
+			$count++;
+		}
+		// echo $count;
+		$video_timing=array();		
+		$opt_a=array();
+		$opt_b=array();
+		$opt_c=array();
+		$opt_d=array();
+		$correct=array();
+		$question_id=array();
+
+		for($i=0;$i<$count;$i++)
+		{
+			// $question_id[$i]=$rv['question_id'];
+			$question[$i]=$res[$i]['question'];
+			$opt_a[$i]=$res[$i]['opt_a'];
+			$opt_b[$i]=$res[$i]['opt_b'];
+			$opt_c[$i]=$res[$i]['opt_c'];
+			$opt_d[$i]=$res[$i]['opt_d'];
+			$video_timing[$i]=$res[$i]['video_timing'];			
+			$correct[$i]=$res[$i]['correct'];
+		}
+		// echo $res[1]['question'];
+
 <?php
 		{
 			for($i=0;$i<$count;$i++)
@@ -312,6 +362,7 @@ break;
 
 <?php
 case $video1:
+
 	?>
 
 
@@ -320,14 +371,52 @@ case $video1:
 	
     <div id="container">
 		<div class="row videoArea">
+
+			<video id="video1" controls autoplay="true">
+			<source src="<?=base_url()?>students/video/lacture_video_download/<?=$video?>" type="video/mp4">	
+
 			<video id="video1" controls>
 			<source src="<?=base_url()?>students/video/lacture_video_download/<?=$lesson?>" type="video/mp4">	
+
 			<!-- <source src="https://www.youtube.com/embed/4gxI8Yu6vGU" autoplay="true" type="video/*"> -->
 			<!-- <source width="846" height="480" src="https://www.youtube.com/embed/eG1pjrdmIrs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen type="videp/*"></source> -->
 				Your browser does not support the video tag.
 			</video>
 		</div>
-	
+
+		<?php
+		{
+			for($i=0;$i<$count;$i++)
+			{
+			?>
+				 <div class="lightbox popUpQuestion<?=$i+1?>"> 
+					<h4>Question <?=$i+1?></h4>
+					<p><?=$question[$i]?></p>
+					<br>
+					<input class="q<?=$i+1?>" type="radio" name="Question<?=$i+1?>" value="opt_a"><?=$opt_a[$i]?>
+					<input class="q<?=$i+1?>" type="radio" name="Question<?=$i+1?>" value="opt_b"><?=$opt_b[$i]?>
+					<input class="q<?=$i+1?>" type="radio" name="Question<?=$i+1?>" value="opt_c"><?=$opt_c[$i]?>
+					<input class="q<?=$i+1?>" type="radio" name="Question<?=$i+1?>" value="opt_d"><?=$opt_d[$i]?>	
+				</div>
+			<?php
+			}
+		}
+		?>
+		<div class="lightbox final">
+		<h4> Thanks For Watching Video</h4>
+		<form action="<?php echo site_url('students/video/form_data')?>" id="videoFrm" name="videoFrm" method="POST"> 
+		<input id="st" type="text" name="StartTime" value="" hidden><br>
+		<input id="et" type="text" name="EndTime" value="" hidden><br>
+		<input id="ts" type="text" name="TimeSpent" value="" hidden><br>
+		<input id="sc" type="text" name="score" value="" hidden><br>
+		<input id="sc" type="text" name="video_id" value="<?=$vid?>" hidden><br>
+		<input id="user_id" type="text" name="user_id" value="<?=$this->session->userdata['student']['student_id'];?>" hidden>
+		<input type="submit" name="submit" class="submit">
+		</div>
+
+	</div>
+	</form>
+
 </body>
 </html>
 
@@ -388,7 +477,6 @@ case $video1:
 			?>		
 		});
 	});
-
 
 	$('#video1').bind('ended',function()
 	{
@@ -463,6 +551,9 @@ case $video1:
 		document.cookie = name + "=" + (value || "")  + expires + "; path=/";
 	}
 
+
+</script>
+
 </script>
 
 	<?php
@@ -475,3 +566,4 @@ case $video1:
 	break;
 }
 ?>
+

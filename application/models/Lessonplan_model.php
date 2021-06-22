@@ -184,36 +184,37 @@ class Lessonplan_model extends MY_model {
 
         //==========================syllabus============================
 
-        public function add_syllabus($data){
+        public function add_syllabus($data)
+		{
 			//$this->db->trans_start(); # Starting Transaction
 			//$this->db->trans_strict(false); # See Note 01. If you wish can remove as well
 			//=======================Code Start===========================
-
-			if (isset($data['id']) && $data['id']>0 ) {
-            $this->db->where('id', $data['id']);
-            $this->db->update('subject_syllabus', $data);
-           // echo $this->db->last_query();die;
-			$insert_id =  $data['id'];
-            $message      = UPDATE_RECORD_CONSTANT." On Subject Syllabus id ".$insert_id;
-			$action       = "Update";
-			$record_id    = $insert_id;
-
-			//$this->log($message, $record_id, $action);
-			return $record_id;
-        } else {
-            $this->db->insert('subject_syllabus', $data);
-			$insert_id =  $this->db->insert_id();
-            $message      = INSERT_RECORD_CONSTANT." On Subject Syllabus id ".$insert_id;
-			$action       = "Insert";
-			$record_id    = $insert_id;
-			//$this->log($message, $record_id, $action);
-			
-            return $this->db->insert_id();
-        }
+			if (isset($data['id']) && $data['id']>0) 
+			{
+				$this->db->where('id', $data['id']);
+				$this->db->update('subject_syllabus', $data);
+				// echo $this->db->last_query();die;
+				$insert_id =  $data['id'];
+				$message      = UPDATE_RECORD_CONSTANT." On Subject Syllabus id ".$insert_id;
+				$action       = "Update";
+				$record_id    = $insert_id;
+				//$this->log($message, $record_id, $action);
+				return $record_id;
+			} 
+			else 
+			{
+				$this->db->insert('subject_syllabus', $data);
+				$insert_id =  $this->db->insert_id();
+				$message      = INSERT_RECORD_CONSTANT." On Subject Syllabus id ".$insert_id;
+				$action       = "Insert";
+				$record_id    = $insert_id;
+				//$this->log($message, $record_id, $action);				
+				return $this->db->insert_id();
+			}
            
 			//======================Code End==============================
 
-		//	$this->db->trans_complete(); # Completing transaction
+			//	$this->db->trans_complete(); # Completing transaction
 			/*Optional*/
 
 			//if ($this->db->trans_status() === false) {
@@ -225,34 +226,92 @@ class Lessonplan_model extends MY_model {
 			//	return $insert_id;
 			//}
         }
-		public function update_syllabus($data) {
+
+		public function add_question($questionData)
+		{
+			//=======================Code Start===========================
+			if(isset($questionData['id']) && $questionData['id']>0) 
+			{
+				$this->db->where('id', $questionData['id']);
+				$this->db->update('intractive_video_question', $questionData);
+				$insert_id    =  $questionData['id'];
+				$message      =  UPDATE_RECORD_CONSTANT." On intractive_video_question id ".$insert_id;
+				$action       =  "Update";
+				$record_id    =  $insert_id;
+				return $record_id;
+			} 
+			else 
+			{
+				$this->db->insert('intractive_video_question', $questionData);
+				$insert_id 	  =  $this->db->insert_id();
+				$message      =  INSERT_RECORD_CONSTANT." On intractive_video_question id ".$insert_id;
+				$action       =  "Insert";
+				$record_id    =  $insert_id;
+				return $this->db->insert_id();
+			}
+        }
+
+		public function add_question1($data)
+		{
+			if(isset($questionData['id']) && $questionData['id']>0) 
+			{
+				$this->db->where('id', $questionData['id']);
+				$this->db->update('intractive_video_question', $questionData);
+				$insert_id    =  $questionData['id'];
+				$message      =  UPDATE_RECORD_CONSTANT." On intractive_video_question id ".$insert_id;
+				$action       =  "Update";
+				$record_id    =  $insert_id;
+				return $record_id;
+			} 
+			else 
+			{
+				$this->db->insert('intractive_video_question', $questionData);
+				$insert_id 	  =  $this->db->insert_id();
+				$message      =  INSERT_RECORD_CONSTANT." On intractive_video_question id ".$insert_id;
+				$action       =  "Insert";
+				$record_id    =  $insert_id;
+				return $this->db->insert_id();
+			}
+		}
+
+		function add_products($questionData)
+		{
+			// $sql="INSERT INTO `intractive_video_question`(`question_id`, `video_timing`, `subject_syllabus_id`) VALUES (:question_id,:video_timing,:subject_syllabus_id)";
+			// $rs=$this->db->query($sql);
+			// return $rs;    
+			$this->db->insert('intractive_video_question', $questionData);
+			
+		}
+
+		public function update_syllabus($data) 
+		{
 			$this->db->trans_start(); # Starting Transaction
 			$this->db->trans_strict(false); # See Note 01. If you wish can remove as well
 			//=======================Code Start===========================
 			$this->db->where('id', $data['id']);
-			$query = $this->db->update('subject_syllabus', $data);
-			
+			$query = $this->db->update('subject_syllabus', $data);			
 			$message      = UPDATE_RECORD_CONSTANT." On  Subject Syllabus id ". $data['id'];
 			$action       = "Update";
 			$record_id    = $data['id'];
 			$this->log($message, $record_id, $action);			
 			//======================Code End==============================
-
 			$this->db->trans_complete(); # Completing transaction
 			/*Optional*/
-
-			if ($this->db->trans_status() === false) {
+			if($this->db->trans_status() === false) 
+			{
 				# Something went wrong.
 				$this->db->trans_rollback();
 				return false;
-
-			} else {
+			} 
+			else 
+			{
 				return true;
 			}
 		}
 
         
-	public function get($id = null,$session,$subject_group_subject_id = null){ 
+	public function get($id = null,$session,$subject_group_subject_id = null)
+	{ 
 
 		$this->db->select('lesson.*,subject_groups.name as sgname,subjects.name as subname,sections.section as sname,sections.id as sectionid,subject_groups.id as subjectgroupsid,subjects.id as subjectid,class_sections.id as csectionid,classes.class as cname,classes.id as classid')->from('lesson');
 
@@ -284,9 +343,10 @@ class Lessonplan_model extends MY_model {
     
     }
  
-    public function getsubject_group_class_sectionsId($class_id,$section_id,$subject_group_id){
+    public function getsubject_group_class_sectionsId($class_id,$section_id,$subject_group_id)
+	{
    
-   $sql = "SELECT subject_groups.name, subject_group_class_sections.* from subject_group_class_sections INNER JOIN class_sections on class_sections.id=subject_group_class_sections.class_section_id INNER JOIN subject_groups on subject_groups.id=subject_group_class_sections.subject_group_id WHERE class_sections.class_id=" . $this->db->escape($class_id) . " and class_sections.section_id=" . $this->db->escape($section_id) . " and subject_groups.id=" . $this->db->escape($subject_group_id) ."and subject_groups.session_id=" . $this->db->escape($this->current_session) ." ORDER by subject_groups.id DESC";
+   				$sql = "SELECT subject_groups.name, subject_group_class_sections.* from subject_group_class_sections INNER JOIN class_sections on class_sections.id=subject_group_class_sections.class_section_id INNER JOIN subject_groups on subject_groups.id=subject_group_class_sections.subject_group_id WHERE class_sections.class_id=" . $this->db->escape($class_id) . " and class_sections.section_id=" . $this->db->escape($section_id) . " and subject_groups.id=" . $this->db->escape($subject_group_id) ."and subject_groups.session_id=" . $this->db->escape($this->current_session) ." ORDER by subject_groups.id DESC";
                 $query = $this->db->query($sql);
                
                 return $query->row_array();

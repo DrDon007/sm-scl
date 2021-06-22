@@ -1,9 +1,10 @@
 <?php
  
-if (!defined('BASEPATH'))
+    if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Syllabus extends Admin_Controller {
+class Syllabus extends Admin_Controller 
+{
 
 	public function __construct()
     {
@@ -11,9 +12,11 @@ class Syllabus extends Admin_Controller {
 		$this->sch_current_session = $this->setting_model->getCurrentSession();
         $this->staff_id=$this->customlib->getStaffID();
     }
+
     public function index()
     { 
-		if (!($this->rbac->hasPrivilege('manage_lesson_plan', 'can_view') )) {
+		if (!($this->rbac->hasPrivilege('manage_lesson_plan', 'can_view') )) 
+        {
             access_denied();
         }  
         $this->session->set_userdata('top_menu', 'lessonplan');
@@ -31,13 +34,22 @@ class Syllabus extends Admin_Controller {
 		$data['this_week_start']=date($this->customlib->getSchoolDateFormat(), $this->customlib->dateyyyymmddTodateformat($this_week_start));
 		$data['this_week_end']=date($this->customlib->getSchoolDateFormat(), $this->customlib->dateyyyymmddTodateformat($this_week_end));
         $data['staff_id']=$this->staff_id;
+       
+        //modified question popup
+
+        $subject_result       = $this->subject_model->get();
+        $data['subjectlist']  = $subject_result;
+        $class                   = $this->class_model->get();
+        $data['classlistNEW']    = $class;    
+
+
         $this->load->view('layout/header', $data);
         $this->load->view('admin/syllabus/index', $data);
         $this->load->view('layout/footer', $data);
     }
 
-
-    public function get_weekdates(){     
+    public function get_weekdates()
+    {     
  
         $this_week_start=$_POST['date'];  
         $date = date_create($this_week_start);
@@ -101,7 +113,9 @@ class Syllabus extends Admin_Controller {
         $data['staff_id']=$staff_id ;
         $this->load->view('admin/syllabus/_get_weekdates', $data);
     }
-	public function get_subject_syllabus(){    
+
+	public function get_subject_syllabus()
+    {    
         $data['id']	=	$_POST['id']; 
         $staff_id					=	$this->customlib->getStaffID();
         $my_role  = $this->customlib->getStaffRole();
@@ -115,7 +129,8 @@ class Syllabus extends Admin_Controller {
 		$this->load->view('admin/syllabus/_get_subject_syllabus', $data);
     }
 
-    public function get_subject_syllabusdata(){
+    public function get_subject_syllabusdata()
+    {
          $staff_id                  =   $this->customlib->getStaffID();
         $my_role  = $this->customlib->getStaffRole();
         $role     = json_decode($my_role);
@@ -129,17 +144,16 @@ class Syllabus extends Admin_Controller {
        }
     } 
 
-    public function getsubject_syllabus($id){
+    public function getsubject_syllabus($id)
+    {
        $data= $this->syllabus_model->get_subject_syllabusdatabyid($id);
        $data['date']=date($this->customlib->getSchoolDateFormat(),strtotime($data['date']));
        echo json_encode($data);
        //$this->load->view('admin/syllabus/_editsubject_syllabus',$data);
     }
 
-
-
-    public function add_syllabus(){
-      
+    public function add_syllabus()
+    {      
         $this->form_validation->set_rules('lesson_id', $this->lang->line('lesson'), 'trim|required|xss_clean');
         $this->form_validation->set_rules('topic_id', $this->lang->line('topic'), 'trim|required|xss_clean');
         $this->form_validation->set_rules('date', $this->lang->line('date'), 'trim|required|xss_clean');
@@ -148,8 +162,14 @@ class Syllabus extends Admin_Controller {
         $this->form_validation->set_rules('time_to',$this->lang->line('time_to'), 'trim|required|xss_clean');
         $this->form_validation->set_rules('file',$this->lang->line('attachment'), 'callback_handle_upload');
         $this->form_validation->set_rules('lacture_video',$this->lang->line('lacture_video'),'handle_uploadlacturevideo');
+
+        ///--------------------------custom
+        // $random_videoId = rand(100000, 999999);
+        ///--------------------------custom
         
-        if ($this->form_validation->run() == FALSE) {
+        
+        if($this->form_validation->run() == FALSE) 
+        {
             $msg = array(
                 'lessonid'          => form_error('lesson_id'),
                 'topic_id'          => form_error('topic_id'),
@@ -158,13 +178,12 @@ class Syllabus extends Admin_Controller {
                 'time_from'         => form_error('time_from'),
                 'time_to'           => form_error('time_to'),
                 'file'              =>form_error('file'),
-                'lacture_video'     =>form_error('lacture_video')
-                
+                'lacture_video'     =>form_error('lacture_video')                
             ); 
             $array = array('status' => 'fail', 'error' => $msg, 'message' => '');
-
-        } else { 
-
+        } 
+        else 
+        { 
             $data=array(
                 'session_id'        =>  $this->sch_current_session,
                 'topic_id'          =>  $_POST['topic_id'],
@@ -183,21 +202,96 @@ class Syllabus extends Admin_Controller {
                 'created_by'        =>  $this->staff_id,
                 'created_for'=>$_POST['created_for'],
                 'id'=>$_POST['subject_syllabusid'],
-
-            );
-
-           
+                // 'question_id'=>$_POST['question_id_filter'],
+                // 'video_timing'=>$_POST['time'],
+            );                     
 
             $insert_id = $this->lessonplan_model->add_syllabus($data);
-           // echo $this->db->last_query();die;
-            if (isset($_FILES["file"]) && !empty($_FILES['file']['name'])) {
+
+            ///--------------------------custom------------------
+           
+            $question_count = $_POST['question_count'];
+            if($_POST['question_id_filter'] ){
+                    $questionData = array(
+                        'question_id'=>$_POST['question_id_filter'],
+                        'video_timing'=>$_POST['time'],
+                        'subject_syllabus_id'=>$insert_id,
+                    ); 
+                    $this->lessonplan_model->add_question($questionData);
+                
+            }
+            if($_POST['question_id_filter2']){
+                for($i=1; $i<=$question_count; $i++){
+                    $questionData = array(
+                        'question_id'=>$_POST['question_id_filter'.$i.''],
+                        'video_timing'=>$_POST['time'.$i.''],
+                        'subject_syllabus_id'=>$insert_id,
+                    ); 
+                    $this->lessonplan_model->add_question($questionData);
+                }
+            }
+            // if($_POST['question_id_filter'] && $_POST['time']){
+            //     $questionData=array(
+            //         'question_id'=>$_POST['question_id_filter'],
+            //         'video_timing'=>$_POST['time'],
+            //         'subject_syllabus_id'=>$insert_id,
+            //     ); 
+            //     $this->lessonplan_model->add_question($questionData);
+            // }
+            
+
+            // if($_POST['question_id_filter2'] && $_POST['time2']){
+
+            //     $questionData=array(
+            //         'question_id'=>$_POST['question_id_filter2'],
+            //         'video_timing'=>$_POST['time2'],
+            //         'subject_syllabus_id'=>$insert_id,
+            //     ); 
+    
+            //     $this->lessonplan_model->add_question($questionData);
+            // }
+            
+            // if($_POST['question_id_filter3'] && $_POST['time3']){
+            //     $questionData=array(
+            //         'question_id'=>$_POST['question_id_filter3'],
+            //         'video_timing'=>$_POST['time3'],
+            //         'subject_syllabus_id'=>$insert_id,
+            //     ); 
+            //     $this->lessonplan_model->add_question($questionData);
+            // }
+            // if($_POST['question_id_filter4'] && $_POST['time4']){
+            //     $questionData=array(
+            //         'question_id'=>$_POST['question_id_filter4'],
+            //         'video_timing'=>$_POST['time4'],
+            //         'subject_syllabus_id'=>$insert_id,
+            //     ); 
+            //     $this->lessonplan_model->add_question($questionData);
+            // }
+
+            // if($_POST['question_id_filter5'] && $_POST['time5']){
+            //     $questionData=array(
+            //         'question_id'=>$_POST['question_id_filter5'],
+            //         'video_timing'=>$_POST['time5'],
+            //         'subject_syllabus_id'=>$insert_id,
+            //     ); 
+            //     $this->lessonplan_model->add_question($questionData);
+            // }
+            
+            
+            
+            //$que_insert_id = $this->lessonplan_model->add_question($questionData);
+            ///--------------------------custom------------------
+
+            if(isset($_FILES["file"]) && !empty($_FILES['file']['name'])) 
+            {
                     $fileInfo = pathinfo($_FILES["file"]["name"]);
                     $img_name = time(). '.' . $fileInfo['extension'];
                     move_uploaded_file($_FILES["file"]["tmp_name"], "./uploads/syllabus_attachment/" . $img_name);
                     $data_img = array('id' => $insert_id, 'attachment' =>  $img_name);
                     $this->lessonplan_model->update_syllabus($data_img);
             }
-            if (isset($_FILES["lacture_video"]) && !empty($_FILES['lacture_video']['name'])) {
+            if(isset($_FILES["lacture_video"]) && !empty($_FILES['lacture_video']['name'])) 
+            {
                     $fileInfo = pathinfo($_FILES["lacture_video"]["name"]);
                     $img_name = time() . '.' . $fileInfo['extension'];
                     move_uploaded_file($_FILES["lacture_video"]["tmp_name"], "./uploads/syllabus_attachment/lacture_video/" . $img_name);
@@ -209,7 +303,6 @@ class Syllabus extends Admin_Controller {
          echo json_encode($array);
     }
 
-
      public function download($doc)
     {
         $this->load->helper('download');
@@ -219,7 +312,8 @@ class Syllabus extends Admin_Controller {
         $name     = $this->uri->segment(4);
         force_download($name, $data);
     }
-  public function lacture_video_download($doc)
+
+    public function lacture_video_download($doc)
     {
         $this->load->helper('download');
        $filepath = "./uploads/syllabus_attachment/lacture_video/" . $this->uri->segment(4);
@@ -229,7 +323,7 @@ class Syllabus extends Admin_Controller {
         force_download($name, $data);
     }
 
- public function handle_uploadlacturevideo()
+    public function handle_uploadlacturevideo()
     {
 
         $image_validate = $this->config->item('file_validate');
@@ -311,8 +405,8 @@ class Syllabus extends Admin_Controller {
         return true;
     }
 
- 
-    public function status(){
+    public function status()
+    {
 
         if (!($this->rbac->hasPrivilege('manage_syllabus_status', 'can_view') )) {
             access_denied();
@@ -365,7 +459,20 @@ class Syllabus extends Admin_Controller {
         $this->load->view('layout/footer');
     }
      
-
-
 }
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -203,6 +203,71 @@ if (!empty($staff_list)) {
                                         <textarea type="text" id="comprehensive_questions" name="comprehensive_questions" class="form-control " ></textarea>
                                     </div>
                                 </div>
+                                <div class="row">
+                        <input type="hidden" name="ci_csrf_token" value="">
+                            <?php echo $this->customlib->getCSRF(); ?>
+                            <div class="col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <label><?php echo $this->lang->line('class'); ?></label><small class="req"> *</small>
+                                    <select autofocus="" id="class_id_filter" name="class_id_filter" class="form-control" >
+                                        <option value=""><?php echo $this->lang->line('select'); ?></option>
+                                        <?php
+                                        foreach ($classlistNEW as $class) 
+                                        {
+                                            ?>
+                                            <option value="<?php echo $class['id'] ?>" <?php if (set_value('class_id') == $class['id']) echo "selected=selected" ?> ><?php echo $class['class'] ?></option>
+                                            
+                                            <?php
+                                            $count++;
+                                        }
+                                        ?>
+                                    </select>
+                                    <span class="text-danger"><?php echo form_error('class_id'); ?></span>
+                                </div>
+                            </div> 
+                            <div class="col-sm-4 col-md-4">
+                                <div class="form-group">  
+                                    <label><?php echo $this->lang->line('section'); ?></label><small class="req"> *</small>
+                                    <select id="section_id_filter" name="section_id_filter" class="form-control">
+                                        <option value=""><?php echo $this->lang->line('select'); ?></option>
+                                    </select>
+                                    <span class="text-danger"><?php echo form_error('section_id'); ?></span>
+                                </div>  
+                            </div>
+                            <div class="col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <label for="subject_id"><?php echo $this->lang->line('subject') ?></label><small class="req"> *</small>
+                                    <select class="form-control" id="subject_id_filter" name="subject_id_filter">
+                                        <option value=""><?php echo $this->lang->line('select'); ?></option>
+                                        <?php
+                                        foreach ($subjectlist as $subject_key => $subject_value) {
+                                            ?>
+                                            <option value="<?php echo $subject_value['id']; ?>"><?php echo $subject_value['name']; ?></option>
+                                             <?php
+                                        }
+                                        ?>
+                                    </select>
+                                    <span class="text text-danger subject_id_error"></span>
+                                </div>
+                            </div>
+                            <div id="add_question">
+                            <div class="col-md-6">
+                                    <div class="form-group">  
+                                        <label><?php echo $this->lang->line('question'); ?></label><small class="req"> *</small>
+                                        <select id="question_id_filter" name="question_id_filter" class="form-control">
+                                        </select>
+                                    </div>  
+                                </div> 
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="pwd">Timing in seconds</label>
+                                        <input type="text" id="time" name="time" class="form-control">
+                                    </div>
+                                </div>
+                                </div>
+                                <button id="add_question_button" type="button" style="background-color:Green; position:absolute; bottom: 427px; left: 720px;" name="Add Question">Add Question</button>
+                               <input type="number" id="question_count" name="question_count" value="" hidden>
 
                                 <div class="col-md-12">
                                     <div class="form-group" id="get_ckeditor">
@@ -283,9 +348,29 @@ if (!empty($staff_list)) {
         </div>
     </div>
 </div>
-
 <script>
+   var  i = 2;
+   
+    $('#add_question_button').click(function (){
+        $('#subject_id_filter').prop("disabled",true)
+        $('#section_id_filter').prop("disabled",true)
+        $('#class_id_filter').prop("disabled",true)
+        
+        if(i < 6) { 
+            document.getElementById("question_count").value = i;
+            var $add_div = $(' <div class="col-md-6"> <div class="form-group">  <label><?php echo $this->lang->line('question'); ?></label><small class="req"> *</small> <select id="question_id_filter'+i+'" name="question_id_filter'+i+'" class="form-control"> </select> </div> </div> <div class="col-md-4"> <div class="form-group"> <label for="pwd">Timing in seconds</label> <input type="text" id="time'+i+'" name="time'+i+'" class="form-control"> </div> </div> </div>');
+        // var $add_div = $(' <div class="col-md-6"> <div class="form-group">  <label><?php echo $this->lang->line('question'); ?></label><small class="req"> *</small> <select id="question_id_filter'+i+'" name="question_id_filter'+i+'" class="form-control"> </select> </div> </div> <div class="col-md-4"> <div class="form-group"> <label for="pwd">Timing in seconds</label> <input type="text" id="time'+i+'" name="time'+i+'"class="form-control"> </div> </div> </div>');
+        $('#add_question').append($add_div);
+        $('#question_id_filter option').clone().appendTo('#question_id_filter'+i+'')
+        // $('#question_id_filter option').clone().appendTo('#question_id_filter')
+        i++;
 
+         }
+   else{
+    $('#add_question_button').off("click");
+   }
+}
+);
     function run_video(lacture_youtube_url){		
 		$('#lacture_youtube_modal').modal('show');  
 		var str = lacture_youtube_url;
@@ -294,8 +379,9 @@ if (!empty($staff_list)) {
     }
 </script>	
 <script>	
-	function get_subject_syllabus(id){
-  $('#assignsyllabus').modal('show');
+	function get_subject_syllabus(id)
+    {
+        $('#assignsyllabus').modal('show');
         $('#syllabus_result').html('');
         $.ajax({
             type: "POST",
@@ -473,9 +559,9 @@ if (!empty($staff_list)) {
 
       $("#syllabus_form").on('submit', (function (e) {
         e.preventDefault();
-    for (instance in CKEDITOR.instances) {
-        CKEDITOR.instances[instance].updateElement();
-    }
+        for (instance in CKEDITOR.instances) {
+            CKEDITOR.instances[instance].updateElement();
+        }
         var $this = $(this).find("button[type=submit]:focus");
 
         $.ajax({
@@ -714,8 +800,8 @@ $('#created_for').val(staff_id);
 
 <script> 
 
-  document.getElementById("printModal").style.display = "block";
-  document.getElementById("btnExportModal").style.display = "block";
+//   document.getElementById("printModal").style.display = "block";
+//   document.getElementById("btnExportModal").style.display = "block";
 
         function printDivModal() { 
 		
@@ -769,4 +855,96 @@ $('#created_for').val(staff_id);
 
     return (sa);
 }  
-    </script>
+
+
+//modified question popup 
+      //--custom
+      function getSectionByClass(class_id, section_id) 
+    {
+        if(class_id != "" && section_id != "") 
+        {
+            $('#section_id').html("");
+            var base_url = '<?php echo base_url() ?>';
+            var div_data = '<option value=""><?php echo $this->lang->line('select'); ?></option>';
+            $.ajax({
+                type: "GET",
+                url: base_url + "sections/getByClass",
+                data: {'class_id': class_id},
+                dataType: "json",
+                success: function (data) {
+                    $.each(data, function (i, obj)
+                    {
+                        var sel = "";
+                        if (section_id == obj.section_id) {
+                            sel = "selected";
+                        }
+                        div_data += "<option value=" + obj.section_id + " " + sel + ">" + obj.section + "</option>";
+                    });
+                    $('#section_id').append(div_data);
+                }
+            });
+        }
+    }
+
+    $(document).ready(function() 
+    {
+        var class_id = $('#class_id_filter').val();
+        var section_id = '<?php echo set_value('section_id_filter') ?>';
+        getSectionByClass(class_id, section_id);
+        $(document).on('change', '#class_id_filter', function (e) 
+        {
+            $('#section_id_filter').html("");
+            var class_id = $(this).val();
+            var base_url = '<?php echo base_url() ?>';
+            var div_data = '<option value=""><?php echo $this->lang->line('select'); ?></option>';
+            $.ajax({
+                type: "GET",
+                url: base_url + "sections/getByClass",
+                data: {'class_id': class_id},
+                dataType: "json",
+                success: function (data) {
+                    $.each(data, function (i, obj)
+                    {
+                        div_data += "<option value=" + obj.section_id + ">" + obj.section + "</option>";
+                    });
+                    $('#section_id_filter').append(div_data);
+                }
+            });
+        });
+    });
+
+   
+    $(document).ready(function () 
+    {
+        var div_data = '<option value=""><?php echo $this->lang->line('select'); ?></option>';
+        $(document).on('change', '#subject_id_filter', function (e) 
+        {
+            var class_id_filter = $('#class_id_filter').val();
+            var section_id_filter = $('#section_id_filter').val();
+            var subject_id_filter = $('#subject_id_filter').val();        
+            // var status=$(this).attr('state');
+            $.ajax({
+                url:'<?=base_url('admin/Question/getQuestionByFilter'); ?>',
+                method: 'POST',                
+                data:{class_id:class_id_filter,section_id:section_id_filter,subject_id:subject_id_filter},
+                dataType:'json',
+                success: function(data)
+                {                   
+                               var html = '';
+                               var i;
+                               for(i=0; i<data.length; i++)
+                               {
+                                   html +="<option value="+data[i].id+" data-id='"+ i +"' ques='"+data[i].question+"'>"+data[i].question+"</option>";
+                               }
+                               $('#question_id_filter').html(html);
+                           },
+                           error:function(){
+                               alert('could not get data from database');
+                           }
+        });
+            // getQuestions();
+        });
+    });
+
+    //--custom
+</script>

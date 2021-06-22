@@ -108,11 +108,12 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                             <th>Topic/Chapter</th>   
                                             <th>Sub Topic</th>  
                                             <th>Created</th> 
-                                            <th>Score</th>       									
+                                            <th>Score</th>       		
+                                            <th>Attempts</th>							
                                             <th>Start Time</th>                                          
                                             <th>End Time</th>
                                             <th>Time Spent</th>										
-                                            <th class="text-right"><?php echo $this->lang->line('action'); ?></th>
+                                            <!-- <th class="text-right"><?php //echo $this->lang->line('action'); ?></th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -139,14 +140,15 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                     <td><?php echo $student['sub_topic']; ?></td>	     
                                                     <td><?php echo $student['created_at']; ?></td>	     
 													<td><?php echo $student['score']; ?></td>	
+                                                    <td><?php echo $student['attempts']; ?></td>	
                                                     <td><?php echo $student['StartTime']; ?></td>	
                                                     <td><?php echo $student['EndTime']; ?></td>		
                                                     <td><?php echo $student['TimeSpent']; ?></td>							                                                 
-                                                    <td class="pull-right">
-                                                        <a href="<?php echo base_url(); ?>student/view/<?php echo $student['id'] ?>" class="btn btn-default btn-xs"  data-toggle="tooltip" title="<?php echo $this->lang->line('show'); ?>" >
+                                                    <!-- <td class="pull-right"> -->
+                                                        <!-- <a href="<?php// echo base_url(); ?>student/view/<?php //echo $student['id'] ?>" class="btn btn-default btn-xs"  data-toggle="tooltip" title="<?php //echo $this->lang->line('show'); ?>" >
                                                             <i class="fa fa-reorder"></i>
-                                                        </a>                                                       
-                                                    </td>
+                                                        </a>                                                        -->
+                                                    <!-- </td> -->
                                                 </tr>
                                                 <?php
                                                 $count++;

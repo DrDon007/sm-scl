@@ -13,30 +13,32 @@ if(!defined('BASEPATH'))
 
        public function form_data()
        {
-            $this->load->model('Video_model');
-            $score = $this->input->POST('score');
-            $TimeSpent = $this->input->POST('TimeSpent');
-            $StartTime = $this->input->POST('StartTime');
-            $EndTime = $this->input->POST('EndTime');
-            $video_id = $this->input->POST('video_id');            
-            // $User =$this->session->userdata['student']['username'];
-            $User =$this->session->userdata['student']['student_id'];
-            // $User =$this->session->userdata['student']['adm_number'];
-            $this->Video_model->insert_summary($score,$TimeSpent,$StartTime,$EndTime,$User,$video_id);
-            redirect('user/syllabus');
+          $this->load->model('Video_model');
+          $data = array(
+               'score' => $_POST['score'],
+               'StartTime' => $_POST['StartTime'],
+               'EndTime' =>  $_POST['EndTime'],
+               'TimeSpent' =>  $_POST['TimeSpent'],
+               'User' =>  $_POST['user_id'],
+               'VideoId' =>  $_POST['video_id'],         
+               // $User => $this->session->userdata['student']['student_id'];              
+          );
+
+          $res= $this->Video_model->insert_summary($data);
+          // echo $res;
+          redirect('user/syllabus');
        }
 
        public function lacture_video_download($doc)
        {
            $this->load->helper('download');
-          $filepath = "./uploads/syllabus_attachment/lacture_video/" . $this->uri->segment(4);
-         
+           $filepath = "./uploads/syllabus_attachment/lacture_video/" . $this->uri->segment(4);         
            $data     = file_get_contents($filepath);
            $name     = $this->uri->segment(4);
            force_download($name, $data);
        }
 
-       public function check()
+       public function load()
        {
             // $User =  $this->session->userdata(‘student_id’);
           //    $User =$this->session->userdata['student']['username'];

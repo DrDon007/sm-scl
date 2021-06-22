@@ -45,7 +45,7 @@
 						<th>Video</th>
 						<td>
 						<!-- <p><a style='margin-left:5px;'data-toggle="tooltip" data-original-title="<?php echo $this->lang->line('download_video')?>" href="<?php echo base_url()?>user/syllabus/lacture_video_download/<?php echo $result['lacture_video']?>"><i class="fa fa-file-video-o">  <?php echo $this->lang->line('download_video')?> </i></a> </p> -->
-						<p><a style="margin-left:5px;" data-original-title="Open video" data-toggle="tooltip" target="#" href="<?=base_url()?>students/video/check/<?=$result['lacture_video']?>" ><i class="fa fa-play"> Play Video</i></a></p>
+						<p><a style="margin-left:5px;" data-original-title="Open video" data-toggle="tooltip" target="#" href="<?=base_url()?>students/video/load/<?=$result['lacture_video']?>" ><i class="fa fa-play"> Play Video</i></a></p>
 						</td>
 					</tr>
 					<?php }?>

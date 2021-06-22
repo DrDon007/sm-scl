@@ -102,6 +102,7 @@
 		<input id="ts" type="text" name="TimeSpent" value="" hidden><br>
 		<input id="sc" type="text" name="score" value="" hidden><br>
 		<input id="sc" type="text" name="video_id" value="<?=$vid?>" hidden><br>
+		<input id="user_id" type="text" name="user_id" value="<?=$this->session->userdata['student']['student_id'];?>" hidden>
 		<input type="submit" name="submit" class="submit">
 		</div>
 

@@ -2,8 +2,8 @@
 
 class Question_model extends MY_model 
 {
-	 public function add($data) 
-     {
+	public function add($data) 
+    {
 		$this->db->trans_start(); # Starting Transaction
         $this->db->trans_strict(false); # See Note 01. If you wish can remove as well
         //=======================Code Start===========================

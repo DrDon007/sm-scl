@@ -418,6 +418,79 @@ public function search_alumniStudent($class_id = null, $section_id = null,$sessi
         return $query->result_array();
     }
 
+    //custom code for video report
+    public function videoSearchByClassSection($class_id = null, $section_id = null)
+    {        
+        $this->db->select('summary.score,summary.StartTime,summary.EndTime,summary.TimeSpent,subject_syllabus.sub_topic,topic.name,subject_syllabus.created_at, classes.id AS `class_id`,student_session.id as student_session_id,students.id,classes.class,sections.id AS `section_id`,sections.section,students.id,students.admission_no , students.roll_no,students.admission_date,students.firstname,  students.lastname,students.image,    students.mobileno, students.email ,students.state ,   students.city , students.pincode ,     students.religion,     students.dob ,students.current_address,    students.permanent_address,IFNULL(students.category_id, 0) as `category_id`,IFNULL(categories.category, "") as `category`,students.adhar_no,students.samagra_id,students.bank_account_no,students.bank_name, students.ifsc_code , students.guardian_name , students.guardian_relation,students.guardian_phone,students.guardian_address,students.is_active ,students.created_at ,students.updated_at,students.father_name,students.app_key,students.parent_app_key,students.rte,students.gender,' . $field_variable)->from('students');
+        $this->db->join('student_session', 'student_session.student_id = students.id');
+        $this->db->join('classes', 'student_session.class_id = classes.id');
+        $this->db->join('sections', 'sections.id = student_session.section_id');
+        $this->db->join('summary', 'summary.user = students.id');
+        $this->db->join('subject_syllabus', 'subject_syllabus.id = summary.VideoId');
+        $this->db->join('topic', 'subject_syllabus.topic_id = topic.id');
+        $this->db->join('categories', 'students.category_id = categories.id', 'left');
+        
+        $this->db->where('student_session.session_id', $this->current_session);
+        $this->db->where('students.is_active', "yes");
+        if ($class_id != null) {
+            $this->db->where('student_session.class_id', $class_id);
+        }
+        if ($section_id != null) {
+            $this->db->where('student_session.section_id', $section_id);
+        }
+        //$this->db->order_by('students.id');
+        $this->db->order_by('students.admission_no', 'asc');
+
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+    public function VideoSearchFullText($searchterm, $carray = null)
+    {
+        $userdata = $this->customlib->getUserData();
+        $staff_id=$userdata['id'];
+
+        if(($userdata["role_id"] == 2) && ($userdata["class_teacher"] == "yes")) 
+        {
+            if (!empty($carray)) 
+            {
+                $this->db->where_in("student_session.class_id", $carray);
+                $sections=$this->teacher_model->get_teacherrestricted_modeallsections($staff_id);
+                foreach ($sections as $key => $value) 
+                {
+                   $sections_id[]=$value['section_id'];
+                }
+               $this->db->where_in("student_session.section_id", $sections_id);
+            } 
+            else 
+            {
+                $this->db->where_in("student_session.class_id", "");
+            }
+        }
+        $this->db->select('summary.score,summary.StartTime,summary.EndTime,summary.TimeSpent,subject_syllabus.sub_topic,topic.name,subject_syllabus.created_at,classes.id AS `class_id`,students.id,student_session.id as student_session_id,classes.class,sections.id AS `section_id`,sections.section,students.id,students.admission_no , students.roll_no,students.admission_date,students.firstname,  students.lastname,students.image,    students.mobileno, students.email ,students.state ,   students.city , students.pincode ,     students.religion,     students.dob ,students.current_address,    students.permanent_address,IFNULL(students.category_id, 0) as `category_id`,IFNULL(categories.category, "") as `category`,      students.adhar_no,students.samagra_id,students.bank_account_no,students.bank_name, students.ifsc_code ,students.father_name , students.guardian_name , students.guardian_relation,students.guardian_phone,students.guardian_address,students.is_active ,students.created_at ,students.updated_at,students.gender,students.rte,student_session.session_id,' . $field_variable)->from('students');
+        $this->db->join('student_session', 'student_session.student_id = students.id');
+        $this->db->join('classes', 'student_session.class_id = classes.id');
+        $this->db->join('sections', 'sections.id = student_session.section_id');
+        $this->db->join('summary', 'summary.user = students.id');
+        $this->db->join('categories', 'students.category_id = categories.id', 'left');
+        $this->db->where('student_session.session_id', $this->current_session);
+        $this->db->where('students.is_active', 'yes');
+        $this->db->group_start();
+        $this->db->like('CONCAT(students.firstname," ",students.lastname)', $searchterm);
+        $this->db->or_like('students.guardian_name', $searchterm);
+        $this->db->or_like('students.adhar_no', $searchterm);
+        $this->db->or_like('students.samagra_id', $searchterm);
+        $this->db->or_like('students.roll_no', $searchterm);
+        $this->db->or_like('students.admission_no', $searchterm);
+        $this->db->group_end();
+        $this->db->order_by('students.id');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    // custom code for video report
+
     public function searchByClassSectionWithoutCurrent($class_id = null, $section_id = null, $student_id = null)
     {
         $this->db->select('classes.id AS `class_id`,student_session.id as student_session_id,students.id,classes.class,sections.id AS `section_id`,sections.section,students.id,students.admission_no , students.roll_no,students.admission_date,students.firstname,  students.lastname,students.image,    students.mobileno, students.email ,students.state ,   students.city , students.pincode ,     students.religion,     students.dob ,students.current_address,    students.permanent_address,IFNULL(students.category_id, 0) as `category_id`,IFNULL(categories.category, "") as `category`,students.adhar_no,students.samagra_id,students.bank_account_no,students.bank_name, students.ifsc_code , students.guardian_name , students.guardian_relation,students.guardian_phone,students.guardian_address,students.is_active ,students.created_at ,students.updated_at,students.father_name,students.rte,students.gender')->from('students');

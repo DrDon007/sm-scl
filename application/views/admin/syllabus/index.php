@@ -19,9 +19,9 @@
 
                     <div class="box-body">
                         <?php
-if ($role_id == 7) {
-
-    ?>
+                            if ($role_id == 7) 
+                            {
+                                ?>
 
                         <form action="<?php echo site_url('admin/syllabus/getteachertimetable'); ?>" id="getTimetable" class="row">
                          <div class="col-lg-4 col-md-4 col-sm-4">

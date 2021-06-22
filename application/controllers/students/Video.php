@@ -18,8 +18,11 @@ if(!defined('BASEPATH'))
             $TimeSpent = $this->input->POST('TimeSpent');
             $StartTime = $this->input->POST('StartTime');
             $EndTime = $this->input->POST('EndTime');
-            $User =$this->session->userdata['student']['username'];
-            $this->Video_model->insert_summary($score,$TimeSpent,$StartTime,$EndTime,$User);
+            $video_id = $this->input->POST('video_id');            
+            // $User =$this->session->userdata['student']['username'];
+            $User =$this->session->userdata['student']['student_id'];
+            // $User =$this->session->userdata['student']['adm_number'];
+            $this->Video_model->insert_summary($score,$TimeSpent,$StartTime,$EndTime,$User,$video_id);
             redirect('user/syllabus');
        }
 
@@ -52,8 +55,8 @@ if(!defined('BASEPATH'))
                $this->load->view('student/video',$data); 
           }
           
-       }
-
+       }   
+     
    }
 
 

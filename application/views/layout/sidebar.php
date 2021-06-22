@@ -443,6 +443,7 @@
                             <?php if($this->rbac->hasPrivilege('manage_lesson_plan','can_view')){?>
                             <li class="<?php echo set_Submenu('admin/syllabus'); ?>"><a href="<?php echo base_url(); ?>admin/syllabus"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('manage_lesson_plan'); ?></a></li>
                         <?php } ?>
+                      
                           <?php if($this->rbac->hasPrivilege('manage_syllabus_status','can_view')){?>
                             <li class="<?php echo set_Submenu('admin/lessonplan'); ?>"><a href="<?php echo base_url(); ?>admin/syllabus/status"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('manage_syllabus_status'); ?></a></li>
                               <?php } if($this->rbac->hasPrivilege('lesson','can_view')){?>
@@ -450,7 +451,10 @@
                               <?php } if($this->rbac->hasPrivilege('topic','can_view')){?>
                             <li class="<?php echo set_Submenu('admin/lessonplan/topic'); ?>"><a href="<?php echo base_url(); ?>admin/lessonplan/topic"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('topic'); ?></a></li>
                         <?php }?>
-                            
+                        <?php 
+                            if($this->rbac->hasPrivilege('report','can_view')){?>
+                            <li class="report"><a href="<?php echo base_url(); ?>admin/syllabus/report"><i class="fa fa-angle-double-right"></i> Report</a></li>
+                        <?php } ?>
                         </ul>
                     </li>
             <?php } }?>

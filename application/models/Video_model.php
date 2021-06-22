@@ -2,9 +2,9 @@
 class Video_model extends MY_model
 {
 
-    function insert_summary($score,$TimeSpent,$StartTime,$EndTime,$User)
+    function insert_summary($score,$TimeSpent,$StartTime,$EndTime,$User,$video_id)
     {
-        $sql="INSERT INTO `summary`(`score`,`StartTime`,`EndTime`,`TimeSpent`,`User`) VALUES ($score,'$StartTime','$EndTime','$TimeSpent','$User')";
+        $sql="INSERT INTO `summary`(`score`,`StartTime`,`EndTime`,`TimeSpent`,`User`,`VideoId`) VALUES ($score,'$StartTime','$EndTime','$TimeSpent','$User','$video_id')";
         $rs=$this->db->query($sql);
         return $rs;    
     }
@@ -31,9 +31,18 @@ class Video_model extends MY_model
 
     public function checkGetdata($lacture_video)
     {         
-        $sql="SELECT ss.`lacture_video`,iv.video_timing,iv.question_id ,iv.subject_syllabus_id,q.question,q.opt_a,q.opt_b,q.opt_c,q.opt_d,q.opt_e,q.correct,q.class,q.section,q.subject_id FROM `subject_syllabus` ss INNER JOIN `intractive_video_question` iv ON ss.id=iv.subject_syllabus_id INNER JOIN questions q ON iv.question_id=q.id where ss.`lacture_video`='$lacture_video'";
+        $sql="SELECT ss.id,ss.`lacture_video`,iv.video_timing,iv.question_id ,iv.subject_syllabus_id,q.question,q.opt_a,q.opt_b,q.opt_c,q.opt_d,q.opt_e,q.correct,q.class,q.section,q.subject_id FROM `subject_syllabus` ss INNER JOIN `intractive_video_question` iv ON ss.id=iv.subject_syllabus_id INNER JOIN questions q ON iv.question_id=q.id where ss.`lacture_video`='$lacture_video'";
         $rs=$this->db->query($sql);
         return $rs->result_array();
     }
+
+    // function getReport()
+    // {
+    //     $q = "SELECT * FROM `summary` ";  
+    //     $res = $this->db->query($q);
+    //     return $res->result_array(); 
+
+    // }
+
 }
 ?>

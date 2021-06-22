@@ -42,6 +42,7 @@
 		foreach($res as $r => $rv) 
 		{
 			$video=$rv['lacture_video'];
+			$vid=$rv['id'];
 			$count++;
 		}
 		// echo $count;
@@ -100,6 +101,7 @@
 		<input id="et" type="text" name="EndTime" value="" hidden><br>
 		<input id="ts" type="text" name="TimeSpent" value="" hidden><br>
 		<input id="sc" type="text" name="score" value="" hidden><br>
+		<input id="sc" type="text" name="video_id" value="<?=$vid?>" hidden><br>
 		<input type="submit" name="submit" class="submit">
 		</div>
 

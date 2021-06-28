@@ -8,7 +8,6 @@ foreach($res as $r => $rv)
 	$video=$rv['lacture_youtube_url'];
 	$video1=$rv['lacture_video'];
 	$count++;
-	
 }
 
 
@@ -36,9 +35,12 @@ for($i=0;$i<$count;$i++)
 
 
 
-if(!empty($video)){
+if(!empty($video))
+{
 	$lesson = $video;
-}else{
+}
+else
+{
 	$lesson = $video1;
 }
 ?>
@@ -82,70 +84,8 @@ if(!empty($video)){
 	</style>
 </head>
 
+	
 
-<body>
-	<?php
-		$count=0;
-		$video='';
-		foreach($res as $r => $rv) 
-		{
-			$video=$rv['lacture_video'];
-			$vid=$rv['id'];
-			$count++;
-		}
-		// echo $count;
-		$video_timing=array();		
-		$opt_a=array();
-		$opt_b=array();
-		$opt_c=array();
-		$opt_d=array();
-		$correct=array();
-		$question_id=array();
-
-		for($i=0;$i<$count;$i++)
-		{
-			// $question_id[$i]=$rv['question_id'];
-			$question[$i]=$res[$i]['question'];
-			$opt_a[$i]=$res[$i]['opt_a'];
-			$opt_b[$i]=$res[$i]['opt_b'];
-			$opt_c[$i]=$res[$i]['opt_c'];
-			$opt_d[$i]=$res[$i]['opt_d'];
-			$video_timing[$i]=$res[$i]['video_timing'];			
-			$correct[$i]=$res[$i]['correct'];
-		}
-		// echo $res[1]['question'];
-
-<?php
-		{
-			for($i=0;$i<$count;$i++)
-			{
-			?>
-				 <div class="lightbox popUpQuestion<?=$i+1?>"> 
-					<h4>Question <?=$i+1?></h4>
-					<p><?=$question[$i]?></p>
-					<br>
-					<input class="q<?=$i+1?>" type="radio" name="Question<?=$i+1?>" value="opt_a"><?=$opt_a[$i]?>
-					<input class="q<?=$i+1?>" type="radio" name="Question<?=$i+1?>" value="opt_b"><?=$opt_b[$i]?>
-					<input class="q<?=$i+1?>" type="radio" name="Question<?=$i+1?>" value="opt_c"><?=$opt_c[$i]?>
-					<input class="q<?=$i+1?>" type="radio" name="Question<?=$i+1?>" value="opt_d"><?=$opt_d[$i]?>	
-				</div>
-			<?php
-			}
-		}
-		?>
-		
-		<div class="lightbox final">
-		<h4> Thanks For Watching Video</h4>
-		<form action="<?php echo site_url('students/video/form_data')?>" id="videoFrm" name="videoFrm" method="POST"> 
-		<input id="st" type="text" name="StartTime" value="" hidden><br>
-		<input id="et" type="text" name="EndTime" value="" hidden><br>
-		<input id="ts" type="text" name="TimeSpent" value="" hidden><br>
-		<input id="sc" type="text" name="score" value="" hidden><br>
-		<input type="submit" name="submit" class="submit">
-		</div>
-
-	</div>
-	</form>
 
 <?php
 
@@ -158,29 +98,24 @@ switch($lesson) {
 <?php
 
 		function get_youtube_id_from_url($url)
-{
-    if (stristr($url,'youtu.be/'))
-        {preg_match('/(https:|http:|)(\/\/www\.|\/\/|)(.*?)\/(.{11})/i', $url, $final_ID); return $final_ID[4]; }
-    else 
-        {@preg_match('/(https:|http:|):(\/\/www\.|\/\/|)(.?)\/(embed\/|watch.?v=|)([a-z_A-Z0-9\-]{11})/i', $url, $IDD); return $IDD[5]; }
-}
+		{
+			if (stristr($url,'youtu.be/'))
+				{preg_match('/(https:|http:|)(\/\/www\.|\/\/|)(.*?)\/(.{11})/i', $url, $final_ID); return $final_ID[4]; }
+			else 
+				{@preg_match('/(https:|http:|):(\/\/www\.|\/\/|)(.?)\/(embed\/|watch.?v=|)([a-z_A-Z0-9\-]{11})/i', $url, $IDD); return $IDD[5]; }
+		}
 
 
 
-$video_id = get_youtube_id_from_url($lesson);
+		$video_id = get_youtube_id_from_url($lesson);
 ?>
 
 
 <body>
-
     <div id="container">
 		<div class="row videoArea">
-
 			<iframe id="player" width="560" height="315" class="trackable-video" src="https://www.youtube.com/embed/<?=$video_id?>?autoplay=0&enablejsapi=1"></iframe>
-
-
-		</div>
-	
+	</div>
 </body>
 </html>
 
@@ -286,72 +221,72 @@ $video_id = get_youtube_id_from_url($lesson);
   
   function pauseVideo1() {
     time1 = player.getCurrentTime();
-if( ( time1 > (stopPlayAt1 - 0.5) && time1 < stopPlayAt1 ) &&  question1Asked == false ){
-	player.pauseVideo();
-	$.featherlight($('.popUpQuestion1'))
-	     question1Asked = true; 
-	$('.q1').click(function(){
-		$.featherlight.current().close();
-		player.playVideo();
-	});
-}
-  }
-  function pauseVideo2() {
-    time1 = player.getCurrentTime();
-	time = Math.round(player.getCurrentTime());
-if(question2Asked == false && ( time1 > (stopPlayAt2 - 0.5) && time1 < stopPlayAt2)){
-	player.pauseVideo();
-		question2Asked = true; 
-	$.featherlight($('.popUpQuestion2'))
-	$('.q2').click(function(){
-		$.featherlight.current().close();
-		player.playVideo();
-	});
-}
-  }
+	if( ( time1 > (stopPlayAt1 - 0.5) && time1 < stopPlayAt1 ) &&  question1Asked == false ){
+		player.pauseVideo();
+		$.featherlight($('.popUpQuestion1'))
+			question1Asked = true; 
+		$('.q1').click(function(){
+			$.featherlight.current().close();
+			player.playVideo();
+		});
+	}
+	}
+	function pauseVideo2() {
+		time1 = player.getCurrentTime();
+		time = Math.round(player.getCurrentTime());
+	if(question2Asked == false && ( time1 > (stopPlayAt2 - 0.5) && time1 < stopPlayAt2)){
+		player.pauseVideo();
+			question2Asked = true; 
+		$.featherlight($('.popUpQuestion2'))
+		$('.q2').click(function(){
+			$.featherlight.current().close();
+			player.playVideo();
+		});
+	}
+	}
 
-  function pauseVideo3() {
-    time1 = player.getCurrentTime();
-	time = Math.round(player.getCurrentTime());
-if(question3Asked == false && ( time1 > (stopPlayAt3 - 0.5) && time1 < stopPlayAt3)){
-	player.pauseVideo();
-		question3Asked = true; 
-	$.featherlight($('.popUpQuestion3'))
-	$('.q3').click(function(){
-		$.featherlight.current().close();
-		player.playVideo();
-	});
-}
-  }
-  function pauseVideo4() {
-     time1 = player.getCurrentTime();
-	time = Math.round(player.getCurrentTime());
+	function pauseVideo3() {
+		time1 = player.getCurrentTime();
+		time = Math.round(player.getCurrentTime());
+	if(question3Asked == false && ( time1 > (stopPlayAt3 - 0.5) && time1 < stopPlayAt3)){
+		player.pauseVideo();
+			question3Asked = true; 
+		$.featherlight($('.popUpQuestion3'))
+		$('.q3').click(function(){
+			$.featherlight.current().close();
+			player.playVideo();
+		});
+	}
+	}
+	function pauseVideo4() {
+		time1 = player.getCurrentTime();
+		time = Math.round(player.getCurrentTime());
 
-if(question4Asked == false && ( time1 > (stopPlayAt4 - 0.5) && time1 < stopPlayAt4)){
-	player.pauseVideo();
-		question4Asked = true; 
-	$.featherlight($('.popUpQuestion4'))
-	$('.q4').click(function(){
-		$.featherlight.current().close();
-		player.playVideo();
-	});
-}
-  }
-  function pauseVideo5() {
-     time1 = player.getCurrentTime();
-	time = Math.round(player.getCurrentTime());
+	if(question4Asked == false && ( time1 > (stopPlayAt4 - 0.5) && time1 < stopPlayAt4)){
+		player.pauseVideo();
+			question4Asked = true; 
+		$.featherlight($('.popUpQuestion4'))
+		$('.q4').click(function(){
+			$.featherlight.current().close();
+			player.playVideo();
+		});
+	}
+	}
+	function pauseVideo5() {
+		time1 = player.getCurrentTime();
+		time = Math.round(player.getCurrentTime());
 
-if(question5Asked == false && ( time1 > (stopPlayAt5 - 0.5) && time1 < stopPlayAt5)){
-	player.pauseVideo();
-		question5Asked = true; 
-	$.featherlight($('.popUpQuestion5'))
-	$('.q5').click(function(){
-		$.featherlight.current().close();
-		player.playVideo();
-	});
-}
-  }
-})();
+	if(question5Asked == false && ( time1 > (stopPlayAt5 - 0.5) && time1 < stopPlayAt5)){
+		player.pauseVideo();
+			question5Asked = true; 
+		$.featherlight($('.popUpQuestion5'))
+		$('.q5').click(function(){
+			$.featherlight.current().close();
+			player.playVideo();
+		});
+	}
+	}
+	})();
 
 </script>
 
@@ -371,12 +306,11 @@ case $video1:
 	
     <div id="container">
 		<div class="row videoArea">
-
-			<video id="video1" controls autoplay="true">
-			<source src="<?=base_url()?>students/video/lacture_video_download/<?=$video?>" type="video/mp4">	
+			<!-- <video id="video1" controls autoplay="true"> -->
+			<!-- <source src="<?=base_url()?>students/video/lacture_video_download/<?=$video?>" type="video/mp4">	  -->
 
 			<video id="video1" controls>
-			<source src="<?=base_url()?>students/video/lacture_video_download/<?=$lesson?>" type="video/mp4">	
+			<source src="<?=base_url()?>students/video/lacture_video_download/<?=$lesson?>" type="video/mp4">	 
 
 			<!-- <source src="https://www.youtube.com/embed/4gxI8Yu6vGU" autoplay="true" type="video/*"> -->
 			<!-- <source width="846" height="480" src="https://www.youtube.com/embed/eG1pjrdmIrs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen type="videp/*"></source> -->

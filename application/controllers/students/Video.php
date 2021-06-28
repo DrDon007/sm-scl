@@ -48,7 +48,7 @@ if(!defined('BASEPATH'))
           $this->load->model('Video_model');
           if(!empty($lacture_video))
           {                 
-               $data['res']=$this->Video_model->checkGetdata($lacture_video);
+               $data['res']=$this->Video_model->checkGetdata($openlacture_video);
                $this->load->view('student/video',$data); 
           }
           if(!empty($openlacture_video))

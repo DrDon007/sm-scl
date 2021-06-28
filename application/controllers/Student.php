@@ -16,6 +16,7 @@ class Student extends Admin_Controller
         $this->load->library('smsgateway');
         $this->load->library('mailsmsconf');
         $this->load->library('encoding_lib');
+        // $this->load->library('M_pdf');
         $this->load->model("classteacher_model");
         $this->load->model("timeline_model");
         $this->blood_group        = $this->config->item('bloodgroup');
@@ -222,6 +223,7 @@ class Student extends Admin_Controller
         $this->load->view('layout/footer', $data);
     }
 
+   
     public function exportformat()
     {
         $this->load->helper('download');

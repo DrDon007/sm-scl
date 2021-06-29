@@ -16,7 +16,6 @@ class Syllabus_model extends CI_Model
     public function getDetailbyDateandTime($subject_group_subject_id, $subject_group_class_sections_id, $time_from, $time_to, $date)
     {
         $sql   = "SELECT lesson.name as `lesson_name`,topic.id as `topic_name`,topic.name as `topic_name`,subject_syllabus.* FROM `lesson` inner join topic on topic.lesson_id = lesson.id INNER JOIN subject_syllabus on subject_syllabus.topic_id=topic.id WHERE subject_group_subject_id =" . $this->db->escape($subject_group_subject_id) . " and subject_group_class_sections_id=" . $this->db->escape($subject_group_class_sections_id) . " and subject_syllabus.date=" . $this->db->escape($date) . " and subject_syllabus.time_from=" . $this->db->escape($time_from) . " and subject_syllabus.time_to=" . $this->db->escape($time_to);
-        
         $query = $this->db->query($sql);
         return $query->result();
     }

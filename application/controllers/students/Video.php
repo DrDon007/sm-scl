@@ -8,7 +8,7 @@ if(!defined('BASEPATH'))
        { 
             $this->load->model('Video_model');
             $data['res']=$this->Video_model->getAllQuestions();
-            $this->load->view('student/video',$data);  
+            $this->load->view('student/video_s',$data);  
        }
 
        public function form_data()
@@ -20,13 +20,13 @@ if(!defined('BASEPATH'))
                'EndTime' =>  $_POST['EndTime'],
                'TimeSpent' =>  $_POST['TimeSpent'],
                'User' =>  $_POST['user_id'],
-               'VideoId' =>  $_POST['video_id'],         
+               'VideoId' =>  $_POST['videoId'],         
                // $User => $this->session->userdata['student']['student_id'];              
           );
 
           $res= $this->Video_model->insert_summary($data);
           // echo $res;
-          redirect('user/syllabus');
+          // redirect('user/syllabus');
        }
 
        public function lacture_video_download($doc)

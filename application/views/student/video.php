@@ -33,6 +33,8 @@ for($i=0;$i<$count;$i++)
 
 
 
+
+
 if(!empty($video)){
 	$lesson = $video;
 }else{
@@ -145,6 +147,10 @@ $video_id = get_youtube_id_from_url($lesson);
 	   var time, rate, remainingTime;
   let count = <?php echo json_encode($count); ?>;
     // console.log(count);
+	var score = 0;
+	var EndTime;
+	var startTime;
+	var TimeSpent;
 	<?php
 			{
 				for($i=0;$i<$count;$i++)
@@ -157,7 +163,16 @@ $video_id = get_youtube_id_from_url($lesson);
 				}
 			}
 			?>
-
+<?php
+for($i=0;$i<$count;$i++)
+				{
+				?>
+			
+              var correct<?=$i+1?> = ("<?=$correct[$i]?>");
+          
+			<?php
+				}
+?>
 
 
   <?php
@@ -197,6 +212,35 @@ $video_id = get_youtube_id_from_url($lesson);
 
   // The API calls this function when the player's state changes.
   function onPlayerStateChange(event) {
+	if(event.data == -1)
+		{
+			startTime = new Date();
+		}
+
+	  if(event.data === 0) {
+		    EndTime = new Date();    
+			date1 = startTime
+		    date2 = EndTime
+		 var res = Math.abs(date1 - date2) / 1000;     // get total days between two dates
+         var days = Math.floor(res / 86400);                   // get hours            
+         var hours = Math.floor(res / 3600) % 24;          // get minutes
+         var minutes = Math.floor(res / 60) % 60;    // get second
+         var seconds = res % 60;
+        
+		TimeSpent = hours +  " hours" + ":" + minutes + " minutes" + ":" + seconds + " seconds" 
+		document.getElementById("st").value = startTime;
+		document.getElementById("et").value = EndTime;
+		document.getElementById("ts").value = TimeSpent;
+		document.getElementById("sc").value = score;	      
+		$.featherlight($('.final'))
+		$('.submit').click(function(){
+				$.featherlight.current().close();	
+			});
+            }
+			
+		
+	
+    
     
     clearTimeout(stopPlayTimer);
     if (event.data == YT.PlayerState.PLAYING) {
@@ -242,6 +286,12 @@ if( ( time1 > (stopPlayAt1 - 0.5) && time1 < stopPlayAt1 ) &&  question1Asked ==
 	     question1Asked = true; 
 	$('.q1').click(function(){
 		$.featherlight.current().close();
+		let answer1 = $("input[type='radio'][name='Question1']:checked").val();
+		console.log(answer1);
+        if(answer1 == correct1)
+		{
+		score = score+30;
+		}  
 		player.playVideo();
 	});
 }
@@ -255,6 +305,11 @@ if(question2Asked == false && ( time1 > (stopPlayAt2 - 0.5) && time1 < stopPlayA
 	$.featherlight($('.popUpQuestion2'))
 	$('.q2').click(function(){
 		$.featherlight.current().close();
+		let answer2 = $("input[type='radio'][name='Question2']:checked").val();
+        if(answer2 == correct2)
+		{
+		score = score+30;
+		} 
 		player.playVideo();
 	});
 }
@@ -269,6 +324,11 @@ if(question3Asked == false && ( time1 > (stopPlayAt3 - 0.5) && time1 < stopPlayA
 	$.featherlight($('.popUpQuestion3'))
 	$('.q3').click(function(){
 		$.featherlight.current().close();
+		let answer3 = $("input[type='radio'][name='Question3']:checked").val();
+        if(answer3 == correct3)
+		{
+		score = score+30;
+		} 
 		player.playVideo();
 	});
 }
@@ -283,6 +343,12 @@ if(question4Asked == false && ( time1 > (stopPlayAt4 - 0.5) && time1 < stopPlayA
 	$.featherlight($('.popUpQuestion4'))
 	$('.q4').click(function(){
 		$.featherlight.current().close();
+		let answer4 = $("input[type='radio'][name='Question4']:checked").val();
+        if(answer4 == correct4)
+		{
+		score = score+30;
+		} 
+		
 		player.playVideo();
 	});
 }
@@ -297,6 +363,11 @@ if(question5Asked == false && ( time1 > (stopPlayAt5 - 0.5) && time1 < stopPlayA
 	$.featherlight($('.popUpQuestion5'))
 	$('.q5').click(function(){
 		$.featherlight.current().close();
+		let answer5 = $("input[type='radio'][name='Question5']:checked").val();
+        if(answer5 == correct5)
+		{
+		score = score+30;
+		} 
 		player.playVideo();
 	});
 }

@@ -8,7 +8,7 @@ if(!defined('BASEPATH'))
        { 
             $this->load->model('Video_model');
             $data['res']=$this->Video_model->getAllQuestions();
-            $this->load->view('student/video_s',$data);  
+            $this->load->view('student/video',$data);  
        }
 
        public function form_data()
@@ -26,7 +26,7 @@ if(!defined('BASEPATH'))
 
           $res= $this->Video_model->insert_summary($data);
           // echo $res;
-          // redirect('user/syllabus');
+          redirect('user/syllabus');
        }
 
        public function lacture_video_download($doc)

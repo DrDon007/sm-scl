@@ -1,43 +1,43 @@
 <?php
-$count=0;
-$userId=$this->session->userdata['student']['student_id'];
-foreach($res as $r => $rv) 
-{
-	$video=$rv['lacture_youtube_url'];
-	$video1=$rv['lacture_video'];
-	$vid=$rv['id'];
-	$count++;
-}
+	$count=0;
+	$userId=$this->session->userdata['student']['student_id'];
+	foreach($res as $r => $rv) 
+	{
+		$video=$rv['lacture_youtube_url'];
+		$video1=$rv['lacture_video'];
+		$vid=$rv['id'];
+		$count++;
+	}
 
 
-$video_timing=array();		
-$opt_a=array();
-$opt_b=array();
-$opt_c=array();
-$opt_d=array();
-$correct=array();
-$question_id=array();
+	$video_timing=array();		
+	$opt_a=array();
+	$opt_b=array();
+	$opt_c=array();
+	$opt_d=array();
+	$correct=array();
+	$question_id=array();
 
-for($i=0;$i<$count;$i++)
-{
+	for($i=0;$i<$count;$i++)
+	{
 
-	$question[$i]=$res[$i]['question'];
-	$opt_a[$i]=$res[$i]['opt_a'];
-	$opt_b[$i]=$res[$i]['opt_b'];
-	$opt_c[$i]=$res[$i]['opt_c'];
-	$opt_d[$i]=$res[$i]['opt_d'];
-	$video_timing[$i]=$res[$i]['video_timing'];			
-	$correct[$i]=$res[$i]['correct'];
+		$question[$i]=$res[$i]['question'];
+		$opt_a[$i]=$res[$i]['opt_a'];
+		$opt_b[$i]=$res[$i]['opt_b'];
+		$opt_c[$i]=$res[$i]['opt_c'];
+		$opt_d[$i]=$res[$i]['opt_d'];
+		$video_timing[$i]=$res[$i]['video_timing'];			
+		$correct[$i]=$res[$i]['correct'];
 
-}
+	}
 
 
 
-if(!empty($video)){
-	$lesson = $video;
-}else{
-	$lesson = $video1;
-}
+	if(!empty($video)){
+		$lesson = $video;
+	}else{
+		$lesson = $video1;
+	}
 ?>
 
 
@@ -65,6 +65,7 @@ if(!empty($video)){
 	<script src="<?=base_url()?>js/TweenMax.min.js"></script>
     <title>BALA BHARATHI VIDYALAYAM</title>
 </head>
+
 <?php
 		{
 			for($i=0;$i<$count;$i++)
@@ -117,21 +118,15 @@ switch($lesson) {
 				{@preg_match('/(https:|http:|):(\/\/www\.|\/\/|)(.?)\/(embed\/|watch.?v=|)([a-z_A-Z0-9\-]{11})/i', $url, $IDD); return $IDD[5]; }
 		}
 
-
-
 		$video_id = get_youtube_id_from_url($lesson);
 		?>
 
 
 <body>
-
     <div id="container">
 		<div class="row videoArea">
-
 			<iframe id="player" width="560" height="315" class="trackable-video" src="https://www.youtube.com/embed/<?=$video_id?>?autoplay=0&enablejsapi=1"></iframe>
-
-
-		</div>
+	</div>
 	
 </body>
 </html>

@@ -74,6 +74,7 @@ class Certificate extends Admin_Controller {
             }
             $data = array(
                 'certificate_name' => $this->input->post('certificate_name'),
+                'certificate_count' => $this->input->post('certificate_count'),
                 'certificate_text' => $this->input->post('certificate_text'),
                 'left_header' => $this->input->post('left_header'),
                 'center_header' => $this->input->post('center_header'),
@@ -139,7 +140,8 @@ class Certificate extends Admin_Controller {
                     $picture = $uploadData['file_name'];
                     $data = array(
                         'id' => $this->input->post('id'),
-                        'certificate_name' => $this->input->post('certificate_name'),
+                        'certificate_name' => $this->input->post('certificate_name'),                        
+                        'certificate_count' => $this->input->post('certificate_count'),
                         'certificate_text' => $this->input->post('certificate_text'),
                         'left_header' => $this->input->post('left_header'),
                         'center_header' => $this->input->post('center_header'),
@@ -161,7 +163,8 @@ class Certificate extends Admin_Controller {
                     $picture = '';
                     $data = array(
                         'id' => $this->input->post('id'),
-                        'certificate_name' => $this->input->post('certificate_name'),
+                        'certificate_name' => $this->input->post('certificate_name'),                        
+                        'certificate_count' => $this->input->post('certificate_count'),
                         'certificate_text' => $this->input->post('certificate_text'),
                         'left_header' => $this->input->post('left_header'),
                         'center_header' => $this->input->post('center_header'),
@@ -181,6 +184,7 @@ class Certificate extends Admin_Controller {
                 $data = array(
                     'id' => $this->input->post('id'),
                     'certificate_name' => $this->input->post('certificate_name'),
+                    'certificate_count' => $this->input->post('certificate_count'),
                     'certificate_text' => $this->input->post('certificate_text'),
                     'left_header' => $this->input->post('left_header'),
                     'center_header' => $this->input->post('center_header'),

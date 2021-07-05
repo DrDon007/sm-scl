@@ -39,6 +39,11 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                     <span class="text-danger"><?php echo form_error('certificate_name'); ?></span>
                                 </div>
                                 <div class="form-group">
+                                    <label><?php echo $this->lang->line('certificate'); ?> <?php echo $this->lang->line('count'); ?></label><small class="req"> </small>
+                                    <input autofocus="" id="certificate_name" name="certificate_count" value="<?php echo set_value('certificate_count', $editcertificate[0]->certificate_count); ?>" type="number" class="form-control" />
+                                    <span class="text-danger"><?php echo form_error('certificate_count'); ?></span>
+                                </div>
+                                <div class="form-group">
                                     <label><?php echo $this->lang->line('header_left_text'); ?></label>
                                     <input autofocus="" id="left_header" name="left_header" placeholder="" type="text" class="form-control"  value="<?php echo set_value('left_header', $editcertificate[0]->left_header); ?>" />
                                 </div>
@@ -55,7 +60,7 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                     <label><?php echo $this->lang->line('body_text'); ?></label><small class="req"> *</small>
                                     <textarea class="form-control" id="certificate_text" name="certificate_text" placeholder="" rows="3" placeholder=""><?php echo set_value('certificate_name', $editcertificate[0]->certificate_text); ?></textarea>
                                     <span class="text-primary">
-                                    [current_date] [dob_in_words] [name] [dob] [present_address] [guardian] [created_at] [admission_no] [roll_no] [class] [previous_class] [from_year] [to_year] [section] [gender] [admission_date] [category] [cast] [father_name] [mother_name] [religion] [email] [phone][fee_total] [fee_paid] [fee_due] [fee_status]
+                                    [current_date] [dob_in_words] [name] [dob] [Certi NO] [present_address] [guardian] [created_at] [admission_no] [roll_no] [class] [previous_class] [from_year] [to_year] [section] [gender] [admission_date] [category] [cast] [father_name] [mother_name] [religion] [email] [phone][fee_total] [fee_paid] [fee_due] [fee_status]
  <?php
                                         
                                         if (!empty($custom_fields)) {

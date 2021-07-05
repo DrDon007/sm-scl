@@ -7,10 +7,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-    'hostname' => 'localhost',
-	'username' => 'u623942019_ksmbbvu' ,  //'u623942019_vilsa',
-	'password' =>  ']PR72;]zuR8',  //'7:*&:jEpZ',
-	'database' =>  'u623942019_ksmbbv',  ///'u623942019_vilsa',
+	'hostname' => 'localhost',
+	'username' => 'root' ,  //'u623942019_vilsa',
+	'password' =>  '',  //'7:*&:jEpZ',
+	'database' =>  'u623942019_ksmbbv_new',  ///'u623942019_vilsa',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,

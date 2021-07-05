@@ -274,7 +274,7 @@ class Generatecertificate extends Admin_Controller
         $student               = $this->student_model->get($id);
         $gradeList             = $this->grade_model->get();
         $studentSession        = $this->student_model->getStudentSession($id);
-        $timeline              = $this->timeline_model->getStudentTimeline($id, $status = '');
+        // $timeline              = $this->timeline_model->getStudentTimeline($id, $status = '');
         $data["timeline_list"] = $timeline;
         $student_session_id = $studentSession["student_session_id"];
         $student_session         = $studentSession["session"];

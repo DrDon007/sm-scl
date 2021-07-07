@@ -20,7 +20,7 @@ class Generatecertificate extends Admin_Controller
         $this->load->library('smsgateway');
         $this->load->library('mailsmsconf');
         $this->load->library('encoding_lib');
-        // $this->load->library('m_pdf');
+        $this->load->library('m_pdf');
         $this->load->library('pdf');
         $this->load->model("classteacher_model");
         $this->load->model("timeline_model");
@@ -255,17 +255,17 @@ class Generatecertificate extends Admin_Controller
         $certificates = $this->load->view('admin/certificate/studentDetailsReportDownload', $data, true);
         // $certificates="hi";
         $pdfFilePath="downloadReport.pdf";
-        // $this->m_pdf->pdf->WriteHTML($certificates);
-        // $this->m_pdf->pdf->Output($pdfFilePath,"D");
+        $this->m_pdf->pdf->WriteHTML($certificates);
+        $this->m_pdf->pdf->Output($pdfFilePath,"D");
     }
   
     public function downloadReport1($id)
     {
-        $data['students'] = $this->student_model->getStudentsByID($id);  
-        $certificates = $this->load->view('admin/certificate/studentDetailsReportDownload1', $data, true);     
+        $data['students'] = $this->student_model->getCStudentsByID($id);  
+        $certificates = $this->load->view('admin/certificate/studentDetailsReport', $data, true);     
         $pdfFilePath="downloadReport.pdf";
-        // $this->m_pdf->pdf->WriteHTML($certificates);
-        // $this->m_pdf->pdf->Output($pdfFilePath,"D");
+        $this->m_pdf->pdf->WriteHTML($certificates);
+        $this->m_pdf->pdf->Output($pdfFilePath,"D");
     }
 
     public function downloadReport2($id)

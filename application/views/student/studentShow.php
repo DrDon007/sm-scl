@@ -282,8 +282,8 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                         <?php //echo $this->lang->line('login_details');    ?>
                                     <!-- </a> -->
                                     <button class="btn btn-sm printDetails pull-right" type="button" studentId="<?=$student["id"] ?>" name="printD"  data-toggle="tooltip" data-placement="bottom" title="print detail"><i class="fa fa-print"></i></button>
-                                    <a class="btn btn-sm downloadDetails pull-right" href="<?=site_url("admin/generatecertificate/downloadReport2") ?>/<?=$student["id"] ?>"  name="downloadD"  data-toggle="tooltip" data-placement="bottom" title="download report"><i class="fa fa-download"></i></a>
-                                    <button onclick="window.print()" class="btn btn-sm printDetails pull-right" type="button" studentId="<?=$student["id"] ?>" name="printD"  data-toggle="tooltip" data-placement="bottom" title="print detail"><i class="fa fa-print"></i></button>
+                                    <a class="btn btn-sm downloadDetails pull-right" href="<?=site_url("admin/generatecertificate/downloadReport1") ?>/<?=$student["id"] ?>"  name="downloadD"  data-toggle="tooltip" data-placement="bottom" title="download report"><i class="fa fa-download"></i></a>
+                                    <!-- <button onclick="window.print()" class="btn btn-sm printDetails pull-right" type="button" studentId="<?=$student["id"] ?>" name="printD"  data-toggle="tooltip" data-placement="bottom" title="print detail"><i class="fa fa-print"></i></button> -->
                                 </li>
                                 <?php
                             }

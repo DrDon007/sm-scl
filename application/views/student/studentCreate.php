@@ -160,6 +160,7 @@ foreach ($genderList as $key => $value) {
                                                 <span class="text-danger"><?php echo form_error('cast'); ?></span>
                                             </div>
                                         </div>
+
 										<?php } if ($sch_setting->mobile_no) {  ?>
                                         <div class="col-md-3">
                                             <div class="form-group">
@@ -242,7 +243,7 @@ if ($sch_setting->is_student_house) {
 
                                        
 													<?php if ($sch_setting->student_height) {  ?>
-                                                    <div class="col-md-3 col-xs-12">
+                                                    <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1"><?php echo $this->lang->line('height'); ?></label>
                                                            <?php
@@ -253,7 +254,7 @@ if ($sch_setting->is_student_house) {
                                                         </div>
                                                     </div>
 													<?php } if ($sch_setting->student_weight) { ?>
-                                                    <div class="col-md-3 col-xs-12">
+                                                    <div class="col-md-2">
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1"><?php echo $this->lang->line('weight'); ?></label>
                                                            <?php
@@ -263,7 +264,19 @@ if ($sch_setting->is_student_house) {
                                                             <span class="text-danger"><?php echo form_error('weight'); ?></span>
                                                         </div>
                                                     </div>
-													<?php } if ($sch_setting->measurement_date) { ?>
+                                                    <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1"><?php echo $this->lang->line('age'); ?></label>
+                                                <input id="age" name="age" placeholder="" type="text" class="form-control"  value="<?php echo set_value('age'); ?>" />
+                                                <span class="text-danger"><?php echo form_error('age'); ?></span>
+                                            </div>
+                                        </div>
+				
+                                       
+										<?php }  ?>
+
+                                                     <?php
+                                                     if ($sch_setting->measurement_date) { ?>
                                                     <div class="col-md-3 col-xs-12">
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1"><?php echo $this->lang->line('measurement_date'); ?></label>
@@ -548,6 +561,17 @@ echo set_value('guardian_is') == "other" ? "checked" : "";
                                                     </div>
 
                                                 </div>
+                                                <div class="row">
+                                        <div class="col-md-6">
+
+<label for="exampleInputEmail1"><?php echo $this->lang->line('guardian_qualification'); ?></label>
+
+<textarea id="guardian_qualification" name="guardian_qualification" placeholder="" class="form-control" ><?php echo set_value('guardian_qualification'); ?></textarea>
+
+<span class="text-danger"><?php echo form_error('guardian_qualification'); ?></span>
+
+</div>
+                                        </div>
 
                                                 <div class="col-md-6">
 
@@ -866,15 +890,22 @@ echo set_value('rte') == "no" ? "checked" : "";
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1"><?php echo $this->lang->line('previous_school_details'); ?></label>
-                                                            <textarea class="form-control" rows="3" placeholder="" name="previous_school"></textarea>
+                                                            <input class="form-control" rows="3" placeholder="" name="previous_school">
                                                             <span class="text-danger"><?php echo form_error('previous_school'); ?></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1"><?php echo $this->lang->line('tc_no'); ?></label>
+                                                            <input class="form-control" rows="2" placeholder="" name="tc_no">
+                                                            <span class="text-danger"><?php echo form_error('tc_no'); ?></span>
                                                         </div>
                                                     </div>
 													<?php } if ($sch_setting->student_note) {  ?>
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1"><?php echo $this->lang->line('note'); ?></label>
-                                                            <textarea class="form-control" rows="3" placeholder="" name="note"></textarea>
+                                                            <input class="form-control" rows="3" placeholder="" name="note">
                                                             <span class="text-danger"><?php echo form_error('note'); ?></span>
                                                         </div>
                                                     </div>

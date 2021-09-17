@@ -151,7 +151,7 @@ class Onlineexam extends Admin_Controller
         $page           = $this->input->post('page');
         $exam_id        = $this->input->post('exam_id');
         if (isset($page)) {
-            $max      = 200;
+            $max      = 30;
             $cur_page = $page;
             $page -= 1;
             $per_page     = $max ? $max : 100;

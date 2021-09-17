@@ -6,7 +6,7 @@
 <div class="col-lg-12" id="transfee">	
 			<?php if(!empty($result)){ ?>
 			<div class="classtopic">
-				<ul class="classlist ">
+				<ul class="classlist ">				
 					<li><a class="" data-original-title="<?php echo $this->lang->line('print')?>" data-toggle="tooltip" id="print" onclick="printDiv()" ><i class="fa fa-print"></i></a></li>
 					<li> <a data-original-title="<?php echo $this->lang->line('download_excel')?>" data-toggle="tooltip" class="" id="btnExport" onclick="fnExcelReport();"> <i class="fa fa-file-excel-o"></i> </a>
 					</li>			
@@ -34,7 +34,8 @@
 					<tr>
 						<th>Video Link: </th>
 						<td>
-						<a data-original-title="<?php echo $this->lang->line('youtube_link')?>" data-toggle="tooltip" onclick="run_video('<?php echo $result['lacture_youtube_url']?>')" ><i class="fa fa-play"></i></a>
+						<!-- <a tyle="margin-left:5px;" data-original-title="<?php echo $this->lang->line('youtube_link')?>" data-toggle="tooltip" onclick="run_video('<?php echo $result['lacture_youtube_url']?>')" ><i class="fa fa-youtube"> Youtube</i></a> -->
+						<a tyle="margin-left:5px;" data-original-title="<?php echo $this->lang->line('youtube_link')?>" data-toggle="tooltip" target="#" href="<?=base_url()?>students/video/load/<?=$result['id']?>"><i class="fa fa-youtube"> Youtube</i></a>
 						</td>
 					</tr>
 					<?php 
@@ -45,7 +46,8 @@
 						<th>Video</th>
 						<td>
 						<!-- <p><a style='margin-left:5px;'data-toggle="tooltip" data-original-title="<?php echo $this->lang->line('download_video')?>" href="<?php echo base_url()?>user/syllabus/lacture_video_download/<?php echo $result['lacture_video']?>"><i class="fa fa-file-video-o">  <?php echo $this->lang->line('download_video')?> </i></a> </p> -->
-						<p><a style="margin-left:5px;" data-original-title="Open video" data-toggle="tooltip" target="#" href="<?=base_url()?>students/video/load/<?=$result['lacture_video']?>" ><i class="fa fa-play"> Play Video</i></a></p>
+						<!-- <p><a style="margin-left:0px;" data-original-title="Open video" data-toggle="tooltip" target="#" href="<?=base_url()?>students/video/load/<?=$result['lacture_video']?>" ><i class="fa fa-play"> Play Video</i></a></p> -->
+						<p><a style="margin-left:0px;" data-original-title="Open video" data-toggle="tooltip" target="#" href="<?=base_url()?>students/video/load/<?=$result['id']?>" ><i class="fa fa-play"> Play Video</i></a></p>
 						</td>
 					</tr>
 					<?php }?>

@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   | a PHP script and you can easily do that on your own.
   |
  */
-$config['base_url'] =  'http://localhost/gitSm-scl/sm-scl/';
+$config['base_url'] =  'http://localhost/sm-scl/'; //'https://ksmbbv.com/';
 
 
 /*
@@ -37,7 +37,7 @@ $config['base_url'] =  'http://localhost/gitSm-scl/sm-scl/';
   | variable so that it is blank.
   |
  */
-$config['index_page'] = '';
+$config['index_page'] = 'index.php';
 
 /*
   |--------------------------------------------------------------------------
@@ -513,6 +513,6 @@ $config['rewrite_short_tags'] = FALSE;
   | Array:		array('10.0.1.200', '192.168.5.0/24')
  */
 $config['routine_session'] = 16;
-$config['routine_update'] = 1623283200;
+$config['routine_update'] = 1630434600;
 $config['proxy_ips'] = '';
 $config['installed'] = true;

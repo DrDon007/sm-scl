@@ -1,48 +1,44 @@
-
-<!DOCTYPE html>
-
 <?php
-$count=0;
-foreach($res as $r => $rv) 
-{
-	$video=$rv['lacture_youtube_url'];
-	$video1=$rv['lacture_video'];
-	$count++;
-	
-}
+	$count=0;
+	$userId=$this->session->userdata['student']['student_id'];
+	foreach($res as $r => $rv) 
+	{
+		$video=$rv['lacture_youtube_url'];
+		$video1=$rv['lacture_video'];
+		$vid=$rv['id'];
+		$count++;
+	}
+
+
+	$video_timing=array();		
+	$opt_a=array();
+	$opt_b=array();
+	$opt_c=array();
+	$opt_d=array();
+	$correct=array();
+	$question_id=array();
+
+	for($i=0;$i<$count;$i++)
+	{
+
+		$question[$i]=$res[$i]['question'];
+		$opt_a[$i]=$res[$i]['opt_a'];
+		$opt_b[$i]=$res[$i]['opt_b'];
+		$opt_c[$i]=$res[$i]['opt_c'];
+		$opt_d[$i]=$res[$i]['opt_d'];
+		$video_timing[$i]=$res[$i]['video_timing'];			
+		$correct[$i]=$res[$i]['correct'];
+
+	}
 
 
 
-$video_timing=array();		
-$opt_a=array();
-$opt_b=array();
-$opt_c=array();
-$opt_d=array();
-$correct=array();
-$question_id=array();
-
-for($i=0;$i<$count;$i++)
-{
-
-	$question[$i]=$res[$i]['question'];
-	$opt_a[$i]=$res[$i]['opt_a'];
-	$opt_b[$i]=$res[$i]['opt_b'];
-	$opt_c[$i]=$res[$i]['opt_c'];
-	$opt_d[$i]=$res[$i]['opt_d'];
-	$video_timing[$i]=$res[$i]['video_timing'];			
-	$correct[$i]=$res[$i]['correct'];
-
-}
-
-
-
-if(!empty($video)){
-	$lesson = $video;
-}else{
-	$lesson = $video1;
-}
+	if(!empty($video)){
+		$lesson = $video;
+	}else{
+		$lesson = $video1;
+	}
 ?>
-
 
 
 <html lang="en">
@@ -68,52 +64,7 @@ if(!empty($video)){
 	<!-- GreenSock -->
 	<script src="<?=base_url()?>js/TweenMax.min.js"></script>
     <title>BALA BHARATHI VIDYALAYAM</title>
-	<style>
-		/* .videoInsert {
-		position: absolute; 
-		right: 0; 
-		bottom: 0;
-		min-width: 100%; 
-		min-height: 100%;
-		width: auto; 
-		height: auto; 
-		background-size: cover;
-		overflow: hidden;} */
-	</style>
 </head>
-
-
-<body>
-	<?php
-		$count=0;
-		$video='';
-		foreach($res as $r => $rv) 
-		{
-			$video=$rv['lacture_video'];
-			$vid=$rv['id'];
-			$count++;
-		}
-		// echo $count;
-		$video_timing=array();		
-		$opt_a=array();
-		$opt_b=array();
-		$opt_c=array();
-		$opt_d=array();
-		$correct=array();
-		$question_id=array();
-
-		for($i=0;$i<$count;$i++)
-		{
-			// $question_id[$i]=$rv['question_id'];
-			$question[$i]=$res[$i]['question'];
-			$opt_a[$i]=$res[$i]['opt_a'];
-			$opt_b[$i]=$res[$i]['opt_b'];
-			$opt_c[$i]=$res[$i]['opt_c'];
-			$opt_d[$i]=$res[$i]['opt_d'];
-			$video_timing[$i]=$res[$i]['video_timing'];			
-			$correct[$i]=$res[$i]['correct'];
-		}
-		// echo $res[1]['question'];
 
 <?php
 		{
@@ -141,6 +92,8 @@ if(!empty($video)){
 		<input id="et" type="text" name="EndTime" value="" hidden><br>
 		<input id="ts" type="text" name="TimeSpent" value="" hidden><br>
 		<input id="sc" type="text" name="score" value="" hidden><br>
+		<input id="uid" type="text" name="user_id" value="<?=$userId?>" hidden><br>
+		<input id="vid" type="text" name="videoId" value="<?=$vid?>" hidden><br>
 		<input type="submit" name="submit" class="submit">
 		</div>
 
@@ -158,28 +111,22 @@ switch($lesson) {
 <?php
 
 		function get_youtube_id_from_url($url)
-{
-    if (stristr($url,'youtu.be/'))
-        {preg_match('/(https:|http:|)(\/\/www\.|\/\/|)(.*?)\/(.{11})/i', $url, $final_ID); return $final_ID[4]; }
-    else 
-        {@preg_match('/(https:|http:|):(\/\/www\.|\/\/|)(.?)\/(embed\/|watch.?v=|)([a-z_A-Z0-9\-]{11})/i', $url, $IDD); return $IDD[5]; }
-}
+		{
+			if (stristr($url,'youtu.be/'))
+				{preg_match('/(https:|http:|)(\/\/www\.|\/\/|)(.*?)\/(.{11})/i', $url, $final_ID); return $final_ID[4]; }
+			else 
+				{@preg_match('/(https:|http:|):(\/\/www\.|\/\/|)(.?)\/(embed\/|watch.?v=|)([a-z_A-Z0-9\-]{11})/i', $url, $IDD); return $IDD[5]; }
+		}
 
-
-
-$video_id = get_youtube_id_from_url($lesson);
-?>
+		$video_id = get_youtube_id_from_url($lesson);
+		?>
 
 
 <body>
-
     <div id="container">
 		<div class="row videoArea">
-
-			<iframe id="player" width="560" height="315" class="trackable-video" src="https://www.youtube.com/embed/<?=$video_id?>?autoplay=0&enablejsapi=1"></iframe>
-
-
-		</div>
+			<iframe id="player" width="1530" height="700" class="trackable-video" src="https://www.youtube.com/embed/<?=$video_id?>?autoplay=0&enablejsapi=1"></iframe>
+	</div>
 	
 </body>
 </html>
@@ -195,6 +142,10 @@ $video_id = get_youtube_id_from_url($lesson);
 	   var time, rate, remainingTime;
   let count = <?php echo json_encode($count); ?>;
     // console.log(count);
+	var score = 0;
+	var EndTime;
+	var startTime;
+	var TimeSpent;
 	<?php
 			{
 				for($i=0;$i<$count;$i++)
@@ -247,6 +198,35 @@ $video_id = get_youtube_id_from_url($lesson);
 
   // The API calls this function when the player's state changes.
   function onPlayerStateChange(event) {
+	if(event.data == -1)
+		{
+			startTime = new Date();
+		}
+
+	  if(event.data === 0) {
+		    EndTime = new Date();    
+			date1 = startTime;
+		    date2 = EndTime;
+		 var res = Math.abs(date1 - date2) / 1000;     // get total days between two dates
+         var days = Math.floor(res / 86400);                   // get hours            
+         var hours = Math.floor(res / 3600) % 24;          // get minutes
+         var minutes = Math.floor(res / 60) % 60;    // get second
+         var seconds = res % 60;
+        
+		TimeSpent = hours +  " hours" + ":" + minutes + " minutes" + ":" + seconds + " seconds" 
+		document.getElementById("st").value = startTime;
+		document.getElementById("et").value = EndTime;
+		document.getElementById("ts").value = TimeSpent;
+		document.getElementById("sc").value = score;	      
+		$.featherlight($('.final'))
+		$('.submit').click(function(){
+				$.featherlight.current().close();	
+			});
+            }
+			
+		
+	
+    
     
     clearTimeout(stopPlayTimer);
     if (event.data == YT.PlayerState.PLAYING) {
@@ -292,6 +272,11 @@ if( ( time1 > (stopPlayAt1 - 0.5) && time1 < stopPlayAt1 ) &&  question1Asked ==
 	     question1Asked = true; 
 	$('.q1').click(function(){
 		$.featherlight.current().close();
+		let answer1 = $("input[type='radio'][name='Question1']:checked").val();
+        if(answer1 == "<?=$correct[0];?>")
+		{
+		score = score+30;
+		}  
 		player.playVideo();
 	});
 }
@@ -305,6 +290,11 @@ if(question2Asked == false && ( time1 > (stopPlayAt2 - 0.5) && time1 < stopPlayA
 	$.featherlight($('.popUpQuestion2'))
 	$('.q2').click(function(){
 		$.featherlight.current().close();
+		let answer2 = $("input[type='radio'][name='Question2']:checked").val();
+        if(answer2 == "<?=$correct[1];?>")
+		{
+		score = score+30;
+		} 
 		player.playVideo();
 	});
 }
@@ -313,43 +303,62 @@ if(question2Asked == false && ( time1 > (stopPlayAt2 - 0.5) && time1 < stopPlayA
   function pauseVideo3() {
     time1 = player.getCurrentTime();
 	time = Math.round(player.getCurrentTime());
-if(question3Asked == false && ( time1 > (stopPlayAt3 - 0.5) && time1 < stopPlayAt3)){
-	player.pauseVideo();
-		question3Asked = true; 
-	$.featherlight($('.popUpQuestion3'))
-	$('.q3').click(function(){
-		$.featherlight.current().close();
-		player.playVideo();
-	});
-}
+	if(question3Asked == false && ( time1 > (stopPlayAt3 - 0.5) && time1 < stopPlayAt3)){
+		player.pauseVideo();
+			question3Asked = true; 
+		$.featherlight($('.popUpQuestion3'))
+		$('.q3').click(function(){
+			$.featherlight.current().close();
+			let answer3 = $("input[type='radio'][name='Question3']:checked").val();
+			if(answer3 == "<?=$correct[2];?>")
+			{
+			score = score+30;
+			} 
+			player.playVideo();
+		});
+	}
   }
-  function pauseVideo4() {
-     time1 = player.getCurrentTime();
+  function pauseVideo4() 
+  {
+    time1 = player.getCurrentTime();
 	time = Math.round(player.getCurrentTime());
-
-if(question4Asked == false && ( time1 > (stopPlayAt4 - 0.5) && time1 < stopPlayAt4)){
-	player.pauseVideo();
+	if(question4Asked == false && ( time1 > (stopPlayAt4 - 0.5) && time1 < stopPlayAt4))
+	{
+		player.pauseVideo();
 		question4Asked = true; 
-	$.featherlight($('.popUpQuestion4'))
-	$('.q4').click(function(){
-		$.featherlight.current().close();
-		player.playVideo();
-	});
-}
+		$.featherlight($('.popUpQuestion4'))
+		$('.q4').click(function()
+			{
+			$.featherlight.current().close();
+			let answer4 = $("input[type='radio'][name='Question4']:checked").val();
+			if(answer3 == "<?=$correct[3];?>")
+			{
+			score = score+30;
+			} 
+			
+			player.playVideo();
+		});
+	}
   }
-  function pauseVideo5() {
+  function pauseVideo5() 
+  {
      time1 = player.getCurrentTime();
 	time = Math.round(player.getCurrentTime());
 
-if(question5Asked == false && ( time1 > (stopPlayAt5 - 0.5) && time1 < stopPlayAt5)){
-	player.pauseVideo();
-		question5Asked = true; 
-	$.featherlight($('.popUpQuestion5'))
-	$('.q5').click(function(){
-		$.featherlight.current().close();
-		player.playVideo();
-	});
-}
+	if(question5Asked == false && ( time1 > (stopPlayAt5 - 0.5) && time1 < stopPlayAt5)){
+		player.pauseVideo();
+			question5Asked = true; 
+		$.featherlight($('.popUpQuestion5'))
+		$('.q5').click(function(){
+			$.featherlight.current().close();
+			let answer5 = $("input[type='radio'][name='Question5']:checked").val();
+			if(answer5 == "<?=$correct[4];?>")
+			{
+			score = score+30;
+			} 
+			player.playVideo();
+		});
+	}
   }
 })();
 
@@ -362,7 +371,6 @@ break;
 
 <?php
 case $video1:
-
 	?>
 
 
@@ -371,52 +379,14 @@ case $video1:
 	
     <div id="container">
 		<div class="row videoArea">
-
-			<video id="video1" controls autoplay="true">
-			<source src="<?=base_url()?>students/video/lacture_video_download/<?=$video?>" type="video/mp4">	
-
 			<video id="video1" controls>
 			<source src="<?=base_url()?>students/video/lacture_video_download/<?=$lesson?>" type="video/mp4">	
-
 			<!-- <source src="https://www.youtube.com/embed/4gxI8Yu6vGU" autoplay="true" type="video/*"> -->
 			<!-- <source width="846" height="480" src="https://www.youtube.com/embed/eG1pjrdmIrs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen type="videp/*"></source> -->
 				Your browser does not support the video tag.
 			</video>
 		</div>
-
-		<?php
-		{
-			for($i=0;$i<$count;$i++)
-			{
-			?>
-				 <div class="lightbox popUpQuestion<?=$i+1?>"> 
-					<h4>Question <?=$i+1?></h4>
-					<p><?=$question[$i]?></p>
-					<br>
-					<input class="q<?=$i+1?>" type="radio" name="Question<?=$i+1?>" value="opt_a"><?=$opt_a[$i]?>
-					<input class="q<?=$i+1?>" type="radio" name="Question<?=$i+1?>" value="opt_b"><?=$opt_b[$i]?>
-					<input class="q<?=$i+1?>" type="radio" name="Question<?=$i+1?>" value="opt_c"><?=$opt_c[$i]?>
-					<input class="q<?=$i+1?>" type="radio" name="Question<?=$i+1?>" value="opt_d"><?=$opt_d[$i]?>	
-				</div>
-			<?php
-			}
-		}
-		?>
-		<div class="lightbox final">
-		<h4> Thanks For Watching Video</h4>
-		<form action="<?php echo site_url('students/video/form_data')?>" id="videoFrm" name="videoFrm" method="POST"> 
-		<input id="st" type="text" name="StartTime" value="" hidden><br>
-		<input id="et" type="text" name="EndTime" value="" hidden><br>
-		<input id="ts" type="text" name="TimeSpent" value="" hidden><br>
-		<input id="sc" type="text" name="score" value="" hidden><br>
-		<input id="sc" type="text" name="video_id" value="<?=$vid?>" hidden><br>
-		<input id="user_id" type="text" name="user_id" value="<?=$this->session->userdata['student']['student_id'];?>" hidden>
-		<input type="submit" name="submit" class="submit">
-		</div>
-
-	</div>
-	</form>
-
+	
 </body>
 </html>
 
@@ -477,6 +447,7 @@ case $video1:
 			?>		
 		});
 	});
+
 
 	$('#video1').bind('ended',function()
 	{
@@ -551,9 +522,6 @@ case $video1:
 		document.cookie = name + "=" + (value || "")  + expires + "; path=/";
 	}
 
-
-</script>
-
 </script>
 
 	<?php
@@ -566,4 +534,3 @@ case $video1:
 	break;
 }
 ?>
-

@@ -16,6 +16,7 @@ class Student extends Admin_Controller
         $this->load->library('smsgateway');
         $this->load->library('mailsmsconf');
         $this->load->library('encoding_lib');
+        // $this->load->library('M_pdf');
         $this->load->model("classteacher_model");
         $this->load->model("timeline_model");
         $this->blood_group        = $this->config->item('bloodgroup');
@@ -222,6 +223,7 @@ class Student extends Admin_Controller
         $this->load->view('layout/footer', $data);
     }
 
+   
     public function exportformat()
     {
         $this->load->helper('download');
@@ -249,12 +251,15 @@ class Student extends Admin_Controller
         redirect('student/view/' . $student_id);
     }
 
+    
     public function create()
     {
         if (!$this->rbac->hasPrivilege('student', 'can_add')) {
             access_denied();
         }
-       
+        $this->load->model("Student_model");
+        $data['res']=$this->Student_model->laststudent();
+
         $this->session->set_userdata('top_menu', 'Student Information');
         $this->session->set_userdata('sub_menu', 'student/create');
         $genderList                 = $this->customlib->getGender();
@@ -379,6 +384,14 @@ class Student extends Admin_Controller
                 'is_active'           => 'yes',
             );
             $house            = $this->input->post('house');
+            $educational_qualification     = $this->input->post('guardian_qualification');
+            $age            = $this->input->post('age');
+            $tc_no            = $this->input->post('tc_no');
+            $class            = $this->input->post('class_id');
+            $mother_tongue            = $this->input->post('custom_fields[students][8]');
+            $personal_identification_marks_1            = $this->input->post('custom_fields[students][3]');
+            $personal_identification_marks_2            = $this->input->post('custom_fields[students][4]');
+
             $blood_group      = $this->input->post('blood_group');
             $measurement_date = $this->input->post('measure_date');
 
@@ -404,6 +417,27 @@ class Student extends Admin_Controller
 
             if (isset($house)) {
                 $data_insert['school_house_id'] = $this->input->post('house');
+            }
+            if (isset($educational_qualification)) {
+                $data_insert['educational_qualification'] = $this->input->post('guardian_qualification');
+            }
+            if (isset($age)) {
+                $data_insert['age'] = $this->input->post('age');
+            }
+            if (isset($tc_no)) {
+                $data_insert['tc_no'] = $this->input->post('tc_no');
+            }
+            if (isset($class)) {
+                $data_insert['class'] = $this->input->post('class_id');
+            }
+            if (isset($mother_tongue)) {
+                $data_insert['mother_tongue'] = $this->input->post('custom_fields[students][8]');
+            }
+            if (isset($house)) {
+                $data_insert['personal_identification_marks_1'] = $this->input->post('custom_fields[students][3]');
+            }
+            if (isset($house)) {
+                $data_insert['personal_identification_marks_2'] = $this->input->post('custom_fields[students][4]');
             }
             if (isset($blood_group)) {
 
@@ -671,7 +705,7 @@ class Student extends Admin_Controller
                 }
 
                 $this->session->set_flashdata('msg', '<div class="alert alert-success">' . $this->lang->line('success_message') . '</div>');
-                redirect('student/create');
+                redirect('student/getStudents');
             } else {
 
                 $data['error_message'] = $this->lang->line('admission_no') . ' ' . $admission_no . ' ' . $this->lang->line('already_exists');
@@ -1911,5 +1945,13 @@ public function handle_uploadcreate_doc()
         }
         echo json_encode($array);
     }
+
+
+    public function getStudents()
+       { 
+            $this->load->model('Student_model');
+            $data['res']=$this->Student_model->laststudent();
+            $this->load->view('student/studentPrint',$data);
+       }
 
 }

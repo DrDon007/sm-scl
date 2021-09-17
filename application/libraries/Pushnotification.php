@@ -10,7 +10,7 @@ class Pushnotification
     public $CI;
 
 	//com.qdocs.smartschool
-    public $API_ACCESS_KEY = "AAAAyWiqEbI:APA91bEMASkzBFEvuksBDGs6sAfe4yUBAtH3RQbdO-3wtboNDOAzO1q3K9g10NOZ4jvR9mh1eHswhMUeDrLUF4h91pjStqGshsIr3MbydxtfDubMynCN7EYv4wRmcW3U4FK-uDHme8u0";
+    public $API_ACCESS_KEY = "AAAAkGeJt3E:APA91bEITzLONxgN9bFDgpvZTgXdqCe23JVcC_96cfHiLJzMiN-oOO1lc15OULp1pUxH0uHljFnTX72b2ELQazuFNTjt3dK-flPO_iDUXnSEFjFlHJQW2r2mF4SuzkaL0wJPE-6UealO";
     public $fcmUrl         = "https://fcm.googleapis.com/fcm/send";
 
     public function __construct()

@@ -20,7 +20,7 @@ if(!defined('BASEPATH'))
                'EndTime' =>  $_POST['EndTime'],
                'TimeSpent' =>  $_POST['TimeSpent'],
                'User' =>  $_POST['user_id'],
-               'VideoId' =>  $_POST['video_id'],         
+               'VideoId' =>  $_POST['videoId'],         
                // $User => $this->session->userdata['student']['student_id'];              
           );
 
@@ -48,7 +48,7 @@ if(!defined('BASEPATH'))
           $this->load->model('Video_model');
           if(!empty($lacture_video))
           {                 
-               $data['res']=$this->Video_model->checkGetdata($lacture_video);
+               $data['res']=$this->Video_model->checkGetdata($openlacture_video);
                $this->load->view('student/video',$data); 
           }
           if(!empty($openlacture_video))

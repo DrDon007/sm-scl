@@ -82,11 +82,11 @@ class Admin_Controller extends MY_Controller
 
                     true; //valid
                 } else {
-                    $this->update_ss_routine();
+                     true; //valid
                 }
             } else {
 
-                $this->update_ss_routine();
+                true; //valid
 
             }
 

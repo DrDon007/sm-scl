@@ -255,7 +255,7 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                 <?php
                             }
 
-//5235
+            //5235
                             if ($this->rbac->hasPrivilege('student_login_credential_report', 'can_view')) {
                                 ?> 
 
@@ -274,6 +274,16 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                     <a href="<?php echo base_url() . "student/edit/" . $student["id"] ?>"  class="" data-toggle="tooltip" data-placement="bottom" title="<?php echo $this->lang->line('edit'); ?>"><i class="fa fa-pencil"></i>
                                         <?php //echo $this->lang->line('login_details');    ?>
                                     </a>
+                                </li>
+
+                                <!--  custom student report generation -->
+                                <li class="pull-right">
+                                    <!-- <a href="<?php //echo base_url() . "student/printDetails/" . $student["id"] ?>"  class="" data-toggle="tooltip" data-placement="bottom" title="print detail"><i class="fa fa-print"></i> -->
+                                        <?php //echo $this->lang->line('login_details');    ?>
+                                    <!-- </a> -->
+                                    <button class="btn btn-sm printDetails pull-right" type="button" studentId="<?=$student["id"] ?>" name="printD"  data-toggle="tooltip" data-placement="bottom" title="print detail"><i class="fa fa-print"></i></button>
+                                    <a class="btn btn-sm downloadDetails pull-right" href="<?=site_url("admin/generatecertificate/downloadReport1") ?>/<?=$student["id"] ?>"  name="downloadD"  data-toggle="tooltip" data-placement="bottom" title="download report"><i class="fa fa-download"></i></a>
+                                    <!-- <button onclick="window.print()" class="btn btn-sm printDetails pull-right" type="button" studentId="<?=$student["id"] ?>" name="printD"  data-toggle="tooltip" data-placement="bottom" title="print detail"><i class="fa fa-print"></i></button> -->
                                 </li>
                                 <?php
                             }
@@ -1054,6 +1064,7 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
             </div>
     </section>
 </div>
+
 <script type="text/javascript">
     $("#myTimelineButton").click(function () {
         $("#reset").click();
@@ -1202,6 +1213,7 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $this->lang->line('cancel'); ?></button>
+                <button type="button" class="btn btn-success" onClick="saveData()"><?php echo $this->lang->line('Save'); ?>Save</button>
             </div>
         </div>
     </div>
@@ -1551,7 +1563,7 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                 var data = "";
                 data += '<div class="col-md-12">';
                 data += '<div class="table-responsive">';
-                data += '<p class="lead text text-center">' + student_first_name + ' ' + student_last_name + '</p>';
+                data += '<p  id ="stuName" class="lead text text-center">' + student_first_name + ' ' + student_last_name + '</p>';
                 data += '<table class="table table-hover">';
                 data += '<thead>';
                 data += '<tr>';
@@ -1565,9 +1577,9 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                 {
                     data += '<tr>';
                     data += '<td><b>' + firstToUpperCase(obj.role) + '</b></td>';
-                    data += '<input type=hidden name=userid id=userid value=' + obj.id + '>';
-                    data += '<td class="text text-center">' + obj.username + '</td> ';
-                    data += '<td class="text text-center">' + obj.password + '</td> ';
+                    // data += '<input type=hidden name=userid id=userid value=' + obj.id + '>';
+                    data += '<td class="text text-center" id="stuuser'+i+'">' + obj.username + '</td> ';
+                    data += '<td class="text text-center"id="stupasw'+i+'">' + obj.password + '</td> ';
                     data += '</tr>';
                 });
                 data += '</tbody>';
@@ -1663,7 +1675,7 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
         }
     });
 
-// this is the id of the form
+    // this is the id of the form
     $("form#form_examgroup").submit(function (e) {
 
         e.preventDefault(); // avoid to execute the actual submit of the form.
@@ -1732,4 +1744,91 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                             }));
 
                                         });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () 
+    {
+        $(document).on('click', '.printDetails', function () 
+        {
+            // var certificateId = $("#certificate_id").val(); 
+            var sid=$(this).attr('studentId');       
+            // alert(sid);
+            $.ajax({
+                    url: '<?php echo site_url("admin/generatecertificate/generateStudentReport1") ?>',
+                    type: 'post',
+                    dataType: "html",
+                    data: {'studentID': sid},
+                    success: function (response) 
+                    {
+                        //alert(response)
+                        Popup(response);
+                    }
+                });            
+        });
+    });
+</script>
+
+<script type="text/javascript">
+
+    var base_url = '<?php echo base_url() ?>';
+    function Popup(data)
+    {
+        var frame1 = $('<iframe />');
+        frame1[0].name = "frame1";
+
+        $("body").append(frame1);
+        var frameDoc = frame1[0].contentWindow ? frame1[0].contentWindow : frame1[0].contentDocument.document ? frame1[0].contentDocument.document : frame1[0].contentDocument;
+        frameDoc.document.open();
+        //Create a new HTML document.
+        frameDoc.document.write('<html>');
+        frameDoc.document.write('<head>');
+        frameDoc.document.write('<title></title>');
+        // frameDoc.document.write('<link rel="stylesheet" href="' + base_url + 'backend/dist/css/idcard.css">');
+
+        frameDoc.document.write('</head>');
+        frameDoc.document.write('<body>');
+        frameDoc.document.write(data);
+        frameDoc.document.write('</body>');
+        frameDoc.document.write('</html>');
+        frameDoc.document.close();
+        setTimeout(function () {
+            window.frames["frame1"].focus();
+            window.frames["frame1"].print();
+            frame1.remove();
+        }, 500);
+
+
+        return true;
+    }
+
+
+    function saveData(){
+        Name = "Name: " + document.getElementById("stuName").innerHTML;
+        ParentUserName = "Parent User Name: " + document.getElementById("stuuser0").innerHTML;
+        ParentPassword = "Parent Password: " + document.getElementById("stupasw0").innerHTML;
+        StudentUserName = "Student User Name: " + document.getElementById("stuuser1").innerHTML;
+        StudentPassword = "Student Password: " + document.getElementById("stupasw1").innerHTML;
+        
+        //  console.log(ParentUserName)
+        //  console.log(ParentPassword)
+        //  console.log(StudentUserName)
+        //  console.log(StudentPassword)
+
+        let rows = [[Name],[ParentUserName],[ParentPassword],[StudentUserName],[StudentPassword]];
+  
+
+        let CsvContent = "data:text/csv;charset=utf-8,"
+        + rows.map(e => e.join(",")).join("\n");
+
+        var downloadLink = document.createElement("a");
+        downloadLink.href = CsvContent;
+        downloadLink.download = "LoginDetails.txt";
+
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+
+
+    }
 </script>

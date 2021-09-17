@@ -61,7 +61,7 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                     <label><?php echo $this->lang->line('body_text'); ?></label><small class="req"> *</small>
                                     <textarea class="form-control" id="certificate_text" name="certificate_text" placeholder="" rows="3" placeholder=""></textarea>
                                     <span class="text-primary">
-                                    [current_date] [dob_in_words] [name] [dob] [present_address] [guardian] [created_at] [admission_no] [roll_no] [class] [previous_class] [from_year] [to_year] [section] [gender] [admission_date] [category] [cast] [father_name] [mother_name] [religion] [email] [phone][fee_total] [fee_paid] [fee_due] [fee_status]
+                                    [current_date] [first_join_class] [dob_in_words] [name] [dob] [present_address] [guardian] [created_at] [admission_no] [roll_no] [class] [previous_class] [from_year] [to_year] [section] [gender] [admission_date] [category] [cast] [father_name] [mother_name] [religion] [email] [phone][fee_total] [fee_paid] [fee_due] [fee_status]
                                         <?php
                                         
                                         if (!empty($custom_fields)) {

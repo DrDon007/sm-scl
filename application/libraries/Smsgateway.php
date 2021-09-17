@@ -40,9 +40,8 @@ class Smsgateway {
         } else {
             $msg = $detail;
         }
-$sms_detail->type = 'smsatm';
+
         if (!empty($sms_detail)) {
-         
             if ($sms_detail->type == 'vilsasms') {
 //echo '<pre>';print_r($send_to);die;
  $api_key =$sms_detail->api_id;
@@ -58,29 +57,7 @@ $response = file_get_contents( $api_url);
 //echo $response;
 
                 
-            }elseif ($sms_detail->type == 'smsatm') {
-             
-//echo '<pre>';print_r($send_to);die;
- $api_key =$sms_detail->api_id;
-$contacts =$send_to;
-$username =$sms_detail->username;
-$from =$sms_detail->from;
-$sms_text = urlencode($msg);
-$username='ksmbbv';
-//$api_key='6185559';
-$api_key="3b51d817eaa6c18b753c";
-$from='KSMBBV';
-//$api_url = "http://smsatm.net/spanelv2/api.php?username=".$username."&password=".$api_key."&to=".$contacts."&from=".$from."&message=".$sms_text;
-//$api_url = "http://smsatm.net/spanelv2/api.php?username=".$username."&password=".$api_key."&to=".$contacts."&from=".$from."&message=".$sms_text;
-$api_url = "http://smsatm.net/v3/api.php?username=".$username."&apikey=".$api_key."&senderid=".$from."&mobile=".$contacts."&message=".$sms_text;
-
-
-$response = file($api_url);
-
-
-//echo $response;
-
-            } elseif ($sms_detail->type == 'clickatell') {
+            }elseif ($sms_detail->type == 'clickatell') {
 
                 $params = array(
                     'apiToken' => $sms_detail->api_id,
@@ -95,7 +72,7 @@ $response = file($api_url);
                 } catch (Exception $e) {
                     return true;
                 }
-            }else if ($sms_detail->type == 'twilio') {
+            } else if ($sms_detail->type == 'twilio') {
 
                 $params = array(
                     'mode' => 'sandbox',
@@ -155,8 +132,6 @@ $response = file($api_url);
     public function sentRegisterSMS($id, $send_to, $template) {
         $sms_detail = $this->_CI->smsconfig_model->getActiveSMS();
         $msg = $this->getStudentRegistrationContent($id, $template);
-        $this->sendSMS($send_to,  '', $msg);
-        $sms_detail='';
         if (!empty($sms_detail)) {
             if ($sms_detail->type == 'clickatell') {
 
@@ -236,8 +211,6 @@ $response = file($api_url);
         $sms_detail = $this->_CI->smsconfig_model->getActiveSMS();
         $send_to = $detail->contact_no;
         $msg = $this->getAddFeeContent($detail, $template);
-        $this->sendSMS($send_to,  '', $msg);
-        $sms_detail='';
 
         if (!empty($sms_detail)) {
             if ($sms_detail->type == 'clickatell') {
@@ -312,15 +285,11 @@ $response = file($api_url);
 
     public function sentAbsentStudentSMS($detail, $template) {
         $sms_detail = $this->_CI->smsconfig_model->getActiveSMS();
-            $send_to = $detail['guardian_phone'];
-            $msg = $this->getAbsentStudentContent($detail, $template);
-            
-        $this->sendSMS($send_to,  '', $msg);
-        $sms_detail='';
 
         if (!empty($sms_detail)) {
 
-        
+            $send_to = $detail['guardian_phone'];
+            $msg = $this->getAbsentStudentContent($detail, $template);
 
             if ($sms_detail->type == 'clickatell') {
                 $params = array(
@@ -426,9 +395,6 @@ $response = file($api_url);
         $msg = $this->getStudentResultContent($detail, $template);
 
         $send_to = $detail['guardian_phone'];
-                $this->sendSMS($send_to,  '', $msg);
-        $sms_detail='';
-
 
         if (!empty($sms_detail)) {
             if ($sms_detail->type == 'clickatell') {
@@ -509,10 +475,6 @@ $response = file($api_url);
         $msg = $this->getLoginCredentialContent($sender_details['credential_for'], $sender_details, $template);
 
         $send_to = $sender_details['contact_no'];
-                $this->sendSMS($send_to,  '', $msg);
-        $sms_detail='';
-
-        
         if (!empty($sms_detail)) {
             if ($sms_detail->type == 'clickatell') {
 
@@ -627,18 +589,12 @@ $response = file($api_url);
 
     public function sentHomeworkStudentSMS($detail, $template) {
         $sms_detail = $this->_CI->smsconfig_model->getActiveSMS();
-        
         if (!empty($sms_detail)) {
 
             foreach ($detail as $student_key => $student_value) {
-                $msg = $this->getHomeworkStudentContent($detail[$student_key], $template);
-                 
                 $send_to = $student_key;
-                        $this->sendSMS($send_to,  '', $msg);
-        $send_to='';
-
-        
                 if ($send_to != "") {
+                    $msg = $this->getHomeworkStudentContent($detail[$student_key], $template);
                     $subject = "HomeWork Notice";
                     if ($sms_detail->type == 'clickatell') {
                         $params = array(
@@ -757,14 +713,9 @@ $response = file($api_url);
 
             foreach ($detail as $student_key => $student_value) {
                 $send_to = $student_key;
-                       $msg = $this->getOnlineClassStudentContent($detail[$student_key], $template);
-
-                                        $this->sendSMS($send_to,  '', $msg);
-        $send_to='';
-
-        
                 if ($send_to != "") {
-             
+                    $msg = $this->getOnlineClassStudentContent($detail[$student_key], $template);
+
                     $subject = "Online Class";
                     if ($sms_detail->type == 'clickatell') {
                         $params = array(
@@ -847,14 +798,9 @@ $response = file($api_url);
 
             foreach ($detail as $staff_key => $staff_value) {
                 $send_to = $staff_key;
-                            $msg = $this->getOnlineMeetingStaffContent($detail[$staff_key], $template);
-
-                                                        $this->sendSMS($send_to,  '', $msg);
-        $send_to='';
-
-        
                 if ($send_to != "") {
-        
+                    $msg = $this->getOnlineMeetingStaffContent($detail[$staff_key], $template);
+
                     $subject = "Online Meeting";
                     if ($sms_detail->type == 'clickatell') {
                         $params = array(
@@ -1009,10 +955,6 @@ $response = file($api_url);
                 $sender_details['body'];
         $send_to = $sender_details['contact_no'];
 
-         $this->sendSMS($send_to,  '', $msg);
-        $sms_detail='';
-
-        
         if (!empty($sms_detail)) {
             if ($sms_detail->type == 'clickatell') {
 

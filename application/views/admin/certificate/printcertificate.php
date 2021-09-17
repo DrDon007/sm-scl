@@ -38,8 +38,11 @@ $certificate[0]->certificate_text = str_replace('[guardian]', '[guardian_name]',
 $certificate[0]->certificate_text = str_replace('[phone]', '[mobileno]', $certificate[0]->certificate_text);
 
 // ---by me--
-$certificate[0]->certificate_text=str_replace('[current_date]',date("d/m/Y"),$certificate[0]->certificate_text);
+//$certificate[0]->certificate_text=str_replace('[current_date]',date("d/m/Y"),$certificate[0]->certificate_text);
 // $certificate[0]->certificate_text=str_replace('[previous_class]','',$certificate[0]->certificate_text);
+// ---by me-- arka
+$certificate[0]->certificate_text=str_replace('[current_date]',date("d/m/Y"),$certificate[0]->certificate_text);
+
 
 foreach($students as $student) 
 {
@@ -81,6 +84,72 @@ foreach($students as $student)
     $certificate[0]->certificate_text=str_replace('[to_year]',$toyear,$certificate[0]->certificate_text);
     //session 
 
+    $first_class = $gg[0]->class_id;
+     
+    if( $first_class == 1){
+        $join = 'Class 1'; 
+    }
+    else if($first_class == 2){
+        $join = 'Class 2';
+    }
+    else if($first_class == 3){
+        $join = 'Class 3';
+    }
+    else if($first_class == 4){
+        $join = 'Class 4';
+    }
+    else if($first_class == 5){
+        $join = 'Class 5';
+    }
+    else if($first_class == 6){
+        $join = 'Class 6';
+    }
+    else if($first_class == 7){
+        $join = 'Class 7';
+    }
+    else if($first_class == 8){
+        $join = 'Class 8';
+    }
+    else if($first_class == 9){
+        $join = 'Class 9';
+    }
+    else if($first_class == 10){
+        $join = 'Class 10';
+    }
+    else if($first_class == 11){
+        $join = 'Class 11 Art';
+    }
+    else if($first_class == 12){
+        $join = 'Class 12 Art';
+    }
+    else if($first_class == 13){
+        $join = 'Prep';
+    }
+    else if($first_class == 14){
+        $join = 'LKG';
+    }
+    else if($first_class == 15){
+        $join = 'UKG';
+    }
+    else if($first_class == 16){
+        $join = 'I YEAR BPC';
+    }
+    else if($first_class == 17){
+        $join = 'I YEAR MPC';
+    }
+    else if($first_class == 18){
+        $join = 'I YEAR CEC';
+    }
+    else if($first_class == 19){
+        $join = 'I YEAR HEC';
+    }
+    else if($first_class == 20){
+        $join = 'II YEAR BiPC';
+    }
+
+
+
+    //-----------------------//----------------------------
     //----getting previous class     
     if($student->class_id>1 && $student->class_id<12)
     {
@@ -154,6 +223,9 @@ foreach($students as $student)
             $result .= ' nine ';
     }
     $certificate_body = str_replace('[dob_in_words]', $result , $certificate_body);
+    $certificate_body = str_replace('[first_join_class]', $join, $certificate_body);
+    //$certificate_body = str_replace('[first_join_class]', $first_class, $certificate_body);
+
     //------------------------date in words-------------------------
      
     $id=$student->student_session_id;

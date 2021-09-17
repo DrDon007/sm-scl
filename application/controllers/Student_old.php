@@ -136,6 +136,25 @@ class Student extends Admin_Controller
         }
     }
 
+    public function activestudentreport()
+    { 
+        if (!$this->rbac->hasPrivilege('active_student_report', 'can_view')) 
+        {
+            access_denied();
+        }
+
+        $this->session->set_userdata('top_menu', 'Reports');
+        $this->session->set_userdata('sub_menu', 'Reports/student_information');
+        $this->session->set_userdata('subsub_menu', 'Reports/student_information/active_student_report');     
+        $resultlist  = $this->student_model->activestudentsClass();
+        $data['resultlist'] = $resultlist;
+        $this->load->view('layout/header', $data);
+        $this->load->view('student/activestudentReport', $data);
+        $this->load->view('layout/footer', $data);
+        
+    }
+
+
     public function download($student_id, $doc)
     {
         $this->load->helper('download');
@@ -1490,8 +1509,8 @@ public function handle_uploadcreate_doc()
 
         $userdata = $this->customlib->getUserData();
         $carray   = array();
-
-        if (!empty($data["classlist"])) {
+        if (!empty($data["classlist"])) 
+        {
             foreach ($data["classlist"] as $ckey => $cvalue) {
 
                 $carray[] = $cvalue["id"];
@@ -1499,19 +1518,25 @@ public function handle_uploadcreate_doc()
         }
         //echo "<pre>";  print_r($carray); echo "<pre>";die;
         $button = $this->input->post('search');
-        if ($this->input->server('REQUEST_METHOD') == "GET") {
+        if ($this->input->server('REQUEST_METHOD') == "GET") 
+        {
             $this->load->view('layout/header', $data);
             $this->load->view('student/studentSearch', $data);
             $this->load->view('layout/footer', $data);
-        } else {
+        } 
+        else 
+        {
             $class       = $this->input->post('class_id');
             $section     = $this->input->post('section_id');
             $search      = $this->input->post('search');
             $search_text = $this->input->post('search_text');
-            if (isset($search)) {
-                if ($search == 'search_filter') {
+            if (isset($search)) 
+            {
+                if ($search == 'search_filter') 
+                {
                     $this->form_validation->set_rules('class_id', $this->lang->line('class'), 'trim|required|xss_clean');
-                    if ($this->form_validation->run() == false) {
+                    if ($this->form_validation->run() == false) 
+                    {
 
                     } else {
                         $data['searchby']    = "filter";
@@ -1523,7 +1548,9 @@ public function handle_uploadcreate_doc()
                         $title               = $this->classsection_model->getDetailbyClassSection($data['class_id'], $data['section_id']);
                         $data['title']       = 'Student Details for ' . $title['class'] . "(" . $title['section'] . ")";
                     }
-                } else if ($search == 'search_full') {
+                } 
+                else if ($search == 'search_full') 
+                {
                     $data['searchby'] = "text";
 
                     $data['search_text'] = trim($this->input->post('search_text'));

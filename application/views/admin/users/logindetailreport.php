@@ -140,62 +140,33 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                 </div>
                 <div class="box-body table-responsive">
                     <div class="download_label"><?php echo $this->lang->line('login_credential'); ?> <?php echo $this->lang->line('report')."<br>";$this->customlib->get_postmessage(); ?></div>
-                    <table class="table table-striped table-bordered table-hover example">
+                    <table class="table table-striped table-bordered table-hover example" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-								
                                 <th>Sr No</th>
-                                 <th><?php echo $this->lang->line('admission_no'); ?></th>
-
-							
+                                <th><?php echo $this->lang->line('admission_no'); ?></th>
                                 <th><?php echo $this->lang->line('student_name'); ?></th>
                                 <th><?php echo $this->lang->line('username'); ?></th>
                                 <th><?php echo $this->lang->line('password'); ?></th>
                                 <th><?php echo $this->lang->line('parent'); ?> <?php echo $this->lang->line('username'); ?></th>
                                 <th><?php echo $this->lang->line('parent'); ?> <?php echo $this->lang->line('password'); ?></th>
-
-
-
-
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            if (empty($resultlist)) {
-                                ?>
-
-                                <?php
-                            } else {
-                                $count = 1;
-                                $i = 0;
-                                foreach ($resultlist as $student) {
-                                    ?>
-                                    <tr <?php
-                                    if ($student["is_active"] == "no") {
-                                        echo "class='danger'";
-                                    }
-                                    ?>>
-										
-                                        <td><?php echo $count; ?></td>
-
-										
-
-                                        <td>
-                                        <td><?php echo $student['admission_no']; ?></td>
-
-										
-
-                                        <td>
-                                            <a href="<?php echo base_url(); ?>student/view/<?php echo $student['id']; ?>"><?php echo $student['firstname'] . " " . $student['lastname']; ?>
-                                            </a>
-                                        </td>
-
-
+                                <?php if (empty($resultlist)) { ?>
+                                <?php } else { $count = 1;
+                                    foreach ($resultlist as $student) {        ?>
+                                    <tr <?php if ($student["is_active"] == "no") { echo "class='danger'";}?>>
+                                        <td><?php echo $count; ?></td>								
+                                        <td><?php echo $student['admission_no'];?></td>										
+                                        <td><a href="<?php echo base_url(); ?>student/view/<?php echo $student['id']; ?>"><?php echo $student['firstname'] . " " . $student['lastname']; ?></a></td>
                                         <td><?php
-                                    if (isset($student['student_username'])) {
-                                        echo $student['student_username'];
-                                    }
-                                    ?></td>
+                                            if(isset($student['student_username'])) 
+                                            {
+                                                echo $student['student_username'];
+                                            }
+                                            ?>
+                                        </td>
 
                                         <td><?php
                                             if (isset($student['student_password'])) {
@@ -208,20 +179,20 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                             }
                                             ?></td>
 
-                                        <td><?php
-                                    if (isset($student['parent_password'])) {
-                                        echo $student['parent_password'];
-                                    }
-                                    ?></td>
-
-
+                                        <td>
+                                            <?php
+                                            if (isset($student['parent_password'])) 
+                                            {
+                                                echo $student['parent_password'];
+                                            }
+                                            ?>
+                                        </td>
                                     </tr>
-        <?php
-        $i++;
-        $count++;
-    }
-}
-?>
+                                <?php
+                                $count++;
+                            }
+                        }
+                        ?>
                         </tbody>
                     </table>
                 </div>

@@ -15,6 +15,7 @@ if (!empty($questionList)) {
 
     foreach ($questionList as $question_key => $question_value) {
     $checkbox_status="";
+    
 
 if($question_value->onlineexam_question_id != 0){
     $checkbox_status="checked";
@@ -31,7 +32,7 @@ if($question_value->onlineexam_question_id != 0){
                        <div class="rltpaddleft">
                      
                         <?php echo readmorelink($question_value->question,site_url('admin/question/read/'.$question_value->id)); ?>
-                        <p> 
+                        <p>  
                             <b><?php echo $this->lang->line('class')?>:</b>
                             <span class="class_text <?php echo str_replace(' ', '', $question_value->class);?>"><?php echo $question_value->class; ?></span><br>
                             <b><?php echo $this->lang->line('section')?>:</b>

@@ -750,6 +750,16 @@
                                                         <img src="<?php echo base_url(); ?>backend/images/gray.jpg">
                                                     </label>
                                                 </div>
+                                                <div class="col-sm-3 col-xs-6 col20">
+                                                    <label class="radio-img">
+                                                        <input name="theme" <?php
+                                                        if ($settinglist[0]['theme'] == "scketch.jpg") {
+                                                            echo "checked";
+                                                        }
+                                                        ?> value="scketch.jpg" type="radio" />
+                                                        <img src="<?php echo base_url(); ?>backend/images/gray.jpg">
+                                                    </label>
+                                                </div>
 
 
                                             </div><!--./row-->

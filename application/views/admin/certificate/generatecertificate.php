@@ -1,5 +1,7 @@
 <?php
 $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
+
+//var_dump($sessionData );
 ?>
 <style type="text/css">
 
@@ -7,7 +9,7 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
 
 <div class="content-wrapper" style="min-height: 946px;">  
     <section class="content-header">
-        <h1><i class="fa fa-newspaper-o"></i> <?php echo $this->lang->line('certificate'); ?></h1>
+        <h1><i class="fa fa-newspaper-o"></i> <?php echo $this->lang->line('certificate'); ?> </h1>
     </section>
     <!-- Main content -->
     <section class="content">

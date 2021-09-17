@@ -22,6 +22,7 @@
                         $this->rbac->hasPrivilege('postal_dispatch', 'can_view') ||
                         $this->rbac->hasPrivilege('postal_receive', 'can_view') ||
                         $this->rbac->hasPrivilege('complaint', 'can_view') ||
+                        $this->rbac->hasPrivilege('applyforcertificate', 'can_view') ||
                         $this->rbac->hasPrivilege('setup_font_office', 'can_view'))) {
                     ?>
 
@@ -76,6 +77,13 @@
                                 <li class="<?php echo set_Submenu('admin/visitorspurpose'); ?>"><a href="<?php echo base_url(); ?>admin/visitorspurpose"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('setup_front_office'); ?></a></li>
 
                             <?php } ?>
+                            <?php
+                             if ($this->rbac->hasPrivilege('applyforcertificate', 'can_view')) {
+                                ?>
+
+                                <li class="<?php echo set_Submenu('admin/applyforcertificates'); ?>"><a href="<?php echo base_url(); ?>admin/applyforcertificates"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('applyforcertificates'); ?>Apply For certificates </a></li>
+                             
+                                <?php } ?>
                         </ul>
                     </li>
                     <?php

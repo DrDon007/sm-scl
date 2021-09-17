@@ -22,6 +22,7 @@ $config['ci_front_themes'] = array(
     'bold_blue' => 'theme_bold_blue.jpg',
     'shadow_white' => 'theme_shadow_white.jpg',
     'material_pink' => 'theme_material_pink.jpg',
+    'scketch' => 'theme_scketch.jpg'
 );
 
 

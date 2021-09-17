@@ -50,7 +50,14 @@ if ($theme == "white") {
     <link rel="stylesheet" href="<?php echo base_url(); ?>backend/dist/themes/blue/skins/skin-darkblue.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>backend/dist/themes/blue/ss-main-darkblue.css">
     <?php
-} elseif ($theme == "gray") {
+} elseif ($theme == "scketch") {
+    ?>
+    <link rel="stylesheet" href="<?php echo base_url(); ?>backend/dist/css/style-main.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>backend/dist/themes/scketch/skins/skin-darkblue.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>backend/dist/themes/scketch/ss-main-darkblue.css">
+    <?php
+}
+elseif ($theme == "gray") {
     ?>
     <link rel="stylesheet" href="<?php echo base_url(); ?>backend/dist/css/style-main.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>backend/dist/themes/gray/skins/skin-light.css">

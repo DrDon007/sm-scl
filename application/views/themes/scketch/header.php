@@ -1,28 +1,6 @@
 <div id="alert" class="affix-top">
 <header>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 col-sm-5">
-                <a class="logo" href="<?php echo base_url(); ?>"><img src="<?php echo base_url($front_setting->logo); ?>" alt=""></a>
-            </div><!--./col-md-4-->
-            <div class="col-md-9 col-sm-7">
-                <ul class="header-extras">
-                   
-                    <li><i class="fa fa-phone i-plain"></i><div class="he-text"><?php echo $this->lang->line('call_us'); ?><span><?php echo $school_setting->phone; ?></span></div></li>
-                     <li><a class="complainbtn" href="<?php echo site_url('site/userlogin') ?>">Login</a></li>
-                    <!-- <li><i class="fa fa-pencil-square-o i-plain"></i>
-                        <div class="he-text"><?php echo $this->lang->line('feedback'); ?><span><a href="<?php echo site_url('page/complain') ?>"><?php echo $this->lang->line('complain'); ?></a></span>
-                        </div>
-                    </li> -->
-                </ul>
-            </div><!--./col-md-8-->
-        </div><!--./row-->
-    </div><!--./container-->
-</header>
-
-
-<div class="navborder">
-    <div class="container">
+	<div class="container">
         <div class="row">
             <nav class="navbar">
                 <div class="navbar-header">
@@ -32,10 +10,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
+                    <a class="navbar-brand logo" href="<?php echo base_url(); ?>"><img src="<?php echo base_url($front_setting->logo); ?>" alt=""></a>
                 </div>
 
-                <div class="collapse navbar-collapse" id="navbar-collapse-3">
-                    <ul class="nav navbar-nav">
+                <div class="collapse navbar-collapse navborder" id="navbar-collapse-3">
+                    <ul class="nav navbar-nav navbar-right">
                         <?php
                         foreach ($main_menus as $menu_key => $menu_value) {
                             $submenus = false;
@@ -101,12 +80,11 @@
                             <?php
                         }
                         ?>
-
-
+                         <li><a class="login-btn" href="<?php echo site_url('site/userlogin') ?>"><i class="fa fa-user"></i>Login</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </nav><!-- /.navbar -->
         </div>
-    </div>   
-</div> 
+    </div> 
+</header>
 </div>

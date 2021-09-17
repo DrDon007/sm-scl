@@ -757,7 +757,7 @@
                                                             echo "checked";
                                                         }
                                                         ?> value="scketch.jpg" type="radio" />
-                                                        <img src="<?php echo base_url(); ?>backend/images/gray.jpg">
+                                                        <img src="<?php echo base_url(); ?>backend/images/scketch.jpg">
                                                     </label>
                                                 </div>
 

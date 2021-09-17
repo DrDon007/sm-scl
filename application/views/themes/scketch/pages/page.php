@@ -25,7 +25,6 @@ if ($page_form) {
         $form_content .= $this->form_builder->build_form_horizontal($form, $defaults_object_or_array_from_db);
         $form_content .= $this->form_builder->close_form();
         //build end form
-       
         $replace_frm = '[form-builder:' . $form_name . ']';
         $replace_to = $form_content;
         echo $description = str_replace($replace_frm, $replace_to, $page['description']);
@@ -43,6 +42,8 @@ if ($page_form) {
         <?php
         foreach ($page['category_content'] as $page_content_key => $page_content_value) {
             ?>
+
+
             <?php
             if ($page_content_key == "events") {
 
@@ -70,7 +71,7 @@ if ($page_form) {
                                     <div class="eventcaption">
                                         <div class="blur"></div>
                                         <div class="event20">
-                                            <h3><?php echo $value['title']; ?></h3>
+                                            <h3 style="margin-top: 10px;"><?php echo $value['title']; ?></h3>
                                             <p><?php echo substr($value['description'], 0, 85) . ".."; ?></p>
                                         </div><!--./around20-->
                                     </div>    
@@ -91,16 +92,12 @@ if ($page_form) {
 
                 foreach ($page['category_content'][$page_content_key] as $key => $value) {
                     ?>
-                    
-                    <div class="latestevent">
-                        
+                        <div class="latestevent">
                             <div class="alert-message alert-message-default">
                                 <h4><a href="<?php echo site_url($value['url']); ?>"><?php echo $value['title']; ?></a></h4>
                                 <p><?php echo substr($value['description'], 0, 85) . ".."; ?></p>
                             </div>
-                        </div>
-                   
-
+                         </div>   
                     <?php
                 }
             } elseif ($page_content_key == "gallery") {

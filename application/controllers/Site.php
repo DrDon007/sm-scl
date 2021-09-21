@@ -121,6 +121,98 @@ $app_name=$app_name[0]['name'];
         }
     }
 
+
+    function login1() {
+
+        $app_name=$this->setting_model->get();
+        $app_name=$app_name[0]['name'];
+        
+                if ($this->auth->logged_in()) {
+                    $this->auth->is_logged_in(true);
+                }
+        
+                $data = array();
+                $data['title'] = 'Login';
+                $school = $this->setting_model->get();
+                
+                $data['name'] = $app_name;
+        
+                $notice_content = $this->config->item('ci_front_notice_content');
+                $notices = $this->cms_program_model->getByCategory($notice_content, array('start' => 0, 'limit' => 5));
+                $data['notice'] = $notices;
+                $data['school'] = $school[0];
+                $this->form_validation->set_rules('username', $this->lang->line('username'), 'trim|required|xss_clean');
+                $this->form_validation->set_rules('password', $this->lang->line('password'), 'trim|required|xss_clean');
+                if ($this->form_validation->run() == FALSE) {
+                   $data['name'] = $app_name;
+                    $this->load->view('admin/login1', $data);
+                } else {
+                    $login_post = array(
+                        'email' => $this->input->post('username'),
+                        'password' => $this->input->post('password')
+                    );
+                    $setting_result = $this->setting_model->get();
+                    $result = $this->staff_model->checkLogin($login_post);
+        
+                    if (!empty($result->language_id)) {
+                        $lang_array = array('lang_id' => $result->language_id, 'language' => $result->language);
+                    } else {
+                        $lang_array = array('lang_id' => $setting_result[0]['lang_id'], 'language' => $setting_result[0]['language']);
+                    }
+                    
+                    if ($result) {
+                        if ($result->is_active) {
+                            if ($result->surname != "") {
+                                $logusername = $result->name . " " . $result->surname;
+                            } else {
+                                $logusername = $result->name;
+                            }
+        
+                            $setting_result = $this->setting_model->get();
+                            $session_data = array(
+                                'id' => $result->id,
+                                'username' => $logusername,
+                                'email' => $result->email,
+                                'roles' => $result->roles,
+                                'date_format' => $setting_result[0]['date_format'],
+                                'currency_symbol' => $setting_result[0]['currency_symbol'],
+                                'currency_place' => $setting_result[0]['currency_place'],
+                                'start_month' => $setting_result[0]['start_month'],
+                                'school_name' => $setting_result[0]['name'],
+                                'timezone' => $setting_result[0]['timezone'],
+                                'sch_name' => $setting_result[0]['name'],
+                                'language' => $lang_array,
+                                'is_rtl' => $setting_result[0]['is_rtl'],
+                                'theme' => $setting_result[0]['theme'],
+                            );
+                            $this->session->set_userdata('admin', $session_data);
+                            $role = $this->customlib->getStaffRole();
+                            $role_name = json_decode($role)->name;
+                            $this->customlib->setUserLog($this->input->post('username'), $role_name);
+        
+                            if (isset($_SESSION['redirect_to']))
+                                redirect($_SESSION['redirect_to']);
+                            else
+                                redirect('admin/admin/dashboard');
+                        }else {
+                            $data['name'] = $app_name;
+                            $data['error_message'] = $this->lang->line('your_account_is_disabled_please_contact_to_administrator');
+        
+                            $this->load->view('admin/login1', $data);
+                        }
+                    } else {
+                        $data['name'] = $app_name;
+                        $data['error_message'] = $this->lang->line('invalid_username_or_password');
+                        $this->load->view('admin/login1', $data);
+                    }
+                }
+            }
+        
+
+
+
+
+
     function logout() {
         $admin_session = $this->session->userdata('admin');
         $student_session = $this->session->userdata('student');
@@ -569,5 +661,6 @@ $data['name']=$app_name[0]['name'];
     }
 
 }
+
 
 ?>

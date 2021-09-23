@@ -635,6 +635,101 @@ $data['name']=$app_name[0]['name'];
             }
         }
     }
+    function userlogin1() {
+        if ($this->auth->user_logged_in()) {
+            $this->auth->user_redirect();
+        }
+        $data = array();
+        $data['title'] = 'Login';
+        $school = $this->setting_model->get();
+        $data['name'] = $school[0]['name'];
+        $notice_content = $this->config->item('ci_front_notice_content');
+        $notices = $this->cms_program_model->getByCategory($notice_content, array('start' => 0, 'limit' => 5));
+        $data['notice'] = $notices;
+        $data['school'] = $school[0];
+        $this->form_validation->set_rules('username', $this->lang->line('username'), 'trim|required|xss_clean');
+        $this->form_validation->set_rules('password', $this->lang->line('password'), 'trim|required|xss_clean');
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('userlogin', $data);
+        } else {
+            $login_post = array(
+                'username' => $this->input->post('username'),
+                'password' => $this->input->post('password')
+            );
+            $login_details = $this->user_model->checkLogin($login_post);
+
+            if (isset($login_details) && !empty($login_details)) {
+                $user = $login_details[0];
+                if ($user->is_active == "yes") {
+                    if ($user->role == "student") {
+                        $result = $this->user_model->read_user_information($user->id);
+                    } else if ($user->role == "parent") {
+                        $result = $this->user_model->checkLoginParent($login_post);
+                    }
+
+                    if ($result != false) {
+                        $setting_result = $this->setting_model->get();
+                        if ($result[0]->lang_id == 0) {
+                            $language = array('lang_id' => $setting_result[0]['lang_id'], 'language' => $setting_result[0]['language']);
+                        } else {
+                            $language = array('lang_id' => $result[0]->lang_id, 'language' => $result[0]->language);
+                        }
+                        if($result[0]->role == "parent") {
+                             $username=$result[0]->guardian_name;
+                            if ($result[0]->guardian_relation == "Father") {
+                                $image = $result[0]->father_pic;
+                            } else if ($result[0]->guardian_relation == "Mother") {
+                                $image = $result[0]->mother_pic;
+                            } else if ($result[0]->guardian_relation == "Other") {
+                                $image = $result[0]->guardian_pic;
+                            }
+                        }elseif ($result[0]->role == "student") {
+                             $image = $result[0]->image;
+                            $username= ($result[0]->lastname != "")? $result[0]->firstname . " " .$result[0]->lastname: $result[0]->firstname;
+                        }
+                       
+                        
+                     
+                            $session_data = array(
+                                'id' => $result[0]->id,
+                                'student_id' => $result[0]->user_id,
+                                'role' => $result[0]->role,
+                                'username' => $username,
+                                'date_format' => $setting_result[0]['date_format'],
+                                'currency_symbol' => $setting_result[0]['currency_symbol'],
+                                'timezone' => $setting_result[0]['timezone'],
+                                'sch_name' => $setting_result[0]['name'],
+                                'language' => $language,
+                                'is_rtl' => $setting_result[0]['is_rtl'],
+                                'theme' => $setting_result[0]['theme'],
+                                'image' => $result[0]->image,
+                            );
+                            $this->session->set_userdata('student', $session_data);
+
+                            // $student_display_session = $this->studentsession_model->searchActiveClassSectionStudent($result[0]->user_id);
+                            // $student_current_class = array('student_session_id'=>$student_display_session->id,'class_id' => $student_display_session->class_id,
+                            //     'section_id' => $student_display_session->section_id);
+
+                            // $this->session->set_userdata('current_class', $student_current_class);
+
+                            $this->customlib->setUserLog($result[0]->username, $result[0]->role);
+                            // redirect('user/user/dashboard');
+                            redirect('user/user/choose');
+                   
+                    } else {
+                        $data['error_message'] = 'Account Suspended';
+                        $this->load->view('userlogin', $data);
+                    }
+                } else {
+                    $data['error_message'] = $this->lang->line('your_account_is_disabled_please_contact_to_administrator');
+                    $this->load->view('userlogin', $data);
+                }
+            } else {
+                $data['error_message'] = $this->lang->line('invalid_username_or_password');
+                $this->load->view('userlogin', $data);
+            }
+        }
+    }
 
     public function savemulticlass() {
         

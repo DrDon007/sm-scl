@@ -1,0 +1,42 @@
+/* body{
+    background-color: #E5E5E5;
+}
+
+.profile{
+    position: absolute;
+width: 1280px;
+height: 91px;
+left: 204px;
+top: 0px;
+padding-right: 80px;
+
+background: #F7F9FF;
+border-radius: 0px 15px 15px 0px;
+    
+}
+.logo{
+    padding-top: 20p0x;
+}
+.search{
+    position: absolute;
+width: 315px;
+height: 53px;
+left: 259px;
+top: 18px;
+
+background: #FFFFFF;
+border-radius: 16px;
+}
+input:focus{
+    outline:none;
+    font-family: SF Pro Display;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+    text-align: center;
+    width: 315px;
+height: 53px;
+    
+    color: #48B5B9;
+} */

@@ -5,9 +5,6 @@
   .sidebar-collapse #barChart{height: 100% !important;}
   .sidebar-collapse #lineChart{height: 100% !important;}
 </style>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
 <div class="content-wrapper" style="min-height: 946px;">
     <section class="content">
        <div class="">
@@ -43,21 +40,22 @@
                 ?>
 
             </div> 
-            <h3 style="font-family:poppins;color:#535353 font-weight: 600;font-size: 24px;line-height: 36px; padding-left:15px;">Dashboard</h3>
         <div class="row">
           <?php 
            if($this->module_lib->hasActive('fees_collection')){ 
           if($this->rbac->hasPrivilege('fees_awaiting_payment_widegts','can_view')){
             ?>
-         <div class="main">
-         <div class="sub-main">
-                <div class="div1">
-                <p class="inner-text"><?php echo $this->lang->line('fees')." ".$this->lang->line('awaiting')." ".$this->lang->line('payment');?> </br>
-                <span class="inner-text1"><?php echo $total_paid; ?>/<?php echo $total_fees?></span>
-                </p>
-               </div>
-             
-           
+             <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="topprograssstart">
+                <p class="text-uppercase mt5 clearfix"><i class="fa fa-money ftlayer"></i><?php echo $this->lang->line('fees')." ".$this->lang->line('awaiting')." ".$this->lang->line('payment');?><span class="pull-right"><?php echo $total_paid; ?>/<?php echo $total_fees?></span>
+               </p>
+              <div class="progress-group">
+                 <div class="progress progress-minibar">
+                      <div class="progress-bar progress-bar-aqua" style="width: <?php echo $fessprogressbar;?>%"></div>
+                    </div>
+                  </div>
+              </div><!--./topprograssstart-->
+            </div><!--./col-md-3-->
 
             <?php
           } }
@@ -68,21 +66,33 @@
       if($this->rbac->hasPrivilege('conveted_leads_widegts','can_view')){
 
             ?>
-        <div class="div2">
-                <p class="inner-text"> <?php echo $this->lang->line('converted')." ".$this->lang->line('leads')?></br>
-                <span class="inner-text1"><?php  echo $total_complete+0; ?>/<?php echo $total_enquiry; ?></span>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="topprograssstart">
+                <p class="text-uppercase mt5 clearfix"><i class="fa fa-ioxhost ftlayer"></i> <?php echo $this->lang->line('converted')." ".$this->lang->line('leads')?><span class="pull-right"><?php  echo $total_complete+0; ?>/<?php echo $total_enquiry; ?></span>
                </p>
-               </div>
+              <div class="progress-group">
+                 <div class="progress progress-minibar">
+                      <div class="progress-bar progress-bar-red" style="width: <?php echo $fenquiryprogressbar;?>%"></div>
+                    </div>
+                  </div>
+              </div><!--./topprograssstart-->
+            </div><!--./col-md-3--> 
           <?php 
         } }
           if($this->rbac->hasPrivilege('staff_present_today_widegts','can_view')){
 
             ?>
-            <div class="div3">
-                <p class="inner-text"><?php echo $this->lang->line('staff').' '.$this->lang->line('present').' '.$this->lang->line('today'); ?></br>
-                <span class="inner-text1"><?php echo $Staffattendence_data+0; ?>/<?php echo $getTotalStaff_data; ?></span>
+             <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="topprograssstart">
+                <p class="text-uppercase mt5 clearfix"><i class="fa fa-calendar-check-o ftlayer"></i><?php echo $this->lang->line('staff').' '.$this->lang->line('present').' '.$this->lang->line('today'); ?><span class="pull-right"><?php echo $Staffattendence_data+0; ?>/<?php echo $getTotalStaff_data; ?></span>
                </p> 
-               </div>
+              <div class="progress-group">
+                 <div class="progress progress-minibar">
+                      <div class="progress-bar progress-bar-green" style="width: <?php echo $percentTotalStaff_data;?>%"></div>
+                    </div>
+                  </div>
+              </div><!--./topprograssstart-->
+            </div><!--./col-md-3-->
             <?php
           }
            if($this->module_lib->hasActive('student_attendance')){
@@ -90,16 +100,20 @@
             ?>
             
 
-           <div class="div4">
-                <p class="inner-text"><?php echo $this->lang->line('student').' '.$this->lang->line('present').' '.$this->lang->line('today'); ?></br>
-                <span class="inner-text1"> <?php echo 0+$attendence_data['total_half_day']+$attendence_data['total_late']+$attendence_data['total_present'];?>/<?php echo $total_students ; ?></span>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="topprograssstart">
+                <p class="text-uppercase mt5 clearfix"><i class="fa fa-calendar-check-o ftlayer"></i><?php echo $this->lang->line('student').' '.$this->lang->line('present').' '.$this->lang->line('today'); ?><span class="pull-right"> <?php echo 0+$attendence_data['total_half_day']+$attendence_data['total_late']+$attendence_data['total_present'];?>/<?php echo $total_students ; ?></span>
                </p>
-               </div>
+              <div class="progress-group">
+                 <div class="progress progress-minibar">
+                      <div class="progress-bar progress-bar-yellow" style="width: <?php echo 0+$attendence_data['total_half_day']+$attendence_data['total_late']+$attendence_data['total_present'];?>%"></div>
+                    </div>
+                  </div>
+              </div><!--./topprograssstart-->
+            </div><!--./col-md-3--> 
           <?php } }?>
-            </div>
-            </div>
            </div><!--./row--> 
-            
+           
 
           <div class="row">
               <?php 
@@ -708,11 +722,6 @@
         </div>
     </div>
 </div>  
-<div class="rightbar">
-   <div class="notice">
-       
-   </div>
-</div>
 <style>
   canvas {
     -moz-user-select: none;

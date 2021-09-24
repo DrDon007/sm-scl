@@ -1,37 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BALA BHARATHI VIDYALAYAM</title>
-        
-        <link rel="stylesheet" href="<?php echo base_url(); ?>backend/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="<?php echo base_url(); ?>css/ThemeUpdate/header.css">
-        <?php
-          $this->load->view('layout/theme');
-         ?>
-</head>
-<body>
-<header class="main-header" id="alert">
-    <a href="<?php echo base_url(); ?>admin/admin/dashboard" class="logo">
-        <span class="logo-mini"><img src="<?php echo base_url(); ?>uploads/school_content/admin_small_logo/<?php $this->setting_model->getAdminsmalllogo();?>" alt="<?php echo $this->customlib->getAppName() ?>" /></span>
-        <span class="logo-lg"><img src="<?php echo base_url(); ?>uploads/school_content/admin_logo/<?php $this->setting_model->getAdminlogo();?>" alt="<?php echo $this->customlib->getAppName() ?>" /></span>
-    </a>
-    <div class="profile">
-        <div class="search">
-            <input placeholder="search" type="hidden">
-        </div>
-        <div class="notification">
-        </div>
-</header>
-
-</body>
-</html>
- -->
-
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html <?php echo $this->customlib->getRTL(); ?>>
     <head>
         <meta charset="utf-8">
@@ -55,9 +22,6 @@
         <link rel="stylesheet" href="<?php echo base_url(); ?>backend/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>backend/plugins/datepicker/datepicker3.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>backend/plugins/colorpicker/bootstrap-colorpicker.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="<?php echo base_url(); ?>backend/plugins/daterangepicker/daterangepicker-bs3.css">
         <link rel="stylesheet" href="<?php echo base_url(); ?>backend/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
@@ -156,25 +120,36 @@ if ($this->config->item('SSLK') == "") {
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-
-                    <?php if ($this->rbac->hasPrivilege('student', 'can_view')) {?>
-                              
-                              <form class="navbar-form navbar-left search-form" role="search"  action="<?php echo site_url('admin/admin/search'); ?>" method="POST">
-                                  <?php echo $this->customlib->getCSRF(); ?>
-                                  <div class="input-group">
-                                      <input type="text" value="<?php echo set_value('search_text1');?>" name="search_text1" class="form-control search-form search-form3" placeholder="<?php echo $this->lang->line('search_by_student_name'); ?>">
-                                      <span class="input-group-btn">
-                                          <button type="submit" name="search" id="search-btn" style="" class="btn btn-flat topsidesearchbtn"><i class="fa fa-search"></i></button>
-                                      </span>
-                                  </div>
-
-                              </form>
-                          <?php }?>
+                    <div class="col-lg-5 col-md-3 col-sm-2 col-xs-5">
+                        <span href="#"  class="sidebar-session">
+                            <?php echo $this->setting_model->getCurrentSchoolName(); ?>
+                        </span>
+                    </div>
                     <div class="col-lg-7 col-md-9 col-sm-10 col-xs-7">
                         <div class="pull-right">
-                           
+                            <?php if ($this->rbac->hasPrivilege('student', 'can_view')) {?>
+                              
+                                <form class="navbar-form navbar-left search-form" role="search"  action="<?php echo site_url('admin/admin/search'); ?>" method="POST">
+                                    <?php echo $this->customlib->getCSRF(); ?>
+                                    <div class="input-group">
+                                        <input type="text" value="<?php echo set_value('search_text1');?>" name="search_text1" class="form-control search-form search-form3" placeholder="<?php echo $this->lang->line('search_by_student_name'); ?>">
+                                        <span class="input-group-btn">
+                                            <button type="submit" name="search" id="search-btn" style="" class="btn btn-flat topsidesearchbtn"><i class="fa fa-search"></i></button>
+                                        </span>
+                                    </div>
+ 
+                                </form>
+                            <?php }?>
                             <div class="navbar-custom-menu">
-                               
+                                <?php //if($this->rbac->hasPrivilege('language_switcher','can_view')){
+                                    ?>
+                                    <div class="langdiv"><select class="languageselectpicker" onchange="set_languages(this.value)"  type="text" id="languageSwitcher" >
+                                          
+                                           <?php $this->load->view('admin/language/languageSwitcher')?>
+
+                                        </select></div> 
+                                    <?php
+                               // }?>
                                 
                                      
                                 <ul class="nav navbar-nav headertopmenu">

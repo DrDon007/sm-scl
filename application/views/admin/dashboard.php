@@ -9,6 +9,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
 <div class="content-wrapper" style="min-height: 946px;">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <!-- Respomsive slider -->
+    <link href="<?php echo base_url(); ?>/css/responsive-calendar.css" rel="stylesheet">
     <section class="content">
        <div class="">
      
@@ -113,11 +117,12 @@
 
 
                                 ?>  
-                      <div class="col-lg-7 col-md-7 col-sm-12 col60">
-                         
-                                <div class="box box-primary borderwhite">
+                    
+                               <div class="expense_graph">
+                                <div class="box box1-primary borderwhite">
                                     <div class="box-header with-border">
-                                        <h3 class="box-title"><?php echo $this->lang->line('fees_collection_&_expenses_for'); ?><?php echo $this->lang->line('_expenses_for')?> <?php echo date('F') . " " . date('Y'); ?></h3>
+                                    <p class="text_fees" >Income & Expenses</p>   
+                                    <!-- <h3 class="box-title"><?php echo $this->lang->line('fees_collection_&_expenses_for'); ?><?php echo $this->lang->line('_expenses_for')?> <?php echo date('F') . " " . date('Y'); ?></h3> -->
                                         <div class="box-tools pull-right">
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -126,33 +131,29 @@
 
                                     <div class="box-body">
                                       <div class="chart">
-                                        <canvas id="barChart" height="95"></canvas>
-                                      </div>  
+                                      <canvas id="barChart" height="298" width="943" style="width: 755px; height: 239px;"></canvas>                                      </div>  
                                     </div>
                                    
                                 </div>
-                          
-            </div><!--./col-lg-7-->
+                                </div>
+                          <div class="bottom">
+                              <div class="enquiry1">
+                              <p class="text_enquiry">Enquiry</p>
+
+                              </div>
+                              <div class="fees_collection">
+                                  <p class="text_enquiry">Fees Collection</p>
+                                  <canvas id="barChart" height="250" width="250" style="width: 250px; height: 239px;"></canvas>
+                              </div>
+                          <div style="clear: both;"></div>
+                          </div>
+           
               <?php }  }?>
               <?php
                if($this->module_lib->hasActive('income')){ 
                if($this->rbac->hasPrivilege('income_donut_graph','can_view')){
                 ?>
-            <div class="col-lg-5 col-md-5 col-sm-12 col40">
-              
-              <div class="box box-primary borderwhite">
-                <div class="box-header with-border"><h3 class="box-title"><?php echo $this->lang->line('income')." - ".date('F Y'); ?></h3></div>
-
-              
-              <div class="box-body">
-                <div class="chart-responsive">
-                  <canvas id="doughnut-chart" class="" height="148"></canvas>
-                </div>  
-              </div>
-                
-              </div><!--./col-md-6-->
-             
-            </div><!--./col-lg-5-->
+        
              <?php } }
                 ?>
           </div><!--./row--> 
@@ -164,49 +165,13 @@
                                 $div_rol = 3;
                                 
                                 ?>
-            <div class="col-lg-7 col-md-7 col-sm-12 col60">
-             
-                                <div class="box box-info borderwhite">
-                                    <div class="box-header with-border">
-                                        <h3 class="box-title"><?php echo $this->lang->line('fees_collection_&_expenses_for_session'); ?> <?php echo $this->setting_model->getCurrentSessionName(); ?></h3>
-                                        <div class="box-tools pull-right">
-                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                        </div>
-                                    </div>
-                                   <div class="box-body">
-                                      <div class="chart">
-                                        <canvas id="lineChart" height="95"></canvas>
-                                      </div>  
-                                    </div>  
-
-                                   <!--  <div class="box-body">
-                                        <div class="chart">
-                                            <canvas id="lineChart" style="height: 233px; width: 100%; white-space: nowrap;"></canvas>
-                                        </div>
-                                    </div> -->
-                                </div>
-                            
-              </div><!--./col-lg-7-->
+        
               <?php 
                         }  } 
                         if($this->module_lib->hasActive('expense')){ 
                         ?>
             <?php   if($this->rbac->hasPrivilege('expense_donut_graph','can_view')){ ?>
-            <div class="col-lg-5 col-md-5 col-sm-12 col40">
-              <div class="box box-primary borderwhite">
-                <div class="box-header with-border"><h3 class="box-title"><?php echo $this->lang->line('expense')." - ".date('F Y');; ?></h3>
-                  </div><!--./info-box--> 
-
-                  <div class="box-body">
-                    <div class="chart-responsive">
-                      <canvas id="doughnut-chart1" class="" height="148"></canvas>
-                    </div>  
-                  </div>
-               <!--  <div class="full-width-chart"><canvas id="doughnut-chart1" style="height: 340px; width: 100%; white-space: nowrap;"></canvas></div> -->
-               
-             </div>  
-            </div><!--./col-lg-5-->
+         
           <?php } }?>
           </div><!--./row-->
 
@@ -220,86 +185,13 @@
             if($this->module_lib->hasActive('fees_collection')){ 
             if($this->rbac->hasPrivilege('fees_overview_widegts','can_view')){
             ?>
-            <div class="col-md-3 col-sm-6">
-            
-              <div class="topprograssstart">
-                <h5 class="pro-border pb10"><?php echo $this->lang->line('fees')." ".$this->lang->line('overview')?></h5>
-                <p class="text-uppercase mt10 clearfix"><?php echo $fees_overview['total_unpaid']; ?> <?php echo $this->lang->line('unpaid');?><span class="pull-right"><?php echo round($fees_overview['unpaid_progress'],2); ?>%</span>
-               </p>
-                <div class="progress-group">
-                 <div class="progress progress-minibar">
-                    <div class="progress-bar" style="width: <?php echo $fees_overview['unpaid_progress']; ?>%"></div>
-                </div>
-               </div>
-              
-               <p class="text-uppercase mt10 clearfix"><?php echo $fees_overview['total_partial']; ?> <?php echo $this->lang->line('partial');?><span class="pull-right"><?php echo round($fees_overview['partial_progress'],2); ?>%</span>
-               </p>
-                <div class="progress-group">
-                 <div class="progress progress-minibar">
-                    <div class="progress-bar progress-bar-aqua" style="width: <?php echo $fees_overview['partial_progress']; ?>%"></div>
-                </div>
-               </div>
-
-               <p class="text-uppercase mt10 clearfix"><?php echo $fees_overview['total_paid']; ?> <?php echo $this->lang->line('paid'); ?><span class="pull-right"><?php echo round($fees_overview['paid_progress'],2); ?>%</span>
-               </p>
-                <div class="progress-group">
-                 <div class="progress progress-minibar">
-                    <div class="progress-bar progress-bar-aqua" style="width: <?php echo $fees_overview['paid_progress']; ?>%"></div>
-                </div>
-               </div>
-              </div><!--./topprograssstart-->
-
-            </div><!--./col-md-3-->
+           
             <?php
            } }
             if($this->module_lib->hasActive('front_office')){
            if($this->rbac->hasPrivilege('enquiry_overview_widegts','can_view')){
             ?>
-            <div class="col-md-3 col-sm-6">
-            
-              <div class="topprograssstart">
-                <h5 class="pro-border pb10"> <?php echo $this->lang->line('enquiry')." ".$this->lang->line('overview'); ?></h5>
-                <p class="text-uppercase mt10 clearfix"><?php echo $enquiry_overview['active'];?> <?php echo $this->lang->line('active')?><span class="pull-right"><?php echo round($enquiry_overview['active_progress'],2);?>%</span>
-               </p>
-                <div class="progress-group">
-                 <div class="progress progress-minibar">
-                    <div class="progress-bar progress-bar-red" style="width: <?php echo $enquiry_overview['active_progress'];?>%"></div>
-                </div>
-               </div>
-              
-                <p class="text-uppercase mt10 clearfix"><?php echo $enquiry_overview['won'];?> <?php echo $this->lang->line('won')?><span class="pull-right"><?php echo round($enquiry_overview['won_progress'],2);?>%</span>
-               </p>
-                <div class="progress-group">
-                 <div class="progress progress-minibar">
-                    <div class="progress-bar progress-bar-yellow" style="width: <?php echo $enquiry_overview['won_progress'];?>%"></div>
-                </div>
-               </div>
-
-               <p class="text-uppercase mt10 clearfix"><?php echo $enquiry_overview['passive'];?> <?php echo $this->lang->line('passive')?><span class="pull-right"><?php echo round($enquiry_overview['passive_progress'],2);?>%</span>
-               </p>
-                <div class="progress-group">
-                 <div class="progress progress-minibar">
-                    <div class="progress-bar progress-bar-yellow" style="width: <?php echo $enquiry_overview['passive_progress'];?>%"></div>
-                </div>
-               </div>
-
-                <p class="text-uppercase mt10 clearfix"><?php echo $enquiry_overview['lost'];?> <?php echo $this->lang->line('lost')?><span class="pull-right"><?php echo round($enquiry_overview['lost_progress'],2);?>%</span>
-               </p>
-                <div class="progress-group">
-                 <div class="progress progress-minibar">
-                    <div class="progress-bar progress-bar-yellow" style="width: <?php echo $enquiry_overview['lost_progress'];?>%"></div>
-                </div>
-               </div>
-               <p class="text-uppercase mt10 clearfix"><?php echo $enquiry_overview['dead'];?> <?php echo $this->lang->line('dead')?><span class="pull-right"><?php echo round($enquiry_overview['dead_progress'],2);?>%</span>
-               </p>
-                <div class="progress-group">
-                 <div class="progress progress-minibar">
-                    <div class="progress-bar progress-bar-yellow" style="width: <?php echo $enquiry_overview['dead_progress'];?>%"></div>
-                </div>
-               </div>
-              </div><!--./topprograssstart-->
-
-            </div><!--./col-md-3-->
+           
 
             <?php
            }}
@@ -309,87 +201,12 @@
             ?>
              
 
-             <div class="col-md-3 col-sm-6">
-            
-              <div class="topprograssstart">
-                <h5 class="pro-border pb10"> <?php echo $this->lang->line('library')." ".$this->lang->line('overview');?></h5>
-                <p class="text-uppercase mt10 clearfix"><?php echo $book_overview['dueforreturn'];?> <?php echo $this->lang->line('due')." ".$this->lang->line('for')." ".$this->lang->line('return');?><span class="pull-right"></span>
-               </p>
-                <div class="progress-group">
-                 <div class="progress progress-minibar">
-                    <div class="progress-bar progress-bar-green" style="width: <?php echo $book_overview['dueforreturn'];?>%"></div>
-                </div>
-               </div>
-              
-                <p class="text-uppercase mt10 clearfix"><?php echo $book_overview['forreturn'];?> <?php echo $this->lang->line('returned')?><span class="pull-right"></span>
-               </p>
-                <div class="progress-group">
-                 <div class="progress progress-minibar">
-                    <div class="progress-bar progress-bar-green" style="width: <?php echo $book_overview['forreturn'];?>%"></div>
-                </div>
-               </div>
-
-               <p class="text-uppercase mt10 clearfix"><?php echo $book_overview['total_issued']; ?> <?php echo $this->lang->line('issued_out_of');?> <?php echo $book_overview['total']?><span class="pull-right"><?php echo $book_overview['issued_progress']; ?>%</span>
-               </p>
-                <div class="progress-group">
-                 <div class="progress progress-minibar">
-                    <div class="progress-bar progress-bar-green" style="width: <?php echo $book_overview['issued_progress']; ?>%"></div>
-                </div>
-               </div>
-
-               <p class="text-uppercase mt10 clearfix"><?php echo $book_overview['availble']; ?> <?php echo $this->lang->line('available_out_of')?> <?php echo $book_overview['total'];?><span class="pull-right"><?php echo $book_overview['availble_progress'];?>%</span>
-               </p>
-                <div class="progress-group">
-                 <div class="progress progress-minibar">
-                    <div class="progress-bar progress-bar-green" style="width: <?php echo $book_overview['availble_progress'];?>%"></div>
-                </div>
-               </div>
-              </div><!--./topprograssstart-->
-
-            </div><!--./col-md-3-->
-
-
+          
 <?php } }
      if($this->module_lib->hasActive('student_attendance')){
     if($this->rbac->hasPrivilege('today_attendance_widegts','can_view')){
       ?>
-       <div class="col-md-3 col-sm-6">
-             
-              <div class="topprograssstart">
-                <h5 class="pro-border pb10"> <?php echo $this->lang->line('student')." ".$this->lang->line('today')." ".$this->lang->line('attendance'); ?></h5>
-               
-                <p class="text-uppercase mt10 clearfix"><?php echo $attendence_data['total_present'];?> <?php echo $this->lang->line('present');?><span class="pull-right"><?php echo $attendence_data['present'];?></span>
-               </p>
-                <div class="progress-group">
-                 <div class="progress progress-minibar">
-                    <div class="progress-bar" style="width: <?php echo $attendence_data['present'];?>"></div>
-                </div>
-               </div>
-              
-                <p class="text-uppercase mt10 clearfix"><?php echo $attendence_data['total_late'];?> <?php echo $this->lang->line('late')?><span class="pull-right"><?php echo $attendence_data['late'];?></span>
-               </p>
-                <div class="progress-group">
-                 <div class="progress progress-minibar">
-                    <div class="progress-bar" style="width: <?php echo $attendence_data['late'];?>"></div>
-                </div>
-               </div>
-               <p class="text-uppercase mt10 clearfix"><?php echo $attendence_data['total_absent'];?> <?php echo $this->lang->line('absent');?><span class="pull-right"><?php echo $attendence_data['absent'];?></span>
-               </p>
-                <div class="progress-group">
-                 <div class="progress progress-minibar">
-                    <div class="progress-bar" style="width: <?php echo $attendence_data['absent'];?>"></div>
-                </div>
-               </div>
-               <p class="text-uppercase mt10 clearfix"><?php echo $attendence_data['total_half_day'];?> <?php  echo $this->lang->line('half_day');?><span class="pull-right"><?php echo $attendence_data['half_day'];?></span>
-               </p>
-                <div class="progress-group">
-                 <div class="progress progress-minibar">
-                    <div class="progress-bar" style="width: <?php echo $attendence_data['half_day'];?>"></div>
-                </div>
-               </div>
-              </div><!--./topprograssstart-->
-
-            </div><!--./col-md-3--> 
+     
       <?php
     } }
 
@@ -432,95 +249,12 @@
 
       <div class="row">
 
-            <div class="col-lg-9 col-md-9 col-sm-12 col80">
-                <div class="row">
-                    <?php 
-                    if($this->module_lib->hasActive('fees_collection')){
-                    if ($this->rbac->hasPrivilege('Monthly fees_collection_widget', 'can_view')) { ?>
-                        <div class="col-md-4 col-sm-6">
-                            <div class="info-box">
-                                <a href="<?php echo site_url('studentfee') ?>">
-                                    <span class="info-box-icon bg-green"><i class="fa fa-money"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text"><?php echo $this->lang->line('monthly_fees_collection'); ?></span>
-                                        <span class="info-box-number"><?php echo $currency_symbol.$month_collection; ?></span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    <?php }} ?>
-                    <?php 
-                     if($this->module_lib->hasActive('expense')){
-                    if ($this->rbac->hasPrivilege('monthly_expense_widget', 'can_view')) { ?>
-
-                        <div class="col-md-4 col-sm-6">
-                            <div class="info-box">
-                                <a href="<?php echo site_url('admin/expense') ?>">
-                                    <span class="info-box-icon bg-red"><i class="fa fa-credit-card"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text"><?php echo $this->lang->line('monthly_expenses'); ?></span>
-                                        <span class="info-box-number"><?php echo $currency_symbol.$month_expense; ?></span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    <?php } }
-
-                     if ($this->rbac->hasPrivilege('student_count_widget', 'can_view')) { ?>
-
-
-                        <div class="col-md-4 col-sm-6">
-                            <div class="info-box">
-                                <a href="<?php echo site_url('student/search') ?>">
-                                    <span class="info-box-icon bg-aqua"><i class="fa fa-user"></i></span>
-                                    <div class="info-box-content">
-                                        <span class="info-box-text"><?php echo $this->lang->line('student'); ?></span>
-                                        <span class="info-box-number"><?php echo $total_students; ?></span>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>   
-           
-         
-                         <?php
-                        if ($this->rbac->hasPrivilege('calendar_to_do_list', 'can_view')) {
-                            $div_rol = 3;
-                            ?>
-                            <div class="box box-primary borderwhite">
-                                <div class="box-body">
-                                    <!-- THE CALENDAR -->
-                                    <div id="calendar"></div>
-                                </div>
-                                <!-- /.box-body -->
-                            </div>
-                            <!-- /. box -->
-                        <?php } ?> 
-
-            </div><!--./col-lg-9-->
+          
             <?php if ($this->rbac->hasPrivilege('staff_role_count_widget', 'can_view')) {
               // print_r($roles);
                 ?>
 
-            <div class="col-lg-3 col-md-3 col-sm-12 col20">
-              
-                    <?php foreach ($roles as $key => $value) {
-                        ?>
-                        <div class="info-box">
-                            <a href="#">
-                                <span class="info-box-icon bg-yellow"><i class="fa fa-user-secret"></i></span>
-                                <div class="info-box-content">
-                                    <span class="info-box-text"><?php echo $key; ?></span>
-                                    <span class="info-box-number"><?php echo $value; ?></span>
-                                </div>
-                            </a>
-                        </div>     
-                <?php } ?>
-               
-                
-              
-            </div><!--./col-lg-3-->
+      
             <?php } ?>
           </div><!--./row-->
             
@@ -709,10 +443,44 @@
     </div>
 </div>  
 <div class="rightbar">
-   <div class="notice">
-       
-   </div>
-</div>
+      <!-- Responsive calendar - START -->
+    	<div class="responsive-calendar">
+        <div class="controls">
+            <h4><span data-head-year></span> <span data-head-month></span></h4>
+        </div><hr/>
+        <div class="day-headers">
+          <div class="day header">Mon</div>
+          <div class="day header">Tue</div>
+          <div class="day header">Wed</div>
+          <div class="day header">Thu</div>
+          <div class="day header">Fri</div>
+          <div class="day header">Sat</div>
+          <div class="day header">Sun</div>
+        </div>
+        <div class="days" data-group="days">
+          
+        </div>
+      </div>
+      <!-- Responsive calendar - END -->
+      <div class="notice">
+        <p class="notice_text" >Notice Board</p>
+      </div>
+    </div>
+    <script src="<?php echo base_url(); ?>/js/jquery.js"></script>
+    <script src="<?php echo base_url(); ?>/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url(); ?>/js/responsive-calendar.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $(".responsive-calendar").responsiveCalendar({
+          time: '2021-09',
+          events: {
+            "2013-04-30": {"number": 5, "url": "http://w3widgets.com/responsive-slider"},
+            "2013-04-26": {"number": 1, "url": "http://w3widgets.com"}, 
+            "2013-05-03":{"number": 1}, 
+            "2013-06-12": {}}
+        });
+      });
+    </script>
 <style>
   canvas {
     -moz-user-select: none;

@@ -9,6 +9,7 @@
     font-style: normal;
     font-weight: normal;
 }
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap");
 @font-face {
     font-family:'Roboto-Bold';
     src: url('../fonts/roboto-bold-webfont.eot');
@@ -3930,19 +3931,137 @@ color: #298693;
 
 .rightbar{
 width: 262px;
-height: 1000px;
+height: 900px;
 left: 1255px;
 top: 100px;
 position: absolute;
 background: #F7F9FF;
 border-radius: 0px 15px 15px 0px;
+padding-left: -20px;
 }
 .notice{
-    position: absolute;
 width: 262px;
 height: 334px;
-left: 1255px;
-top: 500px;
+top: 560px;
+padding-top: 100px;
 background: #298693;
 border-radius: 0px 15px 15px 0px;
+position: absolute;
+}
+
+
+
+.responsive-calendar{
+    width:262px;
+    height:300px;
+    background: #FFFFFF;
+border-radius: 0px 15px 15px 0px;
+padding: 10px 10px 0 10px;
+font-family: Poppins;
+font-style: normal;
+font-weight: normal;
+/* font-size: 12px;
+line-height: 22px; */
+text-align: center;
+
+
+}
+.container{
+    padding-top:10px;
+    padding-right:50px;
+    font-family: Poppins;
+font-style: normal;
+font-weight: normal;
+}
+.year{
+    font-family: Poppins;
+font-style: normal;
+font-weight: normal;
+}
+.expense_graph{
+    width:800px;
+    height:450px;
+    margin-left: 20px;
+}
+.box.box1-primary,.expense_graph{ width:1030px;height:430px;}
+
+.enquiry1{
+  position: absolute;
+width: 450px;
+height: 313px;
+top:750px;
+left:225px;
+background: #FBFAFA;
+border-radius: 4px;
+float: left;
+}
+.fees_collection{
+    position: absolute;
+width: 450px;
+height: 312px;
+left: 775px;
+top: 750px;
+float:right;
+background: #FBFAFA;
+border-radius: 4px;
+}
+.bottom{
+    width:800px;
+    height:400px;
+}
+.text_enquiry{
+    position: absolute;
+    width: 136px;
+    height: 22px;
+    left: 30px;
+    top: 20px;
+    
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 22px;
+    /* identical to box height, or 157% */
+    
+    
+    color: #535353;
+
+}
+.text_fees{
+    position: static;
+width: 271px;
+height: 22px;
+left: 0px;
+top: calc(50% - 22px/2);
+
+font-family: Poppins;
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 22px;
+/* identical to box height, or 157% */
+
+
+color: #535353;
+
+}
+.notice_text{
+    position: absolute;
+width: 152px;
+height: 19px;
+top:20px;
+left:15px;
+
+/* Body/Input - 14px - R */
+
+font-family: Poppins;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 22px;
+/* or 157% */
+
+
+color: #FFFFFF;
+
 }

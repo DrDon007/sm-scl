@@ -3988,7 +3988,7 @@ font-weight: normal;
 .enquiry1{
   position: absolute;
 width: 450px;
-height: 313px;
+height: 400px;
 top:750px;
 left:225px;
 background: #FBFAFA;
@@ -3997,9 +3997,9 @@ float: left;
 }
 .fees_collection{
     position: absolute;
-width: 450px;
-height: 312px;
-left: 775px;
+width: 545px;
+height: 400px;
+left: 695px;
 top: 750px;
 float:right;
 background: #FBFAFA;
@@ -4007,13 +4007,13 @@ border-radius: 4px;
 }
 .bottom{
     width:800px;
-    height:400px;
+    height:500px;
 }
 .text_enquiry{
     position: absolute;
     width: 136px;
     height: 22px;
-    left: 30px;
+    left: 50px;
     top: 20px;
     
     font-family: Poppins;

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php  $currency_symbol=$this->customlib->getSchoolCurrencyFormat();  ?>
 <style type="text/css">
   .borderwhite{border-top-color: #fff !important;}
@@ -8,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <div class="content-wrapper" style="min-height: 946px;">
   <!-- Bootstrap -->
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
@@ -118,11 +120,10 @@
 
                                 ?>  
                     
-                               <div class="expense_graph">
+                               <!-- <div class="expense_graph">
                                 <div class="box box1-primary borderwhite">
                                     <div class="box-header with-border">
                                     <p class="text_fees" >Income & Expenses</p>   
-                                    <!-- <h3 class="box-title"><?php echo $this->lang->line('fees_collection_&_expenses_for'); ?><?php echo $this->lang->line('_expenses_for')?> <?php echo date('F') . " " . date('Y'); ?></h3> -->
                                         <div class="box-tools pull-right">
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -135,7 +136,27 @@
                                     </div>
                                    
                                 </div>
+                                </div> -->
+                                <div class="expense_graph">
+                                <div class="box box-primary borderwhite">
+                                    <div class="box-header with-border">
+                                    <h3 class="box-title"><?php echo $this->lang->line('fees_collection_&_expenses_for_session'); ?> <?php echo $this->setting_model->getCurrentSessionName(); ?></h3>
+                                        <div class="box-tools pull-right">
+                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                        </div>
+                                    </div>
+
+                                    <div class="box-body">
+                                      <div class="chart">
+                                        <canvas id="lineChart" height="95"></canvas>
+                                      </div>  
+                                    </div>
+                                   
                                 </div>
+                            </div>
+
+
                           <div class="bottom">
                               <div class="enquiry1">
                               <p class="text_enquiry">Enquiry</p>
@@ -143,7 +164,8 @@
                               </div>
                               <div class="fees_collection">
                                   <p class="text_enquiry">Fees Collection</p>
-                                  <canvas id="barChart" height="250" width="250" style="width: 250px; height: 239px;"></canvas>
+                                  <canvas id="barChart" height="205"></canvas>
+                                  
                               </div>
                           <div style="clear: both;"></div>
                           </div>
@@ -165,6 +187,7 @@
                                 $div_rol = 3;
                                 
                                 ?>
+                          
         
               <?php 
                         }  } 
@@ -493,68 +516,68 @@
 <script src="<?php echo base_url() ?>backend/js/utils.js"></script> -->
 <script type="text/javascript">
  
-new Chart(document.getElementById("doughnut-chart"), {
-    type: 'doughnut',
-    data: {
-      labels: [<?php foreach($incomegraph as $value){ ?>"<?php echo $value['income_category'];?>", <?php } ?> ],
-      datasets: [
-        {
-          label: "Income",
-          backgroundColor: [<?php $s=1; foreach($incomegraph as $value){ ?>"<?php echo incomegraphColors($s++);?>", <?php if($s==8){ $s=1; }} ?> ],
-          data: [<?php $s=1; foreach($incomegraph as $value){ ?><?php echo $value['total'];?>, <?php } ?>]
-        }
-      ]
-    },
-     options: {
-                responsive: true,
-                circumference: Math.PI,
-                rotation: -Math.PI,
-                legend: {
-                    position: 'top',
-                },
-                title: {
-                    display: true,
+// new Chart(document.getElementById("doughnut-chart"), {
+//     type: 'doughnut',
+//     data: {
+//       labels: [<?php foreach($incomegraph as $value){ ?>"<?php echo $value['income_category'];?>", <?php } ?> ],
+//       datasets: [
+//         {
+//           label: "Income",
+//           backgroundColor: [<?php $s=1; foreach($incomegraph as $value){ ?>"<?php echo incomegraphColors($s++);?>", <?php if($s==8){ $s=1; }} ?> ],
+//           data: [<?php $s=1; foreach($incomegraph as $value){ ?><?php echo $value['total'];?>, <?php } ?>]
+//         }
+//       ]
+//     },
+//      options: {
+//                 responsive: true,
+//                 circumference: Math.PI,
+//                 rotation: -Math.PI,
+//                 legend: {
+//                     position: 'top',
+//                 },
+//                 title: {
+//                     display: true,
                     
-                },
-                animation: {
-                    animateScale: true,
-                    animateRotate: true
-                }
-            }
-});
+//                 },
+//                 animation: {
+//                     animateScale: true,
+//                     animateRotate: true
+//                 }
+//             }
+// });
 
-new Chart(document.getElementById("doughnut-chart1"), {
-    type: 'doughnut',
-    data: {
-      labels: [<?php foreach($expensegraph as $value){ ?>"<?php echo $value['exp_category'];?>", <?php } ?>],
-      datasets: [
-        {
-          label: "Population (millions)",
-          backgroundColor: [<?php $ss=1;foreach($expensegraph as $value){ ?>"<?php echo expensegraphColors($ss++); ?>", <?php if($ss==8){ $ss=1; }} ?>],
-          data: [<?php foreach($expensegraph as $value){ ?><?php echo $value['total'];?>, <?php } ?>]
-        }
-      ]
-    },
-   options: {
-                responsive: true,
-                circumference: Math.PI,
-                rotation: -Math.PI,
-                legend: {
-                    position: 'top',
-                },
-                title: {
-                    display: true,
+// new Chart(document.getElementById("doughnut-chart1"), {
+//     type: 'doughnut',
+//     data: {
+//       labels: [<?php foreach($expensegraph as $value){ ?>"<?php echo $value['exp_category'];?>", <?php } ?>],
+//       datasets: [
+//         {
+//           label: "Population (millions)",
+//           backgroundColor: [<?php $ss=1;foreach($expensegraph as $value){ ?>"<?php echo expensegraphColors($ss++); ?>", <?php if($ss==8){ $ss=1; }} ?>],
+//           data: [<?php foreach($expensegraph as $value){ ?><?php echo $value['total'];?>, <?php } ?>]
+//         }
+//       ]
+//     },
+//    options: {
+//                 responsive: true,
+//                 circumference: Math.PI,
+//                 rotation: -Math.PI,
+//                 legend: {
+//                     position: 'top',
+//                 },
+//                 title: {
+//                     display: true,
                    
-                },
-                animation: {
-                    animateScale: true,
-                    animateRotate: true
-                }
-            }
-});
+//                 },
+//                 animation: {
+//                     animateScale: true,
+//                     animateRotate: true
+//                 }
+//             }
+// });
 
 <?php 
-  if(($this->module_lib->hasActive('fees_collection')) || ($this->module_lib->hasActive('expense'))){
+  if(($this->module_lib->hasActive('fees_collection'))){
     ?>
     $(function () {
         var areaChartOptions = {

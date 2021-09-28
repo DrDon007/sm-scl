@@ -617,8 +617,8 @@
                 datasets: [
                     {
                         label: "Expense",
-                        fillColor: "rgba(215, 44, 44, 0.7)",
-                        strokeColor: "rgba(215, 44, 44, 0.7)",
+                        fillColor: " rgba(255, 135, 135, 0.33)",
+                        strokeColor: " rgba(255, 135, 135, 0.33)",
                         pointColor: "rgba(233, 30, 99, 0.9)",
                         pointStrokeColor: "#c1c7d1",
                         pointHighlightFill: "#fff",
@@ -627,10 +627,10 @@
                     },
                     {
                         label: "Collection",
-                        fillColor: "rgba(102, 170, 24, 0.6)",
-                        strokeColor: "rgba(102, 170, 24, 0.6)",
+                        fillColor: "rgba(41,134,147,1)",
+                        strokeColor: "rgba(41,134,147,1)",
                         pointColor: "rgba(102, 170, 24, 0.9)",
-                        pointStrokeColor: "rgba(102, 170, 24, 0.6)",
+                        pointStrokeColor: "rgba(41,134,147,1)",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(60,141,188,1)",
                         data: yearly_collection_array
@@ -651,9 +651,9 @@
             datasets: [
                 {
                     label: "Electronics",
-                    fillColor: "rgba(102, 170, 24, 0.6)",
-                    strokeColor: "rgba(102, 170, 24, 0.6)",
-                    pointColor: "rgba(102, 170, 24, 0.6)",
+                    fillColor: "rgba(72,181,185,1)",
+                    strokeColor: "rgba(72,181,185,1)",
+                    pointColor: "rgba(72,181,185,1)",
                     pointStrokeColor: "#c1c7d1",
                     pointHighlightFill: "#fff",
                     pointHighlightStroke: "rgba(220,220,220,1)",
@@ -697,6 +697,7 @@
             barChart.Bar(barChartData, barChartOptions);
         }
     });
+    
 
     <?php
   }

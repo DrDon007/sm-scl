@@ -3869,7 +3869,7 @@ input[type=checkbox], input[type=radio] {
 
 .div1{
     padding-left: 10px;
-width: 255px;
+width: 25%;
 height: 96px;
 display:table-cell;
 background: #FBFAFA;
@@ -3879,7 +3879,7 @@ border-radius: 0px 15px 15px 0px;
 .div2{
     padding-left: 10px;
     /* position: absolute; */
-width: 255px;
+width: 25%;
 height: 96px;
 display:table-cell;
 background: #FBFAFA;
@@ -3888,7 +3888,7 @@ border-radius: 0px 15px 15px 0px;
 .div3{
     padding-left: 10px;
     /* position: absolute; */
-width: 255px;
+width: 25%;
 height: 96px;
 display:table-cell;
 background: #FBFAFA;
@@ -3897,7 +3897,7 @@ border-radius: 0px 15px 15px 0px;
 .div4{
     padding-left: 10px;
     /* position: absolute; */
-width: 255px;
+width: 25%;
 height: 96px;
 display:table-cell;
 background: #FBFAFA;
@@ -3930,17 +3930,17 @@ color: #298693;
 }
 
 .rightbar{
-width: 262px;
-height: 900px;
-left: 1255px;
+width:100%;
+/* height: 900px; */
+/* left: 1255px;
 top: 100px;
-position: absolute;
+position: absolute; */
 background: #F7F9FF;
 border-radius: 0px 15px 15px 0px;
-padding-left: -20px;
+/* padding-left: -20px; */
 }
 .notice{
-width: 262px;
+width: 100%;
 height: 334px;
 top: 560px;
 padding-top: 100px;
@@ -3952,8 +3952,8 @@ position: absolute;
 
 
 .responsive-calendar{
-    width:262px;
-    height:300px;
+    width:100%;
+    height:400px;
     background: #FFFFFF;
 border-radius: 0px 15px 15px 0px;
 padding: 10px 10px 0 10px;
@@ -3979,25 +3979,24 @@ font-style: normal;
 font-weight: normal;
 }
 .expense_graph{
-    width:800px;
+    width:100%;
     height:450px;
     margin-left: 20px;
 }
-.box.box1-primary,.expense_graph{ width:1030px;height:430px;}
 
 .enquiry1{
-  position: absolute;
-width: 450px;
+  /* position: absolute; */
+width: 100%;
 height: 400px;
-top:750px;
-left:225px;
+/* top:750px;
+left:225px; */
 background: #FBFAFA;
 border-radius: 4px;
 float: left;
 }
 .fees_collection{
-    position: absolute;
-width: 545px;
+    /* position: absolute; */
+width: 100%;
 height: 400px;
 left: 695px;
 top: 750px;

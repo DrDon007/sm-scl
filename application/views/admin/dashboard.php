@@ -101,7 +101,7 @@
                                             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                                             <div class="box-body">
                                       <div class="chart">
-                                        <!-- <canvas id="lineChart" height="95"></canvas> -->
+                                        <canvas id="lineChart" height="95"></canvas>
                                       </div>  
                                     </div>
                                         </div>
@@ -125,7 +125,7 @@
      <div class="col-md-6">  
                              <div class="fees_collection">
                              <p class="text_enquiry">Fees Collection</p>
-                                  <!-- <canvas id="barChart" height="205"></canvas> -->
+                                  <canvas id="barChart" height="205"></canvas>
                              </div>
 
      </div>

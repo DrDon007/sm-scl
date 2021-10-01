@@ -4010,10 +4010,10 @@ border-radius: 4px;
 }
 .text_enquiry{
     position: absolute;
-    width: 136px;
+    /* width: 136px;
     height: 22px;
     left: 50px;
-    top: 20px;
+    top: 20px; */
     
     font-family: Poppins;
     font-style: normal;
@@ -4028,10 +4028,10 @@ border-radius: 4px;
 }
 .text_fees{
     position: static;
-width: 271px;
+/* width: 271px;
 height: 22px;
 left: 0px;
-top: calc(50% - 22px/2);
+top: calc(50% - 22px/2); */
 
 font-family: Poppins;
 font-style: normal;

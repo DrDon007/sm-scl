@@ -133,10 +133,15 @@ color: #999696;
     min: height 100%;
     height:100%;
 }
+.logo{
+    width:15%;
+    height:15%;
+    padding:30px 0px 0px 30px;
+}
 </style>
 <body>
+<img  src="<?php echo base_url(); ?>uploads/school_content/admin_logo/<?php $this->setting_model->getAdminlogo();?>" />
     <section  class="h-100">
-        <img src="<?php echo base_url(); ?>uploads/school_content/admin_logo/<?php $this->setting_model->getAdminlogo();?>" />
         <!-- <div class="jumbotron vertical-center"> -->
 <div class="container">
   <div class="row mb-2">

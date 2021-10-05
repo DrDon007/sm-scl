@@ -3878,7 +3878,6 @@ border-radius: 0px 15px 15px 0px;
 
 .div2{
     padding-left: 10px;
-    /* position: absolute; */
 width: 25%;
 height: 96px;
 display:table-cell;
@@ -3887,7 +3886,6 @@ border-radius: 0px 15px 15px 0px;
 }
 .div3{
     padding-left: 10px;
-    /* position: absolute; */
 width: 25%;
 height: 96px;
 display:table-cell;
@@ -3896,7 +3894,6 @@ border-radius: 0px 15px 15px 0px;
 }
 .div4{
     padding-left: 10px;
-    /* position: absolute; */
 width: 25%;
 height: 96px;
 display:table-cell;
@@ -3920,6 +3917,15 @@ line-height: 22px;
 color: #999696;
 }
 
+.inner-text2{
+    font-family: Poppins;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 80px;
+color: #999696;
+}
+
 .inner-text1{
     font-family: Poppins;
 font-style: normal;
@@ -3931,39 +3937,40 @@ color: #298693;
 
 .rightbar{
 width:100%;
-/* height: 900px; */
+height: 900px;
 /* left: 1255px;
 top: 100px;
 position: absolute; */
+padding-top:15px;
 background: #F7F9FF;
 border-radius: 0px 15px 15px 0px;
 /* padding-left: -20px; */
 }
 .notice{
-width: 100%;
+width: 80%;
 height: 334px;
 top: 560px;
 padding-top: 100px;
 background: #298693;
+margin-left: 20px;
 border-radius: 0px 15px 15px 0px;
+padding: 10px 10px 0 10px;
 position: absolute;
 }
 
 
 
 .responsive-calendar{
-    width:100%;
-    height:400px;
+    width: 90%;
+    height: 350px;
     background: #FFFFFF;
-border-radius: 0px 15px 15px 0px;
-padding: 10px 10px 0 10px;
-font-family: Poppins;
-font-style: normal;
-font-weight: normal;
-/* font-size: 12px;
-line-height: 22px; */
-text-align: center;
-
+    margin: 0px 0px 18px 15px;
+    border-radius: 0px 15px 15px 0px;
+    padding: 10px 10px 0 10px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    text-align: center;
 
 }
 .container{
@@ -3985,82 +3992,39 @@ font-weight: normal;
 }
 
 .enquiry1{
-  /* position: absolute; */
-width: 100%;
-height: 400px;
-/* top:750px;
-left:225px; */
+height: 350px;
 background: #FBFAFA;
-border-radius: 4px;
-float: left;
 }
 .fees_collection{
-    /* position: absolute; */
-width: 100%;
-height: 400px;
-left: 695px;
-top: 750px;
-float:right;
 background: #FBFAFA;
-border-radius: 4px;
 }
-.bottom{
-    width:800px;
-    height:500px;
-}
-.text_enquiry{
-    position: absolute;
-    /* width: 136px;
-    height: 22px;
-    left: 50px;
-    top: 20px; */
-    
+.text_enquiry{ 
     font-family: Poppins;
+    margin-top:30px;
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
     line-height: 22px;
-    /* identical to box height, or 157% */
-    
-    
     color: #535353;
-
 }
 .text_fees{
     position: static;
-/* width: 271px;
-height: 22px;
-left: 0px;
-top: calc(50% - 22px/2); */
-
 font-family: Poppins;
 font-style: normal;
 font-weight: 600;
 font-size: 14px;
-line-height: 22px;
-/* identical to box height, or 157% */
-
-
 color: #535353;
-
 }
 .notice_text{
-    position: absolute;
+    /* position: absolute;
 width: 152px;
 height: 19px;
 top:20px;
-left:15px;
-
-/* Body/Input - 14px - R */
-
+left:15px; */
 font-family: Poppins;
 font-style: normal;
 font-weight: normal;
 font-size: 14px;
 line-height: 22px;
-/* or 157% */
-
-
 color: #FFFFFF;
-
 }

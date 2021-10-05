@@ -1,37 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BALA BHARATHI VIDYALAYAM</title>
-        
-        <link rel="stylesheet" href="<?php echo base_url(); ?>backend/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="<?php echo base_url(); ?>css/ThemeUpdate/header.css">
-        <?php
-          $this->load->view('layout/theme');
-         ?>
-</head>
-<body>
-<header class="main-header" id="alert">
-    <a href="<?php echo base_url(); ?>admin/admin/dashboard" class="logo">
-        <span class="logo-mini"><img src="<?php echo base_url(); ?>uploads/school_content/admin_small_logo/<?php $this->setting_model->getAdminsmalllogo();?>" alt="<?php echo $this->customlib->getAppName() ?>" /></span>
-        <span class="logo-lg"><img src="<?php echo base_url(); ?>uploads/school_content/admin_logo/<?php $this->setting_model->getAdminlogo();?>" alt="<?php echo $this->customlib->getAppName() ?>" /></span>
-    </a>
-    <div class="profile">
-        <div class="search">
-            <input placeholder="search" type="hidden">
-        </div>
-        <div class="notification">
-        </div>
-</header>
-
-</body>
-</html>
- -->
-
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html <?php echo $this->customlib->getRTL(); ?>>
     <head>
         <meta charset="utf-8">
@@ -176,8 +143,7 @@ if ($this->config->item('SSLK') == "") {
                             <div class="navbar-custom-menu">
                                
                                 
-                                     
-                                <ul class="nav navbar-nav headertopmenu">
+                            <ul class="nav navbar-nav headertopmenu">
  <?php
 if ($this->module_lib->hasActive('calendar_to_do_list')) {
     if ($this->rbac->hasPrivilege('calendar_to_do_list', 'can_view')) {
@@ -283,9 +249,8 @@ if (!empty($image)) {
                     </div>
                 </nav>
             </header>
-
             <?php $this->load->view('layout/sidebar');?>
-            <script>
+            <!-- <script>
                 function defoult(id){
       var defoult=  $('#languageSwitcher').val();
    
@@ -322,4 +287,24 @@ if (!empty($image)) {
 
     }
 
-            </script>
+            </script> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

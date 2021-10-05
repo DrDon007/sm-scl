@@ -1,3 +1,7 @@
+
+
+
+
 <!DOCTYPE html>
 <?php  $currency_symbol=$this->customlib->getSchoolCurrencyFormat();  ?>
 <style type="text/css">
@@ -10,7 +14,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<div class="content-wrapper" style="min-height: 946px;">
+
+
+
+<script src="<?php echo base_url(); ?>/js/jquery.js"></script>
+<script src="<?php echo base_url(); ?>/js/responsive-calendar.js"></script>
+
+
+    <div class="content-wrapper" style="min-height: 946px;">
   <!-- Bootstrap -->
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
     <!-- Respomsive slider -->
@@ -93,45 +104,46 @@
           <div class="col-md-12">
 
 
-                                <div class="expense_graph">
-                                <h3 class="box-title"><?php echo $this->lang->line('fees_collection_&_expenses_for_session'); ?> <?php echo $this->setting_model->getCurrentSessionName(); ?></h3>
+                              
+                                <h3 class="inner-text2"><?php echo $this->lang->line('fees_collection_&_expenses_for_session'); ?> <?php echo $this->setting_model->getCurrentSessionName(); ?></h3>
 
                                 <div class="box-tools pull-right">
                                             <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                             <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                            </div>
+
                                             <div class="box-body">
                                       <div class="chart">
                                         <canvas id="lineChart" height="95"></canvas>
                                       </div>  
                                     </div>
-                                        </div>
-                                        </div>
+                                    
 
 
 
           </div>
 
 
-          <div class="row">
+          <!-- <div class="row"> -->
 
 
-     <div class="col-md-6">  
-                             <div class="enquiry1">
-                             <p class="text_enquiry">Enquiry</p>
+     <div class="col-md-6 ">  
+                            <div class="enquiry1">
+                             <h5 class="text_enquiry">Enquiry</h5>
                              </div>
 
      </div>
 
      <div class="col-md-6">  
                              <div class="fees_collection">
-                             <p class="text_enquiry">Fees Collection</p>
+                             <h5 class="text_enquiry">Fees Collection</h5>
                                   <canvas id="barChart" height="205"></canvas>
                              </div>
 
      </div>
 
 
-     </div>
+     <!-- </div> -->
 
 
 
@@ -140,7 +152,7 @@
 
   <div class="col-md-3">
       
-  <!-- <div class="rightbar"> -->
+  <div class="rightbar">
       <!-- Responsive calendar - START -->
     	<div class="responsive-calendar">
         <div class="controls">
@@ -158,29 +170,15 @@
         <div class="days" data-group="days">
           
         </div>
-      </div>
+       </div>
       <!-- Responsive calendar - END -->
       <div class="notice">
         <p class="notice_text" >Notice Board</p>
       </div>
-    <!-- </div> -->
+    </div>
 
     
-    <script src="<?php echo base_url(); ?>/js/jquery.js"></script>
-    <script src="<?php echo base_url(); ?>/js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url(); ?>/js/responsive-calendar.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function () {
-        $(".responsive-calendar").responsiveCalendar({
-          time: '2021-09',
-          events: {
-            "2013-04-30": {"number": 5, "url": "http://w3widgets.com/responsive-slider"},
-            "2013-04-26": {"number": 1, "url": "http://w3widgets.com"}, 
-            "2013-05-03":{"number": 1}, 
-            "2013-06-12": {}}
-        });
-      });
-    </script>
+   
 
 
 
@@ -427,4 +425,18 @@
         });
     });
 </script>
+
+
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $(".responsive-calendar").responsiveCalendar({
+          time: '2021-10',
+          events: {
+            "2013-04-30": {"number": 5, "url": "http://w3widgets.com/responsive-slider"},
+            "2013-04-26": {"number": 1, "url": "http://w3widgets.com"}, 
+            "2013-05-03":{"number": 1}, 
+            "2013-06-12": {}}
+        });
+      });
+    </script>
 

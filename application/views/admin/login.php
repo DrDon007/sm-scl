@@ -140,7 +140,7 @@ color: #999696;
 }
 </style>
 <body>
-<img  src="<?php echo base_url(); ?>uploads/school_content/admin_logo/<?php $this->setting_model->getAdminlogo();?>" />
+<img class="logo" src="<?php echo base_url(); ?>uploads/school_content/admin_logo/<?php $this->setting_model->getAdminlogo();?>" />
     <section  class="h-100">
         <!-- <div class="jumbotron vertical-center"> -->
 <div class="container">

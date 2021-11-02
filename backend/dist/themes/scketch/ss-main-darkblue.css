@@ -35,7 +35,7 @@ border: 1px solid #03324e;color:#fff;
 .slide-content h4 {line-height: normal;}
 /* .fixedmenu{background: #fff !important;} */
 .fixedmenu {
-  background:none !important;
+  /* background:none !important; */
 }
 .removehover {color: #fff !important;}
 /*end 19 August*/

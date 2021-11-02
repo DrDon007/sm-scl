@@ -71,9 +71,7 @@ class User extends Student_Controller
         $this->session->set_userdata('top_menu', 'Dashboard');
         $student_id            = $this->customlib->getStudentSessionUserID();
         $student_current_class = $this->customlib->getStudentCurrentClsSection();
-
         $student = $this->student_model->getStudentByClassSectionID($student_current_class->class_id, $student_current_class->section_id, $student_id);
-
         $data = array();
         if (!empty($student)) {
 
@@ -98,22 +96,55 @@ class User extends Student_Controller
             $data['category_list']  = $category_list;
             $data['gradeList']      = $gradeList;
             $data['student']        = $student;
+            $this->load->model("Student_model");
+            $class_id                     = $student_current_class->class_id;
+            $data['res']=$this->Student_model->getBirthdays();
+            $data['res1']=$this->Student_model->upcomingClass();
+            $data['res3']=$this->Student_model->getEvents();
+            $data['res2']=$this->Student_model->subjectAttendence($class_id);
+            $this->session->set_userdata('top_menu', 'Time_table');
+            $student_current_class = $this->customlib->getStudentCurrentClsSection();
+    
+            $student_id       = $this->customlib->getStudentSessionUserID();
+            $student          = $this->student_model->get($student_id);
+            $days        = $this->customlib->getDaysname();
+            $days_record = array();
+            foreach ($days as $day_key => $day_value) {
+             
+                $days_record[$day_key] = $this->subjecttimetable_model->getparentSubjectByClassandSectionDay($student_current_class->class_id, $student_current_class->section_id, $day_key);
+            }
+            $data['timetable'] = $days_record;
 
-        }
+            $this->load->model("Notification_model");
 
-        $unread_notifications = $this->notification_model->getUnreadStudentNotification();
-        $notification_bydate=array();
-         foreach ($unread_notifications as $unread_notifications_key => $unread_notifications_value) {
-          if(date($this->customlib->getSchoolDateFormat()) >= date($this->customlib->getSchoolDateFormat(), $this->customlib->dateyyyymmddTodateformat($unread_notifications_value->publish_date))){
-            $notification_bydate[]=$unread_notifications_value;
-          }
-        }
-        $data['unread_notifications']=$notification_bydate;
+            $data['title'] = 'Notifications';
+            $user_role     = $this->customlib->getUserRole();
+            if ($user_role == 'student') {
+                $student_id = $this->customlib->getStudentSessionUserID();
+                $notifications = $this->notification_model->getNotificationForStudent($student_id);
+            } elseif ($user_role == 'parent') {
+                $student_id    = $this->customlib->getUsersID();
+                $notifications = $this->notification_model->getNotificationForParent($student_id);
+            }
+    
+            foreach ($notifications as $key => $value) {
+              if(date($this->customlib->getSchoolDateFormat()) >= date($this->customlib->getSchoolDateFormat(), $this->customlib->dateyyyymmddTodateformat($value['publish_date']))){
+                $notification_bydate[]=$value;
+              }
+            }
+    
+            $data['notificationlist'] =$notification_bydate;
        
         $this->load->view('layout/student/header', $data);
         $this->load->view('user/dashboard', $data);
         $this->load->view('layout/student/footer', $data);
-    }
+    }}
+ 
+     public function test(){
+        $this->load->model("Student_model");
+        $data['res']=$this->Student_model->subjectAttendence();
+        var_dump($data['res']['0']);        
+     }
 
     public function changepass()
     {

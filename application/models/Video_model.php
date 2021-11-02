@@ -52,7 +52,6 @@ class Video_model extends MY_model
                 return $this->db->insert_id();
             }          
     }
-
     function getdata()
     {
         $sql="SELECT ss.`lacture_video`,ss.lacture_youtube_url,iv.video_timing,iv.question_id ,iv.subject_syllabus_id,q.question,q.opt_a,q.opt_b,q.opt_c,q.opt_d,q.opt_e,q.correct,q.class,q.section,q.subject_id FROM `subject_syllabus` ss INNER JOIN `intractive_video_question` iv ON ss.id=iv.subject_syllabus_id INNER JOIN questions q ON iv.question_id=q.id";

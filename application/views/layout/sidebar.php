@@ -315,7 +315,8 @@
                         </a>
                         <ul class="treeview-menu">
                             <?php
-                            if (!is_subAttendence()) {
+
+                            // if (!is_subAttendence()) {
                                 if ($this->rbac->hasPrivilege('student_attendance', 'can_view')) {
                                     ?>
                                     <li class="<?php echo set_Submenu('stuattendence/index'); ?>"><a href="<?php echo base_url(); ?>admin/stuattendence"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('student_attendance'); ?></a></li>
@@ -326,7 +327,7 @@
                                     <li class="<?php echo set_Submenu('stuattendence/attendenceReport'); ?>"><a href="<?php echo base_url(); ?>admin/stuattendence/attendencereport"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('attendance_by_date'); ?></a></li>
                                     <?php
                                 }
-                            } else {
+                            // } else {
                                 if ($this->rbac->hasPrivilege('student_attendance', 'can_view')) {
                                     ?>
                                     <li class="<?php echo set_Submenu('subjectattendence/index'); ?>"><a href="<?php echo base_url(); ?>admin/subjectattendence"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('period') . " " . $this->lang->line('attendance'); ?></a></li>
@@ -339,7 +340,8 @@
                                 <li class="<?php echo set_Submenu('subjectattendence/reportbydate'); ?>"><a href="<?php echo site_url('admin/subjectattendence/reportbydate'); ?>"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('period') . " " . $this->lang->line('attendance') . " " . $this->lang->line('by') . " " . $this->lang->line('date'); ?></a></li>
 
                                 <?php
-                            } }
+                            } 
+                        // }
                             if($this->rbac->hasPrivilege('approve_leave','can_view')){
                             ?>
 

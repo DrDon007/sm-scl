@@ -108,102 +108,105 @@ if ($this->config->item('SSLK') == "") {
 
     checksidebar();
 
+
 </script> 
        <div class="wrapper">
 
             <header class="main-header" id="alert">
-                <a href="<?php echo base_url(); ?>admin/admin/dashboard" class="logo">
-                    <span class="logo-mini"><img src="<?php echo base_url(); ?>uploads/school_content/admin_small_logo/<?php $this->setting_model->getAdminsmalllogo();?>" alt="<?php echo $this->customlib->getAppName() ?>" /></span>
-                    <span class="logo-lg"><img src="<?php echo base_url(); ?>uploads/school_content/admin_logo/<?php $this->setting_model->getAdminlogo();?>" alt="<?php echo $this->customlib->getAppName() ?>" /></span>
-                </a>
-                <nav class="navbar navbar-static-top" role="navigation">
-                    <a onclick="collapseSidebar()"  class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
+            <a href="<?php echo base_url(); ?>admin/admin/dashboard" class="logo">
+  <span class="logo-mini"><img src="<?php echo base_url(); ?>uploads/school_content/admin_small_logo/<?php $this->setting_model->getAdminsmalllogo();?>" alt="<?php echo $this->customlib->getAppName() ?>" /></span>
+  <span class="logo-lg"><img src="<?php echo base_url(); ?>uploads/school_content/admin_logo/<?php $this->setting_model->getAdminlogo();?>" alt="<?php echo $this->customlib->getAppName() ?>" /></span>
+</a>
+<nav class="navbar navbar-static-top" role="navigation">
+  <a onclick="collapseSidebar()"  class="sidebar-toggle" data-toggle="offcanvas" role="button">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+  </a>
+       
+  <?php if ($this->rbac->hasPrivilege('student', 'can_view')) {?>
+            
+            <form class="navbar-form navbar-left search-form" role="search"  action="<?php echo site_url('admin/admin/search'); ?>" method="POST">
+                <?php echo $this->customlib->getCSRF(); ?>
+                <div class="input-group">
+                    <input type="text" value="<?php echo set_value('search_text1');?>"  name="search_text1" class="form-control search-form search-form3" placeholder="<?php echo $this->lang->line('search_by_student_name'); ?>">
+                    <span class="input-group-btn">
+                        <button type="submit" name="search" id="search-btn" style="" class="btn btn-flat topsidesearchbtn"><i class="fa fa-search"></i></button>
+                    </span>
+                </div>
 
-                    <?php if ($this->rbac->hasPrivilege('student', 'can_view')) {?>
-                              
-                              <form class="navbar-form navbar-left search-form" role="search"  action="<?php echo site_url('admin/admin/search'); ?>" method="POST">
-                                  <?php echo $this->customlib->getCSRF(); ?>
-                                  <div class="input-group">
-                                      <input type="text" value="<?php echo set_value('search_text1');?>" name="search_text1" class="form-control search-form search-form3" placeholder="<?php echo $this->lang->line('search_by_student_name'); ?>">
-                                      <span class="input-group-btn">
-                                          <button type="submit" name="search" id="search-btn" style="" class="btn btn-flat topsidesearchbtn"><i class="fa fa-search"></i></button>
-                                      </span>
-                                  </div>
-
-                              </form>
-                          <?php }?>
-                    <div class="col-lg-7 col-md-9 col-sm-10 col-xs-7">
-                        <div class="pull-right">
-                           
-                            <div class="navbar-custom-menu">
-                               
-                                
-                            <ul class="nav navbar-nav headertopmenu">
- <?php
+            </form>
+        <?php }?>
+                
+  <!-- <div class="col-lg-7 col-md-9 col-sm-10 col-xs-7"> -->
+      <div class="pull-right">
+         
+          <div class="navbar-custom-menu">
+             
+              
+          <ul class="nav navbar-nav headertopmenu">
+<?php
 if ($this->module_lib->hasActive('calendar_to_do_list')) {
-    if ($this->rbac->hasPrivilege('calendar_to_do_list', 'can_view')) {
-        ?>
-                                            <li class="cal15"><a data-placement="bottom" data-toggle="tooltip" title="<?php echo $this->lang->line('calendar') ?>" href="<?php echo base_url() ?>admin/calendar/events" ><i class="fa fa-calendar"></i></a>
+if ($this->rbac->hasPrivilege('calendar_to_do_list', 'can_view')) {
+?>
+                          <li class="cal15"><a data-placement="bottom" data-toggle="tooltip" title="<?php echo $this->lang->line('calendar') ?>" href="<?php echo base_url() ?>admin/calendar/events" ><img style="width:70%;height:70%" src="<?php echo base_url()?>images/vector1.png"></i></a>
 
-                                            </li>
-                                            <?php
+                          </li>
+                          <?php
 }
 }
 ?>
-                                    <?php
+                  <?php
 if ($this->module_lib->hasActive('calendar_to_do_list')) {
-    if ($this->rbac->hasPrivilege('calendar_to_do_list', 'can_view')) {
-        ?>
-                                            <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="<?php echo $this->lang->line('task') ?>">
-                                                <a href="#"  class="dropdown-toggle todoicon" data-toggle="dropdown">
-                                                    <i class="fa fa-check-square-o"></i>
-                                                    <?php
+if ($this->rbac->hasPrivilege('calendar_to_do_list', 'can_view')) {
+?>
+                          <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="<?php echo $this->lang->line('task') ?>">
+                              <a href="#"  class="dropdown-toggle todoicon" data-toggle="dropdown">
+                              <img style="width:70%;height:70%"  src="<?php echo base_url()?>images/notification.png">
+                                  <?php
 $userdata = $this->customlib->getUserData();
-        $count    = $this->customlib->countincompleteTask($userdata["id"]);
-        if ($count > 0) {
-            ?>
+$count    = $this->customlib->countincompleteTask($userdata["id"]);
+if ($count > 0) {
+?>
 
-                                                        <span class="todo-indicator"><?php echo $count ?></span>
-                                                    <?php }?>
-                                                </a>
-                                                <ul class="dropdown-menu menuboxshadow">
+                                      <span class="todo-indicator"><?php echo $count ?></span>
+                                  <?php }?>
+                              </a>
+                              <ul class="dropdown-menu menuboxshadow">
 
-                                                    <li class="todoview plr10 ssnoti"><?php echo $this->lang->line('today_you_have'); ?> <?php echo $count; ?> <?php echo $this->lang->line('pending_task'); ?><a href="<?php echo base_url() ?>admin/calendar/events" class="pull-right pt0"><?php echo $this->lang->line('view'); ?> <?php echo $this->lang->line('all'); ?></a></li>
-                                                    <li>
-                                                        <ul class="todolist">
-                                                            <?php
+                                  <li class="todoview plr10 ssnoti"><?php echo $this->lang->line('today_you_have'); ?> <?php echo $count; ?> <?php echo $this->lang->line('pending_task'); ?><a href="<?php echo base_url() ?>admin/calendar/events" class="pull-right pt0"><?php echo $this->lang->line('view'); ?> <?php echo $this->lang->line('all'); ?></a></li>
+                                  <li>
+                                      <ul class="todolist">
+                                          <?php
 $tasklist = $this->customlib->getincompleteTask($userdata["id"]);
-        foreach ($tasklist as $key => $value) {
-            ?>
-                                                                <li><div class="checkbox">
-                                                                        <label><input type="checkbox" id="newcheck<?php echo $value["id"] ?>" onclick="markc('<?php echo $value["id"] ?>')" name="eventcheck"  value="<?php echo $value["id"]; ?>"><?php echo $value["event_title"] ?></label>
-                                                                    </div></li>
-                                                            <?php }?>
+foreach ($tasklist as $key => $value) {
+?>
+                                              <li><div class="checkbox">
+                                                      <label><input type="checkbox" id="newcheck<?php echo $value["id"] ?>" onclick="markc('<?php echo $value["id"] ?>')" name="eventcheck"  value="<?php echo $value["id"]; ?>"><?php echo $value["event_title"] ?></label>
+                                                  </div></li>
+                                          <?php }?>
 
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
+                                      </ul>
+                                  </li>
+                              </ul>
+                          </li>
 
-                                        
-                                            <?php
+                      
+                          <?php
 }
 }
-                                if ($this->module_lib->hasActive('chat')){
-                                    if($this->rbac->hasPrivilege('chat','can_view')){
-                                        ?>
-                                         <li class="cal15"><a data-placement="bottom" data-toggle="tooltip" title="" href="<?php echo base_url()?>admin/chat" data-original-title="Chat" class="todoicon"><i class="fa fa-whatsapp"></i></a></li> 
-                                        <?php
-                                    }
-                                ?>
+              if ($this->module_lib->hasActive('chat')){
+                  if($this->rbac->hasPrivilege('chat','can_view')){
+                      ?>
+                      <!-- <li class="cal15"><a href="<?php echo base_url()?>admin/chat"><img src="<?php echo base_url()?>images/chat.png"></a></li> -->
+                      <li class="cal15"><a data-placement="bottom" data-toggle="tooltip" title="" href="<?php echo base_url()?>admin/chat" data-original-title="Chat" class="todoicon"><img style="width:70%;height:70%"  src="<?php echo base_url()?>images/chat.png"></i></a></li> 
+                      <?php
+                  }
+              ?>
 
-                                  
-                                <?php }
+                
+              <?php }
 $file   = "";
 $result = $this->customlib->getUserData();
 
@@ -212,42 +215,54 @@ $role  = $result["user_type"];
 $id    = $result["id"];
 if (!empty($image)) {
 
-    $file = "uploads/staff_images/" . $image;
+$file = "uploads/staff_images/" . $image;
 } else {
 
-    $file = "uploads/student_images/no_image.png";
+$file = "uploads/student_images/no_image.png";
 }
 ?>
-                                    <li class="dropdown user-menu">
-                                        <a class="dropdown-toggle" style="padding: 15px 13px;" data-toggle="dropdown" href="#" aria-expanded="false">
-                                            <img src="<?php echo base_url() . $file; ?>" class="topuser-image" alt="User Image">
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-user menuboxshadow">
-                                            <li>
-                                                <div class="sstopuser">
-                                                    <div class="ssuserleft">
-                                                        <a href="<?php echo base_url() . "admin/staff/profile/" . $id ?>"><img src="<?php echo base_url() . $file; ?>" alt="User Image"></a>
-                                                    </div>
 
-                                                    <div class="sstopuser-test">
-                                                        <h4 style="text-transform: capitalize;"><?php echo $this->customlib->getAdminSessionUserName(); ?></h4>
-                                                        <h5><?php echo $role; ?></h5>
-                                                     
-                                                    </div>
 
-                                                    <div class="divider"></div>
-                                                    <div class="sspass">
-                                                        <a href="<?php echo base_url() . "admin/staff/profile/" . $id ?>" data-toggle="tooltip" title="" data-original-title="My Profile"><i class="fa fa-user"></i>Profile</a>
-                                                        <a class="pl25" href="<?php echo base_url(); ?>admin/admin/changepass" data-toggle="tooltip" title="" data-original-title="Change Password"><i class="fa fa-key"></i><?php echo $this->lang->line('password'); ?></a> <a class="pull-right" href="<?php echo base_url(); ?>site/logout"><i class="fa fa-sign-out fa-fw"></i><?php echo $this->lang->line('logout'); ?></a>
-                                                    </div>
-                                                </div><!--./sstopuser--></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
+
+
+
+
+
+
+
+
+
+                  <li class="dropdown user-menu">
+                      <a class="dropdown-toggle" style="padding: 15px 13px;" data-toggle="dropdown" href="#" aria-expanded="false">
+                          <img style="border-radius:20%" src="<?php echo base_url() . $file; ?>" class="topuser-image" alt="User Image">
+                      </a>
+                      <ul class="dropdown-menu dropdown-user menuboxshadow">
+                          <li>
+                              <div class="sstopuser">
+                                  <div class="ssuserleft">
+                                      <a href="<?php echo base_url() . "admin/staff/profile/" . $id ?>"><img src="<?php echo base_url() . $file; ?>" alt="User Image"></a>
+                                  </div>
+
+                                  <div class="sstopuser-test">
+                                      <h4 style="text-transform: capitalize;"><?php echo $this->customlib->getAdminSessionUserName(); ?></h4>
+                                      <h5><?php echo $role; ?></h5>
+                                   
+                                  </div>
+
+                                  <div class="divider"></div>
+                                  <div class="sspass">
+                                      <a href="<?php echo base_url() . "admin/staff/profile/" . $id ?>" data-toggle="tooltip" title="" data-original-title="My Profile"><i class="fa fa-user"></i>Profile</a>
+                                      <a class="pl25" href="<?php echo base_url(); ?>admin/admin/changepass" data-toggle="tooltip" title="" data-original-title="Change Password"><i class="fa fa-key"></i><?php echo $this->lang->line('password'); ?></a> <a class="pull-right" href="<?php echo base_url(); ?>site/logout"><i class="fa fa-sign-out fa-fw"></i><?php echo $this->lang->line('logout'); ?></a>
+                                  </div>
+                              </div><!--./sstopuser--></li>
+                      </ul>
+                  </li>
+              </ul>
+          <!-- </div> -->
+      </div>
+  </div>
+</nav>
+
             </header>
             <?php $this->load->view('layout/sidebar');?>
             <!-- <script>

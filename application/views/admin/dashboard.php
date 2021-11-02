@@ -1,7 +1,3 @@
-
-
-
-
 <!DOCTYPE html>
 <?php  $currency_symbol=$this->customlib->getSchoolCurrencyFormat();  ?>
 <style type="text/css">
@@ -9,25 +5,25 @@
   .box-header>.box-tools {display: none;}
   .sidebar-collapse #barChart{height: 100% !important;}
   .sidebar-collapse #lineChart{height: 100% !important;}
+  .html,body{
+    background-color:#E5E5E5;
+}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
-
 <script src="<?php echo base_url(); ?>/js/jquery.js"></script>
 <script src="<?php echo base_url(); ?>/js/responsive-calendar.js"></script>
 
 
-    <div class="content-wrapper" style="min-height: 946px;">
+    <div class="content-wrapper" style="min-height: 760px;">
   <!-- Bootstrap -->
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
     <!-- Respomsive slider -->
     <link href="<?php echo base_url(); ?>/css/responsive-calendar.css" rel="stylesheet">
 
-    <h3 style="font-family:poppins;color:#535353 font-weight: 600;font-size: 24px;line-height: 36px; padding-left:15px;">Dashboard</h3>
+    <h3 style="font-family:poppins;color:#535353 font-weight: 600;font-size: 24px;line-height: 10px; padding-left:32px; padding-bottom:10px;">Dashboard</h3>
 
 
     
@@ -102,23 +98,20 @@
             
 
           <div class="col-md-12">
-
+  <div class="fee_graph" style="height:200px;">
 
                               
                                 <h3 class="inner-text2"><?php echo $this->lang->line('fees_collection_&_expenses_for_session'); ?> <?php echo $this->setting_model->getCurrentSessionName(); ?></h3>
 
-                                <div class="box-tools pull-right">
-                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                            </div>
+                               
 
                                             <div class="box-body">
                                       <div class="chart">
-                                        <canvas id="lineChart" height="95"></canvas>
+                                        <canvas id="lineChart" height="50"></canvas>
                                       </div>  
                                     </div>
                                     
-
+                                    </div>
 
 
           </div>
@@ -137,7 +130,7 @@
      <div class="col-md-6">  
                              <div class="fees_collection">
                              <h5 class="text_enquiry">Fees Collection</h5>
-                                  <canvas id="barChart" height="205"></canvas>
+                                  <canvas id="barChart" height="180"></canvas>
                              </div>
 
      </div>
@@ -314,17 +307,17 @@
                         label: "Expense",
                         fillColor: " rgba(255, 135, 135, 0.33)",
                         strokeColor: " rgba(255, 135, 135, 0.33)",
-                        pointColor: "rgba(233, 30, 99, 0.9)",
+                        pointColor: "rgba(41,134,147,1)",
                         pointStrokeColor: "#c1c7d1",
                         pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(220,220,220,1)",
+                        pointHighlightStroke: "rgba(255, 135, 135, 0.33)",
                         data: yearly_expense_array
                     },
                     {
                         label: "Collection",
                         fillColor: "rgba(41,134,147,1)",
                         strokeColor: "rgba(41,134,147,1)",
-                        pointColor: "rgba(102, 170, 24, 0.9)",
+                        pointColor: "rgba(41,134,147,1)",
                         pointStrokeColor: "rgba(41,134,147,1)",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(60,141,188,1)",

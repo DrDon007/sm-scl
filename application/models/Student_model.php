@@ -1846,4 +1846,40 @@ public function search_alumniStudent($class_id = null, $section_id = null,$sessi
         $query = $this->db->get();
         return $query->result();
     }
+
+    public function getBirthdays(){
+        $sql = "SELECT dob,firstname,classes.class from students INNER join student_session ON students.id = student_session.student_id JOIN classes ON student_session.class_id = classes.id WHERE DATE_FORMAT(dob, '%m-%d') >= DATE_FORMAT(NOW(), '%m-%d') and DATE_FORMAT(dob, '%m-%d') <= DATE_FORMAT((NOW() + INTERVAL +7 DAY), '%m-%d')"; 
+        $rs = $this->db->query($sql);
+        return $rs->result_array();
+    }
+
+     public function upcomingClass(){
+        $sql = "SELECT staff.surname,staff.name,return_response,conferences.date,title,classes.class FROM `conferences` join classes on conferences.class_id=classes.id join staff on conferences.staff_id=staff.id where DATE(conferences.date) = DATE(CURRENT_DATE)"; 
+        $rs1 = $this->db->query($sql);
+        return $rs1->result_array();
+    }
+
+    public function subjectAttendence($class_id){
+        // $sql = "SELECT students.id, classes.class,subjects.name,attendence_type.type,student_subject_attendances.date FROM student_subject_attendances JOIN student_session on student_subject_attendances.student_session_id=student_session.id JOIN attendence_type ON student_subject_attendances.attendence_type_id=attendence_type.id join subject_timetable on student_subject_attendances.subject_timetable_id = subject_timetable.id join subject_group_subjects on subject_timetable.subject_group_subject_id=subject_group_subjects.id join subjects on subject_group_subjects.subject_id=subjects.id JOIN classes on subject_timetable.class_id=classes.id join students on student_session.id = students.id where attendence_type.id in (1,2,3) and classes.id=3";
+        
+        $this->db->select('students.id,classes.class,subjects.name,attendence_type.type,student_subject_attendances.date')->from('student_subject_attendances');
+        $this->db->join('student_session', 'student_session.id = student_subject_attendances.student_session_id');
+        $this->db->join('attendence_type', 'student_subject_attendances.attendence_type_id=attendence_type.id');
+        $this->db->join('subject_timetable', 'student_subject_attendances.subject_timetable_id = subject_timetable.id');
+        $this->db->join('subject_group_subjects', 'subject_timetable.subject_group_subject_id=subject_group_subjects.id');
+        $this->db->join('subjects', ' subject_group_subjects.subject_id=subjects.id');
+        $this->db->join('classes', 'subject_timetable.class_id=classes.id');
+        $this->db->join('students', 'students on student_session.student_id = students.id');
+        $this->db->where('attendence_type.id in (1,2,3)');
+        $this->db->where('classes.id', $class_id);
+        $rs2 = $this->db->get();
+        return $rs2->result_array();
+    }
+
+    public function getEvents(){
+        $sql =  "SELECT * FROM `events` ORDER BY `events`.`id` DESC";
+        $rs3 = $this->db->query($sql);
+        return $rs3->result_array();
+    }
 }
+

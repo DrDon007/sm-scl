@@ -989,8 +989,8 @@ top:0 !important;
 
 }
 
-.verttop{padding-top: 56px;}
-.verttop38{padding-top: 38px;}
+.verttop{padding-top: 77px;}
+.verttop38{padding-top: 51px;}
 .fixedmenu{position: fixed;z-index:2;width: 200px;background: #fff;}
 .sessionul{
   margin: 0;
@@ -3870,16 +3870,20 @@ input[type=checkbox], input[type=radio] {
 .div1{
     padding-left: 10px;
 width: 25%;
-height: 96px;
+height: 60px;
 display:table-cell;
 background: #FBFAFA;
 border-radius: 0px 15px 15px 0px;
 }
 
+.fee_graph{
+    height:200px !important;
+}
+
 .div2{
     padding-left: 10px;
 width: 25%;
-height: 96px;
+height: 60px;
 display:table-cell;
 background: #FBFAFA;
 border-radius: 0px 15px 15px 0px;
@@ -3887,7 +3891,7 @@ border-radius: 0px 15px 15px 0px;
 .div3{
     padding-left: 10px;
 width: 25%;
-height: 96px;
+height: 60px;
 display:table-cell;
 background: #FBFAFA;
 border-radius: 0px 15px 15px 0px;
@@ -3895,7 +3899,7 @@ border-radius: 0px 15px 15px 0px;
 .div4{
     padding-left: 10px;
 width: 25%;
-height: 96px;
+height: 60px;
 display:table-cell;
 background: #FBFAFA;
 border-radius: 0px 15px 15px 0px;
@@ -3922,7 +3926,7 @@ color: #999696;
 font-style: normal;
 font-weight: normal;
 font-size: 14px;
-line-height: 80px;
+line-height: 30px;
 color: #999696;
 }
 
@@ -3937,20 +3941,21 @@ color: #298693;
 
 .rightbar{
 width:100%;
-height: 900px;
+height: 620px;
 /* left: 1255px;
 top: 100px;
 position: absolute; */
 padding-top:15px;
 background: #F7F9FF;
-border-radius: 0px 15px 15px 0px;
+border-radius: 0px 15px 30px 0px;
 /* padding-left: -20px; */
 }
 .notice{
 width: 80%;
-height: 334px;
-top: 560px;
-padding-top: 100px;
+/* height: 334px;
+top: 560px; */
+height:180px;
+margin-top: 90px;
 background: #298693;
 margin-left: 20px;
 border-radius: 0px 15px 15px 0px;
@@ -3962,7 +3967,7 @@ position: absolute;
 
 .responsive-calendar{
     width: 90%;
-    height: 350px;
+    height: 310px;
     background: #FFFFFF;
     margin: 0px 0px 18px 15px;
     border-radius: 0px 15px 15px 0px;
@@ -3992,13 +3997,17 @@ font-weight: normal;
 }
 
 .enquiry1{
-height: 350px;
+height: 300px;
 background: #FBFAFA;
+margin-top:50px;
 }
 .fees_collection{
 background: #FBFAFA;
+height: 300px;
+margin-top:50px;
 }
 .text_enquiry{ 
+    padding-left:15px;
     font-family: Poppins;
     margin-top:30px;
     font-style: normal;

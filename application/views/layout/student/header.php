@@ -118,24 +118,10 @@ if ($this->config->item('SSLK') == "") {
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <div class="col-lg-5 col-md-3 col-sm-2 col-xs-4">   
-                        <span href="#" class="sidebar-session">
-                            <?php echo $this->setting_model->getCurrentSchoolName(); ?>
-                        </span>
-                    </div>   
-                    <div class="col-lg-7 col-md-9 col-sm-10 col-xs-8">
-                        <div class="pull-right"> 
-                          
+                    <!-- <div class="col-lg-7 col-md-9 col-sm-10 col-xs-8"> -->
+                        <div class="pull-right">  
                             <div class="navbar-custom-menu">
-                                <div class="langdiv">
-                                        <select class="languageselectpicker" onchange="set_languages(this.value)"  type="text" id="languageSwitcher" class="form-control search-form search-form3 langselect"  >
-                                            
-                                           <?php $this->load->view('student/languageSwitcher')?>
-
-                                        </select>
-                                       
-                                    </div>
-                                <ul class="nav navbar-nav headertopmenu"> 
+                            <ul class="nav navbar-nav headertopmenu"> 
                                    <?php 
                                    
 if($this->studentmodule_lib->hasActive('multi_class')){
@@ -148,11 +134,11 @@ if($this->studentmodule_lib->hasActive('multi_class')){
                                    
 
                                      <?php if($this->studentmodule_lib->hasActive('calendar_to_do_list')){?>
-                                    <li class="cal15"><a href="<?php echo base_url() ?>user/calendar/"><i class="fa fa fa-calendar"></i></a></li>
+                                        <li class="cal15"><a data-placement="bottom" data-toggle="tooltip" title="<?php echo $this->lang->line('calendar') ?>" href="<?php echo base_url() ?>user/calendar/" ><img style="width:70%;height:70%" src="<?php echo base_url()?>images/vector1.png"></i></a>
 
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle todoicon" data-toggle="dropdown">
-                                            <i class="fa fa-check-square-o"></i>
+                                        <li class="dropdown" data-placement="bottom" data-toggle="tooltip" title="<?php echo $this->lang->line('task') ?>">
+                              <a href="#"  class="dropdown-toggle todoicon" data-toggle="dropdown">
+                              <img style="width:70%;height:70%"  src="<?php echo base_url()?>images/notification.png">
                                             <?php
                                             $userdata = $this->customlib->getLoggedInUserData();
                                             $count = $this->customlib->countincompleteTask($userdata["id"]);
@@ -183,7 +169,7 @@ if($this->studentmodule_lib->hasActive('multi_class')){
                                    
                                 <?php }  if ($this->studentmodule_lib->hasActive('chat')){
                                 ?>
-                                 <li class="cal15"><a data-placement="bottom" data-toggle="tooltip" title="" href="<?php echo base_url()?>user/chat" data-original-title="Chat" class="todoicon"><i class="fa fa-whatsapp"></i></a></li> 
+                      <li class="cal15"><a data-placement="bottom" data-toggle="tooltip" title="" href="<?php echo base_url()?>user/chat" data-original-title="Chat" class="todoicon"><img style="width:70%;height:70%"  src="<?php echo base_url()?>images/chat.png"></i></a></li> 
                                 <?php }
                                     $student_data = $this->customlib->getLoggedInUserData();
                                     $file = $student_data["image"];
@@ -199,7 +185,7 @@ if($this->studentmodule_lib->hasActive('multi_class')){
                                     ?>
                                     <li class="dropdown user-menu">
                                         <a class="dropdown-toggle" style="padding: 15px 13px;" data-toggle="dropdown" href="#" aria-expanded="false">
-                                            <img src="<?php echo base_url() . $file; ?>" class="topuser-image" alt="User Image">
+                                            <img  style="border-radius:20%" src="<?php echo base_url() . $file; ?>" class="topuser-image" alt="User Image">
                                         </a>
                                         <ul class="dropdown-menu dropdown-user menuboxshadow">
 
@@ -233,7 +219,7 @@ if($this->studentmodule_lib->hasActive('multi_class')){
 
                             
                         </div>
-                    </div>
+                    <!-- </div> -->
                 </nav>
             </header>
             <aside class="main-sidebar" id="alert2">               

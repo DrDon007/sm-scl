@@ -1881,5 +1881,26 @@ public function search_alumniStudent($class_id = null, $section_id = null,$sessi
         $rs3 = $this->db->query($sql);
         return $rs3->result_array();
     }
-}
 
+    public function totalClasses($class_id){
+       $this->db->select('count(DISTINCT student_attendences.date) as attendence_count,students.firstname,classes.class')->from('student_attendences');
+       $this->db->join('student_session', 'student_attendences.student_session_id=student_session.id');
+       $this->db->join('classes', 'classes.id=student_session.class_id');
+       $this->db->join('students', 'students on student_session.student_id = students.id');
+       $this->db->where('classes.id', $class_id);
+       $rs4 = $this->db->get();
+       return $rs4->result_array();
+    }
+
+    public function classesPresented($class_id,$student_id){
+    $sql = "SELECT count(DISTINCT student_attendences.date) as presented_count, students.firstname ,students.id,classes.class FROM `student_attendences` join student_session on student_attendences.student_session_id=student_session.id join classes on classes.id=student_session.class_id join students on student_session.student_id = students.id where classes.id=$class_id and student_attendences.attendence_type_id in (1,2,3) and students.id=$student_id ";      
+    $rs5 = $this->db->query($sql);
+    return $rs5->result_array(); 
+    } 
+    
+    public function topAttendence($class_id){
+        $sql = "SELECT count(student_attendences.date) as top_count, students.firstname ,students.id,classes.class FROM `student_attendences` join student_session on student_attendences.student_session_id=student_session.id join classes on classes.id=student_session.class_id join students on student_session.student_id = students.id where classes.id=$class_id and student_attendences.attendence_type_id in (1,2,3) GROUP BY student_attendences.student_session_id";
+        $rs6 = $this->db->query($sql);
+        return $rs6->result_array(); 
+    }
+}

@@ -101,12 +101,15 @@ class User extends Student_Controller
             $data['res']=$this->Student_model->getBirthdays();
             $data['res1']=$this->Student_model->upcomingClass();
             $data['res3']=$this->Student_model->getEvents();
-            $data['res2']=$this->Student_model->subjectAttendence($class_id);
+            
             $this->session->set_userdata('top_menu', 'Time_table');
             $student_current_class = $this->customlib->getStudentCurrentClsSection();
-    
             $student_id       = $this->customlib->getStudentSessionUserID();
             $student          = $this->student_model->get($student_id);
+            $data['res2']=$this->Student_model->subjectAttendence($class_id);
+            $data['res4']=$this->Student_model->totalClasses($class_id);
+            $data['res5']=$this->Student_model->classesPresented($class_id,$student_id);
+            $data['res6']=$this->Student_model->topAttendence($class_id);
             $days        = $this->customlib->getDaysname();
             $days_record = array();
             foreach ($days as $day_key => $day_value) {
@@ -141,9 +144,16 @@ class User extends Student_Controller
     }}
  
      public function test(){
+        $student_id            = $this->customlib->getStudentSessionUserID();
+        $student_current_class = $this->customlib->getStudentCurrentClsSection();
+        $class_id                     = $student_current_class->class_id;
         $this->load->model("Student_model");
-        $data['res']=$this->Student_model->subjectAttendence();
-        var_dump($data['res']['0']);        
+        $data['res1']=$this->Student_model->totalClasses($class_id);
+        $data['res']=$this->Student_model->classesPresented($class_id,$student_id);
+        $data['res2']=$this->Student_model->topAttendence($class_id);
+        // var_dump($data['res']);
+        var_dump($data['res1']);
+        // var_dump($data['res1']);         
      }
 
     public function changepass()

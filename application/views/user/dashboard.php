@@ -39,10 +39,19 @@ foreach($res3 as $r3=> $rv3)
     $end_date[$j] = $res3[$j]['end_date'];
 	}
 
+// foreach($res4 as $r4 => $rv4){
+//   $count1++;
+// } 
 
+// // $attendence_count= array();
+// for($i=0;$i<$count1;$i++){
+//   $id[$i]=$res4[$i]['id'];
+//   $attendence[$i] = $res4[$i]['attendence_count'];
+//   $first_name[$i]= $res4[$i]['firstname'];
+//   // array_push($attendence_count,$first_name); 
+// }
 
-
-
+// // var_dump($attendence_count);
 
 foreach($res1 as $r1 => $rv1) 
 	{
@@ -113,7 +122,8 @@ foreach($res as $r => $rv)
 .right{
     background: #F1F5FF;
 border-radius: 0px 15px 15px 0px;
-height:1000px;
+height:830px;
+/* margin-top:-15px; */
 
 }
 .welcome{
@@ -132,7 +142,7 @@ color: #535353;
 border-radius: 3px;
 width: 1%;
 margin-top:5%;
-height: 80%;
+/* height: 7vh; */
 margin-left:3%;
 }
 
@@ -142,6 +152,21 @@ margin-left:3%;
   /* font-size:0.9vw; */
   word-wrap:break-word;
   overflow:hidden;
+}
+
+@media screen(min-width: 480px) {
+  .event_tit{
+    font-family: Poppins;
+font-style: normal;
+font-weight: 600;
+font-size: 12px;
+line-height: 18px;
+letter-spacing: 0.01em;
+margin-bottom:20%;
+
+color: #535353;
+text-align:center;
+  }
 }
 
 .notice0{
@@ -156,7 +181,8 @@ font-weight: 600;
 font-size: 14px;
 line-height: 21px;
 letter-spacing: 0.01em;
-
+display:inline-block;
+position: absolute;
 color: #535353;
 }
 
@@ -173,6 +199,7 @@ font-size: 14px;
 line-height: 21px;
 letter-spacing: 0.01em;
 color: #535353;
+display:inline-block;
 }
 
 .notice2{
@@ -181,6 +208,7 @@ border-radius: 0px 15px 15px 0px;
 height:80px;
 margin:10px 20px 10px 0px;
 width:30%;
+display:inline-block;
 font-family: Poppins;
 font-style: normal;
 font-weight: 600;
@@ -190,27 +218,90 @@ letter-spacing: 0.01em;
 color: #535353;
 
 }
+.event_tit{
+  font-family: Poppins;
+font-style: normal;
+font-weight: 600;
+font-size: 12px;
+line-height: 18px;
+letter-spacing: 0.01em;
 
+color: #535353;
+text-align:center;
+}
+.event_des{
+  font-family: Poppins;
+font-style: normal;
+font-weight: 600;
+font-size: 10px;
+line-height: 15px;
+letter-spacing: 0.01em;
+text-align:center;
+color: #999696;
+}
 .grades{
     height:300px;
     background: #FFFFFF;
 border-radius: 4px;
 margin-top:10px;
 }
+
+.event_text{
+  font-family: Poppins;
+font-style: normal;
+font-weight: 600;
+font-size: 12px;
+margin-right:60%;
+line-height: 18px;
+/* text-align: center; */
+letter-spacing: 0.01em;
+color: #535353;
+}
+
+.event_text1{
+  font-family: Poppins;
+font-style: normal;
+font-weight: 600;
+font-size: 12px;
+margin-right:60%;
+margin-top:25%;
+line-height: 18px;
+/* text-align: center; */
+letter-spacing: 0.01em;
+color: #535353;
+}
+
 .event{
   margin-left:10%;
-  width:80%;
-  height:12%;
+  width:75%;
+  /* height:8vh; */
   background: #FFFFFF;
 border-radius: 0px 15px 15px 0px;
+float:right;
+margin-top:0%;
+
 }
 .event1{
   margin-left:10%;
-  width:80%;
-  height:12%;
-  margin-top:10%;
+  width:75%;
+  /* height:8vh; */
+  margin-top:5%;
   background: #FFFFFF;
 border-radius: 0px 15px 15px 0px;
+float:right;
+}
+.upcoming1_text{
+  font-family: Poppins;
+font-style: normal;
+font-weight: 600;
+font-size: 10px;
+line-height: 15px;
+/* identical to box height */
+
+text-align: center;
+letter-spacing: 0.01em;
+
+color: #999696;
 }
 .attendence{
     height:300px;
@@ -228,15 +319,14 @@ height:100px;
 .birthdays{
     background: #FFFFFF;
 border-radius: 0px 15px 15px 0px;
-height:350px;
-margin-top: 30px;
+height:280px;
 margin-left:20px;
 width: 80%;
 font-family: Poppins;
 font-style: normal;
 font-weight: 600;
 font-size: 12px;
-line-height: 70px;
+line-height: 55px;
 padding-left:10px;
 letter-spacing: 0.01em;
 color: #535353;
@@ -257,18 +347,18 @@ color: #999696;
   font-family: Poppins;
 font-style: normal;
 font-weight: bold;
-font-size: 14px;
-line-height: 40px;
+font-size: 16px;
+line-height: 28px;
 letter-spacing: 0.01em;
 margin-left:22px;
 color: #999696;
 }
 }
 
-.timetable{
+.classes1{
     background: #FFFFFF;
 border-radius: 4px;
-height:160px;
+height:230px;
 margin:10px 20px 10px 0px;
 }
 .subjects{
@@ -283,7 +373,7 @@ width:60%; */
 .classes{
     background: #FFFFFF;
 border-radius: 4px;
-height:230px;
+height:180px;
 margin:10px 20px 10px 0px;
 }
 
@@ -291,8 +381,8 @@ margin:10px 20px 10px 0px;
 
     background: #298693;
 border-radius: 0px 15px 15px 0px;
-height:300px;
-margin-top:100%;
+height:25%;
+margin-top:45%;
 }
 .att_per{
     border: 1px solid #FF9F04;
@@ -353,7 +443,6 @@ float:right;
 
  <?php }?>
 
-
 <div class="col-md-6 grades">
 <h4 class="text_birth">Grades</h4>
 <canvas id="myChart" style="max-width: 500px;"></canvas>
@@ -361,11 +450,17 @@ float:right;
 <div class="col-md-6 attendence">
     <div class="attendence1">
 <h4 class="text_birth">Attendence</h4>
+<?php 
+
+
+
+?>
 <div class="rounded-pill att_per">
 </div>
 
 <div class="rounded-pill top_att">
 <h4 class="text_birth">Top Attendence</h4>
+<?php echo $data['res6']['top_count'] ?>
 </div>
 </div>
 
@@ -509,10 +604,7 @@ float:right;
 
 
 </div>  
-<div class="col-md-12 timetable">
-<h4 class="text_birth">Time Table</h4>
-
-
+<div class="col-md-12 classes">
 <div class="table-responsive">
     <table class="table">
       <thead>
@@ -548,7 +640,7 @@ float:right;
           <?php 
                 for($i=0;$i<$birthday_count;$i++){?>
                   
-                  <img style="width:15%;height:15%; border-radius:50%;"  src="<?php echo base_url()?>uploads/student_images/no_image.png">
+                  <img style="width:10%;height:10%; border-radius:50%;"  src="<?php echo base_url()?>uploads/student_images/no_image.png">
                   <?php echo $birthdays[$i] ?>
                  <img style="width:10%;height:10% float:right; clear:right"  src="<?php echo base_url()?>images/birthday.png"><br>
                 
@@ -557,31 +649,38 @@ float:right;
         </div>
 
 
-        <h4 class="upcoming_text">upcoming</h4>
-        <div class="col-sm-3 event">
-          <div class="col-sm-3 notice_bar">
+        <?php 
 
-          </div>
-          <?php 
+        $str_date = array();
  
-        $timestamp = strtotime($start_date);
-         $start_day = date('D', $timestamp);
+ $timestamp = strtotime($start_date);
+  $start_day = date('D', $timestamp);
 
-         $timestamp1 = strtotime($end_date);
-         $end_date = date('D', $timestamp1);
-          
-          
-          for($i=0;$i<2;$i++){
-          $result[$i] = date("M jS, Y", strtotime($start_date[$i]));
-          $result[$i] = substr($result[$i],0,5);
-          // echo $result[$i];
-          }?>
+  $timestamp1 = strtotime($end_date);
+  $end_date = date('D', $timestamp1);
+   
+   for($i=0;$i<2;$i++){
+   $result[$i] = date("M jS, Y", strtotime($start_date[$i]));
+   $time[$i] = date("M jS, Y", strtotime($end_date[$i]));
+   $result[$i] = substr($result[$i],0,5);
+   $time[$i] =  substr($result[$i],5,10);
+   array_push($str_date,$result[$i],$time[$i]);
+
+   }
+   ?>
+        
+        <h4 class="upcoming_text">upcoming</h4>
+        <h5 class="event_text"><?php echo $result[0] . "," . date('l',strtotime($result[0]))   ?></h5>
+        <div class="col-sm-8 event">
+          <div class="col-sm-3 notice_bar"></div>
+          <h5 class="event_tit" ><?php echo $event_title[0]  ?></h5>
+          <h5 class="event_des"><?php echo $event_description[0]?></h5>
                 </div>
-
-                <div class="col-sm-3 event1">
-                <div class="col-sm-3 notice_bar">
-
-</div>
+                <h5 class="event_text1"><?php echo $result[1] . "," . date('l',strtotime($result[1]))   ?></h5>             
+                <div class="col-sm-8 event1">
+                <div class="col-sm-3 notice_bar"></div>
+                <h5 class="text-nowrap event_tit"><?php echo $event_title[1]  ?></h5><br>
+                <h5 class="event_des"><?php echo $event_description[1]  ?></h5>
                 </div>       
 
         <div class="notice">

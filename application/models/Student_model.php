@@ -1903,4 +1903,71 @@ public function search_alumniStudent($class_id = null, $section_id = null,$sessi
         $rs6 = $this->db->query($sql);
         return $rs6->result_array(); 
     }
+
+    public function EnglishAttendence_present_count($class_id,$student_id){
+        $sql = "SELECT students.id,classes.class,subjects.name,attendence_type.type,  COUNT(DISTINCT student_subject_attendances.date) as english_present_count FROM student_subject_attendances JOIN student_session on student_subject_attendances.student_session_id=student_session.id JOIN attendence_type ON student_subject_attendances.attendence_type_id=attendence_type.id join subject_timetable on student_subject_attendances.subject_timetable_id = subject_timetable.id join subject_group_subjects on subject_timetable.subject_group_subject_id=subject_group_subjects.id join subjects on subject_group_subjects.subject_id=subjects.id JOIN classes on subject_timetable.class_id=classes.id join students on student_session.student_id = students.id where attendence_type.id in (1,2,3) and classes.id=$class_id  and subjects.name='english' and students.id=$student_id";
+        $rs7 = $this->db->query($sql);
+        return $rs7->result_array();
+        }     
+   
+
+    public function EnglishAttendence_total_count($class_id,$student_id){
+        $sql = "SELECT students.id,classes.class,subjects.name,attendence_type.type,  COUNT(DISTINCT student_subject_attendances.date) as english_total_count FROM student_subject_attendances JOIN student_session on student_subject_attendances.student_session_id=student_session.id JOIN attendence_type ON student_subject_attendances.attendence_type_id=attendence_type.id join subject_timetable on student_subject_attendances.subject_timetable_id = subject_timetable.id join subject_group_subjects on subject_timetable.subject_group_subject_id=subject_group_subjects.id join subjects on subject_group_subjects.subject_id=subjects.id JOIN classes on subject_timetable.class_id=classes.id join students on student_session.student_id = students.id where  classes.id=$class_id  and subjects.name='english'";
+        $rs7 = $this->db->query($sql);
+        return $rs7->result_array();
+
+}
+public function ScienceAttendence_present_count($class_id,$student_id){
+    $sql = "SELECT students.id,classes.class,subjects.name,attendence_type.type,  COUNT(DISTINCT student_subject_attendances.date) as science_present_count FROM student_subject_attendances JOIN student_session on student_subject_attendances.student_session_id=student_session.id JOIN attendence_type ON student_subject_attendances.attendence_type_id=attendence_type.id join subject_timetable on student_subject_attendances.subject_timetable_id = subject_timetable.id join subject_group_subjects on subject_timetable.subject_group_subject_id=subject_group_subjects.id join subjects on subject_group_subjects.subject_id=subjects.id JOIN classes on subject_timetable.class_id=classes.id join students on student_session.student_id = students.id where attendence_type.id in (1,2,3) and classes.id=$class_id  and subjects.name='science' and students.id=$student_id";
+    $rs7 = $this->db->query($sql);
+    return $rs7->result_array();
+    }     
+
+
+public function ScienceAttendence_total_count($class_id,$student_id){
+    $sql = "SELECT students.id,classes.class,subjects.name,attendence_type.type,  COUNT(DISTINCT student_subject_attendances.date) as science_total_count FROM student_subject_attendances JOIN student_session on student_subject_attendances.student_session_id=student_session.id JOIN attendence_type ON student_subject_attendances.attendence_type_id=attendence_type.id join subject_timetable on student_subject_attendances.subject_timetable_id = subject_timetable.id join subject_group_subjects on subject_timetable.subject_group_subject_id=subject_group_subjects.id join subjects on subject_group_subjects.subject_id=subjects.id JOIN classes on subject_timetable.class_id=classes.id join students on student_session.student_id = students.id where  classes.id=$class_id  and subjects.name='science'";
+    $rs7 = $this->db->query($sql);
+    return $rs7->result_array();
+
+}
+public function MathsAttendence_present_count($class_id,$student_id){
+    $sql = "SELECT students.id,classes.class,subjects.name,attendence_type.type,  COUNT(DISTINCT student_subject_attendances.date) as maths_present_count FROM student_subject_attendances JOIN student_session on student_subject_attendances.student_session_id=student_session.id JOIN attendence_type ON student_subject_attendances.attendence_type_id=attendence_type.id join subject_timetable on student_subject_attendances.subject_timetable_id = subject_timetable.id join subject_group_subjects on subject_timetable.subject_group_subject_id=subject_group_subjects.id join subjects on subject_group_subjects.subject_id=subjects.id JOIN classes on subject_timetable.class_id=classes.id join students on student_session.student_id = students.id where attendence_type.id in (1,2,3) and classes.id=$class_id  and subjects.name='math' and students.id=$student_id";
+    $rs7 = $this->db->query($sql);
+    return $rs7->result_array();
+    }     
+
+
+public function MathsAttendence_total_count($class_id,$student_id){
+    $sql = "SELECT students.id,classes.class,subjects.name,attendence_type.type,  COUNT(DISTINCT student_subject_attendances.date) as maths_total_count FROM student_subject_attendances JOIN student_session on student_subject_attendances.student_session_id=student_session.id JOIN attendence_type ON student_subject_attendances.attendence_type_id=attendence_type.id join subject_timetable on student_subject_attendances.subject_timetable_id = subject_timetable.id join subject_group_subjects on subject_timetable.subject_group_subject_id=subject_group_subjects.id join subjects on subject_group_subjects.subject_id=subjects.id JOIN classes on subject_timetable.class_id=classes.id join students on student_session.student_id = students.id where  classes.id=$class_id  and subjects.name='math'";
+    $rs7 = $this->db->query($sql);
+    return $rs7->result_array();
+
+}
+public function TeluguAttendence_present_count($class_id,$student_id){
+    $sql = "SELECT students.id,classes.class,subjects.name,attendence_type.type,  COUNT(DISTINCT student_subject_attendances.date) as telugu_present_count FROM student_subject_attendances JOIN student_session on student_subject_attendances.student_session_id=student_session.id JOIN attendence_type ON student_subject_attendances.attendence_type_id=attendence_type.id join subject_timetable on student_subject_attendances.subject_timetable_id = subject_timetable.id join subject_group_subjects on subject_timetable.subject_group_subject_id=subject_group_subjects.id join subjects on subject_group_subjects.subject_id=subjects.id JOIN classes on subject_timetable.class_id=classes.id join students on student_session.student_id = students.id where attendence_type.id in (1,2,3) and classes.id=$class_id  and subjects.name='telugu' and students.id=$student_id";
+    $rs7 = $this->db->query($sql);
+    return $rs7->result_array();
+    }     
+
+
+public function TeluguAttendence_total_count($class_id,$student_id){
+    $sql = "SELECT students.id,classes.class,subjects.name,attendence_type.type,  COUNT(DISTINCT student_subject_attendances.date) as telugu_total_count FROM student_subject_attendances JOIN student_session on student_subject_attendances.student_session_id=student_session.id JOIN attendence_type ON student_subject_attendances.attendence_type_id=attendence_type.id join subject_timetable on student_subject_attendances.subject_timetable_id = subject_timetable.id join subject_group_subjects on subject_timetable.subject_group_subject_id=subject_group_subjects.id join subjects on subject_group_subjects.subject_id=subjects.id JOIN classes on subject_timetable.class_id=classes.id join students on student_session.student_id = students.id where  classes.id=$class_id  and subjects.name='telugu'";
+    $rs7 = $this->db->query($sql);
+    return $rs7->result_array();
+
+}
+    public function HindiAttendence_present_count($class_id,$student_id){
+        $sql = "SELECT students.id,classes.class,subjects.name,attendence_type.type,  COUNT(DISTINCT student_subject_attendances.date) as hindi_present_count FROM student_subject_attendances JOIN student_session on student_subject_attendances.student_session_id=student_session.id JOIN attendence_type ON student_subject_attendances.attendence_type_id=attendence_type.id join subject_timetable on student_subject_attendances.subject_timetable_id = subject_timetable.id join subject_group_subjects on subject_timetable.subject_group_subject_id=subject_group_subjects.id join subjects on subject_group_subjects.subject_id=subjects.id JOIN classes on subject_timetable.class_id=classes.id join students on student_session.student_id = students.id where attendence_type.id in (1,2,3) and classes.id=$class_id  and subjects.name='hindi' and students.id=$student_id";
+        $rs7 = $this->db->query($sql);
+        return $rs7->result_array();
+        }     
+   
+
+    public function HindiAttendence_total_count($class_id,$student_id){
+        $sql = "SELECT students.id,classes.class,subjects.name,attendence_type.type,  COUNT(DISTINCT student_subject_attendances.date) as hindi_total_count FROM student_subject_attendances JOIN student_session on student_subject_attendances.student_session_id=student_session.id JOIN attendence_type ON student_subject_attendances.attendence_type_id=attendence_type.id join subject_timetable on student_subject_attendances.subject_timetable_id = subject_timetable.id join subject_group_subjects on subject_timetable.subject_group_subject_id=subject_group_subjects.id join subjects on subject_group_subjects.subject_id=subjects.id JOIN classes on subject_timetable.class_id=classes.id join students on student_session.student_id = students.id where  classes.id=$class_id  and subjects.name='hindi'";
+        $rs7 = $this->db->query($sql);
+        return $rs7->result_array();
+
+}
+
 }

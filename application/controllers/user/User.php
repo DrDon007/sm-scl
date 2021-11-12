@@ -110,6 +110,16 @@ class User extends Student_Controller
             $data['res4']=$this->Student_model->totalClasses($class_id);
             $data['res5']=$this->Student_model->classesPresented($class_id,$student_id);
             $data['res6']=$this->Student_model->topAttendence($class_id);
+            $data['res7']=$this->Student_model->EnglishAttendence_total_count($class_id,$student_id);
+            $data['res8']=$this->Student_model->EnglishAttendence_present_count($class_id,$student_id);
+            $data['res9']=$this->Student_model->ScienceAttendence_total_count($class_id,$student_id);
+            $data['res10']=$this->Student_model->ScienceAttendence_present_count($class_id,$student_id);
+            $data['res11']=$this->Student_model->TeluguAttendence_total_count($class_id,$student_id);
+            $data['res12']=$this->Student_model->TeluguAttendence_present_count($class_id,$student_id);
+            $data['res13']=$this->Student_model->HindiAttendence_total_count($class_id,$student_id);
+            $data['res14']=$this->Student_model->HindiAttendence_present_count($class_id,$student_id);
+            $data['res15']=$this->Student_model->MathsAttendence_total_count($class_id,$student_id);
+            $data['res16']=$this->Student_model->MathsAttendence_present_count($class_id,$student_id);
             $days        = $this->customlib->getDaysname();
             $days_record = array();
             foreach ($days as $day_key => $day_value) {
@@ -143,19 +153,6 @@ class User extends Student_Controller
         $this->load->view('layout/student/footer', $data);
     }}
  
-     public function test(){
-        $student_id            = $this->customlib->getStudentSessionUserID();
-        $student_current_class = $this->customlib->getStudentCurrentClsSection();
-        $class_id                     = $student_current_class->class_id;
-        $this->load->model("Student_model");
-        $data['res1']=$this->Student_model->totalClasses($class_id);
-        $data['res']=$this->Student_model->classesPresented($class_id,$student_id);
-        $data['res2']=$this->Student_model->topAttendence($class_id);
-        // var_dump($data['res']);
-        var_dump($data['res1']);
-        // var_dump($data['res1']);         
-     }
-
     public function changepass()
     {
         $data['title'] = 'Change Password';

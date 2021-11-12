@@ -1,8 +1,145 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <?php 
+
+   
+foreach($res7 as $r7 => $rv7) 
+{
+  $count1++;
+}                                                                    //english subject wise attendence queries
+
+for($j=0;$j<$count1;$j++)
+{
+   $total_english_classes=$rv7['english_total_count'];
+ }
+
+
+foreach($res8 as $r8 => $rv8) 
+{
+  $count1++;
+}
+
+   $english_present_classes=$rv8['english_present_count'];
+
+   $english_attendence_per = ($english_present_classes / $total_english_classes) * 100;
+   $english_attendence_per = round($english_attendence_per,2);
+
+
+
+   foreach($res9 as $r9 => $rv9) 
+   {
+     $count1++;
+   }                                                                    //science subject wise attendence queries
+   
+   for($j=0;$j<$count1;$j++)
+   {
+      $total_science_classes=$rv9['science_total_count'];
+    }
+   
+   
+   foreach($res10 as $r10 => $rv10) 
+   {
+     $count1++;
+   }
+   
+      $science_present_classes=$rv10['science_present_count'];
+   
+      $science_attendence_per = ($science_present_classes / $total_science_classes) * 100;
+      $science_attendence_per = round($science_attendence_per,2);
+
+
+
+
+   
+      foreach($res13 as $r13 => $rv13) 
+      {
+        $count1++;
+      }                                                                    //hindi subject wise attendence queries
+      
+      for($j=0;$j<$count1;$j++)
+      {
+         $total_hindi_classes=$rv13['hindi_total_count'];
+       }
+      
+      
+      foreach($res14 as $r14 => $rv14) 
+      {
+        $count1++;
+      }
+      
+         $hindi_present_classes=$rv14['hindi_present_count'];
+      
+         $hindi_attendence_per = ($hindi_present_classes / $total_hindi_classes) * 100;
+         $hindi_attendence_per = round($hindi_attendence_per,2);
+
+
+      
+         foreach($res11 as $r11 => $rv11) 
+         {
+           $count1++;
+         }                                                                    //telugu subject wise attendence queries
+         
+         for($j=0;$j<$count1;$j++)
+         {
+            $total_telugu_classes=$rv11['telugu_total_count'];
+          }
+         
+         
+         foreach($res12 as $r12 => $rv12) 
+         {
+           $count1++;
+         }
+         
+            $telugu_present_classes=$rv12['telugu_present_count'];
+         
+            $telugu_attendence_per = ($telugu_present_classes / $total_telugu_classes) * 100;
+            $telugu_attendence_per = round($telugu_attendence_per,2);
+      
+
+        
+
+        
+            foreach($res15 as $r15 => $rv15) 
+      {
+        $count1++;
+      }                                                                    //maths subject wise attendence queries
+      
+      for($j=0;$j<$count1;$j++)
+      {
+         $total_maths_classes=$rv15['maths_total_count'];
+       }
+      
+      
+      foreach($res16 as $r16 => $rv16) 
+      {
+        $count1++;
+      }
+      
+         $maths_present_classes=$rv16['maths_present_count'];
+      
+         $maths_attendence_per = ($maths_present_classes / $total_maths_classes) * 100;
+         $maths_attendence_per = round($maths_attendence_per,2);
+
+
+
+         foreach($res6 as $r6 => $rv6) 
+         {
+           $count1++;
+         }
+
+        
+         for($j=0;$j<$count1;$j++)
+         {
+          $total_classes_top[$j]=$res6[$j]['top_count'];
+          $first_name_top[$j]=$res6[$j]['firstname'];
+          $id[$j] = $res6[$j]['id']; 
+          }
+     
+     $max_id = array_keys($total_classes_top,max($total_classes_top));
+
 
 foreach($res2 as $r2=> $rv2) 
 	{
@@ -39,19 +176,32 @@ foreach($res3 as $r3=> $rv3)
     $end_date[$j] = $res3[$j]['end_date'];
 	}
 
-// foreach($res4 as $r4 => $rv4){
-//   $count1++;
-// } 
 
-// // $attendence_count= array();
-// for($i=0;$i<$count1;$i++){
-//   $id[$i]=$res4[$i]['id'];
-//   $attendence[$i] = $res4[$i]['attendence_count'];
-//   $first_name[$i]= $res4[$i]['firstname'];
-//   // array_push($attendence_count,$first_name); 
-// }
 
-// // var_dump($attendence_count);
+
+  foreach ($res5 as $r5=> $rv5) { 
+    $count2++;
+   }
+    
+ 
+   for($j=0;$j<$count2;$j++)
+   {
+    $presented_classes=$rv5['presented_count'];
+    
+   }
+
+
+   foreach ($res4 as $r4=> $rv4) { 
+    $count2++;
+
+}
+ 
+   for($j=0;$j<$count2;$j++)
+   {
+     $total_classes=$rv4['attendence_count'];
+    
+   }
+
 
 foreach($res1 as $r1 => $rv1) 
 	{
@@ -65,7 +215,7 @@ foreach($res1 as $r1 => $rv1)
     $title[$j] = $res1[$j]['title'];
     $surname[$j] = $res1[$j]['surname'];
     $name[$j] = $res1[$j]['name'];
-    $date[$j] = $res1[$j]['date'];
+    $date1[$j] = $res1[$j]['date'];
     $response[$j] = json_decode($response[$j]);
 	}
 
@@ -73,9 +223,10 @@ foreach($res1 as $r1 => $rv1)
   for($j=0;$j<$count1;$j++)
   {
   if($class[$j] == $student['class']){
-    array_push($classes,$title[$j],$surname[$j],$name[$j],$response[$j]->join_url,$date[$j]);
+    array_push($classes,$title[$j],$surname[$j],$name[$j],$response[$j]->join_url,$date1[$j]);
   }
 }
+
 
 
 foreach($res as $r => $rv) 
@@ -109,6 +260,7 @@ foreach($res as $r => $rv)
  }
 
 
+
 ?>
 
 <style type="text/css">
@@ -124,8 +276,14 @@ foreach($res as $r => $rv)
 border-radius: 0px 15px 15px 0px;
 height:830px;
 /* margin-top:-15px; */
-
 }
+
+.no_of_classes{
+  font-size:10px;
+  float:right;
+  width:20%;
+}
+
 .welcome{
 padding-left:5px;
 font-family: Poppins;
@@ -182,7 +340,7 @@ font-size: 14px;
 line-height: 21px;
 letter-spacing: 0.01em;
 display:inline-block;
-position: absolute;
+/* position: absolute; */
 color: #535353;
 }
 
@@ -239,6 +397,32 @@ letter-spacing: 0.01em;
 text-align:center;
 color: #999696;
 }
+.your_attendence{
+  font-family: Poppins;
+font-style: normal;
+/* font-weight: 600; */
+font-size: 12px;
+/* line-height: 18px; */
+letter-spacing: 0.01em;
+text-align:center;
+/* padding-bottom:5%; */
+color: #7C7C7C;
+}
+
+.student_attendence{
+  font-family: Poppins;
+font-style: normal;
+font-weight: bold;
+font-size: 18px;
+/* line-height: 27px; */
+text-align:center;
+padding-top:2%;
+/* identical to box height */
+
+
+color: #FF9F04;
+}
+
 .grades{
     height:300px;
     background: #FFFFFF;
@@ -308,6 +492,7 @@ color: #999696;
     background: #FFFFFF;
 border-radius: 4px;
 margin-top:10px;
+margin-left:10px;
 /* margin:10px 20px 10px 0px; */
 }
 .attendence1{
@@ -359,6 +544,7 @@ color: #999696;
     background: #FFFFFF;
 border-radius: 4px;
 height:230px;
+padding-top:20px;
 margin:10px 20px 10px 0px;
 }
 .subjects{
@@ -373,16 +559,16 @@ width:60%; */
 .classes{
     background: #FFFFFF;
 border-radius: 4px;
-height:180px;
+height:265px;
 margin:10px 20px 10px 0px;
 }
 
-.notice{
+.noticeboard{
 
     background: #298693;
 border-radius: 0px 15px 15px 0px;
-height:25%;
-margin-top:45%;
+height:20%;
+margin-top:35%;
 }
 .att_per{
     border: 1px solid #FF9F04;
@@ -450,17 +636,28 @@ float:right;
 <div class="col-md-6 attendence">
     <div class="attendence1">
 <h4 class="text_birth">Attendence</h4>
-<?php 
-
-
-
-?>
 <div class="rounded-pill att_per">
+  <div class="col-sm-4 student_attendence">
+    <?php 
+    $attendance_percentage = ($presented_classes/$total_classes) * 100 ;
+    echo round($attendance_percentage ,2) . "%" ;
+    ?>
+  </div>
+  <div class="col-sm-8 your_attendence">
+    <h5>Your Attendence</h5>
+  </div>
 </div>
 
 <div class="rounded-pill top_att">
-<h4 class="text_birth">Top Attendence</h4>
-<?php echo $data['res6']['top_count'] ?>
+  <div class="col-sm-4 student_attendence">
+    <?php 
+    $attendance_percentage1 = (max($total_classes_top)/$total_classes) * 100 ;
+    echo round($attendance_percentage1 ,2) . "%" ;
+    ?>
+  </div>
+  <div class="col-sm-8 your_attendence">
+    <h5><?php echo ucfirst($first_name_top[$max_id[0]]) . " "?> Attended</h5>
+  </div>
 </div>
 </div>
 
@@ -479,16 +676,16 @@ float:right;
       <td style="width:20%">Telugu</td>
       <td>
         <div class="progress progress-minibar">
-            <div class="progress-bar progress-bar-aqua" style="width:60%"></div>
+            <div class="progress-bar progress-bar-aqua" style="width:<?php echo $telugu_attendence_per?>%"></div>
           </div>
       </td>
     </tr>
 
     <tr>
-        <td style="width:20%">Physics</td>
+        <td style="width:20%">Hindi</td>
         <td>
           <div class="progress progress-minibar">
-              <div class="progress-bar progress-bar-aqua" style="width:60%"></div>
+              <div class="progress-bar progress-bar-aqua" style="width:<?php echo $hindi_attendence_per?>%"></div>
             </div>
         </td>
       </tr>
@@ -497,16 +694,15 @@ float:right;
         <td style="width:20%">English</td>
         <td>
           <div class="progress progress-minibar">
-              <div class="progress-bar progress-bar-aqua" style="width:60%"></div>
+              <div class="progress-bar progress-bar-aqua" style="width:<?php echo $english_attendence_per?>%" ></div>
             </div>
         </td>
       </tr>
-
       <tr>
         <td style="width:20%">Maths</td>
         <td>
           <div class="progress progress-minibar">
-              <div class="progress-bar progress-bar-aqua" style="width:60%"></div>
+              <div class="progress-bar progress-bar-aqua" style="width:<?php echo $maths_attendence_per?>%"></div>
             </div>
         </td>
       </tr>
@@ -515,7 +711,7 @@ float:right;
         <td style="width:20%">Science</td>
         <td style="width:80%">
           <div class="progress progress-minibar">
-              <div class="progress-bar progress-bar-aqua" style="width:60%"></div>
+              <div class="progress-bar progress-bar-aqua" style="width:<?php echo $science_attendence_per?>%"></div>
             </div>
         </td>
       </tr>
@@ -570,32 +766,32 @@ float:right;
     }
     else
     { 
-      for($i=0;$i<2;$i++){
+      // for($i=0;$i<count($classes);$i++){
     ?>
     <tr>
-      <th scope="row"><?php echo $title[$i]; ?></th>
-      <td><?php echo $date[$i]?></td>
-      <td><?php echo $title[$i] ?></td>
-      <td><?php echo $name[$i]." ".$surname[$i] ?></td>
+      <th scope="row"><?php echo $res1[0]['title']  ?></th>
+      <td><?php echo $date1[0]?></td>
+      <td><?php echo $res1[0]['title'] ?></td>
+      <td><?php echo $name[0]." ".$surname[0] ?></td>
       <td style="width:30%">
-           <div class="zoom_link" > <?php echo $response[$i]->join_url ?></div>
+           <div class="zoom_link" > <?php echo $response[0]->join_url ?></div>
     </td>
     </tr>
-   <?php }} ?>
-
-   <?php 
-   
-  //  for($i=0;$i<3;$i++){
-  //    echo $date[$i];
-  //    echo $title[$i];
-  //    echo $name[$i]." ".$surname[$i]; 
-  //    echo $response[$i]->join_url; 
-  //  }
-   
-   
-   ?>
 
 
+    <tr>
+      <th scope="row"><?php echo $res1[1]['title']  ?></th>
+      <td><?php echo $date1[1]?></td>
+      <td><?php echo $res1[1]['title'] ?></td>
+      <td><?php echo $name[1]." ".$surname[1] ?></td>
+      <td style="width:30%">
+           <div class="zoom_link" > <?php echo $response[1]->join_url ?></div>
+    </td>
+    </tr>
+
+
+   <?php }
+  // } ?>
 
   </tbody>
 </table>
@@ -683,7 +879,7 @@ float:right;
                 <h5 class="event_des"><?php echo $event_description[1]  ?></h5>
                 </div>       
 
-        <div class="notice">
+        <div class="col-lg-12 noticeboard">
         <h4 class="notice_text" >Notice Board</h4>
         
       </div>
